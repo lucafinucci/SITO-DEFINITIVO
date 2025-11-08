@@ -265,13 +265,12 @@ export default function FinchAIMockupAnimated() {
 
             <h1 className="mt-5 text-4xl font-extrabold leading-tight sm:text-5xl lg:text-6xl animate-[fadeUp_0.9s_ease_0.12s_both]">
               <span className="bg-clip-text text-transparent bg-gradient-to-r from-cyan-300 via-sky-400 to-blue-500">
-                Trasforma Caos Documentale in Decisioni Intelligenti
+                Automazione Intelligente per Decisioni di Valore
               </span>
             </h1>
 
             <p className="mt-5 text-lg text-slate-300/90 animate-[fadeUp_0.9s_ease_0.2s_both]">
-              Piattaforma AI che unisce automazione documentale, analisi produttiva
-              e controllo finanziario in un unico ecosistema integrato
+              Piattaforma AI che trasforma documenti, dati produttivi e indicatori finanziari in insight azionabili per la tua azienda
             </p>
 
             <div className="mt-7 flex flex-col items-center justify-center gap-3 sm:flex-row animate-[fadeUp_0.9s_ease_0.28s_both] w-full sm:w-auto px-4 sm:px-0">
@@ -279,7 +278,7 @@ export default function FinchAIMockupAnimated() {
                 href="#contatti"
                 className="group inline-flex items-center justify-center gap-2 rounded-xl bg-gradient-to-r from-cyan-500 to-blue-600 px-6 py-4 sm:px-5 sm:py-3 font-semibold text-white shadow-lg shadow-cyan-500/20 transition hover:brightness-110 w-full sm:w-auto text-center min-h-[48px]"
               >
-                Richiedi Demo Personalizzata
+                Scopri il Tuo Potenziale di Risparmio
                 <svg className="h-4 w-4 transition-transform group-hover:translate-x-0.5" viewBox="0 0 24 24" fill="none">
                   <path d="M5 12h14M13 5l7 7-7 7" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round"/>
                 </svg>
@@ -290,6 +289,21 @@ export default function FinchAIMockupAnimated() {
               >
                 Guarda come funziona
               </a>
+            </div>
+
+            {/* Quick Stats Bar */}
+            <div className="mt-16 grid grid-cols-2 lg:grid-cols-4 gap-6 max-w-4xl mx-auto">
+              {[
+                { value: "70%", label: "Riduzione tempi" },
+                { value: "+1000", label: "Doc/giorno" },
+                { value: "99.2%", label: "Accuratezza" },
+                { value: "2-4 sett", label: "Deploy" }
+              ].map((stat, i) => (
+                <div key={i} className="text-center p-4 rounded-xl bg-slate-900/40 border border-slate-700/50 backdrop-blur">
+                  <div className="text-3xl font-bold text-cyan-400 mb-1">{stat.value}</div>
+                  <div className="text-xs text-slate-400 uppercase tracking-wide">{stat.label}</div>
+                </div>
+              ))}
             </div>
           </div>
         </section>
@@ -828,6 +842,99 @@ export default function FinchAIMockupAnimated() {
           </div>
         </section>
 
+        {/* SEZIONE: PERCHÉ FINCH-AI */}
+        <section className="py-20 bg-gradient-to-b from-slate-900/50 to-transparent">
+          <div className="mx-auto max-w-6xl">
+            <div className="text-center mb-16">
+              <span className="inline-flex items-center gap-2 rounded-full border border-cyan-500/30 bg-cyan-500/10 px-4 py-1.5 text-xs font-semibold uppercase tracking-wider text-cyan-300 mb-6">
+                Perché Finch-AI
+              </span>
+              <h2 className="text-3xl sm:text-4xl lg:text-5xl font-extrabold text-white mb-6">
+                Numeri che <span className="bg-clip-text text-transparent bg-gradient-to-r from-cyan-400 to-blue-500">Parlano Chiaro</span>
+              </h2>
+              <p className="text-lg sm:text-xl text-slate-300/90 max-w-3xl mx-auto leading-relaxed">
+                Non solo promesse: risultati misurabili sin dal primo giorno
+              </p>
+            </div>
+
+            {/* Metriche Principali */}
+            <div className="grid sm:grid-cols-2 lg:grid-cols-4 gap-6 mb-12">
+              {[
+                {
+                  metric: "70%",
+                  label: "Riduzione tempo elaborazione documenti",
+                  icon: "⚡",
+                  desc: "Da ore a minuti per processare DDT, fatture e ordini"
+                },
+                {
+                  metric: "+1000",
+                  label: "Documenti/giorno analizzati automaticamente",
+                  icon: "📄",
+                  desc: "Capacità di elaborazione scalabile senza limiti"
+                },
+                {
+                  metric: "99.2%",
+                  label: "Accuratezza estrazione dati",
+                  icon: "🎯",
+                  desc: "OCR con validazione intelligente domain-specific"
+                },
+                {
+                  metric: "24/7",
+                  label: "Monitoraggio operativo continuo",
+                  icon: "👁️",
+                  desc: "Alert real-time su anomalie e opportunità"
+                }
+              ].map((item, i) => (
+                <div
+                  key={i}
+                  className="group relative overflow-hidden rounded-2xl border border-slate-700/60 bg-gradient-to-br from-slate-900/80 to-slate-900/40 backdrop-blur p-6 transition-all hover:border-cyan-500/50 hover:shadow-[0_0_30px_rgba(34,211,238,0.2)]"
+                >
+                  <div className="absolute -inset-px opacity-0 group-hover:opacity-100 transition-opacity">
+                    <div className="h-full w-full bg-[radial-gradient(400px_200px_at_50%_0,rgba(34,211,238,0.1),transparent)]" />
+                  </div>
+
+                  <div className="relative">
+                    <div className="text-4xl mb-4">{item.icon}</div>
+                    <div className="text-4xl font-bold text-cyan-400 mb-2">{item.metric}</div>
+                    <div className="text-sm font-semibold text-white mb-2">{item.label}</div>
+                    <div className="text-xs text-slate-400 leading-relaxed">{item.desc}</div>
+                  </div>
+                </div>
+              ))}
+            </div>
+
+            {/* Vantaggi Competitivi */}
+            <div className="grid md:grid-cols-3 gap-6">
+              {[
+                {
+                  title: "Deploy Rapido",
+                  desc: "Operativi in 2-4 settimane, non mesi. Integrazione plug-and-play con i tuoi sistemi esistenti.",
+                  icon: "🚀"
+                },
+                {
+                  title: "Zero Vendor Lock-in",
+                  desc: "Dati sempre tuoi, esportabili, API aperte. Integrazione con qualsiasi ERP, CRM o gestionale.",
+                  icon: "🔓"
+                },
+                {
+                  title: "ROI Garantito",
+                  desc: "Break-even medio in 6 mesi. Calcolo ROI personalizzato prima di partire. Nessun costo nascosto.",
+                  icon: "💰"
+                }
+              ].map((item, i) => (
+                <div
+                  key={i}
+                  className="relative overflow-hidden rounded-2xl border border-slate-700/60 bg-slate-900/60 backdrop-blur p-6 transition-all hover:border-blue-500/50 hover:bg-slate-900/80"
+                >
+                  <div className="text-4xl mb-4">{item.icon}</div>
+                  <h3 className="text-xl font-bold text-white mb-3">{item.title}</h3>
+                  <p className="text-sm text-slate-300/90 leading-relaxed">{item.desc}</p>
+                </div>
+              ))}
+            </div>
+          </div>
+        </section>
+
         {/* DASHBOARD PREVIEW - Rimossa, sostituita da sezioni 4 e 5 sopra */}
         <section className="py-16 hidden">
           <div className="text-center mb-12">
@@ -1126,29 +1233,45 @@ export default function FinchAIMockupAnimated() {
               <h4 className="mb-4 text-sm font-semibold uppercase tracking-wider text-white">Contatti</h4>
               <ul className="space-y-3">
                 <li className="flex items-start gap-2">
-                  <svg className="h-5 w-5 text-cyan-400 flex-shrink-0" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+                  <svg className="h-5 w-5 text-cyan-400 flex-shrink-0 mt-0.5" fill="none" viewBox="0 0 24 24" stroke="currentColor">
                     <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M3 8l7.89 5.26a2 2 0 002.22 0L21 8M5 19h14a2 2 0 002-2V7a2 2 0 00-2-2H5a2 2 0 00-2 2v10a2 2 0 002 2z" />
                   </svg>
-                  <a href="mailto:info@finch-ai.it" className="text-sm text-slate-400 transition-colors hover:text-cyan-400">
-                    info@finch-ai.it
-                  </a>
+                  <div>
+                    <a href="mailto:info@finch-ai.it" className="text-sm text-slate-400 transition-colors hover:text-cyan-400 block">
+                      info@finch-ai.it
+                    </a>
+                    <a href="mailto:sales@finch-ai.it" className="text-sm text-slate-400 transition-colors hover:text-cyan-400 block mt-1">
+                      sales@finch-ai.it
+                    </a>
+                  </div>
                 </li>
                 <li className="flex items-start gap-2">
-                  <svg className="h-5 w-5 text-cyan-400 flex-shrink-0" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+                  <svg className="h-5 w-5 text-cyan-400 flex-shrink-0 mt-0.5" fill="none" viewBox="0 0 24 24" stroke="currentColor">
                     <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M3 5a2 2 0 012-2h3.28a1 1 0 01.948.684l1.498 4.493a1 1 0 01-.502 1.21l-2.257 1.13a11.042 11.042 0 005.516 5.516l1.13-2.257a1 1 0 011.21-.502l4.493 1.498a1 1 0 01.684.949V19a2 2 0 01-2 2h-1C9.716 21 3 14.284 3 6V5z" />
                   </svg>
-                  <a href="tel:+390123456789" className="text-sm text-slate-400 transition-colors hover:text-cyan-400">
-                    +39 012 345 6789
-                  </a>
+                  <div>
+                    <a href="tel:+390123456789" className="text-sm text-slate-400 transition-colors hover:text-cyan-400 block">
+                      +39 012 345 6789
+                    </a>
+                    <span className="text-xs text-slate-500 mt-1 block">Lun-Ven 9:00-18:00</span>
+                  </div>
                 </li>
                 <li className="flex items-start gap-2">
-                  <svg className="h-5 w-5 text-cyan-400 flex-shrink-0" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+                  <svg className="h-5 w-5 text-cyan-400 flex-shrink-0 mt-0.5" fill="none" viewBox="0 0 24 24" stroke="currentColor">
                     <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M17.657 16.657L13.414 20.9a1.998 1.998 0 01-2.827 0l-4.244-4.243a8 8 0 1111.314 0z" />
                     <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M15 11a3 3 0 11-6 0 3 3 0 016 0z" />
                   </svg>
-                  <span className="text-sm text-slate-400">
-                    Milano, Italia
-                  </span>
+                  <div>
+                    <span className="text-sm text-slate-400 block">
+                      Via Example, 123
+                    </span>
+                    <span className="text-sm text-slate-400 block">
+                      20100 Milano (MI)
+                    </span>
+                    <span className="text-sm text-slate-400 block">
+                      Italia
+                    </span>
+                  </div>
                 </li>
               </ul>
             </div>
@@ -1206,20 +1329,24 @@ export default function FinchAIMockupAnimated() {
             <div className="flex flex-col items-center justify-between gap-4 sm:flex-row">
               <div className="text-center sm:text-left">
                 <p className="text-sm text-slate-500">
-                  © {new Date().getFullYear()} Finch-AI. Tutti i diritti riservati.
+                  © {new Date().getFullYear()} Finch-AI S.r.l. Tutti i diritti riservati.
                 </p>
                 <p className="mt-1 text-xs text-slate-600">
-                  P.IVA: 12345678901
+                  P.IVA: 12345678901 | REA: MI-1234567 | Cap. Soc. €10.000 i.v.
                 </p>
               </div>
-              <div className="flex items-center gap-2 text-xs text-slate-600">
+              <div className="flex flex-wrap items-center justify-center gap-2 text-xs text-slate-600">
                 <span className="inline-flex items-center gap-1.5 rounded-full border border-slate-800/50 bg-slate-900/30 px-3 py-1">
                   <span className="h-1.5 w-1.5 rounded-full bg-emerald-400 animate-pulse" />
-                  ISO 27001 Certified
+                  ISO 27001
                 </span>
                 <span className="inline-flex items-center gap-1.5 rounded-full border border-slate-800/50 bg-slate-900/30 px-3 py-1">
                   <span className="h-1.5 w-1.5 rounded-full bg-cyan-400" />
-                  GDPR Compliant
+                  GDPR
+                </span>
+                <span className="inline-flex items-center gap-1.5 rounded-full border border-slate-800/50 bg-slate-900/30 px-3 py-1">
+                  <span className="h-1.5 w-1.5 rounded-full bg-blue-400" />
+                  SOC 2
                 </span>
               </div>
             </div>
