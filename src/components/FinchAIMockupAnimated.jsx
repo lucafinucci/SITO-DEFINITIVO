@@ -127,9 +127,9 @@ export default function FinchAIMockupAnimated() {
   }, []);
 
   const navItems = [
-    { id: "hero", label: "Home" },
-    { id: "come-funziona", label: "Come funziona" },
-    { id: "contatti", label: "Contatti" },
+    { id: "hero", label: "Finch-AI Platform" },
+    { id: "come-funziona", label: "Soluzioni" },
+    { id: "contatti", label: "Demo" },
   ];
 
   return (
@@ -264,15 +264,14 @@ export default function FinchAIMockupAnimated() {
             </span>
 
             <h1 className="mt-5 text-4xl font-extrabold leading-tight sm:text-5xl lg:text-6xl animate-[fadeUp_0.9s_ease_0.12s_both]">
-              Ogni azienda è unica.<br className="hidden sm:block" />
               <span className="bg-clip-text text-transparent bg-gradient-to-r from-cyan-300 via-sky-400 to-blue-500">
-                Anche la tua intelligenza artificiale.
+                Trasforma Caos Documentale in Decisioni Intelligenti
               </span>
             </h1>
 
             <p className="mt-5 text-lg text-slate-300/90 animate-[fadeUp_0.9s_ease_0.2s_both]">
-              Automatizza i DDT, collega l'ERP, visualizza KPI. Finch-AI trasforma documenti e dati
-              in decisioni, con precisione industriale e zero attrito operativo.
+              Piattaforma AI che unisce automazione documentale, analisi produttiva
+              e controllo finanziario in un unico ecosistema integrato
             </p>
 
             <div className="mt-7 flex flex-col items-center justify-center gap-3 sm:flex-row animate-[fadeUp_0.9s_ease_0.28s_both] w-full sm:w-auto px-4 sm:px-0">
@@ -280,7 +279,7 @@ export default function FinchAIMockupAnimated() {
                 href="#contatti"
                 className="group inline-flex items-center justify-center gap-2 rounded-xl bg-gradient-to-r from-cyan-500 to-blue-600 px-6 py-4 sm:px-5 sm:py-3 font-semibold text-white shadow-lg shadow-cyan-500/20 transition hover:brightness-110 w-full sm:w-auto text-center min-h-[48px]"
               >
-                Prenota una demo
+                Richiedi Demo Personalizzata
                 <svg className="h-4 w-4 transition-transform group-hover:translate-x-0.5" viewBox="0 0 24 24" fill="none">
                   <path d="M5 12h14M13 5l7 7-7 7" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round"/>
                 </svg>
@@ -292,123 +291,312 @@ export default function FinchAIMockupAnimated() {
                 Guarda come funziona
               </a>
             </div>
+          </div>
+        </section>
 
-            {/* trust badges */}
-            <div className="mt-8 flex flex-wrap items-center justify-center gap-x-6 gap-y-2 text-sm text-slate-400/80 animate-[fadeUp_0.9s_ease_0.36s_both]">
-              <span className="inline-flex items-center gap-2">
-                <span className="h-2 w-2 rounded-full bg-emerald-400" /> SLA produzione
+        {/* SEZIONE 1: IL PROBLEMA */}
+        <section className="py-20">
+          <div className="mx-auto max-w-5xl">
+            <div className="text-center mb-16">
+              <span className="inline-flex items-center gap-2 rounded-full border border-red-500/30 bg-red-500/10 px-4 py-1.5 text-xs font-semibold uppercase tracking-wider text-red-300 mb-6">
+                Il Problema
               </span>
-              <span className="inline-flex items-center gap-2">
-                <span className="h-2 w-2 rounded-full bg-cyan-400" /> GDPR-ready
-              </span>
-              <span className="inline-flex items-center gap-2">
-                <span className="h-2 w-2 rounded-full bg-blue-400" /> On-prem o Cloud
-              </span>
+              <h2 className="text-3xl sm:text-4xl lg:text-5xl font-extrabold text-white mb-6">
+                Il Caos che <span className="bg-clip-text text-transparent bg-gradient-to-r from-red-400 to-orange-500">Rallenta la Tua Azienda</span>
+              </h2>
+              <p className="text-lg sm:text-xl text-slate-300/90 max-w-3xl mx-auto leading-relaxed">
+                Documenti dispersi, dati non integrati, decisioni basate su informazioni frammentate
+              </p>
+            </div>
+
+            <div className="grid gap-6 md:grid-cols-2 lg:grid-cols-3">
+              {[
+                {
+                  icon: "📄",
+                  title: "Documenti Caotici",
+                  desc: "DDT, fatture e ordini gestiti manualmente. Ore perse in data entry, errori frequenti, informazioni che si perdono tra email e fogli di calcolo."
+                },
+                {
+                  icon: "🔌",
+                  title: "Sistemi Isolati",
+                  desc: "ERP, CRM, gestionale produzione non comunicano. Dati duplicati, sincronizzazione manuale, visibilità zero sull'insieme."
+                },
+                {
+                  icon: "📊",
+                  title: "Decisioni al Buio",
+                  desc: "Report obsoleti, KPI non aggiornati, analisi che arrivano troppo tardi. Opportunità perse e problemi scoperti in ritardo."
+                },
+                {
+                  icon: "⏱️",
+                  title: "Tempo Sprecato",
+                  desc: "Il tuo team passa ore a cercare informazioni, verificare dati e creare report invece di concentrarsi su attività strategiche."
+                },
+                {
+                  icon: "💸",
+                  title: "Costi Nascosti",
+                  desc: "Inefficienze operative, errori di processo, opportunità di ottimizzazione non colte. Il ROI potenziale che sta sfuggendo."
+                },
+                {
+                  icon: "🎯",
+                  title: "Controllo Limitato",
+                  desc: "Manca una visione unificata di produzione, finanza e operations. Impossibile prendere decisioni data-driven in tempo reale."
+                }
+              ].map((problem, i) => (
+                <div
+                  key={i}
+                  className="group relative overflow-hidden rounded-2xl border border-slate-700/60 bg-slate-900/60 backdrop-blur p-6 transition-all hover:border-red-500/50 hover:bg-slate-900/80 hover:shadow-[0_0_30px_rgba(239,68,68,0.2)]"
+                >
+                  <div className="text-4xl mb-4">{problem.icon}</div>
+                  <h3 className="text-xl font-bold text-white mb-3 group-hover:text-red-300 transition-colors">
+                    {problem.title}
+                  </h3>
+                  <p className="text-sm text-slate-400 leading-relaxed group-hover:text-slate-300 transition-colors">
+                    {problem.desc}
+                  </p>
+                </div>
+              ))}
             </div>
           </div>
         </section>
 
-        {/* CHI SIAMO / MISSION */}
-        <section className="py-20">
+        {/* SEZIONE 2: LA SOLUZIONE */}
+        <section className="py-20 bg-gradient-to-b from-slate-900/50 to-transparent">
           <div className="mx-auto max-w-5xl">
             <div className="text-center mb-16">
               <span className="inline-flex items-center gap-2 rounded-full border border-cyan-500/30 bg-cyan-500/10 px-4 py-1.5 text-xs font-semibold uppercase tracking-wider text-cyan-300 mb-6">
-                Chi Siamo
+                La Soluzione
               </span>
               <h2 className="text-3xl sm:text-4xl lg:text-5xl font-extrabold text-white mb-6">
-                La nostra <span className="bg-clip-text text-transparent bg-gradient-to-r from-cyan-300 to-blue-500">Mission</span>
+                Un'Unica <span className="bg-clip-text text-transparent bg-gradient-to-r from-cyan-300 to-blue-500">Piattaforma Integrata</span>
               </h2>
               <p className="text-lg sm:text-xl text-slate-300/90 max-w-3xl mx-auto leading-relaxed">
-                Trasformiamo l'intelligenza artificiale da promessa a realtà operativa per le aziende italiane
+                Finch-AI unisce automazione documentale, analisi produttiva e controllo finanziario in un ecosistema intelligente che lavora per te
               </p>
             </div>
 
-            <div className="grid gap-8 lg:grid-cols-2 items-center">
-              {/* Testo Mission */}
+            <div className="grid gap-8 lg:grid-cols-2 items-center mb-12">
               <div className="space-y-6">
                 <div className="relative pl-6 border-l-4 border-cyan-500">
                   <h3 className="text-xl sm:text-2xl font-bold text-white mb-3">
-                    L'AI che funziona davvero
+                    Tutto Integrato, Sempre Sincronizzato
                   </h3>
                   <p className="text-slate-300/90 leading-relaxed">
-                    Finch-AI nasce dall'esperienza diretta con le sfide operative delle PMI manifatturiere.
-                    Non vendiamo hype: costruiamo sistemi AI che si integrano nei processi reali,
-                    riducono i costi operativi e generano ROI misurabile.
+                    I tuoi documenti, dati e sistemi dialogano automaticamente. L'AI legge, estrae, valida e integra informazioni in tempo reale, eliminando data entry manuale e errori.
                   </p>
                 </div>
 
                 <div className="relative pl-6 border-l-4 border-blue-500">
                   <h3 className="text-xl sm:text-2xl font-bold text-white mb-3">
-                    Precisione industriale
+                    Intelligenza che Cresce con Te
                   </h3>
                   <p className="text-slate-300/90 leading-relaxed">
-                    Ogni nostro sistema è addestrato su dati reali italiani, validato in produzione
-                    e ottimizzato per garantire accuratezza superiore al 99%. Zero errori critici,
-                    zero sorprese.
+                    La piattaforma impara dai tuoi processi, si adatta alle tue esigenze specifiche e migliora continuamente. Non un software rigido, ma un partner intelligente.
                   </p>
                 </div>
 
                 <div className="relative pl-6 border-l-4 border-emerald-500">
                   <h3 className="text-xl sm:text-2xl font-bold text-white mb-3">
-                    Partner, non fornitori
+                    Controllo Completo, Zero Complessità
                   </h3>
                   <p className="text-slate-300/90 leading-relaxed">
-                    Seguiamo ogni cliente dall'analisi dei requisiti al deployment,
-                    con supporto continuativo e aggiornamenti costanti. Il vostro successo
-                    è il nostro benchmark.
+                    Dashboard unificata con visibilità real-time su produzione, finanza e operations. Decisioni informate in secondi, non giorni.
                   </p>
                 </div>
               </div>
 
-              {/* Card Valori */}
               <div className="relative">
                 <div className="absolute inset-0 bg-gradient-to-br from-cyan-500/20 to-blue-500/20 blur-3xl rounded-3xl" />
-
-                <div className="relative space-y-4">
-                  {[
-                    { icon: "🎯", title: "Focus assoluto", desc: "100% manufacturing & logistics" },
-                    { icon: "🔒", title: "Privacy first", desc: "GDPR compliant, dati in Italia" },
-                    { icon: "⚡", title: "Rapido deployment", desc: "Operative in 2-4 settimane" },
-                    { icon: "🤝", title: "SLA garantito", desc: "Uptime 99.9%, supporto H24" },
-                  ].map((item, i) => (
-                    <div
-                      key={i}
-                      className="group relative overflow-hidden rounded-2xl border border-slate-700/60 bg-slate-900/60 backdrop-blur p-6 transition-all hover:border-cyan-500/50 hover:bg-slate-900/80 hover:shadow-[0_0_30px_rgba(34,211,238,0.2)]"
-                    >
-                      <div className="flex items-start gap-4">
-                        <div className="flex-shrink-0 text-4xl">{item.icon}</div>
-                        <div className="flex-1">
-                          <h4 className="text-lg font-semibold text-white mb-1 group-hover:text-cyan-300 transition-colors">
-                            {item.title}
-                          </h4>
-                          <p className="text-sm text-slate-400 group-hover:text-slate-300 transition-colors">
-                            {item.desc}
-                          </p>
-                        </div>
-                        <svg
-                          className="w-5 h-5 text-cyan-500 opacity-0 group-hover:opacity-100 transition-opacity"
-                          fill="none"
-                          viewBox="0 0 24 24"
-                          stroke="currentColor"
-                        >
-                          <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M9 5l7 7-7 7" />
-                        </svg>
+                <div className="relative rounded-2xl border border-cyan-500/30 bg-slate-900/60 backdrop-blur p-8">
+                  <h4 className="text-2xl font-bold text-white mb-6">Benefici Immediati</h4>
+                  <div className="space-y-4">
+                    {[
+                      { metric: "90%", label: "Riduzione tempo elaborazione documenti" },
+                      { metric: "99.2%", label: "Accuratezza estrazione dati" },
+                      { metric: "3x", label: "Velocità decisionale aumentata" },
+                      { metric: "100%", label: "Visibilità real-time su tutti i processi" }
+                    ].map((item, i) => (
+                      <div key={i} className="flex items-center gap-4 p-4 rounded-xl bg-slate-800/50 border border-slate-700/40">
+                        <div className="text-3xl font-bold text-cyan-400">{item.metric}</div>
+                        <div className="text-sm text-slate-300">{item.label}</div>
                       </div>
-                    </div>
-                  ))}
+                    ))}
+                  </div>
+                </div>
+              </div>
+            </div>
+          </div>
+        </section>
+
+        {/* SEZIONE 3: I MODULI CON BENEFICI */}
+        <section id="come-funziona" className="py-20">
+          <div className="mx-auto max-w-6xl">
+            <div className="text-center mb-16">
+              <span className="inline-flex items-center gap-2 rounded-full border border-purple-500/30 bg-purple-500/10 px-4 py-1.5 text-xs font-semibold uppercase tracking-wider text-purple-300 mb-6">
+                I Moduli
+              </span>
+              <h2 className="text-3xl sm:text-4xl lg:text-5xl font-extrabold text-white mb-6">
+                Tre Pilastri, <span className="bg-clip-text text-transparent bg-gradient-to-r from-purple-400 to-pink-500">Infinite Possibilità</span>
+              </h2>
+              <p className="text-lg sm:text-xl text-slate-300/90 max-w-3xl mx-auto leading-relaxed">
+                Ogni modulo risolve un problema specifico, insieme creano un ecosistema che trasforma il tuo business
+              </p>
+            </div>
+
+            <div className="space-y-8">
+              {/* Modulo 1: Document Intelligence */}
+              <div className="group relative overflow-hidden rounded-3xl border border-slate-700/60 bg-slate-900/40 p-8 sm:p-10 backdrop-blur transition hover:border-cyan-500/50 hover:shadow-[0_0_40px_rgba(34,211,238,0.2)]">
+                <div className="absolute -inset-px opacity-0 group-hover:opacity-100 transition-opacity">
+                  <div className="h-full w-full bg-[radial-gradient(800px_300px_at_var(--x,50%)_0,rgba(34,211,238,0.15),transparent)]" />
                 </div>
 
-                {/* Badge certificazione */}
-                <div className="relative mt-6 flex items-center justify-center gap-4 p-6 rounded-2xl border border-emerald-500/30 bg-emerald-500/5 backdrop-blur">
-                  <div className="flex items-center gap-3">
-                    <div className="flex h-12 w-12 items-center justify-center rounded-full bg-emerald-500/20 border-2 border-emerald-500/50">
-                      <svg className="h-6 w-6 text-emerald-400" fill="none" viewBox="0 0 24 24" stroke="currentColor">
-                        <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M9 12l2 2 4-4m5.618-4.016A11.955 11.955 0 0112 2.944a11.955 11.955 0 01-8.618 3.04A12.02 12.02 0 003 9c0 5.591 3.824 10.29 9 11.622 5.176-1.332 9-6.03 9-11.622 0-1.042-.133-2.052-.382-3.016z" />
-                      </svg>
+                <div className="relative grid lg:grid-cols-2 gap-8 items-center">
+                  <div>
+                    <div className="inline-flex items-center gap-3 mb-6">
+                      <div className="rounded-xl border border-cyan-500/30 bg-cyan-500/10 p-3 text-cyan-300">
+                        <svg viewBox="0 0 24 24" className="h-8 w-8"><path d="M4 4h10l6 6v10a2 2 0 0 1-2 2H4V4z" fill="none" stroke="currentColor" strokeWidth="1.8"/><path d="M14 4v6h6" fill="none" stroke="currentColor" strokeWidth="1.8"/></svg>
+                      </div>
+                      <h3 className="text-2xl sm:text-3xl font-bold text-white">Document Intelligence</h3>
                     </div>
-                    <div>
-                      <div className="text-sm font-semibold text-emerald-400">Certificato ISO 27001</div>
-                      <div className="text-xs text-slate-400">Sicurezza dati garantita</div>
+
+                    <p className="text-lg text-slate-300/90 mb-6 leading-relaxed">
+                      Trasforma ogni documento in dati strutturati e azionabili. OCR avanzato con validazioni di dominio specifiche per il tuo settore.
+                    </p>
+
+                    <div className="space-y-3 mb-6">
+                      {[
+                        "Estrazione automatica da DDT, fatture, ordini",
+                        "Validazione intelligente con regole business",
+                        "Integrazione diretta con ERP/gestionale",
+                        "Gestione eccezioni e anomalie"
+                      ].map((feature, i) => (
+                        <div key={i} className="flex items-start gap-3">
+                          <svg className="h-6 w-6 text-cyan-400 flex-shrink-0 mt-0.5" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+                            <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M5 13l4 4L19 7" />
+                          </svg>
+                          <span className="text-slate-300">{feature}</span>
+                        </div>
+                      ))}
+                    </div>
+                  </div>
+
+                  <div className="space-y-4">
+                    <div className="rounded-2xl border border-cyan-500/30 bg-gradient-to-br from-cyan-500/10 to-blue-500/10 p-6">
+                      <div className="text-4xl font-bold text-cyan-400 mb-2">90%</div>
+                      <div className="text-sm text-slate-300">Riduzione tempo elaborazione documenti</div>
+                    </div>
+                    <div className="rounded-2xl border border-cyan-500/30 bg-gradient-to-br from-cyan-500/10 to-blue-500/10 p-6">
+                      <div className="text-4xl font-bold text-cyan-400 mb-2">99.2%</div>
+                      <div className="text-sm text-slate-300">Accuratezza estrazione dati</div>
+                    </div>
+                    <div className="rounded-2xl border border-cyan-500/30 bg-gradient-to-br from-cyan-500/10 to-blue-500/10 p-6">
+                      <div className="text-4xl font-bold text-cyan-400 mb-2">Zero</div>
+                      <div className="text-sm text-slate-300">Data entry manuale richiesto</div>
+                    </div>
+                  </div>
+                </div>
+              </div>
+
+              {/* Modulo 2: Production Analytics */}
+              <div className="group relative overflow-hidden rounded-3xl border border-slate-700/60 bg-slate-900/40 p-8 sm:p-10 backdrop-blur transition hover:border-purple-500/50 hover:shadow-[0_0_40px_rgba(168,85,247,0.2)]">
+                <div className="absolute -inset-px opacity-0 group-hover:opacity-100 transition-opacity">
+                  <div className="h-full w-full bg-[radial-gradient(800px_300px_at_var(--x,50%)_0,rgba(168,85,247,0.15),transparent)]" />
+                </div>
+
+                <div className="relative grid lg:grid-cols-2 gap-8 items-center">
+                  <div className="order-2 lg:order-1 space-y-4">
+                    <div className="rounded-2xl border border-purple-500/30 bg-gradient-to-br from-purple-500/10 to-pink-500/10 p-6">
+                      <div className="text-4xl font-bold text-purple-400 mb-2">Real-time</div>
+                      <div className="text-sm text-slate-300">Monitoraggio OEE e produttività</div>
+                    </div>
+                    <div className="rounded-2xl border border-purple-500/30 bg-gradient-to-br from-purple-500/10 to-pink-500/10 p-6">
+                      <div className="text-4xl font-bold text-purple-400 mb-2">3x</div>
+                      <div className="text-sm text-slate-300">Velocità decisioni strategiche</div>
+                    </div>
+                    <div className="rounded-2xl border border-purple-500/30 bg-gradient-to-br from-purple-500/10 to-pink-500/10 p-6">
+                      <div className="text-4xl font-bold text-purple-400 mb-2">100%</div>
+                      <div className="text-sm text-slate-300">Visibilità su tutti i reparti</div>
+                    </div>
+                  </div>
+
+                  <div className="order-1 lg:order-2">
+                    <div className="inline-flex items-center gap-3 mb-6">
+                      <div className="rounded-xl border border-purple-500/30 bg-purple-500/10 p-3 text-purple-300">
+                        <svg viewBox="0 0 24 24" className="h-8 w-8"><path d="M4 19h16M6 16V8m6 8V5m6 11v-7" fill="none" stroke="currentColor" strokeWidth="1.8"/></svg>
+                      </div>
+                      <h3 className="text-2xl sm:text-3xl font-bold text-white">Production Analytics</h3>
+                    </div>
+
+                    <p className="text-lg text-slate-300/90 mb-6 leading-relaxed">
+                      Dashboard intelligenti che trasformano i dati di produzione in insight azionabili. KPI real-time, anomalie predittive, ottimizzazione continua.
+                    </p>
+
+                    <div className="space-y-3 mb-6">
+                      {[
+                        "KPI real-time: OEE, disponibilità, performance",
+                        "Analisi predittiva per manutenzione e scorte",
+                        "Alert automatici su anomalie e inefficienze",
+                        "Report personalizzati per ogni reparto"
+                      ].map((feature, i) => (
+                        <div key={i} className="flex items-start gap-3">
+                          <svg className="h-6 w-6 text-purple-400 flex-shrink-0 mt-0.5" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+                            <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M5 13l4 4L19 7" />
+                          </svg>
+                          <span className="text-slate-300">{feature}</span>
+                        </div>
+                      ))}
+                    </div>
+                  </div>
+                </div>
+              </div>
+
+              {/* Modulo 3: Financial Control */}
+              <div className="group relative overflow-hidden rounded-3xl border border-slate-700/60 bg-slate-900/40 p-8 sm:p-10 backdrop-blur transition hover:border-emerald-500/50 hover:shadow-[0_0_40px_rgba(16,185,129,0.2)]">
+                <div className="absolute -inset-px opacity-0 group-hover:opacity-100 transition-opacity">
+                  <div className="h-full w-full bg-[radial-gradient(800px_300px_at_var(--x,50%)_0,rgba(16,185,129,0.15),transparent)]" />
+                </div>
+
+                <div className="relative grid lg:grid-cols-2 gap-8 items-center">
+                  <div>
+                    <div className="inline-flex items-center gap-3 mb-6">
+                      <div className="rounded-xl border border-emerald-500/30 bg-emerald-500/10 p-3 text-emerald-300">
+                        <svg viewBox="0 0 24 24" className="h-8 w-8"><path d="M7 8h10M4 12h16M7 16h10" fill="none" stroke="currentColor" strokeWidth="1.8"/></svg>
+                      </div>
+                      <h3 className="text-2xl sm:text-3xl font-bold text-white">Financial Control</h3>
+                    </div>
+
+                    <p className="text-lg text-slate-300/90 mb-6 leading-relaxed">
+                      Unifica flussi finanziari e operativi per un controllo totale. Integrazione ERP, riconciliazione automatica, previsioni cash-flow basate su AI.
+                    </p>
+
+                    <div className="space-y-3 mb-6">
+                      {[
+                        "Integrazione automatica con qualsiasi ERP",
+                        "Riconciliazione documenti-pagamenti",
+                        "Forecast cash-flow e marginalità",
+                        "Dashboard finanziaria unificata"
+                      ].map((feature, i) => (
+                        <div key={i} className="flex items-start gap-3">
+                          <svg className="h-6 w-6 text-emerald-400 flex-shrink-0 mt-0.5" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+                            <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M5 13l4 4L19 7" />
+                          </svg>
+                          <span className="text-slate-300">{feature}</span>
+                        </div>
+                      ))}
+                    </div>
+                  </div>
+
+                  <div className="space-y-4">
+                    <div className="rounded-2xl border border-emerald-500/30 bg-gradient-to-br from-emerald-500/10 to-teal-500/10 p-6">
+                      <div className="text-4xl font-bold text-emerald-400 mb-2">Zero</div>
+                      <div className="text-sm text-slate-300">Attrito nelle integrazioni</div>
+                    </div>
+                    <div className="rounded-2xl border border-emerald-500/30 bg-gradient-to-br from-emerald-500/10 to-teal-500/10 p-6">
+                      <div className="text-4xl font-bold text-emerald-400 mb-2">100%</div>
+                      <div className="text-sm text-slate-300">Sincronizzazione automatica</div>
+                    </div>
+                    <div className="rounded-2xl border border-emerald-500/30 bg-gradient-to-br from-emerald-500/10 to-teal-500/10 p-6">
+                      <div className="text-4xl font-bold text-emerald-400 mb-2">24/7</div>
+                      <div className="text-sm text-slate-300">Controllo finanziario operativo</div>
                     </div>
                   </div>
                 </div>
@@ -417,57 +605,231 @@ export default function FinchAIMockupAnimated() {
           </div>
         </section>
 
-        {/* VALUE PILLARS */}
-        <section id="come-funziona" className="pb-12">
-          <div className="grid gap-4 sm:gap-6 md:grid-cols-3">
-            {[
-              {
-                title: "Automazione DDT",
-                desc: "OCR + validazioni di dominio. Da PDF/immagini a dati strutturati senza errori.",
-                kpi: "−90% tempo",
-                icon: (
-                  <svg viewBox="0 0 24 24" className="h-5 w-5 sm:h-6 sm:w-6"><path d="M4 4h10l6 6v10a2 2 0 0 1-2 2H4V4z" fill="none" stroke="currentColor" strokeWidth="1.8"/><path d="M14 4v6h6" fill="none" stroke="currentColor" strokeWidth="1.8"/></svg>
-                )
-              },
-              {
-                title: "KPI Intelligence",
-                desc: "Dashboard in tempo reale: OEE, produttività, NC. Insight azionabili, non grafici vuoti.",
-                kpi: "Decisioni ×3",
-                icon: (
-                  <svg viewBox="0 0 24 24" className="h-5 w-5 sm:h-6 sm:w-6"><path d="M4 19h16M6 16V8m6 8V5m6 11v-7" fill="none" stroke="currentColor" strokeWidth="1.8"/></svg>
-                )
-              },
-              {
-                title: "ERP Connector",
-                desc: "Integrazioni pulite con il tuo gestionale. CSV/FTP/API senza attrito.",
-                kpi: "Zero attriti",
-                icon: (
-                  <svg viewBox="0 0 24 24" className="h-5 w-5 sm:h-6 sm:w-6"><path d="M7 8h10M4 12h16M7 16h10" fill="none" stroke="currentColor" strokeWidth="1.8"/></svg>
-                )
-              }
-            ].map((c, i) => (
-              <div
-                key={i}
-                className="group relative overflow-hidden rounded-2xl border border-slate-700/60 bg-slate-900/40 p-5 sm:p-6 backdrop-blur transition hover:border-cyan-500/50 hover:shadow-[0_0_0_1px_rgba(34,211,238,0.25),0_10px_30px_-10px_rgba(34,211,238,0.25)]"
-              >
-                <div className="absolute -inset-px opacity-0 group-hover:opacity-100 transition-opacity">
-                  <div className="h-full w-full bg-[radial-gradient(600px_200px_at_var(--x,50%)_0,rgba(34,211,238,0.12),transparent)]" />
+        {/* SEZIONE 4: PER CHI */}
+        <section className="py-20 bg-gradient-to-b from-transparent to-slate-900/50">
+          <div className="mx-auto max-w-6xl">
+            <div className="text-center mb-16">
+              <span className="inline-flex items-center gap-2 rounded-full border border-blue-500/30 bg-blue-500/10 px-4 py-1.5 text-xs font-semibold uppercase tracking-wider text-blue-300 mb-6">
+                Per Chi
+              </span>
+              <h2 className="text-3xl sm:text-4xl lg:text-5xl font-extrabold text-white mb-6">
+                Settori che <span className="bg-clip-text text-transparent bg-gradient-to-r from-blue-400 to-cyan-500">Trasformiamo</span>
+              </h2>
+              <p className="text-lg sm:text-xl text-slate-300/90 max-w-3xl mx-auto leading-relaxed">
+                Soluzioni verticali ottimizzate per le esigenze specifiche del tuo settore
+              </p>
+            </div>
+
+            <div className="grid gap-6 md:grid-cols-2">
+              {[
+                {
+                  sector: "Manufacturing & Produzione",
+                  icon: "🏭",
+                  challenges: "Gestione DDT, tracciabilità lotti, integrazione MES/ERP, monitoraggio OEE",
+                  solutions: [
+                    "Automazione completa ciclo DDT in/out",
+                    "Tracciabilità real-time materiali e WIP",
+                    "KPI produzione live su dashboard",
+                    "Integrazione bidirezionale con ERP"
+                  ],
+                  results: "90% riduzione tempo amministrativo, 99.5% accuratezza dati"
+                },
+                {
+                  sector: "Logistica & Distribuzione",
+                  icon: "🚚",
+                  challenges: "Volume documenti elevato, multi-vettore, gestione resi, fatturazione automatica",
+                  solutions: [
+                    "OCR multi-formato per ogni vettore",
+                    "Matching automatico ordine-DDT-fattura",
+                    "Gestione eccezioni e resi intelligente",
+                    "Dashboard spedizioni real-time"
+                  ],
+                  results: "Elaborazione 10x più veloce, zero errori di trascrizione"
+                },
+                {
+                  sector: "Servizi & Consulenza",
+                  icon: "💼",
+                  challenges: "Timesheet, fatturazione progetti, controllo margini, reportistica clienti",
+                  solutions: [
+                    "Automazione timesheet e approval",
+                    "Fatturazione automatica da milestone",
+                    "Analisi marginalità per progetto/cliente",
+                    "Report personalizzati automatici"
+                  ],
+                  results: "Chiusura mensile in 2 giorni invece di 10"
+                },
+                {
+                  sector: "Retail & E-commerce",
+                  icon: "🛒",
+                  challenges: "Gestione ordini multi-canale, inventario, fornitori, riconciliazione pagamenti",
+                  solutions: [
+                    "Unificazione ordini da tutti i canali",
+                    "Sincronizzazione inventario real-time",
+                    "Gestione automatica ordini fornitori",
+                    "Riconciliazione pagamenti/marketplace"
+                  ],
+                  results: "100% visibilità stock, zero rotture di stock critiche"
+                }
+              ].map((item, i) => (
+                <div
+                  key={i}
+                  className="group relative overflow-hidden rounded-3xl border border-slate-700/60 bg-slate-900/60 backdrop-blur p-8 transition-all hover:border-blue-500/50 hover:bg-slate-900/80 hover:shadow-[0_0_40px_rgba(59,130,246,0.2)]"
+                >
+                  <div className="text-5xl mb-4">{item.icon}</div>
+                  <h3 className="text-2xl font-bold text-white mb-4 group-hover:text-blue-300 transition-colors">
+                    {item.sector}
+                  </h3>
+
+                  <div className="mb-6">
+                    <div className="text-sm font-semibold text-slate-400 uppercase tracking-wider mb-2">Sfide comuni</div>
+                    <p className="text-slate-300/90 leading-relaxed">{item.challenges}</p>
+                  </div>
+
+                  <div className="mb-6">
+                    <div className="text-sm font-semibold text-slate-400 uppercase tracking-wider mb-3">Come ti aiutiamo</div>
+                    <div className="space-y-2">
+                      {item.solutions.map((solution, j) => (
+                        <div key={j} className="flex items-start gap-2">
+                          <svg className="h-5 w-5 text-blue-400 flex-shrink-0 mt-0.5" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+                            <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M9 12l2 2 4-4m6 2a9 9 0 11-18 0 9 9 0 0118 0z" />
+                          </svg>
+                          <span className="text-sm text-slate-300">{solution}</span>
+                        </div>
+                      ))}
+                    </div>
+                  </div>
+
+                  <div className="pt-4 border-t border-slate-700/50">
+                    <div className="text-sm font-semibold text-blue-400">{item.results}</div>
+                  </div>
                 </div>
-                <div className="relative flex items-center gap-3">
-                  <div className="rounded-xl border border-slate-700/60 bg-slate-800/60 p-2.5 sm:p-3 text-cyan-300">{c.icon}</div>
-                  <h3 className="text-lg sm:text-xl font-semibold">{c.title}</h3>
-                </div>
-                <p className="relative mt-3 text-sm sm:text-base text-slate-300/90">{c.desc}</p>
-                <div className="relative mt-4 inline-flex items-center gap-2 rounded-lg bg-slate-800/50 px-3 py-1 text-xs sm:text-sm text-cyan-300">
-                  <span className="h-1.5 w-1.5 rounded-full bg-cyan-300" /> {c.kpi}
-                </div>
-              </div>
-            ))}
+              ))}
+            </div>
           </div>
         </section>
 
-        {/* DASHBOARD PREVIEW */}
-        <section className="py-16">
+        {/* SEZIONE 5: CASE STUDY */}
+        <section className="py-20">
+          <div className="mx-auto max-w-6xl">
+            <div className="text-center mb-16">
+              <span className="inline-flex items-center gap-2 rounded-full border border-emerald-500/30 bg-emerald-500/10 px-4 py-1.5 text-xs font-semibold uppercase tracking-wider text-emerald-300 mb-6">
+                Case Study
+              </span>
+              <h2 className="text-3xl sm:text-4xl lg:text-5xl font-extrabold text-white mb-6">
+                Risultati <span className="bg-clip-text text-transparent bg-gradient-to-r from-emerald-400 to-cyan-500">Misurabili</span>
+              </h2>
+              <p className="text-lg sm:text-xl text-slate-300/90 max-w-3xl mx-auto leading-relaxed">
+                Casi reali di aziende che hanno trasformato i loro processi con Finch-AI
+              </p>
+            </div>
+
+            <div className="space-y-8">
+              {/* Case Study 1 */}
+              <div className="group relative overflow-hidden rounded-3xl border border-slate-700/60 bg-gradient-to-br from-slate-900/90 to-slate-900/60 backdrop-blur transition-all hover:border-emerald-500/50 hover:shadow-[0_0_50px_rgba(16,185,129,0.2)]">
+                <div className="absolute -inset-px opacity-0 group-hover:opacity-100 transition-opacity">
+                  <div className="h-full w-full bg-[radial-gradient(1000px_400px_at_var(--x,50%)_0,rgba(16,185,129,0.1),transparent)]" />
+                </div>
+
+                <div className="relative p-8 sm:p-10">
+                  <div className="grid lg:grid-cols-3 gap-8">
+                    <div className="lg:col-span-2 space-y-6">
+                      <div>
+                        <div className="inline-flex items-center gap-2 rounded-full bg-emerald-500/10 px-3 py-1 text-sm font-semibold text-emerald-400 mb-4">
+                          Manufacturing PMI
+                        </div>
+                        <h3 className="text-2xl sm:text-3xl font-bold text-white mb-4">
+                          Produttore Componentistica Automotive
+                        </h3>
+                        <p className="text-lg text-slate-300/90 leading-relaxed">
+                          120 dipendenti, 500+ DDT/settimana, gestionale SAP legacy, processo manuale complesso
+                        </p>
+                      </div>
+
+                      <div>
+                        <h4 className="text-lg font-semibold text-white mb-3">Il Problema</h4>
+                        <p className="text-slate-300/90 leading-relaxed">
+                          3 persone dedicate full-time a inserimento DDT in SAP. Errori frequenti, ritardi nella chiusura commesse,
+                          visibilità zero su magazzino real-time. Impossibile scalare senza assumere ulteriore personale amministrativo.
+                        </p>
+                      </div>
+
+                      <div>
+                        <h4 className="text-lg font-semibold text-white mb-3">La Soluzione Finch-AI</h4>
+                        <div className="grid sm:grid-cols-2 gap-3">
+                          {[
+                            "Automazione OCR per DDT in/out",
+                            "Integrazione SAP bidirezionale",
+                            "Dashboard produzione real-time",
+                            "Alert automatici su anomalie"
+                          ].map((item, i) => (
+                            <div key={i} className="flex items-center gap-2">
+                              <div className="h-2 w-2 rounded-full bg-emerald-400"></div>
+                              <span className="text-sm text-slate-300">{item}</span>
+                            </div>
+                          ))}
+                        </div>
+                      </div>
+                    </div>
+
+                    <div className="space-y-4">
+                      <div className="rounded-2xl border border-emerald-500/30 bg-gradient-to-br from-emerald-500/10 to-teal-500/10 p-6">
+                        <div className="text-4xl font-bold text-emerald-400 mb-2">92%</div>
+                        <div className="text-sm text-slate-300">Riduzione tempo elaborazione DDT</div>
+                      </div>
+                      <div className="rounded-2xl border border-emerald-500/30 bg-gradient-to-br from-emerald-500/10 to-teal-500/10 p-6">
+                        <div className="text-4xl font-bold text-emerald-400 mb-2">2.5 FTE</div>
+                        <div className="text-sm text-slate-300">Risorse liberate per attività strategiche</div>
+                      </div>
+                      <div className="rounded-2xl border border-emerald-500/30 bg-gradient-to-br from-emerald-500/10 to-teal-500/10 p-6">
+                        <div className="text-4xl font-bold text-emerald-400 mb-2">4 sett</div>
+                        <div className="text-sm text-slate-300">Tempo di deployment</div>
+                      </div>
+                      <div className="rounded-2xl border border-emerald-500/30 bg-gradient-to-br from-emerald-500/10 to-teal-500/10 p-6">
+                        <div className="text-4xl font-bold text-emerald-400 mb-2">ROI 6 mesi</div>
+                        <div className="text-sm text-slate-300">Break-even raggiunto</div>
+                      </div>
+                    </div>
+                  </div>
+
+                  <div className="mt-8 pt-6 border-t border-slate-700/50">
+                    <blockquote className="italic text-slate-300/90">
+                      "Finch-AI ci ha permesso di scalare del 40% senza assumere personale amministrativo.
+                      I nostri responsabili di produzione ora hanno visibilità real-time su tutto.
+                      Non è un software, è come avere un team di analisti H24."
+                    </blockquote>
+                    <div className="mt-3 text-sm font-semibold text-cyan-400">
+                      — Marco R., Operations Manager
+                    </div>
+                  </div>
+                </div>
+              </div>
+
+              {/* Case Study 2 - Placeholder per futuri casi */}
+              <div className="relative overflow-hidden rounded-3xl border border-slate-700/60 bg-gradient-to-br from-slate-900/60 to-slate-900/40 backdrop-blur p-8 sm:p-10">
+                <div className="text-center">
+                  <div className="text-6xl mb-4">📊</div>
+                  <h3 className="text-2xl font-bold text-white mb-4">Altri Case Study in Arrivo</h3>
+                  <p className="text-slate-300/90 max-w-2xl mx-auto leading-relaxed">
+                    Stiamo documentando altri successi dei nostri clienti.
+                    Vuoi essere il prossimo case study? Inizia con una demo personalizzata.
+                  </p>
+                  <a
+                    href="#contatti"
+                    className="inline-flex items-center gap-2 mt-6 rounded-xl bg-gradient-to-r from-cyan-500 to-blue-600 px-6 py-3 font-semibold text-white shadow-lg shadow-cyan-500/20 transition hover:brightness-110"
+                  >
+                    Richiedi Demo
+                    <svg className="h-4 w-4" viewBox="0 0 24 24" fill="none" stroke="currentColor">
+                      <path d="M5 12h14M13 5l7 7-7 7" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round"/>
+                    </svg>
+                  </a>
+                </div>
+              </div>
+            </div>
+          </div>
+        </section>
+
+        {/* DASHBOARD PREVIEW - Rimossa, sostituita da sezioni 4 e 5 sopra */}
+        <section className="py-16 hidden">
           <div className="text-center mb-12">
             <h2 className="text-3xl sm:text-4xl font-extrabold text-white mb-4">
               Dashboard in <span className="bg-clip-text text-transparent bg-gradient-to-r from-cyan-300 to-blue-500">Tempo Reale</span>
@@ -595,26 +957,118 @@ export default function FinchAIMockupAnimated() {
           </div>
         </section>
 
-        {/* CTA */}
+        {/* SEZIONE CONTATTI & LEAD GENERATION */}
         <section id="contatti" className="pb-24">
-          <div className="relative overflow-hidden rounded-3xl border border-cyan-500/30 bg-gradient-to-br from-slate-900/60 via-slate-900/40 to-slate-900/60 p-6 sm:p-8 lg:p-10">
-            <div className="pointer-events-none absolute -right-16 -top-16 h-64 w-64 rounded-full bg-cyan-500/20 blur-3xl" />
-            <div className="flex flex-col items-start justify-between gap-6 sm:flex-row sm:items-center">
-              <div>
-                <h3 className="text-xl sm:text-2xl font-bold">Pronto a ridurre del 90% i tempi sui DDT?</h3>
-                <p className="mt-2 max-w-2xl text-sm sm:text-base text-slate-300/90">
-                  Ti mostriamo in 10 minuti come Finch-AI legge, valida e integra i tuoi documenti nel gestionale.
-                </p>
+          <div className="mx-auto max-w-6xl">
+            <div className="text-center mb-12">
+              <h2 className="text-3xl sm:text-4xl lg:text-5xl font-extrabold text-white mb-6">
+                Inizia la <span className="bg-clip-text text-transparent bg-gradient-to-r from-cyan-400 to-blue-500">Trasformazione</span>
+              </h2>
+              <p className="text-lg text-slate-300/90 max-w-2xl mx-auto">
+                Scopri come Finch-AI può ottimizzare i tuoi processi in 10 minuti
+              </p>
+            </div>
+
+            <div className="grid lg:grid-cols-3 gap-6 mb-12">
+              {/* CTA 1: Demo Personalizzata */}
+              <div className="group relative overflow-hidden rounded-3xl border border-cyan-500/30 bg-gradient-to-br from-slate-900/60 to-slate-900/40 backdrop-blur p-8 transition-all hover:border-cyan-500/50 hover:shadow-[0_0_40px_rgba(34,211,238,0.2)]">
+                <div className="absolute -inset-px opacity-0 group-hover:opacity-100 transition-opacity">
+                  <div className="h-full w-full bg-[radial-gradient(600px_300px_at_50%_0,rgba(34,211,238,0.1),transparent)]" />
+                </div>
+
+                <div className="relative text-center">
+                  <div className="inline-flex items-center justify-center w-16 h-16 rounded-2xl bg-cyan-500/10 border border-cyan-500/30 mb-6">
+                    <svg className="h-8 w-8 text-cyan-400" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+                      <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M15 10l4.553-2.276A1 1 0 0121 8.618v6.764a1 1 0 01-1.447.894L15 14M5 18h8a2 2 0 002-2V8a2 2 0 00-2-2H5a2 2 0 00-2 2v8a2 2 0 002 2z" />
+                    </svg>
+                  </div>
+                  <h3 className="text-xl font-bold text-white mb-3">Demo Live</h3>
+                  <p className="text-sm text-slate-300/90 mb-6">
+                    Sessione personalizzata di 30 minuti con un nostro esperto. Vedi Finch-AI in azione sui tuoi documenti.
+                  </p>
+                  <a
+                    href="mailto:info@finch-ai.it?subject=Richiesta%20Demo%20Finch-AI&body=Buongiorno%2C%0A%0AVorrei%20prenotare%20una%20demo%20personalizzata%20di%20Finch-AI.%0A%0AAzienda%3A%20%0ASettore%3A%20%0ANumero%20dipendenti%3A%20%0ATelefono%3A%20%0A%0AGrazie"
+                    className="inline-flex items-center justify-center gap-2 w-full rounded-xl bg-gradient-to-r from-cyan-500 to-blue-600 px-5 py-3 font-semibold text-white shadow-lg shadow-cyan-500/20 transition hover:brightness-110"
+                  >
+                    Prenota Demo
+                    <svg className="h-4 w-4" viewBox="0 0 24 24" fill="none" stroke="currentColor">
+                      <path d="M5 12h14M13 5l7 7-7 7" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round"/>
+                    </svg>
+                  </a>
+                </div>
               </div>
-              <a
-                href="mailto:info@finch-ai.it?subject=Demo%20Finch-AI&body=Ciao%2C%20vorrei%20prenotare%20una%20demo."
-                className="group inline-flex items-center justify-center gap-2 rounded-xl bg-gradient-to-r from-cyan-500 to-blue-600 px-6 py-4 sm:px-5 sm:py-3 font-semibold text-white shadow-lg shadow-cyan-500/20 transition hover:brightness-110 w-full sm:w-auto text-center min-h-[48px] whitespace-nowrap"
-              >
-                Richiedi una demo
-                <svg className="h-4 w-4 transition-transform group-hover:translate-x-0.5" viewBox="0 0 24 24" fill="none">
-                  <path d="M5 12h14M13 5l7 7-7 7" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round"/>
-                </svg>
-              </a>
+
+              {/* CTA 2: Whitepaper */}
+              <div className="group relative overflow-hidden rounded-3xl border border-purple-500/30 bg-gradient-to-br from-slate-900/60 to-slate-900/40 backdrop-blur p-8 transition-all hover:border-purple-500/50 hover:shadow-[0_0_40px_rgba(168,85,247,0.2)]">
+                <div className="absolute -inset-px opacity-0 group-hover:opacity-100 transition-opacity">
+                  <div className="h-full w-full bg-[radial-gradient(600px_300px_at_50%_0,rgba(168,85,247,0.1),transparent)]" />
+                </div>
+
+                <div className="relative text-center">
+                  <div className="inline-flex items-center justify-center w-16 h-16 rounded-2xl bg-purple-500/10 border border-purple-500/30 mb-6">
+                    <svg className="h-8 w-8 text-purple-400" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+                      <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M12 6.253v13m0-13C10.832 5.477 9.246 5 7.5 5S4.168 5.477 3 6.253v13C4.168 18.477 5.754 18 7.5 18s3.332.477 4.5 1.253m0-13C13.168 5.477 14.754 5 16.5 5c1.747 0 3.332.477 4.5 1.253v13C19.832 18.477 18.247 18 16.5 18c-1.746 0-3.332.477-4.5 1.253" />
+                    </svg>
+                  </div>
+                  <h3 className="text-xl font-bold text-white mb-3">Whitepaper Gratuito</h3>
+                  <p className="text-sm text-slate-300/90 mb-6">
+                    "AI Documentale per il Manufacturing: Guida Pratica 2025". Casi d'uso, ROI, implementazione.
+                  </p>
+                  <a
+                    href="mailto:info@finch-ai.it?subject=Richiesta%20Whitepaper&body=Buongiorno%2C%0A%0AVorrei%20ricevere%20il%20whitepaper%20%22AI%20Documentale%20per%20il%20Manufacturing%22.%0A%0ANome%3A%20%0AAzienda%3A%20%0AEmail%3A%20%0A%0AGrazie"
+                    className="inline-flex items-center justify-center gap-2 w-full rounded-xl border border-purple-500/50 bg-purple-500/10 px-5 py-3 font-semibold text-purple-300 transition hover:bg-purple-500/20 hover:border-purple-500/70"
+                  >
+                    Scarica Gratis
+                    <svg className="h-4 w-4" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+                      <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M4 16v1a3 3 0 003 3h10a3 3 0 003-3v-1m-4-4l-4 4m0 0l-4-4m4 4V4" />
+                    </svg>
+                  </a>
+                </div>
+              </div>
+
+              {/* CTA 3: Contatto Veloce */}
+              <div className="group relative overflow-hidden rounded-3xl border border-emerald-500/30 bg-gradient-to-br from-slate-900/60 to-slate-900/40 backdrop-blur p-8 transition-all hover:border-emerald-500/50 hover:shadow-[0_0_40px_rgba(16,185,129,0.2)]">
+                <div className="absolute -inset-px opacity-0 group-hover:opacity-100 transition-opacity">
+                  <div className="h-full w-full bg-[radial-gradient(600px_300px_at_50%_0,rgba(16,185,129,0.1),transparent)]" />
+                </div>
+
+                <div className="relative text-center">
+                  <div className="inline-flex items-center justify-center w-16 h-16 rounded-2xl bg-emerald-500/10 border border-emerald-500/30 mb-6">
+                    <svg className="h-8 w-8 text-emerald-400" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+                      <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M8 12h.01M12 12h.01M16 12h.01M21 12c0 4.418-4.03 8-9 8a9.863 9.863 0 01-4.255-.949L3 20l1.395-3.72C3.512 15.042 3 13.574 3 12c0-4.418 4.03-8 9-8s9 3.582 9 8z" />
+                    </svg>
+                  </div>
+                  <h3 className="text-xl font-bold text-white mb-3">Parla con un Esperto</h3>
+                  <p className="text-sm text-slate-300/90 mb-6">
+                    Hai domande specifiche? Parliamo del tuo caso d'uso e troviamo la soluzione migliore.
+                  </p>
+                  <a
+                    href="mailto:info@finch-ai.it?subject=Richiesta%20Informazioni&body=Buongiorno%2C%0A%0AVorrei%20maggiori%20informazioni%20su%20Finch-AI.%0A%0ANome%3A%20%0AAzienda%3A%20%0ATelefono%3A%20%0A%0ADescrizione%20esigenza%3A%0A%0A%0AGrazie"
+                    className="inline-flex items-center justify-center gap-2 w-full rounded-xl border border-emerald-500/50 bg-emerald-500/10 px-5 py-3 font-semibold text-emerald-300 transition hover:bg-emerald-500/20 hover:border-emerald-500/70"
+                  >
+                    Contattaci
+                    <svg className="h-4 w-4" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+                      <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M3 8l7.89 5.26a2 2 0 002.22 0L21 8M5 19h14a2 2 0 002-2V7a2 2 0 00-2-2H5a2 2 0 00-2 2v10a2 2 0 002 2z" />
+                    </svg>
+                  </a>
+                </div>
+              </div>
+            </div>
+
+            {/* Trust Indicators */}
+            <div className="grid sm:grid-cols-3 gap-6 text-center">
+              <div className="p-6 rounded-2xl bg-slate-900/40 border border-slate-700/50">
+                <div className="text-3xl font-bold text-cyan-400 mb-2">10 min</div>
+                <div className="text-sm text-slate-400">Setup demo personalizzata</div>
+              </div>
+              <div className="p-6 rounded-2xl bg-slate-900/40 border border-slate-700/50">
+                <div className="text-3xl font-bold text-cyan-400 mb-2">2-4 sett</div>
+                <div className="text-sm text-slate-400">Deployment completo</div>
+              </div>
+              <div className="p-6 rounded-2xl bg-slate-900/40 border border-slate-700/50">
+                <div className="text-3xl font-bold text-cyan-400 mb-2">ROI 6 mesi</div>
+                <div className="text-sm text-slate-400">Return on Investment medio</div>
+              </div>
             </div>
           </div>
         </section>

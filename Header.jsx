@@ -27,10 +27,10 @@ function Header() {
           <img src="/assets/images/LOGO.png" alt="FINCH-AI Logo" />
         </NavLink>
         <ul>
-          <li><NavLink to="/">Home</NavLink></li>
-          <li><NavLink to="/chi-siamo.html">Chi Siamo</NavLink></li>
-          <li><NavLink to="/servizi.html">Servizi</NavLink></li>
-          <li><NavLink to="/contatti.html">Contatti</NavLink></li>
+          <li><NavLink to="/">Finch-AI Platform</NavLink></li>
+          <li><NavLink to="/servizi.html">Soluzioni</NavLink></li>
+          <li><NavLink to="/chi-siamo.html">Per Aziende</NavLink></li>
+          <li><NavLink to="/contatti.html">Demo</NavLink></li>
         </ul>
       </nav>
     </header>
