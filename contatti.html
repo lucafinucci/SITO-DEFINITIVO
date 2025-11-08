@@ -1,0 +1,135 @@
+<!DOCTYPE html>
+<html lang="it">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Contatti | Richiedi una Demo o un Preventivo - FINCH-AI</title>
+    <meta name="description" content="Contatta FINCH-AI per richiedere informazioni, una demo delle nostre soluzioni AI o un preventivo personalizzato. Siamo pronti ad aiutarti nella tua trasformazione digitale.">
+    <meta name="keywords" content="contatti, richiedi demo, preventivo AI, supporto, info@finch-ai.it, telefono finch-ai">
+    <link rel="stylesheet" href="assets/css/style.css">
+    <link rel="icon" href="assets/images/LOGO.png" type="image/png">
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800&display=swap" rel="stylesheet">
+    <style>
+        @keyframes scaleIn {
+            from {
+                transform: scale(0);
+                opacity: 0;
+            }
+            to {
+                transform: scale(1);
+                opacity: 1;
+            }
+        }
+    </style>
+</head>
+<body>
+    <header>
+        <nav>
+            <a href="index.html" class="logo"><img src="assets/images/LOGO.png" alt="FINCH-AI Logo"></a>
+            <ul>
+                <li><a href="index.html">Home</a></li>
+                <li><a href="chi-siamo.html">Chi Siamo</a></li>
+                <li><a href="servizi.html">Servizi</a></li>
+                <li><a href="contatti.html" class="active">Contatti</a></li>
+            </ul>
+        </nav>
+    </header>
+
+    <main>
+        <section class="contact">
+            <div id="form-container">
+                <h1>Contattaci</h1>
+                <p style="text-align: center; color: var(--text-gray); font-size: 1.2rem; margin-bottom: 3rem;">
+                    Hai un progetto in mente? Vuoi saperne di più sulle nostre soluzioni AI?<br>
+                    Compila il form e ti risponderemo al più presto!
+                </p>
+
+                <iframe name="hidden-iframe" id="hidden-iframe" style="display:none;"></iframe>
+
+                <form id="contact-form" action="https://formsubmit.co/info@finch-ai.it" method="POST" target="hidden-iframe">
+                <!-- FormSubmit Configuration -->
+                <input type="hidden" name="_subject" value="Nuova richiesta da FINCH-AI Website">
+                <input type="hidden" name="_captcha" value="false">
+                <input type="hidden" name="_template" value="table">
+                <input type="text" name="_honey" style="display:none">
+
+                <div class="form-group">
+                    <label for="name">Nome e Cognome</label>
+                    <input type="text" id="name" name="name" placeholder="Inserisci il tuo nome" required>
+                </div>
+
+                <div class="form-group">
+                    <label for="email">Email</label>
+                    <input type="email" id="email" name="email" placeholder="nome@esempio.it" required>
+                </div>
+
+                <div class="form-group">
+                    <label for="phone">Telefono (facoltativo)</label>
+                    <input type="tel" id="phone" name="phone" placeholder="+39 XXX XXX XXXX">
+                </div>
+
+                <div class="form-group">
+                    <label for="company">Azienda</label>
+                    <input type="text" id="company" name="company" placeholder="Nome della tua azienda">
+                </div>
+
+                <div class="form-group">
+                    <label for="subject">Oggetto</label>
+                    <select id="subject" name="subject" style="width: 100%; padding: 1rem; background: rgba(15, 23, 42, 0.5); border: 1px solid rgba(59, 130, 246, 0.3); border-radius: 8px; font-size: 1rem; color: var(--text-light);">
+                        <option value="Richiesta informazioni">Richiesta informazioni</option>
+                        <option value="Richiesta demo">Richiesta demo</option>
+                        <option value="Richiesta preventivo">Richiesta preventivo</option>
+                        <option value="Opportunità partnership">Opportunità partnership</option>
+                        <option value="Altro">Altro</option>
+                    </select>
+                </div>
+
+                <div class="form-group">
+                    <label for="message">Messaggio</label>
+                    <textarea id="message" name="message" rows="6" placeholder="Descrivi la tua richiesta o il tuo progetto..." required></textarea>
+                </div>
+
+                <button type="submit">Invia Richiesta</button>
+            </form>
+            </div>
+
+            <!-- Messaggio di successo (nascosto di default) -->
+            <div id="success-message" style="display: none; text-align: center; padding: 3rem;">
+                <div style="font-size: 5rem; margin-bottom: 2rem; animation: scaleIn 0.5s ease-out;">✅</div>
+                <h2 style="font-size: 2.5rem; font-weight: 800; margin-bottom: 1.5rem; background: linear-gradient(135deg, var(--accent-cyan), var(--accent-green)); -webkit-background-clip: text; -webkit-text-fill-color: transparent; background-clip: text;">Grazie per averci contattato!</h2>
+                <p style="font-size: 1.3rem; color: var(--text-gray); margin-bottom: 3rem;">La tua richiesta è stata inviata con successo. Ti risponderemo entro 48 ore.</p>
+                <a href="index.html" style="display: inline-block; padding: 1.2rem 3rem; background: linear-gradient(135deg, #06b6d4, #10b981); color: #0f172a; font-weight: 800; font-size: 1.2rem; border-radius: 12px; text-decoration: none; box-shadow: 0 8px 25px rgba(6, 182, 212, 0.4); transition: all 0.3s ease;">Torna alla Home</a>
+            </div>
+
+            <div class="features" style="margin-top: 5rem;">
+                <div class="feature-card">
+                    <div class="feature-icon">📧</div>
+                    <h3>Email</h3>
+                    <p style="color: var(--accent-cyan);"><a href="mailto:info@finch-ai.it" style="color: var(--accent-cyan); text-decoration: none;">info@finch-ai.it</a></p>
+                </div>
+
+                <div class="feature-card">
+                    <div class="feature-icon">📱</div>
+                    <h3>Telefono</h3>
+                    <p style="color: var(--accent-cyan);"><a href="tel:+393756475087" style="color: var(--accent-cyan); text-decoration: none;">+39 375 647 5087</a></p>
+                </div>
+
+                <div class="feature-card">
+                    <div class="feature-icon">🕒</div>
+                    <h3>Orari</h3>
+                    <p>Lun - Ven: 9:00 - 18:00</p>
+                </div>
+            </div>
+        </section>
+    </main>
+
+    <footer>
+        <p><strong>FINCH-AI</strong> - Intelligenza Artificiale per la trasformazione digitale delle PMI</p>
+        <p>&copy; 2024 FINCH-AI. Tutti i diritti riservati.</p>
+    </footer>
+
+    <script src="assets/js/script.js"></script>
+</body>
+</html>

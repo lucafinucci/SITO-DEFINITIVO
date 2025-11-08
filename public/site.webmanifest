@@ -1,0 +1,22 @@
+{
+  "name": "Finch-AI - Intelligenza Artificiale per l'Industria",
+  "short_name": "Finch-AI",
+  "description": "Automazione DDT, KPI Dashboard e integrazione ERP con AI industriale",
+  "icons": [
+    {
+      "src": "/assets/images/android-chrome-192x192.png",
+      "sizes": "192x192",
+      "type": "image/png"
+    },
+    {
+      "src": "/assets/images/android-chrome-512x512.png",
+      "sizes": "512x512",
+      "type": "image/png"
+    }
+  ],
+  "theme_color": "#0a1a2b",
+  "background_color": "#0a1a2b",
+  "display": "standalone",
+  "start_url": "/",
+  "scope": "/"
+}
