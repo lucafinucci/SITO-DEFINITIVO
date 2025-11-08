@@ -206,17 +206,6 @@ export default function FinchAIMockupAnimated() {
               </svg>
             </button>
           </div>
-
-          {/* Breadcrumb - Hide on mobile when menu is open */}
-          <div className={`flex items-center gap-2 pb-3 text-xs text-slate-400 ${mobileMenuOpen ? 'hidden' : ''}`}>
-            <svg viewBox="0 0 24 24" className="h-3 w-3" fill="none" stroke="currentColor" strokeWidth="2">
-              <path d="M3 12l2-2m0 0l7-7 7 7M5 10v10a1 1 0 001 1h3m10-11l2 2m-2-2v10a1 1 0 01-1 1h-3m-6 0a1 1 0 001-1v-4a1 1 0 011-1h2a1 1 0 011 1v4a1 1 0 001 1m-6 0h6"/>
-            </svg>
-            <span className="text-slate-500">/</span>
-            <span className="text-cyan-300 font-medium">
-              {navItems.find((item) => item.id === activeSection)?.label || "Home"}
-            </span>
-          </div>
         </div>
 
         {/* Mobile Menu Dropdown */}
