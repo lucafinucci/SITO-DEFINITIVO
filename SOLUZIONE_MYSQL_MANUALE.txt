@@ -1,0 +1,356 @@
+╔══════════════════════════════════════════════════════════════════════════════╗
+║                 MYSQL NON SI AVVIA - SOLUZIONE PASSO-PASSO                   ║
+╚══════════════════════════════════════════════════════════════════════════════╝
+
+Il tuo log mostra che MySQL si blocca su:
+"Server socket created on IP: '::'"
+
+Questo significa che MySQL cerca di creare il socket ma qualcosa lo blocca.
+
+┌──────────────────────────────────────────────────────────────────────────────┐
+│ SOLUZIONE 1: SCRIPT AUTOMATICO (Più Veloce)                                 │
+└──────────────────────────────────────────────────────────────────────────────┘
+
+1. Chiudi XAMPP Control Panel
+2. Doppio click su: FIX_MYSQL_IMMEDIATO.bat
+3. Attendi 10 secondi
+4. Verifica se funziona
+
+Se funziona → FATTO! ✅
+Se non funziona → Continua con SOLUZIONE 2
+
+┌──────────────────────────────────────────────────────────────────────────────┐
+│ SOLUZIONE 2: FIX MANUALE (Sicuro al 100%)                                   │
+└──────────────────────────────────────────────────────────────────────────────┘
+
+╔════════════════════════════════════════════════════════════════════════════╗
+║ PASSO 1: FERMA TUTTO                                                      ║
+╚════════════════════════════════════════════════════════════════════════════╝
+
+1. Apri XAMPP Control Panel
+2. Click "Stop" su MySQL (se rosso/verde)
+3. Chiudi XAMPP Control Panel
+4. Apri Task Manager (Ctrl+Shift+Esc)
+5. Cerca "mysqld.exe" o "mysql"
+6. Se presente: Click destro → Termina processo
+7. Chiudi Task Manager
+
+╔════════════════════════════════════════════════════════════════════════════╗
+║ PASSO 2: PULISCI FILE TEMPORANEI                                          ║
+╚════════════════════════════════════════════════════════════════════════════╝
+
+1. Apri Esplora File
+2. Vai a: C:\xampp\mysql\data\
+3. Elimina questi file (se presenti):
+
+   File da ELIMINARE:
+   ├── *.pid     (es: PC-NAME.pid)
+   ├── *.err     (es: mysql_error.log)
+   └── ibtmp1    (file temporaneo InnoDB)
+
+   ⚠️ NON ELIMINARE:
+   ├── cartelle (aria, mysql, performance_schema, phpmyadmin, test, ecc.)
+   ├── ibdata1
+   ├── ib_logfile0
+   └── ib_logfile1
+
+4. Svuota Cestino
+
+╔════════════════════════════════════════════════════════════════════════════╗
+║ PASSO 3: VERIFICA PORTA 3306                                              ║
+╚════════════════════════════════════════════════════════════════════════════╝
+
+1. Apri PowerShell o Prompt (Win+R → cmd)
+2. Copia e incolla:
+
+   netstat -ano | findstr ":3306"
+
+3. Se vedi risultato:
+
+   TCP    0.0.0.0:3306    0.0.0.0:0    LISTENING    1234
+                                                      ^^^^
+                                                      PID
+
+   Significa che la porta è OCCUPATA!
+
+4. Termina il processo:
+
+   taskkill /F /PID 1234
+
+   (Sostituisci 1234 con il PID che hai visto)
+
+5. Se non vedi nessun risultato → OK, porta libera ✅
+
+╔════════════════════════════════════════════════════════════════════════════╗
+║ PASSO 4: CORREGGI my.ini                                                  ║
+╚════════════════════════════════════════════════════════════════════════════╝
+
+1. Vai a: C:\xampp\mysql\bin\
+2. Trova: my.ini
+3. Click destro → Apri con Notepad (o Notepad++)
+
+4. Cerca questa riga (Ctrl+F):
+
+   skip-networking
+
+5. Se la trovi, aggiungi # davanti:
+
+   PRIMA:  skip-networking
+   DOPO:   #skip-networking
+
+6. Cerca anche:
+
+   bind-address
+
+7. Se presente, assicurati sia:
+
+   bind-address = 127.0.0.1
+
+   oppure commentala:
+
+   #bind-address = 127.0.0.1
+
+8. Salva file (Ctrl+S)
+9. Chiudi editor
+
+╔════════════════════════════════════════════════════════════════════════════╗
+║ PASSO 5: AVVIA MYSQL                                                      ║
+╚════════════════════════════════════════════════════════════════════════════╝
+
+OPZIONE A - Pannello XAMPP:
+
+1. Apri XAMPP Control Panel (come Amministratore)
+   - Click destro su icona → Esegui come amministratore
+2. Click "Start" accanto a MySQL
+3. Guarda il log nella finestra sotto
+4. Deve dire:
+
+   [mysql] MySQL Service started
+   [mysql] MySQL/MariaDB running on port 3306
+
+OPZIONE B - Riga di comando:
+
+1. Apri PowerShell come Amministratore
+2. Vai alla directory:
+
+   cd C:\xampp
+
+3. Esegui:
+
+   .\mysql_start.bat
+
+4. Lascia aperta la finestra
+5. Dopo 10 secondi verifica:
+
+   netstat -ano | findstr ":3306"
+
+6. Dovresti vedere:
+
+   TCP    0.0.0.0:3306    ... LISTENING
+
+╔════════════════════════════════════════════════════════════════════════════╗
+║ PASSO 6: TESTA CONNESSIONE                                                ║
+╚════════════════════════════════════════════════════════════════════════════╝
+
+1. Apri browser
+2. Vai a: http://localhost/phpmyadmin
+
+   Se SI APRE → MySQL funziona! ✅
+   Se ERRORE → Continua sotto
+
+╔════════════════════════════════════════════════════════════════════════════╗
+║ SE ANCORA NON FUNZIONA - CAUSE COMUNI                                     ║
+╚════════════════════════════════════════════════════════════════════════════╝
+
+┌─────────────────────────────────────────────────────────────────────────────┐
+│ CAUSA 1: Altra applicazione usa porta 3306                                 │
+└─────────────────────────────────────────────────────────────────────────────┘
+
+SOLUZIONE:
+1. Scopri chi usa la porta:
+
+   netstat -ano | findstr ":3306"
+
+2. Prendi il PID (ultimo numero)
+3. Scopri il processo:
+
+   tasklist | findstr "PID"
+
+4. Termina:
+
+   taskkill /F /PID XXXX
+
+OPPURE cambia porta MySQL:
+
+1. Apri: C:\xampp\mysql\bin\my.ini
+2. Cerca: port=3306
+3. Cambia in: port=3307
+4. Salva
+5. Riavvia MySQL
+6. Aggiorna config.php dell'area clienti:
+
+   'host' => '127.0.0.1:3307'
+
+┌─────────────────────────────────────────────────────────────────────────────┐
+│ CAUSA 2: Firewall blocca MySQL                                             │
+└─────────────────────────────────────────────────────────────────────────────┘
+
+SOLUZIONE:
+1. Apri Windows Defender Firewall
+2. Impostazioni avanzate
+3. Regole connessioni in entrata
+4. Nuova regola
+5. Porta → TCP → 3306
+6. Consenti connessione
+7. Nome: "XAMPP MySQL"
+
+┌─────────────────────────────────────────────────────────────────────────────┐
+│ CAUSA 3: File database corrotto                                            │
+└─────────────────────────────────────────────────────────────────────────────┘
+
+SOLUZIONE (ESTREMA - Perdi dati):
+
+⚠️ BACKUP PRIMA!
+
+1. Copia TUTTA la cartella:
+   C:\xampp\mysql\data\
+   → C:\backup_mysql_data\
+
+2. Ferma MySQL
+3. Vai a: C:\xampp\mysql\data\
+4. Elimina SOLO:
+   - ibdata1
+   - ib_logfile0
+   - ib_logfile1
+   - ibtmp1
+
+5. Riavvia MySQL
+6. MySQL ricreerà i file
+
+7. Se database mancanti:
+   - Ripristina da backup_mysql_data
+
+┌─────────────────────────────────────────────────────────────────────────────┐
+│ CAUSA 4: Permessi Windows                                                  │
+└─────────────────────────────────────────────────────────────────────────────┘
+
+SOLUZIONE:
+1. Click destro su: C:\xampp
+2. Proprietà → Sicurezza
+3. Modifica permessi
+4. Aggiungi "Everyone" → Controllo completo
+5. Applica
+6. Riavvia MySQL
+
+╔════════════════════════════════════════════════════════════════════════════╗
+║ SOLUZIONE DRASTICA: REINSTALLA MYSQL XAMPP                                ║
+╚════════════════════════════════════════════════════════════════════════════╝
+
+Se NIENTE funziona:
+
+1. BACKUP DATABASE:
+   - Copia: C:\xampp\mysql\data\ → C:\backup_mysql\
+
+2. Disinstalla XAMPP:
+   - Pannello di controllo → Programmi → XAMPP
+
+3. Elimina cartella residua:
+   - C:\xampp\
+
+4. Reinstalla XAMPP:
+   - Download: https://www.apachefriends.org/
+   - Installa solo Apache + MySQL + PHP
+
+5. Ripristina database:
+   - Copia backup → C:\xampp\mysql\data\
+
+╔════════════════════════════════════════════════════════════════════════════╗
+║ VERIFICA FINALE                                                            ║
+╚════════════════════════════════════════════════════════════════════════════╝
+
+Dopo ogni tentativo, verifica:
+
+1. MySQL è in esecuzione:
+
+   tasklist | findstr "mysqld"
+
+   Dovresti vedere: mysqld.exe
+
+2. Porta 3306 è aperta:
+
+   netstat -ano | findstr ":3306"
+
+   Dovresti vedere: LISTENING
+
+3. phpMyAdmin funziona:
+
+   http://localhost/phpmyadmin
+
+   Dovresti vedere login
+
+4. Area clienti funziona:
+
+   http://localhost/area-clienti/login.php
+
+   Dovresti vedere form login
+
+╔════════════════════════════════════════════════════════════════════════════╗
+║ CODICI DI ERRORE COMUNI                                                   ║
+╚════════════════════════════════════════════════════════════════════════════╝
+
+Errore nel log → Soluzione:
+
+"Can't create test file"
+  → Problema permessi: Esegui XAMPP come admin
+
+"Another MySQL daemon already running"
+  → MySQL già attivo: Termina processo mysqld.exe
+
+"Can't connect to MySQL server on 'localhost' (10061)"
+  → MySQL non in ascolto: Verifica porta 3306
+
+"Access denied for user 'root'@'localhost'"
+  → Password errata: Reset password root
+
+"Table doesn't exist"
+  → Database corrotto: Ripristina da backup
+
+╔════════════════════════════════════════════════════════════════════════════╗
+║ LOG ERRORI                                                                 ║
+╚════════════════════════════════════════════════════════════════════════════╝
+
+Controlla log dettagliati in:
+
+C:\xampp\mysql\data\mysql_error.log
+C:\xampp\mysql\data\[TUOPC].err
+
+Apri con Notepad e cerca "ERROR" o "Warning"
+
+╔════════════════════════════════════════════════════════════════════════════╗
+║ SUPPORTO                                                                   ║
+╚════════════════════════════════════════════════════════════════════════════╝
+
+Se hai bisogno di aiuto:
+
+1. Copia il log da: C:\xampp\mysql\data\mysql_error.log
+2. Incollami le ultime 50 righe
+3. Dimmi quale PASSO hai completato
+4. Ti darò soluzione specifica
+
+═══════════════════════════════════════════════════════════════════════════════
+                    CHECKLIST RISOLUZIONE
+═══════════════════════════════════════════════════════════════════════════════
+
+□ Fermato MySQL (Task Manager)
+□ Eliminati file .pid, .err, ibtmp1
+□ Verificato porta 3306 libera
+□ Corretto my.ini (skip-networking commentato)
+□ Riavviato MySQL
+□ Verificato con netstat
+□ Testato phpMyAdmin
+□ Testato area clienti
+
+Se TUTTI i check sono ✅ ma non funziona ancora:
+→ Usa SOLUZIONE DRASTICA (reinstalla)
+
+═══════════════════════════════════════════════════════════════════════════════

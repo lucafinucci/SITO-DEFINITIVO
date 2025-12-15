@@ -1,0 +1,262 @@
+<!DOCTYPE html>
+<html lang="it">
+<head>
+    <meta charset="UTF-8">
+    <title>ISTRUZIONI SETUP DATABASE</title>
+    <style>
+        body {
+            font-family: system-ui;
+            background: #0b1220;
+            color: #e5e7eb;
+            padding: 40px;
+            max-width: 900px;
+            margin: 0 auto;
+            line-height: 1.6;
+        }
+        h1 { color: #22d3ee; }
+        h2 { color: #10b981; margin-top: 40px; }
+        .box {
+            background: #1f2937;
+            padding: 20px;
+            border-radius: 8px;
+            margin: 20px 0;
+            border-left: 4px solid #22d3ee;
+        }
+        code {
+            background: #0f172a;
+            padding: 2px 8px;
+            border-radius: 4px;
+            color: #22d3ee;
+            font-family: 'Consolas', monospace;
+        }
+        .sqlcode {
+            background: #0f172a;
+            padding: 15px;
+            border-radius: 8px;
+            overflow-x: auto;
+            margin: 15px 0;
+            color: #10b981;
+            font-family: 'Consolas', monospace;
+            white-space: pre;
+        }
+        .error { color: #ef4444; font-weight: bold; }
+        .ok { color: #10b981; font-weight: bold; }
+        .step {
+            background: #374151;
+            padding: 15px;
+            margin: 10px 0;
+            border-radius: 6px;
+        }
+        a {
+            color: #22d3ee;
+            text-decoration: none;
+            font-weight: 600;
+        }
+        a:hover {
+            text-decoration: underline;
+        }
+    </style>
+</head>
+<body>
+    <h1>🔧 SETUP DATABASE - ISTRUZIONI DEFINITIVE</h1>
+
+    <div class="box">
+        <h2>⚠️ PROBLEMA IDENTIFICATO</h2>
+        <p>MariaDB ha i permessi di root configurati male. Non possiamo connetterci da PHP perché <span class="error">"Host 'localhost' is not allowed to connect"</span>.</p>
+    </div>
+
+    <h2>✅ SOLUZIONE: Usa phpMyAdmin</h2>
+
+    <div class="step">
+        <strong>PASSO 1:</strong> Apri phpMyAdmin nel browser<br>
+        <a href="http://localhost/phpmyadmin" target="_blank">http://localhost/phpmyadmin</a>
+    </div>
+
+    <div class="step">
+        <strong>PASSO 2:</strong> Entra con:<br>
+        Username: <code>root</code><br>
+        Password: <code>(lascia vuoto)</code>
+    </div>
+
+    <div class="step">
+        <strong>PASSO 3:</strong> Clicca sulla tab <code>SQL</code> in alto
+    </div>
+
+    <div class="step">
+        <strong>PASSO 4:</strong> COPIA E INCOLLA questo codice SQL completo:
+    </div>
+
+    <div class="sqlcode">-- Elimina database esistente
+DROP DATABASE IF EXISTS finch_ai_clienti;
+
+-- Crea nuovo database
+CREATE DATABASE finch_ai_clienti
+CHARACTER SET utf8mb4
+COLLATE utf8mb4_unicode_ci;
+
+-- Seleziona il database
+USE finch_ai_clienti;
+
+-- Tabella utenti
+CREATE TABLE utenti (
+    id INT AUTO_INCREMENT PRIMARY KEY,
+    email VARCHAR(255) NOT NULL UNIQUE,
+    password_hash VARCHAR(255) NOT NULL,
+    nome VARCHAR(100) NOT NULL,
+    cognome VARCHAR(100) NOT NULL,
+    azienda VARCHAR(255) NOT NULL,
+    telefono VARCHAR(20),
+    ruolo ENUM('admin', 'cliente', 'viewer') DEFAULT 'cliente',
+    mfa_secret VARCHAR(32) DEFAULT NULL,
+    mfa_enabled BOOLEAN DEFAULT FALSE,
+    attivo BOOLEAN DEFAULT TRUE,
+    created_at TIMESTAMP DEFAULT CURRENT_TIMESTAMP,
+    updated_at TIMESTAMP DEFAULT CURRENT_TIMESTAMP ON UPDATE CURRENT_TIMESTAMP,
+    last_login TIMESTAMP NULL,
+    INDEX idx_email (email),
+    INDEX idx_azienda (azienda)
+) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci;
+
+-- Tabella sessioni
+CREATE TABLE sessioni (
+    id INT AUTO_INCREMENT PRIMARY KEY,
+    user_id INT NOT NULL,
+    token_hash VARCHAR(255) NOT NULL,
+    ip_address VARCHAR(45),
+    user_agent TEXT,
+    created_at TIMESTAMP DEFAULT CURRENT_TIMESTAMP,
+    expires_at TIMESTAMP NOT NULL,
+    revoked BOOLEAN DEFAULT FALSE,
+    FOREIGN KEY (user_id) REFERENCES utenti(id) ON DELETE CASCADE,
+    INDEX idx_token (token_hash),
+    INDEX idx_user (user_id),
+    INDEX idx_expires (expires_at)
+) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci;
+
+-- Tabella servizi
+CREATE TABLE servizi (
+    id INT AUTO_INCREMENT PRIMARY KEY,
+    nome VARCHAR(255) NOT NULL,
+    descrizione TEXT,
+    codice VARCHAR(50) UNIQUE NOT NULL,
+    prezzo_mensile DECIMAL(10, 2),
+    attivo BOOLEAN DEFAULT TRUE,
+    created_at TIMESTAMP DEFAULT CURRENT_TIMESTAMP,
+    INDEX idx_codice (codice)
+) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci;
+
+-- Tabella utenti_servizi
+CREATE TABLE utenti_servizi (
+    id INT AUTO_INCREMENT PRIMARY KEY,
+    user_id INT NOT NULL,
+    servizio_id INT NOT NULL,
+    data_attivazione DATE NOT NULL,
+    data_disattivazione DATE NULL,
+    stato ENUM('attivo', 'sospeso', 'disattivato') DEFAULT 'attivo',
+    note TEXT,
+    FOREIGN KEY (user_id) REFERENCES utenti(id) ON DELETE CASCADE,
+    FOREIGN KEY (servizio_id) REFERENCES servizi(id) ON DELETE CASCADE,
+    INDEX idx_user_servizio (user_id, servizio_id),
+    INDEX idx_stato (stato)
+) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci;
+
+-- Tabella fatture
+CREATE TABLE fatture (
+    id INT AUTO_INCREMENT PRIMARY KEY,
+    user_id INT NOT NULL,
+    numero_fattura VARCHAR(50) NOT NULL UNIQUE,
+    data_emissione DATE NOT NULL,
+    data_scadenza DATE NOT NULL,
+    importo_netto DECIMAL(10, 2) NOT NULL,
+    iva DECIMAL(10, 2) NOT NULL,
+    importo_totale DECIMAL(10, 2) NOT NULL,
+    stato ENUM('emessa', 'pagata', 'scaduta', 'annullata') DEFAULT 'emessa',
+    file_path VARCHAR(500),
+    note TEXT,
+    created_at TIMESTAMP DEFAULT CURRENT_TIMESTAMP,
+    FOREIGN KEY (user_id) REFERENCES utenti(id) ON DELETE CASCADE,
+    INDEX idx_numero (numero_fattura),
+    INDEX idx_user (user_id),
+    INDEX idx_data (data_emissione),
+    INDEX idx_stato (stato)
+) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci;
+
+-- Tabella scadenze
+CREATE TABLE scadenze (
+    id INT AUTO_INCREMENT PRIMARY KEY,
+    user_id INT NOT NULL,
+    tipo VARCHAR(100) NOT NULL,
+    descrizione TEXT NOT NULL,
+    data_scadenza DATE NOT NULL,
+    urgente BOOLEAN DEFAULT FALSE,
+    completata BOOLEAN DEFAULT FALSE,
+    note TEXT,
+    created_at TIMESTAMP DEFAULT CURRENT_TIMESTAMP,
+    FOREIGN KEY (user_id) REFERENCES utenti(id) ON DELETE CASCADE,
+    INDEX idx_user (user_id),
+    INDEX idx_data (data_scadenza),
+    INDEX idx_urgente (urgente)
+) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci;
+
+-- Tabella access_logs
+CREATE TABLE access_logs (
+    id INT AUTO_INCREMENT PRIMARY KEY,
+    user_id INT,
+    email_tentativo VARCHAR(255),
+    ip_address VARCHAR(45),
+    user_agent TEXT,
+    successo BOOLEAN DEFAULT FALSE,
+    motivo_fallimento VARCHAR(255),
+    created_at TIMESTAMP DEFAULT CURRENT_TIMESTAMP,
+    FOREIGN KEY (user_id) REFERENCES utenti(id) ON DELETE SET NULL,
+    INDEX idx_user (user_id),
+    INDEX idx_ip (ip_address),
+    INDEX idx_data (created_at)
+) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci;
+
+-- Inserisci utente demo
+INSERT INTO utenti (email, password_hash, nome, cognome, azienda, attivo) VALUES
+('demo@finch-ai.it', '$2y$10$92IXUNpkjO0rOQ5byMi.Ye4oKoEa3Ro9llC/.og/at2.uheWG/igi', 'Demo', 'User', 'Demo Company', TRUE);
+
+-- Inserisci servizio
+INSERT INTO servizi (nome, descrizione, codice, prezzo_mensile, attivo) VALUES
+('Document Intelligence', 'Analisi automatica documenti con AI', 'DOC_INTEL', 299.00, TRUE);
+
+-- Assegna servizio a utente demo
+INSERT INTO utenti_servizi (user_id, servizio_id, data_attivazione, stato) VALUES
+(1, 1, CURDATE(), 'attivo');</div>
+
+    <div class="step">
+        <strong>PASSO 5:</strong> Clicca su <code>Esegui</code> (o <code>Go</code>)
+    </div>
+
+    <div class="step">
+        <strong>PASSO 6:</strong> Se tutto va bene vedrai messaggi di successo verdi
+    </div>
+
+    <h2>🎯 DOPO IL SETUP</h2>
+
+    <div class="box">
+        <p><span class="ok">✅ CREDENZIALI</span></p>
+        <p>
+            <strong>Email:</strong> demo@finch-ai.it<br>
+            <strong>Password:</strong> password
+        </p>
+        <p style="margin-top: 20px;">
+            <a href="http://localhost/SITO/area-clienti/login.php">VAI AL LOGIN »</a>
+        </p>
+    </div>
+
+    <h2>❓ SE HAI PROBLEMI</h2>
+
+    <div class="box">
+        <p>Se phpMyAdmin non si apre o non funziona:</p>
+        <ol>
+            <li>Verifica che Apache e MySQL siano avviati in XAMPP</li>
+            <li>Prova ad accedere a <a href="http://127.0.0.1/phpmyadmin" target="_blank">http://127.0.0.1/phpmyadmin</a></li>
+            <li>Se MySQL non si avvia, clicca su "Config" → "my.ini" in XAMPP e verifica che la porta sia 3306</li>
+        </ol>
+    </div>
+
+</body>
+</html>

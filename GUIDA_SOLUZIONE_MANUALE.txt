@@ -1,0 +1,105 @@
+================================================================================
+GUIDA SOLUZIONE MANUALE - FIX MARIADB XAMPP
+================================================================================
+
+Il problema: MariaDB in XAMPP non permette connessioni da localhost/127.0.0.1
+
+SOLUZIONE DEFINITIVA (5 MINUTI):
+
+--------------------------------------------------------------------------------
+METODO 1: Via File di Configurazione (CONSIGLIATO)
+--------------------------------------------------------------------------------
+
+1. FERMA MySQL da XAMPP Control Panel (pulsante Stop)
+
+2. Apri il file di configurazione:
+   C:\xampp\mysql\bin\my.ini
+
+   (Fai clic destro > Apri con Blocco note)
+
+3. Cerca la sezione [mysqld] (circa riga 15-30)
+
+4. AGGIUNGI questa riga sotto [mysqld]:
+
+   skip-grant-tables
+
+   Esempio:
+   [mysqld]
+   skip-grant-tables
+   port=3306
+   socket="C:/xampp/mysql/mysql.sock"
+   ...
+
+5. SALVA il file (Ctrl+S)
+
+6. RIAVVIA MySQL da XAMPP Control Panel (pulsante Start)
+
+7. ESEGUI lo script:
+   ESEGUI_SETUP_PHP.bat
+
+8. IMPORTANTE: Dopo che il database è creato, RIMUOVI la riga:
+   skip-grant-tables
+   dal file my.ini e riavvia MySQL di nuovo per sicurezza.
+
+--------------------------------------------------------------------------------
+METODO 2: Via Console MySQL
+--------------------------------------------------------------------------------
+
+1. Apri cmd.exe (Prompt dei comandi)
+
+2. Vai nella directory MySQL:
+   cd C:\xampp\mysql\bin
+
+3. Avvia MySQL (questo dovrebbe funzionare senza password):
+   mysql.exe -u root
+
+4. Una volta dentro (vedrai il prompt mysql>), esegui questi comandi:
+
+   GRANT ALL PRIVILEGES ON *.* TO 'root'@'localhost' WITH GRANT OPTION;
+   GRANT ALL PRIVILEGES ON *.* TO 'root'@'127.0.0.1' WITH GRANT OPTION;
+   FLUSH PRIVILEGES;
+   EXIT;
+
+5. Riavvia MySQL da XAMPP Control Panel
+
+6. ESEGUI lo script:
+   ESEGUI_SETUP_PHP.bat
+
+--------------------------------------------------------------------------------
+METODO 3: Reinstallazione MySQL di XAMPP (ULTIMA RISORSA)
+--------------------------------------------------------------------------------
+
+Se niente funziona:
+
+1. Backup dei tuoi dati importanti
+2. Disinstalla XAMPP
+3. Scarica XAMPP più recente da: https://www.apachefriends.org/
+4. Reinstalla XAMPP
+5. Riprova gli script
+
+================================================================================
+DOPO IL FIX
+================================================================================
+
+Una volta che il database è creato, testa il login:
+
+1. Apri browser
+2. Vai su: http://localhost/area-clienti/login.php
+3. Email: demo@finch-ai.it
+4. Password: Demo123!
+5. Clicca "Accedi"
+
+Se vedi la dashboard, FUNZIONA! ✓
+
+================================================================================
+SUPPORTO
+================================================================================
+
+Se hai ancora problemi, verifica:
+
+✓ MySQL è avviato (verde in XAMPP)
+✓ Apache è avviato (verde in XAMPP)
+✓ Porta 3306 non è occupata (usa: netstat -an | find "3306")
+✓ File in C:\xampp\htdocs\area-clienti\ esistono
+
+================================================================================

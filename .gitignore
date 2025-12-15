@@ -1,0 +1,43 @@
+# Environment variables
+.env
+
+# Cache
+cache/
+*.cache
+
+# Logs
+logs/
+*.log
+
+# OS Files
+.DS_Store
+Thumbs.db
+desktop.ini
+
+# IDE
+.vscode/
+.idea/
+*.sublime-*
+
+# Node modules
+node_modules/
+
+# Build
+dist/
+build/
+
+# Temporary files
+*.tmp
+*.temp
+~*
+
+# Database
+*.sql.backup
+*.db
+
+# Sensitive
+*.key
+*.pem
+credentials.json
+nul
+**/nul

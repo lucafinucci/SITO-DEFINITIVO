@@ -1,9 +1,12 @@
 import { useEffect, useRef, useState } from "react";
+import { modules as moduleStack } from "@/data/modules";
+import ContactForm from "./ContactForm";
 
 export default function FinchAIMockupAnimated() {
   const canvasRef = useRef(null);
   const [activeSection, setActiveSection] = useState("hero");
   const [mobileMenuOpen, setMobileMenuOpen] = useState(false);
+  const formatWhatsappLink = (phone) => `https://wa.me/${phone.replace(/\D+/g, "")}`;
 
   // Scroll spy for active section
   useEffect(() => {
@@ -130,6 +133,7 @@ export default function FinchAIMockupAnimated() {
     { id: "hero", label: "Finch-AI Platform" },
     { id: "come-funziona", label: "Soluzioni" },
     { id: "contatti", label: "Demo" },
+    { id: "area-clienti", label: "Area Clienti", href: "/area-clienti/" },
   ];
 
   return (
@@ -168,7 +172,7 @@ export default function FinchAIMockupAnimated() {
               {navItems.map((item) => (
                 <a
                   key={item.id}
-                  href={`#${item.id}`}
+                  href={item.href || `#${item.id}`}
                   className={`relative px-4 py-2 text-sm font-medium transition-colors ${
                     activeSection === item.id
                       ? "text-cyan-300"
@@ -185,7 +189,7 @@ export default function FinchAIMockupAnimated() {
 
             {/* Desktop CTA Button */}
             <a
-              href="mailto:info@finch-ai.it"
+              href="#contact-form"
               className="hidden sm:inline-flex items-center gap-2 rounded-lg bg-gradient-to-r from-cyan-500 to-blue-600 px-4 py-2 text-sm font-semibold text-white shadow-lg shadow-cyan-500/20 transition hover:brightness-110"
             >
               Contattaci
@@ -215,7 +219,7 @@ export default function FinchAIMockupAnimated() {
               {navItems.map((item) => (
                 <a
                   key={item.id}
-                  href={`#${item.id}`}
+                  href={item.href || `#${item.id}`}
                   onClick={() => setMobileMenuOpen(false)}
                   className={`block px-4 py-3 rounded-lg text-base font-medium transition-all ${
                     activeSection === item.id
@@ -227,7 +231,7 @@ export default function FinchAIMockupAnimated() {
                 </a>
               ))}
               <a
-                href="mailto:info@finch-ai.it"
+                href="#contact-form"
                 onClick={() => setMobileMenuOpen(false)}
                 className="block mt-4 px-4 py-3 rounded-lg bg-gradient-to-r from-cyan-500 to-blue-600 text-center text-base font-semibold text-white shadow-lg shadow-cyan-500/20"
               >
@@ -265,7 +269,8 @@ export default function FinchAIMockupAnimated() {
 
             <h1 className="mt-5 text-4xl font-extrabold leading-tight sm:text-5xl lg:text-6xl animate-[fadeUp_0.9s_ease_0.12s_both]">
               <span className="bg-clip-text text-transparent bg-gradient-to-r from-cyan-300 via-sky-400 to-blue-500">
-                Automazione Intelligente per Decisioni di Valore
+                Automazione Intelligente per<br />
+                Decisioni di Valore
               </span>
             </h1>
 
@@ -441,6 +446,56 @@ export default function FinchAIMockupAnimated() {
           </div>
         </section>
 
+        {/* ECOSISTEMA FINCH-AI */}
+        <section className="py-16">
+          <div className="mx-auto max-w-5xl">
+            <div className="relative overflow-hidden rounded-3xl border border-cyan-500/20 bg-gradient-to-br from-slate-900/80 via-slate-900/60 to-slate-900/30 p-8 sm:p-10 backdrop-blur">
+              <div className="absolute -inset-px opacity-0 sm:opacity-100">
+                <div className="absolute inset-0 bg-[radial-gradient(900px_300px_at_30%_0%,rgba(56,189,248,0.12),transparent)]" />
+                <div className="absolute inset-0 bg-[radial-gradient(900px_300px_at_70%_100%,rgba(59,130,246,0.08),transparent)]" />
+              </div>
+              <div className="relative space-y-6">
+                <div className="inline-flex items-center gap-2 rounded-full border border-cyan-500/40 bg-cyan-500/10 px-4 py-1.5 text-xs font-semibold uppercase tracking-wider text-cyan-200">
+                  🌐 Ecosistema Finch-AI
+                </div>
+                <h2 className="text-3xl sm:text-4xl font-extrabold text-white">
+                  L'intelligenza artificiale che cresce con la tua azienda.
+                </h2>
+                <p className="text-lg text-slate-300/90 max-w-3xl leading-relaxed">
+                  Ogni azienda è unica — e ha bisogno della propria intelligenza artificiale. Finch-AI costruisce un ecosistema modulare, integrato e personalizzato che si adatta all'identità, ai processi e agli obiettivi di ogni impresa.
+                </p>
+                <div className="grid gap-4 sm:grid-cols-2">
+                  {[
+                    {
+                      title: "AI su misura, non generica",
+                      desc: "Moduli personalizzati sulle tue operation, dati e vincoli. Crescono con il business, non il contrario."
+                    },
+                    {
+                      title: "Sistema, non solo piattaforma",
+                      desc: "I moduli collaborano tra loro: documenti, produzione, finanza, magazzino e assistenti conversazionali si parlano in tempo reale."
+                    },
+                    {
+                      title: "Ecosistema modulare",
+                      desc: "Attiva i moduli che servono ora e aggiungi gli altri quando il business evolve, senza ripartire da zero."
+                    }
+                  ].map((item, i) => (
+                    <div
+                      key={i}
+                      className="rounded-2xl border border-slate-700/60 bg-slate-900/60 p-5 backdrop-blur"
+                    >
+                      <h3 className="text-lg font-semibold text-white mb-2">{item.title}</h3>
+                      <p className="text-sm text-slate-300 leading-relaxed">{item.desc}</p>
+                    </div>
+                  ))}
+                </div>
+                <p className="text-sm text-slate-400">
+                  Non vendiamo una piattaforma: offriamo un sistema intelligente completo, fatto di moduli che collaborano tra loro e crescono insieme alla tua azienda.
+                </p>
+              </div>
+            </div>
+          </div>
+        </section>
+
         {/* SEZIONE 3: I MODULI CON BENEFICI */}
         <section id="come-funziona" className="py-20">
           <div className="mx-auto max-w-6xl">
@@ -449,11 +504,31 @@ export default function FinchAIMockupAnimated() {
                 I Moduli
               </span>
               <h2 className="text-3xl sm:text-4xl lg:text-5xl font-extrabold text-white mb-6">
-                Tre Pilastri, <span className="bg-clip-text text-transparent bg-gradient-to-r from-purple-400 to-pink-500">Infinite Possibilità</span>
+                7 Moduli, un <span className="bg-clip-text text-transparent bg-gradient-to-r from-purple-400 to-pink-500">Ecosistema Unico</span>
               </h2>
               <p className="text-lg sm:text-xl text-slate-300/90 max-w-3xl mx-auto leading-relaxed">
-                Ogni modulo risolve un problema specifico, insieme creano un ecosistema che trasforma il tuo business
+                Ogni modulo risolve un problema concreto; insieme lavorano come un sistema integrato che cresce con la tua azienda.
               </p>
+            </div>
+
+            {/* Stack completo dei 7 moduli AI */}
+            <div className="grid gap-4 sm:grid-cols-2 lg:grid-cols-3 mb-12">
+              {moduleStack.map((module) => (
+                <div
+                  key={module.key}
+                  className="group relative overflow-hidden rounded-2xl border border-slate-700/60 bg-slate-900/50 p-5 backdrop-blur transition hover:border-cyan-500/50 hover:shadow-[0_0_30px_rgba(34,211,238,0.2)]"
+                >
+                  <div className="absolute -inset-px opacity-0 group-hover:opacity-100 transition-opacity">
+                    <div className="h-full w-full bg-[radial-gradient(600px_250px_at_var(--x,50%)_0,rgba(34,211,238,0.12),transparent)]" />
+                  </div>
+                  <div className="relative flex flex-col gap-3 h-full">
+                    <span className="text-2xl" aria-hidden="true">{module.emoji}</span>
+                    <h3 className="text-xl font-semibold text-white">{module.title}</h3>
+                    <p className="text-sm text-slate-300 leading-relaxed">{module.desc}</p>
+                    <p className="text-sm font-semibold text-cyan-300">Output: {module.output}</p>
+                  </div>
+                </div>
+              ))}
             </div>
 
             <div className="space-y-8">
@@ -469,11 +544,11 @@ export default function FinchAIMockupAnimated() {
                       <div className="rounded-xl border border-cyan-500/30 bg-cyan-500/10 p-3 text-cyan-300">
                         <svg viewBox="0 0 24 24" className="h-8 w-8"><path d="M4 4h10l6 6v10a2 2 0 0 1-2 2H4V4z" fill="none" stroke="currentColor" strokeWidth="1.8"/><path d="M14 4v6h6" fill="none" stroke="currentColor" strokeWidth="1.8"/></svg>
                       </div>
-                      <h3 className="text-2xl sm:text-3xl font-bold text-white">Document Intelligence</h3>
+                      <h3 className="text-2xl sm:text-3xl font-bold text-white">Finch-AI Document Intelligence</h3>
                     </div>
 
                     <p className="text-lg text-slate-300/90 mb-6 leading-relaxed">
-                      Trasforma ogni documento in dati strutturati e azionabili. OCR avanzato con validazioni di dominio specifiche per il tuo settore.
+                      OCR + AI per leggere DDT, fatture, ordini, contratti e documenti tecnici. Il tutto con validazioni di dominio specifiche per il tuo settore.
                     </p>
 
                     <div className="space-y-3 mb-6">
@@ -510,7 +585,7 @@ export default function FinchAIMockupAnimated() {
                 </div>
               </div>
 
-              {/* Modulo 2: Production Analytics */}
+              {/* Modulo 2: Finch-AI Production */}
               <div className="group relative overflow-hidden rounded-3xl border border-slate-700/60 bg-slate-900/40 p-8 sm:p-10 backdrop-blur transition hover:border-purple-500/50 hover:shadow-[0_0_40px_rgba(168,85,247,0.2)]">
                 <div className="absolute -inset-px opacity-0 group-hover:opacity-100 transition-opacity">
                   <div className="h-full w-full bg-[radial-gradient(800px_300px_at_var(--x,50%)_0,rgba(168,85,247,0.15),transparent)]" />
@@ -537,11 +612,11 @@ export default function FinchAIMockupAnimated() {
                       <div className="rounded-xl border border-purple-500/30 bg-purple-500/10 p-3 text-purple-300">
                         <svg viewBox="0 0 24 24" className="h-8 w-8"><path d="M4 19h16M6 16V8m6 8V5m6 11v-7" fill="none" stroke="currentColor" strokeWidth="1.8"/></svg>
                       </div>
-                      <h3 className="text-2xl sm:text-3xl font-bold text-white">Production Analytics</h3>
+                      <h3 className="text-2xl sm:text-3xl font-bold text-white">Finch-AI Production</h3>
                     </div>
 
                     <p className="text-lg text-slate-300/90 mb-6 leading-relaxed">
-                      Dashboard intelligenti che trasformano i dati di produzione in insight azionabili. KPI real-time, anomalie predittive, ottimizzazione continua.
+                      Analisi, pianificazione e ottimizzazione della produzione con algoritmi predittivi. KPI real-time, anomalie anticipate e schedulazione ottimizzata.
                     </p>
 
                     <div className="space-y-3 mb-6">
@@ -563,7 +638,7 @@ export default function FinchAIMockupAnimated() {
                 </div>
               </div>
 
-              {/* Modulo 3: Financial Control */}
+              {/* Modulo 3: Finch-AI Finance */}
               <div className="group relative overflow-hidden rounded-3xl border border-slate-700/60 bg-slate-900/40 p-8 sm:p-10 backdrop-blur transition hover:border-emerald-500/50 hover:shadow-[0_0_40px_rgba(16,185,129,0.2)]">
                 <div className="absolute -inset-px opacity-0 group-hover:opacity-100 transition-opacity">
                   <div className="h-full w-full bg-[radial-gradient(800px_300px_at_var(--x,50%)_0,rgba(16,185,129,0.15),transparent)]" />
@@ -575,19 +650,19 @@ export default function FinchAIMockupAnimated() {
                       <div className="rounded-xl border border-emerald-500/30 bg-emerald-500/10 p-3 text-emerald-300">
                         <svg viewBox="0 0 24 24" className="h-8 w-8"><path d="M7 8h10M4 12h16M7 16h10" fill="none" stroke="currentColor" strokeWidth="1.8"/></svg>
                       </div>
-                      <h3 className="text-2xl sm:text-3xl font-bold text-white">Financial Control</h3>
+                      <h3 className="text-2xl sm:text-3xl font-bold text-white">Finch-AI Finance</h3>
                     </div>
 
                     <p className="text-lg text-slate-300/90 mb-6 leading-relaxed">
-                      Unifica flussi finanziari e operativi per un controllo totale. Integrazione ERP, riconciliazione automatica, previsioni cash-flow basate su AI.
+                      Analisi automatica di costi, ricavi, cash flow e previsioni economico-finanziarie con AI.
                     </p>
 
                     <div className="space-y-3 mb-6">
                       {[
-                        "Integrazione automatica con qualsiasi ERP",
-                        "Riconciliazione documenti-pagamenti",
+                        "Integrazione automatica con ERP/gestionali",
+                        "Riconciliazione documenti e pagamenti",
                         "Forecast cash-flow e marginalità",
-                        "Dashboard finanziaria unificata"
+                        "Forecast + indicatori economici intelligenti"
                       ].map((feature, i) => (
                         <div key={i} className="flex items-start gap-3">
                           <svg className="h-6 w-6 text-emerald-400 flex-shrink-0 mt-0.5" fill="none" viewBox="0 0 24 24" stroke="currentColor">
@@ -615,6 +690,7 @@ export default function FinchAIMockupAnimated() {
                   </div>
                 </div>
               </div>
+
             </div>
           </div>
         </section>
@@ -718,126 +794,6 @@ export default function FinchAIMockupAnimated() {
                   </div>
                 </div>
               ))}
-            </div>
-          </div>
-        </section>
-
-        {/* SEZIONE 5: CASE STUDY */}
-        <section className="py-20">
-          <div className="mx-auto max-w-6xl">
-            <div className="text-center mb-16">
-              <span className="inline-flex items-center gap-2 rounded-full border border-emerald-500/30 bg-emerald-500/10 px-4 py-1.5 text-xs font-semibold uppercase tracking-wider text-emerald-300 mb-6">
-                Case Study
-              </span>
-              <h2 className="text-3xl sm:text-4xl lg:text-5xl font-extrabold text-white mb-6">
-                Risultati <span className="bg-clip-text text-transparent bg-gradient-to-r from-emerald-400 to-cyan-500">Misurabili</span>
-              </h2>
-              <p className="text-lg sm:text-xl text-slate-300/90 max-w-3xl mx-auto leading-relaxed">
-                Casi reali di aziende che hanno trasformato i loro processi con Finch-AI
-              </p>
-            </div>
-
-            <div className="space-y-8">
-              {/* Case Study 1 */}
-              <div className="group relative overflow-hidden rounded-3xl border border-slate-700/60 bg-gradient-to-br from-slate-900/90 to-slate-900/60 backdrop-blur transition-all hover:border-emerald-500/50 hover:shadow-[0_0_50px_rgba(16,185,129,0.2)]">
-                <div className="absolute -inset-px opacity-0 group-hover:opacity-100 transition-opacity">
-                  <div className="h-full w-full bg-[radial-gradient(1000px_400px_at_var(--x,50%)_0,rgba(16,185,129,0.1),transparent)]" />
-                </div>
-
-                <div className="relative p-8 sm:p-10">
-                  <div className="grid lg:grid-cols-3 gap-8">
-                    <div className="lg:col-span-2 space-y-6">
-                      <div>
-                        <div className="inline-flex items-center gap-2 rounded-full bg-emerald-500/10 px-3 py-1 text-sm font-semibold text-emerald-400 mb-4">
-                          Manufacturing PMI
-                        </div>
-                        <h3 className="text-2xl sm:text-3xl font-bold text-white mb-4">
-                          Produttore Componentistica Automotive
-                        </h3>
-                        <p className="text-lg text-slate-300/90 leading-relaxed">
-                          120 dipendenti, 500+ DDT/settimana, gestionale SAP legacy, processo manuale complesso
-                        </p>
-                      </div>
-
-                      <div>
-                        <h4 className="text-lg font-semibold text-white mb-3">Il Problema</h4>
-                        <p className="text-slate-300/90 leading-relaxed">
-                          3 persone dedicate full-time a inserimento DDT in SAP. Errori frequenti, ritardi nella chiusura commesse,
-                          visibilità zero su magazzino real-time. Impossibile scalare senza assumere ulteriore personale amministrativo.
-                        </p>
-                      </div>
-
-                      <div>
-                        <h4 className="text-lg font-semibold text-white mb-3">La Soluzione Finch-AI</h4>
-                        <div className="grid sm:grid-cols-2 gap-3">
-                          {[
-                            "Automazione OCR per DDT in/out",
-                            "Integrazione SAP bidirezionale",
-                            "Dashboard produzione real-time",
-                            "Alert automatici su anomalie"
-                          ].map((item, i) => (
-                            <div key={i} className="flex items-center gap-2">
-                              <div className="h-2 w-2 rounded-full bg-emerald-400"></div>
-                              <span className="text-sm text-slate-300">{item}</span>
-                            </div>
-                          ))}
-                        </div>
-                      </div>
-                    </div>
-
-                    <div className="space-y-4">
-                      <div className="rounded-2xl border border-emerald-500/30 bg-gradient-to-br from-emerald-500/10 to-teal-500/10 p-6">
-                        <div className="text-4xl font-bold text-emerald-400 mb-2">92%</div>
-                        <div className="text-sm text-slate-300">Riduzione tempo elaborazione DDT</div>
-                      </div>
-                      <div className="rounded-2xl border border-emerald-500/30 bg-gradient-to-br from-emerald-500/10 to-teal-500/10 p-6">
-                        <div className="text-4xl font-bold text-emerald-400 mb-2">2.5 FTE</div>
-                        <div className="text-sm text-slate-300">Risorse liberate per attività strategiche</div>
-                      </div>
-                      <div className="rounded-2xl border border-emerald-500/30 bg-gradient-to-br from-emerald-500/10 to-teal-500/10 p-6">
-                        <div className="text-4xl font-bold text-emerald-400 mb-2">4 sett</div>
-                        <div className="text-sm text-slate-300">Tempo di deployment</div>
-                      </div>
-                      <div className="rounded-2xl border border-emerald-500/30 bg-gradient-to-br from-emerald-500/10 to-teal-500/10 p-6">
-                        <div className="text-4xl font-bold text-emerald-400 mb-2">ROI 6 mesi</div>
-                        <div className="text-sm text-slate-300">Break-even raggiunto</div>
-                      </div>
-                    </div>
-                  </div>
-
-                  <div className="mt-8 pt-6 border-t border-slate-700/50">
-                    <blockquote className="italic text-slate-300/90">
-                      "Finch-AI ci ha permesso di scalare del 40% senza assumere personale amministrativo.
-                      I nostri responsabili di produzione ora hanno visibilità real-time su tutto.
-                      Non è un software, è come avere un team di analisti H24."
-                    </blockquote>
-                    <div className="mt-3 text-sm font-semibold text-cyan-400">
-                      — Marco R., Operations Manager
-                    </div>
-                  </div>
-                </div>
-              </div>
-
-              {/* Case Study 2 - Placeholder per futuri casi */}
-              <div className="relative overflow-hidden rounded-3xl border border-slate-700/60 bg-gradient-to-br from-slate-900/60 to-slate-900/40 backdrop-blur p-8 sm:p-10">
-                <div className="text-center">
-                  <div className="text-6xl mb-4">📊</div>
-                  <h3 className="text-2xl font-bold text-white mb-4">Altri Case Study in Arrivo</h3>
-                  <p className="text-slate-300/90 max-w-2xl mx-auto leading-relaxed">
-                    Stiamo documentando altri successi dei nostri clienti.
-                    Vuoi essere il prossimo case study? Inizia con una demo personalizzata.
-                  </p>
-                  <a
-                    href="#contatti"
-                    className="inline-flex items-center gap-2 mt-6 rounded-xl bg-gradient-to-r from-cyan-500 to-blue-600 px-6 py-3 font-semibold text-white shadow-lg shadow-cyan-500/20 transition hover:brightness-110"
-                  >
-                    Richiedi Demo
-                    <svg className="h-4 w-4" viewBox="0 0 24 24" fill="none" stroke="currentColor">
-                      <path d="M5 12h14M13 5l7 7-7 7" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round"/>
-                    </svg>
-                  </a>
-                </div>
-              </div>
             </div>
           </div>
         </section>
@@ -1064,6 +1020,127 @@ export default function FinchAIMockupAnimated() {
           </div>
         </section>
 
+        {/* SEZIONE CHI SIAMO */}
+        <section id="chi-siamo" className="py-20">
+          <div className="mx-auto max-w-5xl">
+            <div className="text-center mb-12">
+              <span className="inline-flex items-center gap-2 rounded-full border border-cyan-500/30 bg-cyan-500/10 px-4 py-1.5 text-xs font-semibold uppercase tracking-wider text-cyan-300">
+                Chi Siamo
+              </span>
+              <h2 className="text-3xl sm:text-4xl font-extrabold text-white mt-4">
+                L'AI che parla il linguaggio dell'industria
+              </h2>
+              <p className="text-lg text-slate-300/90 mt-4 max-w-3xl mx-auto">
+                Finch-AI nasce per eliminare tempi morti e decisioni al buio: automazione documentale, KPI real-time e insight azionabili per produzione, logistica e finanza.
+              </p>
+            </div>
+
+            <div className="grid gap-6 lg:grid-cols-3">
+              <div className="rounded-2xl border border-slate-700/60 bg-slate-900/60 p-6 backdrop-blur">
+                <h3 className="text-xl font-semibold text-white mb-3">Missione</h3>
+                <p className="text-sm text-slate-300">
+                  Portiamo AI operativa nelle linee produttive e negli uffici: meno data entry, più decisioni basate su numeri, con integrazione nativa a ERP/CRM/MES.
+                </p>
+              </div>
+              <div className="rounded-2xl border border-slate-700/60 bg-slate-900/60 p-6 backdrop-blur">
+                <h3 className="text-xl font-semibold text-white mb-3">Team</h3>
+                <p className="text-sm text-slate-300">
+                  Data scientist e ingegneri con esperienza in manufacturing, supply chain e sistemi ERP. Delivery rapido (2–4 settimane) e modelli adattati sui tuoi processi.
+                </p>
+              </div>
+              <div className="rounded-2xl border border-slate-700/60 bg-slate-900/60 p-6 backdrop-blur">
+                <h3 className="text-xl font-semibold text-white mb-3">Tecnologia &amp; Sicurezza</h3>
+                <p className="text-sm text-slate-300">
+                  Moduli AI specializzati, OCR avanzato, integrazione API-first. Dati in UE, cifrati in transito e a riposo, privacy by design (GDPR).
+                </p>
+              </div>
+            </div>
+
+            <div className="grid gap-6 sm:grid-cols-3 mt-10">
+              <div className="p-5 rounded-2xl bg-slate-900/50 border border-slate-700/50 text-center">
+                <div className="text-3xl font-bold text-cyan-400 mb-1">-70%</div>
+                <div className="text-sm text-slate-400">Tempo ciclo documenti</div>
+              </div>
+              <div className="p-5 rounded-2xl bg-slate-900/50 border border-slate-700/50 text-center">
+                <div className="text-3xl font-bold text-cyan-400 mb-1">99%</div>
+                <div className="text-sm text-slate-400">Accuratezza estrazione dati</div>
+              </div>
+              <div className="p-5 rounded-2xl bg-slate-900/50 border border-slate-700/50 text-center">
+                <div className="text-3xl font-bold text-cyan-400 mb-1">2–4 sett</div>
+                <div className="text-sm text-slate-400">Go-live medio</div>
+              </div>
+            </div>
+
+          </div>
+        </section>
+
+        {/* AREA CLIENTI */}
+        <section id="area-clienti" className="py-20">
+          <div className="mx-auto max-w-6xl">
+            <div className="text-center mb-12">
+              <span className="inline-flex items-center gap-2 rounded-full border border-cyan-500/30 bg-cyan-500/10 px-4 py-1.5 text-xs font-semibold uppercase tracking-wider text-cyan-300">
+                Area Clienti
+              </span>
+              <h2 className="text-3xl sm:text-4xl lg:text-5xl font-extrabold text-white mt-4">
+                Scarica le fatture e monitora i costi in sicurezza
+              </h2>
+              <p className="text-lg text-slate-300/90 mt-4 max-w-3xl mx-auto">
+                Accesso riservato con controllo ruoli, audit trail e download delle fatture. Dashboard per costi per pagina, addestramento e utilizzo.
+              </p>
+            </div>
+
+            <div className="grid gap-6 lg:grid-cols-3">
+              <div className="rounded-2xl border border-slate-700/60 bg-slate-900/60 p-6 backdrop-blur flex flex-col gap-3">
+                <div className="inline-flex items-center gap-2 text-emerald-300 text-sm font-semibold">
+                  <svg className="h-4 w-4" viewBox="0 0 24 24" fill="none" stroke="currentColor">
+                    <path d="M4 4h16v16H4z" strokeWidth="2" />
+                    <path d="M9 4v4h6V4" strokeWidth="2" />
+                    <path d="M9 12h6" strokeWidth="2" />
+                  </svg>
+                  Fatture e documenti
+                </div>
+                <h3 className="text-xl font-bold text-white">Download fatture</h3>
+                <p className="text-sm text-slate-300">
+                  Scarica fatture e ricevute in PDF, storico completo per periodo, con filtri per progetto e centro di costo.
+                </p>
+              </div>
+
+              <div className="rounded-2xl border border-slate-700/60 bg-slate-900/60 p-6 backdrop-blur flex flex-col gap-3">
+                <div className="inline-flex items-center gap-2 text-cyan-300 text-sm font-semibold">
+                  <svg className="h-4 w-4" viewBox="0 0 24 24" fill="none" stroke="currentColor">
+                    <path d="M4 19h16" strokeWidth="2" />
+                    <path d="M7 16l3-8 4 10 3-6" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round" />
+                    <circle cx="7" cy="16" r="1.3" fill="currentColor" />
+                    <circle cx="10" cy="8" r="1.3" fill="currentColor" />
+                    <circle cx="14" cy="18" r="1.3" fill="currentColor" />
+                    <circle cx="17" cy="12" r="1.3" fill="currentColor" />
+                  </svg>
+                  Costi per pagina & training
+                </div>
+                <h3 className="text-xl font-bold text-white">Monitoraggio dettagliato</h3>
+                <p className="text-sm text-slate-300">
+                  Dashboard di consumo: costi per pagina elaborata, cicli di addestramento, storage modelli e trend temporali.
+                </p>
+              </div>
+
+              <div className="rounded-2xl border border-slate-700/60 bg-slate-900/60 p-6 backdrop-blur flex flex-col gap-3">
+                <div className="inline-flex items-center gap-2 text-amber-300 text-sm font-semibold">
+                  <svg className="h-4 w-4" viewBox="0 0 24 24" fill="none" stroke="currentColor">
+                    <path d="M12 2l7 4v6c0 5-3 8-7 10-4-2-7-5-7-10V6l7-4z" strokeWidth="2" />
+                    <path d="M9 12l2 2 4-4" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round" />
+                  </svg>
+                  Accesso sicuro
+                </div>
+                <h3 className="text-xl font-bold text-white">Ruoli, MFA, audit</h3>
+                <p className="text-sm text-slate-300">
+                  Login sicuro con MFA, ruoli (Admin/Finance/Viewer), audit trail su download e modifiche, notifiche anomalie.
+                </p>
+              </div>
+            </div>
+
+          </div>
+        </section>
+
         {/* SEZIONE CONTATTI & LEAD GENERATION */}
         <section id="contatti" className="pb-24">
           <div className="mx-auto max-w-6xl">
@@ -1072,92 +1149,64 @@ export default function FinchAIMockupAnimated() {
                 Inizia la <span className="bg-clip-text text-transparent bg-gradient-to-r from-cyan-400 to-blue-500">Trasformazione</span>
               </h2>
               <p className="text-lg text-slate-300/90 max-w-2xl mx-auto">
-                Scopri come Finch-AI può ottimizzare i tuoi processi in 10 minuti
+                Scopri come Finch-AI può ottimizzare i tuoi processi in 10 minuti. Risposta garantita entro 24h lavorative.
               </p>
             </div>
 
-            <div className="grid lg:grid-cols-3 gap-6 mb-12">
-              {/* CTA 1: Demo Personalizzata */}
-              <div className="group relative overflow-hidden rounded-3xl border border-cyan-500/30 bg-gradient-to-br from-slate-900/60 to-slate-900/40 backdrop-blur p-8 transition-all hover:border-cyan-500/50 hover:shadow-[0_0_40px_rgba(34,211,238,0.2)]">
-                <div className="absolute -inset-px opacity-0 group-hover:opacity-100 transition-opacity">
-                  <div className="h-full w-full bg-[radial-gradient(600px_300px_at_50%_0,rgba(34,211,238,0.1),transparent)]" />
-                </div>
+            <div className="grid lg:grid-cols-2 gap-8 mb-12 items-stretch">
+              <ContactForm />
 
-                <div className="relative text-center">
-                  <div className="inline-flex items-center justify-center w-16 h-16 rounded-2xl bg-cyan-500/10 border border-cyan-500/30 mb-6">
-                    <svg className="h-8 w-8 text-cyan-400" fill="none" viewBox="0 0 24 24" stroke="currentColor">
-                      <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M15 10l4.553-2.276A1 1 0 0121 8.618v6.764a1 1 0 01-1.447.894L15 14M5 18h8a2 2 0 002-2V8a2 2 0 00-2-2H5a2 2 0 00-2 2v8a2 2 0 002 2z" />
-                    </svg>
+              <div className="space-y-6 h-full flex flex-col">
+                <div className="group relative overflow-hidden rounded-3xl border border-emerald-500/30 bg-gradient-to-br from-slate-900/60 to-slate-900/40 backdrop-blur p-6 transition-all hover:border-emerald-500/50 hover:shadow-[0_0_40px_rgba(16,185,129,0.2)] flex-1">
+                  <div className="absolute -inset-px opacity-0 group-hover:opacity-100 transition-opacity">
+                    <div className="h-full w-full bg-[radial-gradient(600px_300px_at_50%_0,rgba(16,185,129,0.1),transparent)]" />
                   </div>
-                  <h3 className="text-xl font-bold text-white mb-3">Demo Live</h3>
-                  <p className="text-sm text-slate-300/90 mb-6">
-                    Sessione personalizzata di 30 minuti con un nostro esperto. Vedi Finch-AI in azione sui tuoi documenti.
-                  </p>
-                  <a
-                    href="mailto:info@finch-ai.it?subject=Richiesta%20Demo%20Finch-AI&body=Buongiorno%2C%0A%0AVorrei%20prenotare%20una%20demo%20personalizzata%20di%20Finch-AI.%0A%0AAzienda%3A%20%0ASettore%3A%20%0ANumero%20dipendenti%3A%20%0ATelefono%3A%20%0A%0AGrazie"
-                    className="inline-flex items-center justify-center gap-2 w-full rounded-xl bg-gradient-to-r from-cyan-500 to-blue-600 px-5 py-3 font-semibold text-white shadow-lg shadow-cyan-500/20 transition hover:brightness-110"
-                  >
-                    Prenota Demo
-                    <svg className="h-4 w-4" viewBox="0 0 24 24" fill="none" stroke="currentColor">
-                      <path d="M5 12h14M13 5l7 7-7 7" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round"/>
-                    </svg>
-                  </a>
-                </div>
-              </div>
-
-              {/* CTA 2: Whitepaper */}
-              <div className="group relative overflow-hidden rounded-3xl border border-purple-500/30 bg-gradient-to-br from-slate-900/60 to-slate-900/40 backdrop-blur p-8 transition-all hover:border-purple-500/50 hover:shadow-[0_0_40px_rgba(168,85,247,0.2)]">
-                <div className="absolute -inset-px opacity-0 group-hover:opacity-100 transition-opacity">
-                  <div className="h-full w-full bg-[radial-gradient(600px_300px_at_50%_0,rgba(168,85,247,0.1),transparent)]" />
-                </div>
-
-                <div className="relative text-center">
-                  <div className="inline-flex items-center justify-center w-16 h-16 rounded-2xl bg-purple-500/10 border border-purple-500/30 mb-6">
-                    <svg className="h-8 w-8 text-purple-400" fill="none" viewBox="0 0 24 24" stroke="currentColor">
-                      <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M12 6.253v13m0-13C10.832 5.477 9.246 5 7.5 5S4.168 5.477 3 6.253v13C4.168 18.477 5.754 18 7.5 18s3.332.477 4.5 1.253m0-13C13.168 5.477 14.754 5 16.5 5c1.747 0 3.332.477 4.5 1.253v13C19.832 18.477 18.247 18 16.5 18c-1.746 0-3.332.477-4.5 1.253" />
-                    </svg>
+                  <div className="relative space-y-3">
+                    <div className="inline-flex items-center gap-2 rounded-full border border-emerald-500/30 bg-emerald-500/10 px-3 py-1 text-xs font-semibold uppercase tracking-wider text-emerald-200">
+                      Contatto rapido
+                    </div>
+                    <h3 className="text-xl font-bold text-white">Preferisci parlare subito?</h3>
+                    <p className="text-sm text-slate-300/90">
+                      Chiamaci o scrivici su WhatsApp. Dal form possiamo richiamarti all'ora che preferisci.
+                    </p>
+                    <div className="flex flex-wrap items-center gap-3">
+                      {[{ label: "+39 328 717 1587", phone: "+393287171587" }, { label: "+41 76 436 6624", phone: "+41764366624" }, { label: "+39 375 647 5087", phone: "+393756475087" }].map((contact, idx) => (
+                        <span key={contact.phone} className="inline-flex items-center gap-2">
+                          <svg aria-hidden="true" className="h-4 w-4 text-emerald-400" viewBox="0 0 32 32" fill="currentColor">
+                            <path d="M16.02 5.333A10.68 10.68 0 0 0 5.333 16c0 1.874.5 3.704 1.458 5.312l-1.562 5.354 5.52-1.49A10.57 10.57 0 0 0 16 26.667 10.68 10.68 0 0 0 26.667 16 10.68 10.68 0 0 0 16.02 5.333Zm6.26 14.563c-.26.74-1.52 1.407-2.092 1.5-.573.094-1.316.133-2.12-.133-.487-.16-1.113-.364-1.918-.703-3.372-1.46-5.563-4.87-5.732-5.098-.167-.227-1.367-1.814-1.367-3.463 0-1.647.862-2.457 1.168-2.788.304-.333.665-.417.887-.417.222 0 .444 0 .64.012.207.01.486-.078.76.58.26.64.882 2.21.96 2.37.078.16.13.347.026.56-.108.227-.17.347-.333.534-.16.188-.34.418-.49.562-.162.162-.33.338-.14.665.188.333.836 1.376 1.795 2.227 1.233 1.1 2.27 1.45 2.604 1.61.333.162.528.14.72-.085.193-.222.83-.964 1.052-1.293.22-.333.44-.278.74-.167.304.11 1.914.904 2.24 1.068.333.16.553.245.64.38.084.13.084.74-.176 1.48Z" />
+                          </svg>
+                          <div className="flex items-center gap-2">
+                            <a href={formatWhatsappLink(contact.phone)} className="text-sm text-emerald-300 hover:text-emerald-200" target="_blank" rel="noopener noreferrer">
+                              WhatsApp
+                            </a>
+                            <span className="text-slate-600">|</span>
+                            <span className="text-sm text-emerald-200">{contact.label}</span>
+                          </div>
+                          {idx < 2 && <span className="text-slate-600">•</span>}
+                          {idx < 2 && <span className="text-slate-600">&bull;</span>}
+                        </span>
+                      ))}
+                    </div>
                   </div>
-                  <h3 className="text-xl font-bold text-white mb-3">Whitepaper Gratuito</h3>
-                  <p className="text-sm text-slate-300/90 mb-6">
-                    "AI Documentale per il Manufacturing: Guida Pratica 2025". Casi d'uso, ROI, implementazione.
-                  </p>
-                  <a
-                    href="mailto:info@finch-ai.it?subject=Richiesta%20Whitepaper&body=Buongiorno%2C%0A%0AVorrei%20ricevere%20il%20whitepaper%20%22AI%20Documentale%20per%20il%20Manufacturing%22.%0A%0ANome%3A%20%0AAzienda%3A%20%0AEmail%3A%20%0A%0AGrazie"
-                    className="inline-flex items-center justify-center gap-2 w-full rounded-xl border border-purple-500/50 bg-purple-500/10 px-5 py-3 font-semibold text-purple-300 transition hover:bg-purple-500/20 hover:border-purple-500/70"
-                  >
-                    Scarica Gratis
-                    <svg className="h-4 w-4" fill="none" viewBox="0 0 24 24" stroke="currentColor">
-                      <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M4 16v1a3 3 0 003 3h10a3 3 0 003-3v-1m-4-4l-4 4m0 0l-4-4m4 4V4" />
-                    </svg>
-                  </a>
-                </div>
-              </div>
-
-              {/* CTA 3: Contatto Veloce */}
-              <div className="group relative overflow-hidden rounded-3xl border border-emerald-500/30 bg-gradient-to-br from-slate-900/60 to-slate-900/40 backdrop-blur p-8 transition-all hover:border-emerald-500/50 hover:shadow-[0_0_40px_rgba(16,185,129,0.2)]">
-                <div className="absolute -inset-px opacity-0 group-hover:opacity-100 transition-opacity">
-                  <div className="h-full w-full bg-[radial-gradient(600px_300px_at_50%_0,rgba(16,185,129,0.1),transparent)]" />
                 </div>
 
-                <div className="relative text-center">
-                  <div className="inline-flex items-center justify-center w-16 h-16 rounded-2xl bg-emerald-500/10 border border-emerald-500/30 mb-6">
-                    <svg className="h-8 w-8 text-emerald-400" fill="none" viewBox="0 0 24 24" stroke="currentColor">
-                      <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M8 12h.01M12 12h.01M16 12h.01M21 12c0 4.418-4.03 8-9 8a9.863 9.863 0 01-4.255-.949L3 20l1.395-3.72C3.512 15.042 3 13.574 3 12c0-4.418 4.03-8 9-8s9 3.582 9 8z" />
-                    </svg>
+                <div className="group relative overflow-hidden rounded-3xl border border-slate-700/60 bg-gradient-to-br from-slate-900/60 to-slate-900/40 backdrop-blur p-6 transition-all hover:border-slate-500/60 hover:shadow-[0_0_30px_rgba(148,163,184,0.2)]">
+                  <div className="absolute -inset-px opacity-0 group-hover:opacity-100 transition-opacity">
+                    <div className="h-full w-full bg-[radial-gradient(600px_300px_at_50%_0,rgba(148,163,184,0.15),transparent)]" />
                   </div>
-                  <h3 className="text-xl font-bold text-white mb-3">Parla con un Esperto</h3>
-                  <p className="text-sm text-slate-300/90 mb-6">
-                    Hai domande specifiche? Parliamo del tuo caso d'uso e troviamo la soluzione migliore.
-                  </p>
-                  <a
-                    href="mailto:info@finch-ai.it?subject=Richiesta%20Informazioni&body=Buongiorno%2C%0A%0AVorrei%20maggiori%20informazioni%20su%20Finch-AI.%0A%0ANome%3A%20%0AAzienda%3A%20%0ATelefono%3A%20%0A%0ADescrizione%20esigenza%3A%0A%0A%0AGrazie"
-                    className="inline-flex items-center justify-center gap-2 w-full rounded-xl border border-emerald-500/50 bg-emerald-500/10 px-5 py-3 font-semibold text-emerald-300 transition hover:bg-emerald-500/20 hover:border-emerald-500/70"
-                  >
-                    Contattaci
-                    <svg className="h-4 w-4" fill="none" viewBox="0 0 24 24" stroke="currentColor">
-                      <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M3 8l7.89 5.26a2 2 0 002.22 0L21 8M5 19h14a2 2 0 002-2V7a2 2 0 00-2-2H5a2 2 0 00-2 2v10a2 2 0 002 2z" />
-                    </svg>
-                  </a>
+                  <div className="relative space-y-3">
+                    <div className="inline-flex items-center gap-2 rounded-full border border-slate-600/70 bg-slate-800/60 px-3 py-1 text-xs font-semibold uppercase tracking-wider text-slate-200">
+                      Email diretta
+                    </div>
+                    <h3 className="text-xl font-bold text-white">Se preferisci, scrivici</h3>
+                    <p className="text-sm text-slate-300/90">info@finch-ai.it</p>
+                    <a href="mailto:info@finch-ai.it" className="inline-flex items-center gap-2 text-sm font-semibold text-cyan-300 hover:text-cyan-200">
+                      Apri email
+                      <svg className="h-4 w-4" viewBox="0 0 24 24" fill="none" stroke="currentColor">
+                        <path d="M5 12h14M13 5l7 7-7 7" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round" />
+                      </svg>
+                    </a>
+                  </div>
                 </div>
               </div>
             </div>
@@ -1213,7 +1262,6 @@ export default function FinchAIMockupAnimated() {
                 {[
                   { label: "Come Funziona", href: "#come-funziona" },
                   { label: "Chi Siamo", href: "#chi-siamo" },
-                  { label: "Dashboard", href: "#dashboard" },
                   { label: "Contatti", href: "#contatti" },
                 ].map((link, i) => (
                   <li key={i}>
@@ -1240,9 +1288,6 @@ export default function FinchAIMockupAnimated() {
                     <a href="mailto:info@finch-ai.it" className="text-sm text-slate-400 transition-colors hover:text-cyan-400 block">
                       info@finch-ai.it
                     </a>
-                    <a href="mailto:sales@finch-ai.it" className="text-sm text-slate-400 transition-colors hover:text-cyan-400 block mt-1">
-                      sales@finch-ai.it
-                    </a>
                   </div>
                 </li>
                 <li className="flex items-start gap-2">
@@ -1250,8 +1295,14 @@ export default function FinchAIMockupAnimated() {
                     <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M3 5a2 2 0 012-2h3.28a1 1 0 01.948.684l1.498 4.493a1 1 0 01-.502 1.21l-2.257 1.13a11.042 11.042 0 005.516 5.516l1.13-2.257a1 1 0 011.21-.502l4.493 1.498a1 1 0 01.684.949V19a2 2 0 01-2 2h-1C9.716 21 3 14.284 3 6V5z" />
                   </svg>
                   <div>
-                    <a href="tel:+390123456789" className="text-sm text-slate-400 transition-colors hover:text-cyan-400 block">
-                      +39 012 345 6789
+                    <a href="tel:+393287171587" className="text-sm text-slate-400 transition-colors hover:text-cyan-400 block">
+                      +39 328 717 1587
+                    </a>
+                    <a href="tel:+41764366624" className="text-sm text-slate-400 transition-colors hover:text-cyan-400 block">
+                      +41 76 436 6624
+                    </a>
+                    <a href="tel:+393756475087" className="text-sm text-slate-400 transition-colors hover:text-cyan-400 block">
+                      +39 375 647 5087
                     </a>
                     <span className="text-xs text-slate-500 mt-1 block">Lun-Ven 9:00-18:00</span>
                   </div>
@@ -1263,10 +1314,10 @@ export default function FinchAIMockupAnimated() {
                   </svg>
                   <div>
                     <span className="text-sm text-slate-400 block">
-                      Via Example, 123
+                      Via Enrico Mattei, 18
                     </span>
                     <span className="text-sm text-slate-400 block">
-                      20100 Milano (MI)
+                      67043 Celano (AQ)
                     </span>
                     <span className="text-sm text-slate-400 block">
                       Italia
@@ -1280,44 +1331,35 @@ export default function FinchAIMockupAnimated() {
             <div>
               <h4 className="mb-4 text-sm font-semibold uppercase tracking-wider text-white">Seguici</h4>
               <div className="flex gap-3 mb-6">
-                {[
-                  { icon: "linkedin", href: "#", label: "LinkedIn" },
-                  { icon: "twitter", href: "#", label: "Twitter" },
-                  { icon: "github", href: "#", label: "GitHub" },
-                ].map((social, i) => (
-                  <a
-                    key={i}
-                    href={social.href}
-                    aria-label={social.label}
-                    className="flex h-10 w-10 items-center justify-center rounded-lg border border-slate-700/60 bg-slate-900/40 text-slate-400 transition-all hover:border-cyan-500/50 hover:bg-slate-800/60 hover:text-cyan-400"
-                  >
-                    {social.icon === "linkedin" && (
-                      <svg className="h-5 w-5" fill="currentColor" viewBox="0 0 24 24">
-                        <path d="M19 0h-14c-2.761 0-5 2.239-5 5v14c0 2.761 2.239 5 5 5h14c2.762 0 5-2.239 5-5v-14c0-2.761-2.238-5-5-5zm-11 19h-3v-11h3v11zm-1.5-12.268c-.966 0-1.75-.79-1.75-1.764s.784-1.764 1.75-1.764 1.75.79 1.75 1.764-.783 1.764-1.75 1.764zm13.5 12.268h-3v-5.604c0-3.368-4-3.113-4 0v5.604h-3v-11h3v1.765c1.396-2.586 7-2.777 7 2.476v6.759z"/>
-                      </svg>
-                    )}
-                    {social.icon === "twitter" && (
-                      <svg className="h-5 w-5" fill="currentColor" viewBox="0 0 24 24">
-                        <path d="M23.953 4.57a10 10 0 01-2.825.775 4.958 4.958 0 002.163-2.723c-.951.555-2.005.959-3.127 1.184a4.92 4.92 0 00-8.384 4.482C7.69 8.095 4.067 6.13 1.64 3.162a4.822 4.822 0 00-.666 2.475c0 1.71.87 3.213 2.188 4.096a4.904 4.904 0 01-2.228-.616v.06a4.923 4.923 0 003.946 4.827 4.996 4.996 0 01-2.212.085 4.936 4.936 0 004.604 3.417 9.867 9.867 0 01-6.102 2.105c-.39 0-.779-.023-1.17-.067a13.995 13.995 0 007.557 2.209c9.053 0 13.998-7.496 13.998-13.985 0-.21 0-.42-.015-.63A9.935 9.935 0 0024 4.59z"/>
-                      </svg>
-                    )}
-                    {social.icon === "github" && (
-                      <svg className="h-5 w-5" fill="currentColor" viewBox="0 0 24 24">
-                        <path d="M12 0c-6.626 0-12 5.373-12 12 0 5.302 3.438 9.8 8.207 11.387.599.111.793-.261.793-.577v-2.234c-3.338.726-4.033-1.416-4.033-1.416-.546-1.387-1.333-1.756-1.333-1.756-1.089-.745.083-.729.083-.729 1.205.084 1.839 1.237 1.839 1.237 1.07 1.834 2.807 1.304 3.492.997.107-.775.418-1.305.762-1.604-2.665-.305-5.467-1.334-5.467-5.931 0-1.311.469-2.381 1.236-3.221-.124-.303-.535-1.524.117-3.176 0 0 1.008-.322 3.301 1.23.957-.266 1.983-.399 3.003-.404 1.02.005 2.047.138 3.006.404 2.291-1.552 3.297-1.23 3.297-1.23.653 1.653.242 2.874.118 3.176.77.84 1.235 1.911 1.235 3.221 0 4.609-2.807 5.624-5.479 5.921.43.372.823 1.102.823 2.222v3.293c0 .319.192.694.801.576 4.765-1.589 8.199-6.086 8.199-11.386 0-6.627-5.373-12-12-12z"/>
-                      </svg>
-                    )}
-                  </a>
-                ))}
+                <a
+                  href="#"
+                  aria-label="LinkedIn"
+                  className="flex h-10 w-10 items-center justify-center rounded-lg border border-slate-700/60 bg-slate-900/40 text-slate-400 transition-all hover:border-cyan-500/50 hover:bg-slate-800/60 hover:text-cyan-400"
+                >
+                  <svg className="h-5 w-5" fill="currentColor" viewBox="0 0 24 24">
+                    <path d="M19 0h-14c-2.761 0-5 2.239-5 5v14c0 2.761 2.239 5 5 5h14c2.762 0 5-2.239 5-5v-14c0-2.761-2.238-5-5-5zm-11 19h-3v-11h3v11zm-1.5-12.268c-.966 0-1.75-.79-1.75-1.764s.784-1.764 1.75-1.764 1.75.79 1.75 1.764-.783 1.764-1.75 1.764zm13.5 12.268h-3v-5.604c0-3.368-4-3.113-4 0v5.604h-3v-11h3v1.765c1.396-2.586 7-2.777 7 2.476v6.759z"/>
+                  </svg>
+                </a>
               </div>
               <ul className="space-y-2">
                 <li>
-                  <a href="#privacy" className="text-sm text-slate-400 transition-colors hover:text-cyan-400">
+                  <a href="/privacy-policy.html" className="text-sm text-slate-400 transition-colors hover:text-cyan-400">
                     Privacy Policy
                   </a>
                 </li>
                 <li>
-                  <a href="#termini" className="text-sm text-slate-400 transition-colors hover:text-cyan-400">
+                  <a href="/cookie-policy.html" className="text-sm text-slate-400 transition-colors hover:text-cyan-400">
+                    Cookie Policy
+                  </a>
+                </li>
+                <li>
+                  <a href="/termini-di-servizio.html" className="text-sm text-slate-400 transition-colors hover:text-cyan-400">
                     Termini di Servizio
+                  </a>
+                </li>
+                <li>
+                  <a href="/note-legali.html" className="text-sm text-slate-400 transition-colors hover:text-cyan-400">
+                    Note Legali
                   </a>
                 </li>
               </ul>
@@ -1327,28 +1369,12 @@ export default function FinchAIMockupAnimated() {
           {/* Bottom Bar */}
           <div className="border-t border-slate-800/50 py-6">
             <div className="flex flex-col items-center justify-between gap-4 sm:flex-row">
-              <div className="text-center sm:text-left">
-                <p className="text-sm text-slate-500">
-                  © {new Date().getFullYear()} Finch-AI S.r.l. Tutti i diritti riservati.
-                </p>
-                <p className="mt-1 text-xs text-slate-600">
-                  P.IVA: 12345678901 | REA: MI-1234567 | Cap. Soc. €10.000 i.v.
-                </p>
-              </div>
-              <div className="flex flex-wrap items-center justify-center gap-2 text-xs text-slate-600">
-                <span className="inline-flex items-center gap-1.5 rounded-full border border-slate-800/50 bg-slate-900/30 px-3 py-1">
-                  <span className="h-1.5 w-1.5 rounded-full bg-emerald-400 animate-pulse" />
-                  ISO 27001
-                </span>
-                <span className="inline-flex items-center gap-1.5 rounded-full border border-slate-800/50 bg-slate-900/30 px-3 py-1">
-                  <span className="h-1.5 w-1.5 rounded-full bg-cyan-400" />
-                  GDPR
-                </span>
-                <span className="inline-flex items-center gap-1.5 rounded-full border border-slate-800/50 bg-slate-900/30 px-3 py-1">
-                  <span className="h-1.5 w-1.5 rounded-full bg-blue-400" />
-                  SOC 2
-                </span>
-              </div>
+            <div className="text-center sm:text-left">
+              <p className="text-sm text-slate-500">
+                © {new Date().getFullYear()} Finch-AI S.r.l. Tutti i diritti riservati.
+              </p>
+            </div>
+            <div className="flex flex-wrap items-center justify-center gap-2 text-xs text-slate-600" />
             </div>
           </div>
         </div>

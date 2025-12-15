@@ -1,0 +1,214 @@
+╔════════════════════════════════════════════════════════════════╗
+║     CONFIGURAZIONE RAPIDA - SISTEMA UPLOAD TRAINING AI        ║
+╚════════════════════════════════════════════════════════════════╝
+
+📋 LISTA ATTIVITÀ (segui in ordine)
+
+┌─────────────────────────────────────────────────────────────┐
+│ ✅ STEP 1: DATABASE                                          │
+└─────────────────────────────────────────────────────────────┘
+
+1. Accedi a phpMyAdmin su Aruba
+2. Seleziona database: finch_ai_clienti
+3. Vai su tab "SQL"
+4. Apri file: database/add_training_tables.sql
+5. Copia tutto il contenuto e incollalo
+6. Click "Esegui"
+7. Verifica che vengano create 3 nuove tabelle:
+   ✓ richieste_addestramento
+   ✓ richieste_addestramento_files
+   ✓ modelli_addestrati
+
+┌─────────────────────────────────────────────────────────────┐
+│ ✅ STEP 2: CARTELLA UPLOAD                                   │
+└─────────────────────────────────────────────────────────────┘
+
+1. Accedi a File Manager Aruba
+2. Vai nella root (solitamente /home/tuoutente/)
+3. Crea nuova cartella: "uploads"
+4. Entra in "uploads"
+5. Crea sottocartella: "training"
+6. Click destro su "training" → Permessi
+7. Imposta: 755 (rwxr-xr-x)
+8. Annota il PATH COMPLETO mostrato in alto, es:
+   /home/miosito123/uploads/training
+
+┌─────────────────────────────────────────────────────────────┐
+│ ✅ STEP 3: CONFIGURA PATH                                    │
+└─────────────────────────────────────────────────────────────┘
+
+1. Apri file: area-clienti/api/upload-training.php
+2. Cerca riga 64:
+   $uploadBaseDir = __DIR__ . '/../../uploads/training';
+3. Sostituisci con il TUO path annotato prima:
+   $uploadBaseDir = '/home/miosito123/uploads/training';
+4. Salva file
+
+┌─────────────────────────────────────────────────────────────┐
+│ ✅ STEP 4: CARICA FILE VIA FTP                               │
+└─────────────────────────────────────────────────────────────┘
+
+Usa FileZilla e carica questi file:
+
+📁 area-clienti/
+  ├── richiedi-addestramento.php            → NUOVO
+  ├── document-intelligence-modelli.php     → NUOVO
+  ├── document-intelligence.php             → SOVRASCRIVI
+  └── api/
+      └── upload-training.php               → NUOVO
+
+┌─────────────────────────────────────────────────────────────┐
+│ ✅ STEP 5: TEST                                              │
+└─────────────────────────────────────────────────────────────┘
+
+1. Accedi all'area clienti
+2. Vai su "Document Intelligence"
+3. Dovresti vedere sezione "🤖 Modelli AI Addestrati"
+4. Click "➕ Richiedi Addestramento"
+5. Compila form di test:
+   - Tipo: Fatture Elettroniche
+   - Descrizione: Test sistema upload
+   - Num documenti: 10
+6. Carica 2-3 file PDF (o usa file di test)
+7. Click "Invia Richiesta"
+8. Verifica successo!
+
+┌─────────────────────────────────────────────────────────────┐
+│ ✅ STEP 6: DATI DEMO (opzionale)                             │
+└─────────────────────────────────────────────────────────────┘
+
+Per vedere subito modelli di esempio:
+
+1. Apri file: database/seed_training_demo.sql
+2. TROVA il tuo user_id:
+   - phpMyAdmin → Tabella "utenti"
+   - Cerca la tua email
+   - Annota l'ID (es: 2)
+3. Nel file seed_training_demo.sql sostituisci tutti:
+   user_id = 2
+   con
+   user_id = [TUO_ID]
+4. Copia tutto e esegui in phpMyAdmin
+5. Ricarica pagina Document Intelligence
+6. Vedrai 3 modelli attivi!
+
+┌─────────────────────────────────────────────────────────────┐
+│ 📧 CONFIGURAZIONE EMAIL (opzionale)                          │
+└─────────────────────────────────────────────────────────────┘
+
+Per ricevere notifiche richieste addestramento:
+
+Opzione A - Usa .env:
+  Aggiungi in file .env:
+  TRAINING_EMAIL=tuaemail@finch-ai.it
+
+Opzione B - Hardcode:
+  In upload-training.php riga 90 cambia:
+  $emailTo = 'tuaemail@finch-ai.it';
+
+Nota: Aruba potrebbe bloccare mail(). Se email non arrivano,
+è normale e non influisce sul funzionamento upload.
+
+╔════════════════════════════════════════════════════════════════╗
+║                    TROUBLESHOOTING RAPIDO                      ║
+╚════════════════════════════════════════════════════════════════╝
+
+❌ Errore "Tabella non trovata"
+   → Hai eseguito add_training_tables.sql?
+
+❌ Errore "Permission denied"
+   → Controlla permessi 755 su uploads/training/
+
+❌ File non vengono salvati
+   → Verifica path in upload-training.php riga 64
+
+❌ Upload si blocca al 100%
+   → Aumenta timeout in php.ini o .htaccess:
+     php_value max_execution_time 300
+
+❌ Sezione modelli non appare
+   → Svuota cache browser (Ctrl+F5)
+   → Verifica che tabella modelli_addestrati esista
+
+❌ Drag & drop non funziona
+   → Browser troppo vecchio, usa "clicca per sfogliare"
+
+╔════════════════════════════════════════════════════════════════╗
+║                    TUTTO FUNZIONA? 🎉                         ║
+╚════════════════════════════════════════════════════════════════╝
+
+Adesso quando clicchi "Richiedi Addestramento" si apre:
+✓ Interfaccia professionale con drag & drop
+✓ Upload multiplo file (PDF, PNG, JPG)
+✓ Progress bar animata
+✓ Salvataggio nel database
+✓ Visualizzazione richieste in corso
+✓ Gestione modelli addestrati
+
+NON PIÙ:
+✗ Apertura client email
+✗ Mailto: link
+
+╔════════════════════════════════════════════════════════════════╗
+║                    FUNZIONALITÀ BONUS                          ║
+╚════════════════════════════════════════════════════════════════╝
+
+📊 Tracking Richieste
+   - Ogni richiesta ha stato: in_attesa/in_lavorazione/completato
+   - Visibile in document-intelligence-modelli.php
+
+🤖 Modelli Attivi
+   - 3 modelli più recenti mostrati in homepage
+   - Click "Vedi tutti" per lista completa
+   - Accuratezza e statistiche per modello
+
+📁 File Management
+   - File salvati con hash univoco
+   - Tracciamento in database
+   - Path sicuro fuori da public_html
+
+🔒 Sicurezza
+   - CSRF protection
+   - Validazione tipo file (MIME)
+   - Limite dimensione (10MB)
+   - Verifica autenticazione
+
+╔════════════════════════════════════════════════════════════════╗
+║                    PROSSIMI PASSI                              ║
+╚════════════════════════════════════════════════════════════════╝
+
+Dopo l'installazione puoi:
+
+1. Personalizzare tipi di modello
+   → Modifica select in richiedi-addestramento.php riga 125
+
+2. Aumentare limite upload
+   → Cambia 10MB in richiedi-addestramento.php e upload-training.php
+
+3. Aggiungere formati file
+   → Aggiungi MIME types in upload-training.php riga 98
+
+4. Creare dashboard admin
+   → Per gestire richieste e approvazioni
+
+5. Integrare con app esterna
+   → API endpoint per app.finch-ai.it
+
+╔════════════════════════════════════════════════════════════════╗
+║                    SUPPORTO                                    ║
+╚════════════════════════════════════════════════════════════════╝
+
+Documentazione completa:
+→ INSTALLAZIONE_UPLOAD_TRAINING.md
+
+Problemi comuni:
+→ Sezione Troubleshooting sopra
+
+Domande? Controlla:
+→ Log PHP su Aruba (pannello → Log)
+→ Console browser (F12 → Console)
+→ Database (phpMyAdmin → richieste_addestramento)
+
+═══════════════════════════════════════════════════════════════
+                    BUON LAVORO! 🚀
+═══════════════════════════════════════════════════════════════

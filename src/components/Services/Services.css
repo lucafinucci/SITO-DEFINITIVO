@@ -1,0 +1,248 @@
+.custom-services {
+  padding: 100px 0;
+  background: white;
+  position: relative;
+}
+
+.custom-services::before {
+  content: '';
+  position: absolute;
+  top: 0;
+  left: 0;
+  right: 0;
+  height: 1px;
+  background: linear-gradient(90deg, transparent, #e2e8f0, transparent);
+}
+
+.custom-services .container {
+  max-width: 1200px;
+  margin: 0 auto;
+  padding: 0 20px;
+}
+
+.services-header {
+  text-align: center;
+  margin-bottom: 4rem;
+}
+
+.custom-services h2 {
+  font-size: 2.8rem;
+  margin-bottom: 1rem;
+  color: #0f172a;
+  font-weight: 800;
+}
+
+.services-subtitle {
+  font-size: 1.2rem;
+  color: #64748b;
+  max-width: 700px;
+  margin: 0 auto;
+}
+
+.services-grid {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
+  gap: 2rem;
+  margin-bottom: 4rem;
+}
+
+.service-card {
+  background: linear-gradient(135deg, #f8fafc 0%, #f1f5f9 100%);
+  padding: 2.5rem 2rem;
+  border-radius: 16px;
+  text-align: center;
+  transition: all 0.3s ease;
+  border: 1px solid #e2e8f0;
+  position: relative;
+  overflow: hidden;
+}
+
+.service-card::before {
+  content: '';
+  position: absolute;
+  top: 0;
+  left: 0;
+  right: 0;
+  height: 4px;
+  background: linear-gradient(90deg, #667eea 0%, #764ba2 100%);
+  transform: scaleX(0);
+  transform-origin: left;
+  transition: transform 0.3s ease;
+}
+
+.service-card:hover::before {
+  transform: scaleX(1);
+}
+
+.service-card:hover {
+  transform: translateY(-10px);
+  box-shadow: 0 12px 30px rgba(102, 126, 234, 0.2);
+  border-color: #667eea;
+}
+
+.service-icon {
+  font-size: 3.5rem;
+  margin-bottom: 1.5rem;
+  display: inline-block;
+  transition: transform 0.3s ease;
+}
+
+.service-card:hover .service-icon {
+  transform: scale(1.15) rotate(-5deg);
+}
+
+.service-card h4 {
+  font-size: 1.5rem;
+  margin-bottom: 1rem;
+  color: #0f172a;
+  font-weight: 700;
+}
+
+.service-card p {
+  color: #475569;
+  line-height: 1.6;
+  font-size: 1.05rem;
+  margin-bottom: 1rem;
+}
+
+.service-benefit {
+  color: #10b981 !important;
+  font-weight: 600 !important;
+  font-size: 0.95rem !important;
+  margin-top: 1.2rem !important;
+  padding-top: 1.2rem;
+  border-top: 2px solid #e2e8f0;
+  margin-bottom: 0 !important;
+}
+
+/* Consulting CTA */
+.consulting-cta {
+  text-align: center;
+  background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+  color: white;
+  padding: 3.5rem 2rem;
+  border-radius: 20px;
+  margin-top: 3rem;
+  box-shadow: 0 12px 40px rgba(102, 126, 234, 0.3);
+  position: relative;
+  overflow: hidden;
+}
+
+.consulting-cta::before {
+  content: '';
+  position: absolute;
+  top: 0;
+  left: 0;
+  right: 0;
+  bottom: 0;
+  background:
+    radial-gradient(circle at 30% 50%, rgba(255, 255, 255, 0.1) 0%, transparent 50%),
+    radial-gradient(circle at 70% 80%, rgba(255, 255, 255, 0.08) 0%, transparent 50%);
+  pointer-events: none;
+}
+
+.consulting-quote {
+  font-size: 1.3rem;
+  margin-bottom: 2rem;
+  font-weight: 400;
+  font-style: normal;
+  position: relative;
+  z-index: 1;
+  line-height: 1.6;
+  max-width: 800px;
+  margin-left: auto;
+  margin-right: auto;
+}
+
+.cta-tertiary {
+  background: white;
+  color: #667eea;
+  padding: 16px 40px;
+  border: none;
+  border-radius: 12px;
+  font-size: 1.2rem;
+  font-weight: 700;
+  cursor: pointer;
+  transition: all 0.3s ease;
+  position: relative;
+  z-index: 1;
+  box-shadow: 0 4px 15px rgba(0, 0, 0, 0.1);
+}
+
+.cta-tertiary:hover {
+  transform: translateY(-3px);
+  box-shadow: 0 8px 25px rgba(0, 0, 0, 0.2);
+  background: #f8fafc;
+}
+
+.cta-tertiary:active {
+  transform: translateY(-1px);
+}
+
+/* Responsive Design */
+@media (max-width: 768px) {
+  .custom-services {
+    padding: 60px 0;
+  }
+
+  .custom-services h2 {
+    font-size: 2rem;
+  }
+
+  .services-subtitle {
+    font-size: 1.1rem;
+  }
+
+  .services-grid {
+    grid-template-columns: 1fr;
+    gap: 2rem;
+  }
+
+  .service-card {
+    padding: 2rem 1.5rem;
+  }
+
+  .service-icon {
+    font-size: 3rem;
+  }
+
+  .service-card h4 {
+    font-size: 1.3rem;
+  }
+
+  .consulting-cta {
+    padding: 2.5rem 1.5rem;
+  }
+
+  .consulting-quote {
+    font-size: 1.2rem;
+  }
+
+  .cta-tertiary {
+    font-size: 1.1rem;
+    padding: 14px 32px;
+    width: 100%;
+  }
+}
+
+@media (max-width: 480px) {
+  .custom-services h2 {
+    font-size: 1.6rem;
+  }
+
+  .services-subtitle {
+    font-size: 1rem;
+  }
+
+  .service-card h4 {
+    font-size: 1.2rem;
+  }
+
+  .service-card p {
+    font-size: 1rem;
+  }
+
+  .consulting-quote {
+    font-size: 1.1rem;
+  }
+}

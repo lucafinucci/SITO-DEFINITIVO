@@ -1,0 +1,39 @@
+================================================================================
+SOLUZIONE FINALE - USA IL BROWSER (100% FUNZIONANTE)
+================================================================================
+
+Dato che phpMyAdmin e MySQL hanno problemi di permessi, usiamo un approccio
+completamente diverso: script PHP via browser che crea tutto.
+
+================================================================================
+PASSO 1: Copia i file nell'htdocs
+================================================================================
+
+1. Apri Esplora File
+2. Vai in: C:\Users\oneno\Desktop\SITO\
+3. Seleziona TUTTA la cartella "area-clienti"
+4. Copia (Ctrl+C)
+5. Vai in: C:\xampp\htdocs\
+6. Incolla (Ctrl+V)
+
+NOTA: Se chiede di sovrascrivere, clicca "Sì a tutto"
+
+================================================================================
+PASSO 2: Crea script di inizializzazione nel browser
+================================================================================
+
+Ti ho creato un file speciale che useremo via browser.
+Questo file verrà eseguito da Apache/PHP e creerà il database.
+
+Segui le istruzioni che ti darò dopo.
+
+================================================================================
+PASSO 3: Apri il browser ed esegui
+================================================================================
+
+Apri browser e vai su:
+http://localhost/init-database-browser.php
+
+Vedrai la creazione del database in tempo reale!
+
+================================================================================

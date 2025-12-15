@@ -1,0 +1,17 @@
+{
+  "permissions": {
+    "allow": [
+      "Bash(tasklist:*)",
+      "Bash(findstr:*)",
+      "Bash(mysql:*)",
+      "Bash(\"C:\\xampp\\mysql\\bin\\mysql.exe\" -u root -h 127.0.0.1 --protocol=TCP -e \"SELECT user, host FROM mysql.user WHERE user=''root'';\")",
+      "Bash(\"C:\\xampp\\mysql\\bin\\mysql.exe\" -u root -e \"SELECT user, host FROM mysql.user WHERE user=''root'';\")",
+      "Bash(\"C:\\xampp\\mysql\\bin\\mysql.exe\":*)",
+      "Bash(\"C:\\xampp\\mysql\\bin\\mysql.exe\" -u root mysql -e \"UPDATE mysql.user SET Grant_priv=''Y'', Super_priv=''Y'' WHERE User=''root''; UPDATE mysql.db SET Select_priv=''Y'', Insert_priv=''Y'', Update_priv=''Y'', Delete_priv=''Y'', Create_priv=''Y'', Drop_priv=''Y'', Grant_priv=''Y'' WHERE User=''root'';\")",
+      "Bash(powershell:*)",
+      "Bash(ping:*)"
+    ],
+    "deny": [],
+    "ask": []
+  }
+}

@@ -10,4 +10,12 @@ export default defineConfig({
       '@': path.resolve(__dirname, './src'),
     },
   },
+  server: {
+    proxy: {
+      '/area-clienti': {
+        target: 'http://localhost/SITO',
+        changeOrigin: true,
+      },
+    },
+  },
 })

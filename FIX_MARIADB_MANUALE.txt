@@ -1,0 +1,45 @@
+================================================================================
+FIX DEFINITIVO MARIADB - PERMESSI ROOT
+================================================================================
+
+Il problema: MariaDB rifiuta TUTTE le connessioni da localhost/127.0.0.1
+
+SOLUZIONE DEFINITIVA (10 minuti):
+
+================================================================================
+METODO: Modifica diretta tabella mysql.user
+================================================================================
+
+1. FERMA MySQL da XAMPP Control Panel
+
+2. Trova il file:
+   C:\xampp\mysql\data\mysql\user.frm
+   C:\xampp\mysql\data\mysql\user.MYD
+   C:\xampp\mysql\data\mysql\user.MYI
+
+3. Fai BACKUP di questi 3 file (copia in un'altra cartella)
+
+4. ELIMINA questi 3 file
+
+5. Vai in: C:\xampp\mysql\backup\
+   Cerca i file user.* più recenti
+
+6. COPIA i file user.* dalla cartella backup a:
+   C:\xampp\mysql\data\mysql\
+
+7. RIAVVIA MySQL da XAMPP
+
+8. Riprova lo script
+
+OPPURE - SOLUZIONE PIÙ SEMPLICE:
+
+Reinstalla XAMPP (scarica versione più recente)
+
+================================================================================
+ALTERNATIVA IMMEDIATA: Usa SQLite invece di MySQL
+================================================================================
+
+Posso convertirti l'area clienti per usare SQLite che non ha questi problemi
+di permessi. Vuoi che faccia questo?
+
+================================================================================

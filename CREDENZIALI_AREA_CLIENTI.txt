@@ -1,0 +1,139 @@
+╔══════════════════════════════════════════════════════════════════════════════╗
+║                    CREDENZIALI AREA CLIENTI - FINCH-AI                       ║
+╚══════════════════════════════════════════════════════════════════════════════╝
+
+✅ MySQL: ATTIVO sulla porta 3306
+✅ Database: finch_ai_clienti
+✅ Password: AGGIORNATE (hash bcrypt corretti)
+
+═══════════════════════════════════════════════════════════════════════════════
+
+🔐 UTENTE 1 - AMMINISTRATORE
+
+Email:    admin@finch-ai.it
+Password: Admin123!
+
+Ruolo:    Admin
+Nome:     Mario Rossi
+Azienda:  Finch-AI Srl
+Servizi:  3 attivi (Document Intelligence, Production Analytics, Financial Control)
+
+═══════════════════════════════════════════════════════════════════════════════
+
+🔐 UTENTE 2 - DEMO (CONSIGLIATO PER TEST)
+
+Email:    demo@finch-ai.it
+Password: Demo123!
+
+Ruolo:    Cliente
+Nome:     Luigi Verdi
+Azienda:  Azienda Demo Srl
+Servizi:  3 attivi (Document Intelligence, Production Analytics, Financial Control)
+
+═══════════════════════════════════════════════════════════════════════════════
+
+🔐 UTENTE 3 - CLIENTE EXAMPLE
+
+Email:    cliente@example.com
+Password: Cliente123!
+
+Ruolo:    Cliente
+Nome:     Paolo Bianchi
+Azienda:  Example Corp
+Servizi:  2 attivi (Document Intelligence, Supply Chain Optimizer)
+
+═══════════════════════════════════════════════════════════════════════════════
+
+🌐 URL ACCESSO
+
+Area Clienti:  http://localhost/area-clienti/login.php
+phpMyAdmin:    http://localhost/phpmyadmin
+
+═══════════════════════════════════════════════════════════════════════════════
+
+📊 COSA TROVI NELL'AREA CLIENTI
+
+✓ Dashboard con KPI e statistiche
+✓ Gestione servizi attivi
+✓ Fatture (scaricabili in PDF)
+✓ Scadenze e promemoria
+✓ Document Intelligence (upload file per addestramento AI)
+✓ Gestione profilo utente
+
+═══════════════════════════════════════════════════════════════════════════════
+
+⚙️ DATABASE IMPORTATI
+
+✅ Schema (7 tabelle):
+   - utenti
+   - sessioni
+   - servizi
+   - utenti_servizi
+   - fatture
+   - scadenze
+   - access_logs
+
+✅ Seed Data:
+   - 3 utenti demo
+   - 5 servizi disponibili
+   - 12 fatture esempio
+   - 8 scadenze
+   - Relazioni servizi-utenti
+
+═══════════════════════════════════════════════════════════════════════════════
+
+🔧 COME MANTENERE MYSQL ATTIVO
+
+METODO 1: Lascia aperto il terminale dove gira MySQL
+   ⚠️ Se chiudi il terminale, MySQL si ferma
+
+METODO 2: Usa XAMPP Control Panel
+   1. Apri XAMPP Control Panel (come Amministratore)
+   2. Click START su MySQL
+   3. MySQL rimane attivo in background
+
+METODO 3: Installa MySQL come servizio Windows
+   (Già configurato in XAMPP - verifica Services.msc)
+
+═══════════════════════════════════════════════════════════════════════════════
+
+📝 NOTE IMPORTANTI
+
+1. Password CASE-SENSITIVE (maiuscole/minuscole contano!)
+   ✓ Demo123! (corretto)
+   ✗ demo123! (sbagliato)
+
+2. Usa SEMPRE "demo@finch-ai.it" per test (ha tutti i servizi configurati)
+
+3. MFA/TOTP è DISABILITATO per tutti gli utenti demo
+   (puoi abilitarlo dal pannello utente)
+
+4. I file PDF delle fatture sono LINK SIMBOLICI
+   (path: /fatture/2024/FT-xxxx.pdf - da creare se necessario)
+
+═══════════════════════════════════════════════════════════════════════════════
+
+✅ VERIFICA FUNZIONAMENTO
+
+1. Apri: http://localhost/area-clienti/login.php
+2. Inserisci: demo@finch-ai.it
+3. Password: Demo123!
+4. Click LOGIN
+5. Dovresti vedere la dashboard con 3 servizi attivi
+
+Se non funziona:
+- Verifica MySQL attivo: netstat -ano | findstr ":3306"
+- Controlla Apache attivo: http://localhost
+- Leggi log errori: area-clienti/logs/
+
+═══════════════════════════════════════════════════════════════════════════════
+
+🎯 RIEPILOGO RAPIDO
+
+URL:       http://localhost/area-clienti/login.php
+Email:     demo@finch-ai.it
+Password:  Demo123!
+
+═══════════════════════════════════════════════════════════════════════════════
+                              FINE CREDENZIALI
+═══════════════════════════════════════════════════════════════════════════════
