@@ -223,7 +223,8 @@ Gestisci richiesta: https://finch-ai.it/area-clienti/admin/richieste-addestramen
         'richiesta_id' => $richiestaId,
         'files_uploaded' => count($uploadedFiles),
         'files_errors' => $uploadErrors,
-        'message' => 'Richiesta inviata con successo!'
+        'message' => 'Richiesta inviata con successo!',
+        'redirect_url' => '/area-clienti/servizio-dettaglio.php?id=1'
     ]);
 
 } catch (Exception $e) {

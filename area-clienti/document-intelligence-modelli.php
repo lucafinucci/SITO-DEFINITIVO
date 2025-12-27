@@ -96,7 +96,7 @@ $richiesteInCorso = $stmt->fetchAll();
 <main class="container">
 
   <div style="margin-bottom: 20px;">
-    <a href="/area-clienti/document-intelligence.php" style="color: var(--accent1);">← Torna a Document Intelligence</a>
+    <a href="/area-clienti/servizio-dettaglio.php?id=1" style="color: var(--accent1);">← Torna a Document Intelligence</a>
   </div>
 
   <section class="card">

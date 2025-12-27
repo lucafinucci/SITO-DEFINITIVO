@@ -162,7 +162,7 @@ Data: " . date('d/m/Y H:i');
 <main class="container">
 
   <div style="margin-bottom: 20px;">
-    <a href="/area-clienti/document-intelligence.php" style="color: var(--accent1);">← Torna a Document Intelligence</a>
+    <a href="/area-clienti/servizio-dettaglio.php?id=1" style="color: var(--accent1);">← Torna a Document Intelligence</a>
   </div>
 
   <?php if ($success): ?>
@@ -297,7 +297,7 @@ Data: " . date('d/m/Y H:i');
         <button type="submit" name="submit_request" class="btn primary" id="submit-btn">
           Invia Richiesta
         </button>
-        <a href="/area-clienti/document-intelligence.php" class="btn ghost">
+        <a href="/area-clienti/servizio-dettaglio.php?id=1" class="btn ghost">
           Annulla
         </a>
       </div>
@@ -441,7 +441,10 @@ document.getElementById('training-form').addEventListener('submit', async (e) =>
       if (xhr.status === 200) {
         const response = JSON.parse(xhr.responseText);
         if (response.success) {
-          window.location.href = '/area-clienti/document-intelligence.php?upload=success';
+          // VERSIONE AGGIORNATA 2024-12-15 v2
+          console.log('Upload completato! Redirect URL:', response.redirect_url);
+          const redirectUrl = response.redirect_url || '/area-clienti/servizio-dettaglio.php?id=1';
+          window.location.href = redirectUrl;
         } else {
           alert('Errore: ' + response.error);
           uploadProgress.style.display = 'none';

@@ -214,41 +214,87 @@ if (!$servizio) {
           <p class="muted small" style="margin-bottom: 20px;">I tuoi modelli personalizzati per Document Intelligence</p>
 
           <?php
-          // Simula modelli AI addestrati per il cliente
-          $modelliAI = [
-            [
-              'nome' => 'Fatture Elettroniche',
-              'tipo' => 'DDT & Fatture',
-              'accuracy' => 98.5,
-              'documenti' => 4521,
-              'ultima_versione' => '2024-11-28',
-              'stato' => 'attivo'
-            ],
-            [
-              'nome' => 'Contratti Commerciali',
-              'tipo' => 'Contratti',
-              'accuracy' => 96.2,
-              'documenti' => 1834,
-              'ultima_versione' => '2024-11-15',
-              'stato' => 'attivo'
-            ],
-            [
-              'nome' => 'Bolle di Trasporto',
-              'tipo' => 'Logistica',
-              'accuracy' => 97.8,
-              'documenti' => 2756,
-              'ultima_versione' => '2024-11-20',
-              'stato' => 'attivo'
-            ],
-            [
-              'nome' => 'Ordini di Acquisto',
-              'tipo' => 'Procurement',
-              'accuracy' => 95.4,
-              'documenti' => 1236,
-              'ultima_versione' => '2024-10-12',
-              'stato' => 'addestramento'
-            ]
-          ];
+          // Recupera modelli AI addestrati dal database
+          $modelliAI = [];
+
+          // 1. Modelli già completati (dalla tabella modelli_addestrati)
+          try {
+            $stmt = $pdo->prepare('
+              SELECT
+                nome_modello as nome,
+                tipo_modello as tipo,
+                accuratezza as accuracy,
+                num_documenti_addestramento as documenti,
+                updated_at as ultima_versione,
+                "attivo" as stato
+              FROM modelli_addestrati
+              WHERE user_id = :user_id AND attivo = 1
+              ORDER BY updated_at DESC
+            ');
+            $stmt->execute(['user_id' => $clienteId]);
+            $modelliCompletati = $stmt->fetchAll(PDO::FETCH_ASSOC);
+
+            foreach ($modelliCompletati as $modello) {
+              $modelliAI[] = $modello;
+            }
+          } catch (PDOException $e) {
+            // Tabella non esiste ancora, usa dati statici
+          }
+
+          // 2. Richieste di addestramento in corso (dalla tabella richieste_addestramento)
+          try {
+            $stmt = $pdo->prepare('
+              SELECT
+                CONCAT(tipo_modello, " - In Addestramento") as nome,
+                tipo_modello as tipo,
+                0 as accuracy,
+                num_documenti_stimati as documenti,
+                created_at as ultima_versione,
+                "training" as stato
+              FROM richieste_addestramento
+              WHERE user_id = :user_id
+                AND stato IN ("in_attesa", "in_lavorazione")
+              ORDER BY created_at DESC
+            ');
+            $stmt->execute(['user_id' => $clienteId]);
+            $richiesteInCorso = $stmt->fetchAll(PDO::FETCH_ASSOC);
+
+            foreach ($richiesteInCorso as $richiesta) {
+              $modelliAI[] = $richiesta;
+            }
+          } catch (PDOException $e) {
+            // Tabella non esiste ancora
+          }
+
+          // Se nessun modello trovato, usa dati statici di fallback
+          if (empty($modelliAI)) {
+            $modelliAI = [
+              [
+                'nome' => 'Fatture Elettroniche',
+                'tipo' => 'DDT & Fatture',
+                'accuracy' => 98.5,
+                'documenti' => 4521,
+                'ultima_versione' => '2024-11-28',
+                'stato' => 'attivo'
+              ],
+              [
+                'nome' => 'Contratti Commerciali',
+                'tipo' => 'Contratti',
+                'accuracy' => 96.2,
+                'documenti' => 1834,
+                'ultima_versione' => '2024-11-15',
+                'stato' => 'attivo'
+              ],
+              [
+                'nome' => 'Bolle di Trasporto',
+                'tipo' => 'Logistica',
+                'accuracy' => 97.8,
+                'documenti' => 2756,
+                'ultima_versione' => '2024-11-20',
+                'stato' => 'attivo'
+              ]
+            ];
+          }
           ?>
 
           <div style="display: flex; flex-direction: column; gap: 14px;">
@@ -268,19 +314,38 @@ if (!$servizio) {
                 </div>
 
                 <div style="margin-top: 12px;">
-                  <div style="display: flex; justify-content: space-between; margin-bottom: 6px;">
-                    <span class="muted small">Accuratezza</span>
-                    <span style="font-weight: 600; font-size: 13px; color: #10b981;"><?= number_format($modello['accuracy'], 1, ',', '.') ?>%</span>
-                  </div>
-
-                  <div style="width: 100%; height: 6px; background: #1f2937; border-radius: 3px; overflow: hidden;">
-                    <div style="width: <?= $modello['accuracy'] ?>%; height: 100%; background: linear-gradient(90deg, #10b981, #22d3ee); border-radius: 3px;"></div>
-                  </div>
-
-                  <div style="display: flex; justify-content: space-between; margin-top: 10px; margin-bottom: 12px;">
-                    <span class="muted small"><?= number_format($modello['documenti'], 0, ',', '.') ?> doc</span>
-                    <span class="muted small">v. <?= date('d/m', strtotime($modello['ultima_versione'])) ?></span>
-                  </div>
+                  <?php if ($modello['stato'] === 'training'): ?>
+                    <!-- Modello in addestramento - mostra progress animato -->
+                    <div style="margin-bottom: 6px;">
+                      <span class="muted small">Addestramento in corso...</span>
+                    </div>
+                    <div style="width: 100%; height: 6px; background: #1f2937; border-radius: 3px; overflow: hidden; position: relative;">
+                      <div style="width: 50%; height: 100%; background: linear-gradient(90deg, #fbbf24, #f59e0b); border-radius: 3px; animation: training-pulse 2s ease-in-out infinite;"></div>
+                    </div>
+                    <style>
+                      @keyframes training-pulse {
+                        0%, 100% { width: 30%; opacity: 0.6; }
+                        50% { width: 70%; opacity: 1; }
+                      }
+                    </style>
+                    <div style="display: flex; justify-content: space-between; margin-top: 10px; margin-bottom: 12px;">
+                      <span class="muted small"><?= number_format($modello['documenti'], 0, ',', '.') ?> doc</span>
+                      <span class="muted small"><?= date('d/m H:i', strtotime($modello['ultima_versione'])) ?></span>
+                    </div>
+                  <?php else: ?>
+                    <!-- Modello completato - mostra accuracy -->
+                    <div style="display: flex; justify-content: space-between; margin-bottom: 6px;">
+                      <span class="muted small">Accuratezza</span>
+                      <span style="font-weight: 600; font-size: 13px; color: #10b981;"><?= number_format($modello['accuracy'], 1, ',', '.') ?>%</span>
+                    </div>
+                    <div style="width: 100%; height: 6px; background: #1f2937; border-radius: 3px; overflow: hidden;">
+                      <div style="width: <?= $modello['accuracy'] ?>%; height: 100%; background: linear-gradient(90deg, #10b981, #22d3ee); border-radius: 3px;"></div>
+                    </div>
+                    <div style="display: flex; justify-content: space-between; margin-top: 10px; margin-bottom: 12px;">
+                      <span class="muted small"><?= number_format($modello['documenti'], 0, ',', '.') ?> doc</span>
+                      <span class="muted small">v. <?= date('d/m', strtotime($modello['ultima_versione'])) ?></span>
+                    </div>
+                  <?php endif; ?>
 
                   <?php
                   // Recupera il nome del cliente per l'oggetto dell'email

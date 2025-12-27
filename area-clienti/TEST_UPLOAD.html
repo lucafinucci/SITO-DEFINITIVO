@@ -1,0 +1,71 @@
+<!DOCTYPE html>
+<html lang="it">
+<head>
+    <meta charset="UTF-8">
+    <title>TEST Upload Training</title>
+</head>
+<body>
+    <h1>TEST Form Upload Training</h1>
+
+    <form id="test-form" enctype="multipart/form-data">
+        <input type="hidden" name="csrf_token" value="test-token">
+
+        <label>Tipo Modello:</label>
+        <select name="tipo_modello" required>
+            <option value="fatture">Fatture</option>
+            <option value="ddt">DDT</option>
+        </select><br><br>
+
+        <label>Descrizione:</label>
+        <textarea name="descrizione" required>Test upload</textarea><br><br>
+
+        <label>Numero Documenti:</label>
+        <input type="number" name="num_documenti" value="10" required><br><br>
+
+        <label>File:</label>
+        <input type="file" name="files[]" multiple accept=".pdf,.png,.jpg"><br><br>
+
+        <button type="submit">INVIA TEST</button>
+    </form>
+
+    <div id="result"></div>
+
+    <script>
+    document.getElementById('test-form').addEventListener('submit', async (e) => {
+        e.preventDefault();
+
+        const formData = new FormData(e.target);
+        const resultDiv = document.getElementById('result');
+
+        resultDiv.innerHTML = '<p>Caricamento in corso...</p>';
+
+        try {
+            const response = await fetch('/area-clienti/api/upload-training.php', {
+                method: 'POST',
+                body: formData
+            });
+
+            const data = await response.json();
+
+            resultDiv.innerHTML = `
+                <h3>Risposta API:</h3>
+                <pre>${JSON.stringify(data, null, 2)}</pre>
+                <p><strong>Ora verifica dove ti reindirizza richiedi-addestramento.php</strong></p>
+            `;
+
+            console.log('Response:', data);
+
+            if (data.success) {
+                alert('Upload riuscito! Ora verrai reindirizzato...');
+                // Usa lo stesso redirect di richiedi-addestramento.php
+                window.location.href = '/area-clienti/servizio-dettaglio.php?id=1';
+            }
+
+        } catch (error) {
+            resultDiv.innerHTML = `<p style="color:red">Errore: ${error.message}</p>`;
+            console.error('Error:', error);
+        }
+    });
+    </script>
+</body>
+</html>
