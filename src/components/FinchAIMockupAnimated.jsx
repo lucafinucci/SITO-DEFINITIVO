@@ -380,10 +380,7 @@ export default function FinchAIMockupAnimated() {
             </h1>
 
             <p className="mt-5 text-lg text-slate-300/90 animate-[fadeUp_0.9s_ease_0.2s_both]">
-              Soluzioni AI che trasformano documenti, dati produttivi e indicatori finanziari in insight azionabili per la tua azienda
-            </p>
-            <p className="mt-4 text-base text-slate-300/90 animate-[fadeUp_0.9s_ease_0.24s_both]">
-              Semplifichiamo l'Intelligenza Artificiale per la tua PMI, cos&igrave; puoi ottenere risultati concreti senza dover essere un esperto di AI.
+              Aiutiamo la tua PMI a usare l'Intelligenza Artificiale in modo semplice, per arrivare a risultati concreti senza complessità tecniche.
             </p>
 
             <div className="mt-7 flex flex-col items-center justify-center gap-3 sm:flex-row animate-[fadeUp_0.9s_ease_0.28s_both] w-full sm:w-auto px-4 sm:px-0">

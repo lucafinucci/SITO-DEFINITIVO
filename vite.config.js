@@ -5,12 +5,17 @@ import path from 'path'
 // https://vitejs.dev/config/
 export default defineConfig({
   plugins: [react()],
+  root: '.',
   resolve: {
     alias: {
       '@': path.resolve(__dirname, './src'),
     },
   },
   server: {
+    host: '127.0.0.1',
+    port: 5173,
+    strictPort: true,
+    open: false,
     proxy: {
       '/area-clienti': {
         target: 'http://localhost',
