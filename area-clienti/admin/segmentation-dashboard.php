@@ -275,6 +275,36 @@ $segments = $pdo->query("
             position: relative;
         }
 
+        .form-group {
+            margin-bottom: 16px;
+        }
+
+        .form-group label {
+            display: block;
+            font-size: 12px;
+            text-transform: uppercase;
+            color: #7f8c8d;
+            letter-spacing: 0.4px;
+            margin-bottom: 6px;
+        }
+
+        .form-group input,
+        .form-group select,
+        .form-group textarea {
+            width: 100%;
+            padding: 10px;
+            border: 1px solid #e5e7eb;
+            border-radius: 8px;
+            font-size: 14px;
+        }
+
+        .form-actions {
+            display: flex;
+            justify-content: flex-end;
+            gap: 10px;
+            margin-top: 10px;
+        }
+
         /* Modal */
         .modal {
             display: none;
@@ -514,6 +544,65 @@ $segments = $pdo->query("
     </div>
 
     <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
+
+    <!-- Campaign Modal -->
+    <div id="campaignModal" class="modal">
+        <div class="modal-content">
+            <span class="close-modal" onclick="closeCampaignModal()">&times;</span>
+            <h2>Crea Campagna Segmento</h2>
+
+            <form id="campaignForm" onsubmit="submitCampaign(event)">
+                <input type="hidden" name="segment_id" value="">
+
+                <div class="form-group">
+                    <label>Nome Campagna *</label>
+                    <input type="text" name="campaign_name" required placeholder="es: Retention Q1">
+                </div>
+
+                <div class="form-group">
+                    <label>Tipo Campagna *</label>
+                    <select name="campaign_type" required>
+                        <option value="email">Email</option>
+                        <option value="sms">SMS</option>
+                        <option value="call">Call</option>
+                        <option value="in_app">In-app</option>
+                        <option value="mixed">Multicanale</option>
+                    </select>
+                </div>
+
+                <div class="form-group">
+                    <label>Azione Target *</label>
+                    <select name="target_action" required>
+                        <option value="retention">Retention</option>
+                        <option value="upsell">Upsell</option>
+                        <option value="reengagement">Re-engagement</option>
+                        <option value="onboarding">Onboarding</option>
+                        <option value="advocacy">Advocacy</option>
+                    </select>
+                </div>
+
+                <div class="form-group">
+                    <label>Oggetto</label>
+                    <input type="text" name="subject" placeholder="Oggetto email (opzionale)">
+                </div>
+
+                <div class="form-group">
+                    <label>Messaggio</label>
+                    <textarea name="message" rows="4" placeholder="Testo della campagna..."></textarea>
+                </div>
+
+                <div class="form-group">
+                    <label>Data Pianificazione</label>
+                    <input type="date" name="scheduled_date">
+                </div>
+
+                <div class="form-actions">
+                    <button type="button" class="btn btn-secondary" onclick="closeCampaignModal()">Annulla</button>
+                    <button type="submit" class="btn btn-primary">Crea Campagna</button>
+                </div>
+            </form>
+        </div>
+    </div>
     <script>
         // Chart 1: Segment Distribution (Doughnut)
         const distributionCtx = document.getElementById('segmentDistributionChart').getContext('2d');
@@ -751,8 +840,51 @@ $segments = $pdo->query("
         }
 
         function createCampaign(segmentId) {
-            // TODO: Implementa creazione campagna
-            alert(`Creazione campagna per segmento ${segmentId} - Coming soon!`);
+            const form = document.getElementById('campaignForm');
+            const modal = document.getElementById('campaignModal');
+
+            form.segment_id.value = segmentId;
+            modal.classList.add('active');
+        }
+
+        function closeCampaignModal() {
+            document.getElementById('campaignModal').classList.remove('active');
+        }
+
+        async function submitCampaign(event) {
+            event.preventDefault();
+            const formData = new FormData(event.target);
+            const payload = Object.fromEntries(formData);
+
+            payload.segment_id = parseInt(payload.segment_id, 10);
+            if (!payload.scheduled_date) {
+                delete payload.scheduled_date;
+            }
+
+            if (payload.scheduled_date) {
+                payload.status = 'scheduled';
+            } else {
+                payload.status = 'draft';
+            }
+
+            try {
+                const response = await fetch('../api/segmentation.php?action=create_campaign', {
+                    method: 'POST',
+                    headers: { 'Content-Type': 'application/json' },
+                    body: JSON.stringify(payload)
+                });
+
+                const data = await response.json();
+
+                if (data.success) {
+                    closeCampaignModal();
+                    alert('Campagna creata con successo!');
+                } else {
+                    alert('Errore: ' + data.error);
+                }
+            } catch (error) {
+                alert('Errore: ' + error.message);
+            }
         }
 
         function exportSegments() {

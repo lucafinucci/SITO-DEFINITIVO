@@ -36,13 +36,13 @@ if (!$utenteServizioId) {
     exit;
 }
 
-// Verifica che il record esista
+// Verifica che il record esista (ora a livello aziendale)
 $stmt = $pdo->prepare('
-    SELECT us.id, s.nome as servizio_nome, u.nome as cliente_nome
-    FROM utenti_servizi us
-    JOIN servizi s ON us.servizio_id = s.id
-    JOIN utenti u ON us.user_id = u.id
-    WHERE us.id = :id AND us.stato = "attivo"
+    SELECT ase.id, s.nome as servizio_nome, a.nome as cliente_nome
+    FROM aziende_servizi ase
+    JOIN servizi s ON ase.servizio_id = s.id
+    JOIN aziende a ON ase.azienda_id = a.id
+    WHERE ase.id = :id AND ase.stato = "attivo"
 ');
 $stmt->execute(['id' => $utenteServizioId]);
 $record = $stmt->fetch();
@@ -53,10 +53,10 @@ if (!$record) {
     exit;
 }
 
-// Disattiva il servizio
+// Disattiva il servizio a livello aziendale
 try {
     $stmt = $pdo->prepare('
-        UPDATE utenti_servizi
+        UPDATE aziende_servizi
         SET stato = "disattivato",
             data_disattivazione = CURDATE()
         WHERE id = :id

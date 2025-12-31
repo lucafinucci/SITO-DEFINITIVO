@@ -121,9 +121,9 @@ CREATE TABLE IF NOT EXISTS access_logs (
 -- STEP 3: Inserisci dati demo
 -- Password per tutti gli utenti: Demo123!
 INSERT INTO utenti (email, password_hash, nome, cognome, azienda, telefono, ruolo, mfa_enabled, attivo) VALUES
-('admin@finch-ai.it', '$2y$10$92IXUNpkjO0rOQ5byMi.Ye4oKoEa3Ro9llC/.og/at2.uheWG/igi', 'Mario', 'Rossi', 'Finch-AI Srl', '+39 02 1234567', 'admin', FALSE, TRUE),
-('demo@finch-ai.it', '$2y$10$92IXUNpkjO0rOQ5byMi.Ye4oKoEa3Ro9llC/.og/at2.uheWG/igi', 'Luigi', 'Verdi', 'Azienda Demo Srl', '+39 06 7654321', 'cliente', FALSE, TRUE),
-('cliente@example.com', '$2y$10$92IXUNpkjO0rOQ5byMi.Ye4oKoEa3Ro9llC/.og/at2.uheWG/igi', 'Paolo', 'Bianchi', 'Example Corp', '+39 011 9876543', 'cliente', FALSE, TRUE);
+('admin@finch-ai.it', '$2y$10$SdqzQ57mArz7PS0vrXXO1uzyQXLNfkAYmKeaN1UNcoA5vwzqCuO2m', 'Mario', 'Rossi', 'Finch-AI Srl', '+39 02 1234567', 'admin', FALSE, TRUE),
+('demo@finch-ai.it', '$2y$10$sy1aBPONuwKREhutPj7BFeX4jMCdRpMOAYHrFTjEn3fI3bERIpJ4q', 'Luigi', 'Verdi', 'Azienda Demo Srl', '+39 06 7654321', 'cliente', FALSE, TRUE),
+('cliente@example.com', '$2y$10$8LvP.M5bfHJ/2KYyNgTyZ.RrFuvV/2JQwcQ9yeNLmzHF7tasU2ulW', 'Paolo', 'Bianchi', 'Example Corp', '+39 011 9876543', 'cliente', FALSE, TRUE);
 
 INSERT INTO servizi (nome, descrizione, codice, prezzo_mensile, attivo) VALUES
 ('Document Intelligence', 'OCR e validazione documenti automatica con AI', 'DOC-INT', 1500.00, TRUE),

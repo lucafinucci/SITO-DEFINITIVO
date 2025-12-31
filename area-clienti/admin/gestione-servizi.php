@@ -18,19 +18,36 @@ header('Content-Type: text/html; charset=utf-8');
 
 $csrfToken = $_SESSION['csrf_token'] ?? '';
 
+$hasWebappUrl = false;
+try {
+    $stmtCols = $pdo->prepare("
+        SELECT COLUMN_NAME
+        FROM INFORMATION_SCHEMA.COLUMNS
+        WHERE TABLE_SCHEMA = DATABASE()
+          AND TABLE_NAME = 'utenti'
+          AND COLUMN_NAME = 'webapp_url'
+    ");
+    $stmtCols->execute();
+    $hasWebappUrl = (bool)$stmtCols->fetchColumn();
+} catch (PDOException $e) {
+    $hasWebappUrl = false;
+}
+
 // Recupera tutti i clienti con i loro servizi
-$stmt = $pdo->prepare('
+$clientiSelect = '
     SELECT
         u.id,
         u.nome,
         u.cognome,
         u.email,
         u.azienda,
-        u.created_at
+        u.created_at,
+        u.cliente_dal' . ($hasWebappUrl ? ', u.webapp_url' : ', NULL AS webapp_url') . '
     FROM utenti u
     WHERE u.ruolo != "admin"
     ORDER BY u.azienda ASC, u.cognome ASC
-');
+';
+$stmt = $pdo->prepare($clientiSelect);
 $stmt->execute();
 $clienti = $stmt->fetchAll();
 
@@ -107,30 +124,31 @@ foreach ($stmt->fetchAll() as $row) {
     $pacchettiServizi[(int)$row['pacchetto_id']][] = $row;
 }
 
-// Recupera servizi attivi per ogni cliente
+// Recupera servizi attivi per ogni cliente (ora a livello aziendale)
 $serviziClienti = [];
 $stmt = $pdo->prepare('
     SELECT
-        us.id,
-        us.user_id,
-        us.servizio_id,
-        us.data_attivazione,
-        us.data_disattivazione,
-        us.stato,
-        us.note,
+        ase.id,
+        u.id as user_id,
+        ase.servizio_id,
+        ase.data_attivazione,
+        ase.data_disattivazione,
+        ase.stato,
+        ase.note,
         s.nome as servizio_nome,
         s.codice as servizio_codice,
         s.prezzo_mensile,
         s.costo_per_pagina,
-        pp.prezzo_mensile AS prezzo_personalizzato,
-        pp.costo_per_pagina AS costo_per_pagina_personalizzato,
-        COALESCE(pp.prezzo_mensile, s.prezzo_mensile) AS prezzo_finale,
-        COALESCE(pp.costo_per_pagina, s.costo_per_pagina) AS costo_per_pagina_finale
-    FROM utenti_servizi us
-    JOIN servizi s ON us.servizio_id = s.id
-    LEFT JOIN clienti_prezzi_personalizzati pp
-        ON pp.cliente_id = us.user_id AND pp.servizio_id = s.id
-    WHERE us.stato = "attivo"
+        app.prezzo_mensile AS prezzo_personalizzato,
+        app.costo_per_pagina AS costo_per_pagina_personalizzato,
+        COALESCE(app.prezzo_mensile, s.prezzo_mensile) AS prezzo_finale,
+        COALESCE(app.costo_per_pagina, s.costo_per_pagina) AS costo_per_pagina_finale
+    FROM utenti u
+    INNER JOIN aziende_servizi ase ON u.azienda_id = ase.azienda_id
+    JOIN servizi s ON ase.servizio_id = s.id
+    LEFT JOIN aziende_prezzi_personalizzati app
+        ON app.azienda_id = u.azienda_id AND app.servizio_id = s.id
+    WHERE ase.stato = "attivo" AND u.azienda_id IS NOT NULL
 ');
 $stmt->execute();
 foreach ($stmt->fetchAll() as $row) {
@@ -253,11 +271,12 @@ if (!empty($clientIds)) {
     $stmt->execute();
     $allTags = $stmt->fetchAll();
 
-    // Prezzi personalizzati
+    // Prezzi personalizzati (ora a livello aziendale)
     $stmt = $pdo->prepare("
-        SELECT cliente_id, servizio_id, prezzo_mensile, costo_per_pagina
-        FROM clienti_prezzi_personalizzati
-        WHERE cliente_id IN ($placeholders)
+        SELECT u.id as cliente_id, app.servizio_id, app.prezzo_mensile, app.costo_per_pagina
+        FROM utenti u
+        INNER JOIN aziende_prezzi_personalizzati app ON u.azienda_id = app.azienda_id
+        WHERE u.id IN ($placeholders)
     ");
     $stmt->execute($clientIds);
     foreach ($stmt->fetchAll() as $row) {
@@ -266,11 +285,12 @@ if (!empty($clientIds)) {
             $row['costo_per_pagina'] !== null ? (float)$row['costo_per_pagina'] : null;
     }
 
-    // Quote personalizzate per cliente
+    // Quote personalizzate per cliente (ora a livello aziendale)
     $stmt = $pdo->prepare("
-        SELECT cliente_id, servizio_id, quota_documenti_mese
-        FROM clienti_quote
-        WHERE cliente_id IN ($placeholders)
+        SELECT u.id as cliente_id, aq.servizio_id, aq.quota_documenti_mese
+        FROM utenti u
+        INNER JOIN aziende_quote aq ON u.azienda_id = aq.azienda_id
+        WHERE u.id IN ($placeholders)
     ");
     $stmt->execute($clientIds);
     foreach ($stmt->fetchAll() as $row) {
@@ -826,6 +846,15 @@ if ($sumRichiestePrev > 0) {
       margin-bottom: 16px;
       padding-bottom: 16px;
       border-bottom: 1px solid var(--border);
+    }
+    .btn.danger {
+      background: rgba(239, 68, 68, 0.1);
+      border: 1px solid rgba(239, 68, 68, 0.3);
+      color: #fca5a5;
+    }
+    .btn.danger:hover {
+      background: rgba(239, 68, 68, 0.2);
+      border-color: #ef4444;
     }
     .cliente-info h4 {
       margin: 0 0 4px 0;
@@ -1482,7 +1511,6 @@ if ($sumRichiestePrev > 0) {
     <div style="display: flex; align-items: center; gap: 16px;">
       <div class="admin-nav">
         <a href="/area-clienti/admin/gestione-servizi.php" class="active">Servizi Clienti</a>
-        <a href="/area-clienti/admin/kpi-clienti.php">📊 KPI Clienti</a>
         <a href="/area-clienti/admin/richieste-addestramento.php">Richieste Addestramento</a>
         <a href="/area-clienti/admin/fatture.php">Fatture</a>
         <a href="/area-clienti/admin/scadenzario.php">📅 Scadenzario</a>
@@ -1982,6 +2010,44 @@ if ($sumRichiestePrev > 0) {
     </div>
   </section>
 
+  <!-- Nuovo Cliente -->
+  <section class="card">
+    <div class="card-header">
+      <h3>➕ Nuovo Cliente</h3>
+    </div>
+    <form class="form-grid js-create-client-form">
+      <label>
+        Nome
+        <input type="text" name="nome" required>
+      </label>
+      <label>
+        Cognome
+        <input type="text" name="cognome" required>
+      </label>
+      <label>
+        Email
+        <input type="email" name="email" required>
+      </label>
+      <label>
+        Azienda
+        <input type="text" name="azienda" required>
+      </label>
+      <label>
+        Password
+        <input type="password" name="password" minlength="8" required>
+      </label>
+      <label>
+        WebApp URL (opzionale)
+        <input type="url" name="webapp_url" placeholder="https://cliente.example.com/document-intelligence">
+      </label>
+      <label style="display: flex; align-items: center; gap: 8px;">
+        <input type="checkbox" name="attiva_docint" value="1">
+        Attiva DOC-INT
+      </label>
+      <button class="btn primary" type="submit">Crea Cliente</button>
+    </form>
+  </section>
+
   <!-- Lista Clienti -->
   <section class="card">
     <h3>📋 Clienti e Servizi Attivi</h3>
@@ -1996,11 +2062,50 @@ if ($sumRichiestePrev > 0) {
               <p class="company"><?= htmlspecialchars($cliente['azienda']) ?></p>
               <h4><?= htmlspecialchars($cliente['nome'] . ' ' . $cliente['cognome']) ?></h4>
               <p class="muted small" style="margin: 0;">
-                <?= htmlspecialchars($cliente['email']) ?> •
-                Cliente dal <?= date('d/m/Y', strtotime($cliente['created_at'])) ?>
+                <?= htmlspecialchars($cliente['email']) ?>
               </p>
+              <button
+                class="btn danger small js-delete-cliente"
+                type="button"
+                data-cliente-id="<?= (int)$cliente['id'] ?>"
+                style="margin-top: 8px;">
+                Elimina cliente
+              </button>
             </div>
           </div>
+
+          <!-- Form Cliente Dal -->
+          <form class="form-grid js-cliente-dal-form" data-cliente-id="<?= (int)$cliente['id'] ?>" style="margin-top: 12px;">
+            <label>
+              Cliente dal
+              <input
+                type="date"
+                name="cliente_dal"
+                value="<?= htmlspecialchars($cliente['cliente_dal'] ?? date('Y-m-d', strtotime($cliente['created_at']))) ?>"
+                required
+              >
+            </label>
+            <button class="btn ghost small" type="submit">Salva Data</button>
+          </form>
+
+          <?php if ($hasWebappUrl): ?>
+            <form class="form-grid js-webapp-form" data-cliente-id="<?= (int)$cliente['id'] ?>" style="margin-top: 12px;">
+              <label>
+                WebApp URL
+                <input
+                  type="url"
+                  name="webapp_url"
+                  value="<?= htmlspecialchars($cliente['webapp_url'] ?? '') ?>"
+                  placeholder="https://cliente.example.com/document-intelligence"
+                >
+              </label>
+              <button class="btn ghost small" type="submit">Salva URL</button>
+            </form>
+          <?php else: ?>
+            <p class="muted small" style="margin-top: 12px;">
+              WebApp URL non configurabile: manca la colonna <code>utenti.webapp_url</code>.
+            </p>
+          <?php endif; ?>
 
           <!-- Servizi Attivi -->
           <?php if (!empty($serviziClienti[$cliente['id']])): ?>
@@ -2618,25 +2723,30 @@ if ($sumRichiestePrev > 0) {
                       ?>
                       <div class="contract-item">
                         <span><?= htmlspecialchars($c['titolo']) ?><?= htmlspecialchars($serviceLabel) ?> - <?= $rangeLabel ?><?= $durataLabel ?></span>
-                        <select onchange="aggiornaStatoContratto(<?= (int)$c['id'] ?>, this.value)">
-                          <?php foreach (['attivo' => 'Attivo', 'in_rinnovo' => 'In rinnovo', 'rinnovato' => 'Rinnovato', 'scaduto' => 'Scaduto'] as $st => $lbl): ?>
-                            <option value="<?= $st ?>" <?= $c['stato'] === $st ? 'selected' : '' ?>><?= $lbl ?></option>
-                          <?php endforeach; ?>
-                        </select>
+                        <div style="display: flex; align-items: center; gap: 6px;">
+                          <select onchange="aggiornaStatoContratto(<?= (int)$c['id'] ?>, this.value)">
+                            <?php foreach (['attivo' => 'Attivo', 'in_rinnovo' => 'In rinnovo', 'rinnovato' => 'Rinnovato', 'scaduto' => 'Scaduto'] as $st => $lbl): ?>
+                              <option value="<?= $st ?>" <?= $c['stato'] === $st ? 'selected' : '' ?>><?= $lbl ?></option>
+                            <?php endforeach; ?>
+                          </select>
+                          <button class="btn danger small" type="button" onclick="eliminaContratto(<?= (int)$c['id'] ?>)">Elimina</button>
+                        </div>
                       </div>
                     <?php endforeach; ?>
                   <?php endif; ?>
                 </div>
-                <form class="js-contract-form" data-cliente-id="<?= $cliente['id'] ?>">
+                <form class="js-contract-form" data-cliente-id="<?= $cliente['id'] ?>" data-has-servizio="<?= $hasContrattoServizio ? '1' : '0' ?>">
                   <?php $serviziCliente = $serviziClienti[$cliente['id']] ?? []; ?>
-                  <select name="servizio_id" required <?= empty($serviziCliente) ? 'disabled' : '' ?>>
-                    <option value="">Seleziona servizio...</option>
-                    <?php foreach ($serviziCliente as $svc): ?>
-                      <option value="<?= (int)$svc['servizio_id'] ?>"><?= htmlspecialchars($svc['servizio_nome']) ?></option>
-                    <?php endforeach; ?>
-                  </select>
+                  <?php if ($hasContrattoServizio): ?>
+                    <select name="servizio_id" required <?= empty($serviziCliente) ? 'disabled' : '' ?>>
+                      <option value="">Seleziona servizio...</option>
+                      <?php foreach ($serviziCliente as $svc): ?>
+                        <option value="<?= (int)$svc['servizio_id'] ?>"><?= htmlspecialchars($svc['servizio_nome']) ?></option>
+                      <?php endforeach; ?>
+                    </select>
+                  <?php endif; ?>
                   <input type="text" name="titolo" placeholder="Titolo contratto" required>
-                  <input type="date" name="data_inizio" required>
+                  <input type="date" name="data_inizio">
                   <input type="date" name="data_scadenza" required>
                   <input type="number" name="valore_annuo" placeholder="Valore annuo" min="0" step="0.01">
                   <textarea name="note" placeholder="Note (opzionale)"></textarea>
@@ -2708,11 +2818,36 @@ if ($sumRichiestePrev > 0) {
 const csrfToken = '<?= htmlspecialchars($csrfToken, ENT_QUOTES, 'UTF-8') ?>';
 let modalEl = document.getElementById('modalAttivazione');
 
+// Prezzi personalizzati per cliente e servizio
+const prezziPersonalizzati = <?= json_encode($prezziPersonalizzati ?? []) ?>;
+const serviziDisponibili = <?= json_encode(array_map(function($s) {
+  return ['id' => $s['id'], 'nome' => $s['nome'], 'prezzo_mensile' => $s['prezzo_mensile']];
+}, $serviziDisponibili)) ?>;
+
 function mostraModalAttivazione(userId, clienteNome, azienda) {
   document.getElementById('userId').value = userId;
   document.getElementById('clienteNome').value = `${azienda} - ${clienteNome}`;
   document.getElementById('servizioId').value = '';
   document.getElementById('note').value = '';
+
+  // Aggiorna i prezzi nel select in base al cliente
+  const selectServizio = document.getElementById('servizioId');
+  const options = selectServizio.querySelectorAll('option[value]:not([value=""])');
+
+  options.forEach(option => {
+    const servizioId = parseInt(option.value);
+    const servizio = serviziDisponibili.find(s => s.id == servizioId);
+    if (!servizio) return;
+
+    // Controlla se esiste un prezzo personalizzato per questo cliente e servizio
+    const prezzoPersonalizzato = prezziPersonalizzati[userId]?.[servizioId];
+    const prezzoFinale = prezzoPersonalizzato !== undefined ? prezzoPersonalizzato : servizio.prezzo_mensile;
+
+    // Aggiorna il testo dell'option
+    option.textContent = `${servizio.nome} - €${Math.round(prezzoFinale)}/mese${prezzoPersonalizzato !== undefined ? ' (Personalizzato)' : ''}`;
+    option.setAttribute('data-prezzo', prezzoFinale);
+  });
+
   modalEl.classList.add('show');
 }
 
@@ -2807,6 +2942,67 @@ async function postJson(url, payload) {
   }
   return result;
 }
+
+document.querySelectorAll('.js-webapp-form').forEach((form) => {
+  form.addEventListener('submit', async (e) => {
+    e.preventDefault();
+    const clienteId = form.dataset.clienteId;
+    const url = form.querySelector('input[name="webapp_url"]').value.trim();
+    try {
+      await postJson('/area-clienti/api/clienti-webapp.php', { cliente_id: clienteId, webapp_url: url });
+      alert('URL WebApp salvato.');
+    } catch (err) {
+      alert('⚠️ ' + err.message);
+    }
+  });
+});
+
+document.querySelectorAll('.js-cliente-dal-form').forEach((form) => {
+  form.addEventListener('submit', async (e) => {
+    e.preventDefault();
+    const clienteId = form.dataset.clienteId;
+    const clienteDal = form.querySelector('input[name="cliente_dal"]').value.trim();
+    try {
+      await postJson('/area-clienti/api/clienti-dal.php', { cliente_id: clienteId, cliente_dal: clienteDal });
+      alert('✅ Data cliente salvata.');
+      location.reload();
+    } catch (err) {
+      alert('⚠️ ' + err.message);
+    }
+  });
+});
+
+document.querySelectorAll('.js-create-client-form').forEach((form) => {
+  form.addEventListener('submit', async (e) => {
+    e.preventDefault();
+    const formData = new FormData(form);
+    const payload = Object.fromEntries(formData);
+    payload.attiva_docint = payload.attiva_docint ? '1' : '0';
+    try {
+      const result = await postJson('/area-clienti/api/clienti-create.php', payload);
+      alert('Cliente creato con successo.');
+      location.reload();
+    } catch (err) {
+      alert('⚠️ ' + err.message);
+    }
+  });
+});
+
+document.querySelectorAll('.js-delete-cliente').forEach((button) => {
+  button.addEventListener('click', async () => {
+    const clienteId = button.dataset.clienteId;
+    if (!clienteId) return;
+    if (!confirm('Eliminare definitivamente questo cliente?')) return;
+    if (!confirm('Conferma finale: eliminare cliente e dati collegati?')) return;
+    try {
+      await postJson('/area-clienti/api/clienti-delete.php', { cliente_id: clienteId });
+      alert('Cliente eliminato.');
+      location.reload();
+    } catch (err) {
+      alert('?? ' + err.message);
+    }
+  });
+});
 
 document.querySelectorAll('.js-note-form').forEach((form) => {
   form.addEventListener('submit', async (e) => {
@@ -3371,27 +3567,39 @@ document.querySelectorAll('.js-contract-form').forEach((form) => {
   form.addEventListener('submit', async (e) => {
     e.preventDefault();
     const clienteId = form.dataset.clienteId;
-    const servizioId = form.querySelector('select[name="servizio_id"]').value;
+    const hasServizio = form.dataset.hasServizio === '1';
+    const servizioSelect = form.querySelector('select[name="servizio_id"]');
+    const servizioId = servizioSelect ? servizioSelect.value : '';
     const titolo = form.querySelector('input[name="titolo"]').value.trim();
     const dataInizio = form.querySelector('input[name="data_inizio"]').value;
     const dataScadenza = form.querySelector('input[name="data_scadenza"]').value;
     const valoreAnn = form.querySelector('input[name="valore_annuo"]').value;
     const note = form.querySelector('textarea[name="note"]').value.trim();
-    if (!servizioId || !titolo || !dataInizio || !dataScadenza) return;
+    if (!titolo || !dataScadenza) {
+      alert('? Compila almeno titolo e data scadenza.');
+      return;
+    }
+    if (hasServizio && !servizioId) {
+      alert('? Seleziona un servizio.');
+      return;
+    }
     try {
-      await postJson('/area-clienti/api/rinnovi.php', {
+      const payload = {
         cliente_id: clienteId,
-        servizio_id: servizioId,
         titolo: titolo,
         data_inizio: dataInizio,
         data_scadenza: dataScadenza,
         valore_annuo: valoreAnn,
         note: note,
         stato: 'attivo'
-      });
+      };
+      if (hasServizio && servizioId) {
+        payload.servizio_id = servizioId;
+      }
+      await postJson('/area-clienti/api/rinnovi.php', payload);
       location.reload();
     } catch (err) {
-      alert('⚠️ ' + err.message);
+      alert('?? ' + err.message);
     }
   });
 });
@@ -3401,6 +3609,16 @@ async function aggiornaStatoContratto(id, stato) {
     await postJson('/area-clienti/api/rinnovi.php', { action: 'update-status', id, stato });
   } catch (err) {
     alert('❌ ' + err.message);
+  }
+}
+
+async function eliminaContratto(id) {
+  if (!confirm('Eliminare questo contratto?')) return;
+  try {
+    await postJson('/area-clienti/api/rinnovi.php', { action: 'delete', id });
+    location.reload();
+  } catch (err) {
+    alert('? ' + err.message);
   }
 }
 

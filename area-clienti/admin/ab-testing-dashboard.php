@@ -424,6 +424,56 @@ $completedTests = $pdo->query("
             border-radius: 6px;
             font-size: 14px;
         }
+
+        .variants-editor {
+            display: flex;
+            flex-direction: column;
+            gap: 10px;
+            margin-top: 10px;
+        }
+
+        .variant-row {
+            display: grid;
+            grid-template-columns: 1.6fr 0.6fr 0.8fr auto;
+            gap: 10px;
+            align-items: center;
+        }
+
+        .variant-row input[type="text"],
+        .variant-row input[type="number"] {
+            padding: 10px;
+            border: 1px solid #dfe6e9;
+            border-radius: 6px;
+            font-size: 14px;
+        }
+
+        .variant-control {
+            display: flex;
+            align-items: center;
+            gap: 6px;
+            font-size: 12px;
+            color: #6b7280;
+            text-transform: uppercase;
+            letter-spacing: 0.4px;
+        }
+
+        .variant-actions {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            margin-top: 10px;
+        }
+
+        .traffic-total {
+            font-size: 12px;
+            color: #6b7280;
+        }
+
+        .btn-small {
+            padding: 6px 10px;
+            font-size: 12px;
+        }
+
     </style>
 </head>
 <body>
@@ -603,6 +653,15 @@ $completedTests = $pdo->query("
                     </select>
                 </div>
 
+                <div class="form-group">
+                    <label>Varianti *</label>
+                    <div id="variantsContainer" class="variants-editor"></div>
+                    <div class="variant-actions">
+                        <button type="button" class="btn btn-secondary" onclick="addVariantRow()">+ Aggiungi variante</button>
+                        <span id="trafficTotal" class="traffic-total">Totale traffico: 100%</span>
+                    </div>
+                </div>
+
                 <button type="submit" class="btn btn-primary">Crea Test</button>
             </form>
         </div>
@@ -747,29 +806,114 @@ $completedTests = $pdo->query("
             document.getElementById('createModal').classList.remove('active');
         }
 
+        
+        function initVariants() {
+            const container = document.getElementById('variantsContainer');
+            if (!container) return;
+            container.innerHTML = '';
+            addVariantRow({ name: 'Control', traffic: 50, is_control: true });
+            addVariantRow({ name: 'Variant A', traffic: 50, is_control: false });
+            updateTrafficTotal();
+        }
+
+        function addVariantRow(data = {}) {
+            const container = document.getElementById('variantsContainer');
+            if (!container) return;
+
+            const index = container.children.length;
+            const defaultName = data.name || `Variant ${String.fromCharCode(65 + index)}`;
+            const traffic = data.traffic !== undefined ? data.traffic : '';
+            const isControl = data.is_control ? 'checked' : '';
+
+            const html = `
+                <div class="variant-row" data-index="${index}">
+                    <input type="text" class="variant-name" placeholder="Nome variante" value="${defaultName}">
+                    <input type="number" class="variant-traffic" min="0" max="100" step="1" placeholder="Traffico %" value="${traffic}">
+                    <label class="variant-control"><input type="radio" name="variant_control" ${isControl}> Control</label>
+                    <button type="button" class="btn btn-secondary btn-small" onclick="removeVariantRow(this)">Rimuovi</button>
+                </div>
+            `;
+
+            container.insertAdjacentHTML('beforeend', html);
+            updateTrafficTotal();
+        }
+
+        function removeVariantRow(button) {
+            const container = document.getElementById('variantsContainer');
+            if (!container) return;
+
+            if (container.children.length <= 2) {
+                alert('Minimo 2 varianti richieste.');
+                return;
+            }
+
+            button.closest('.variant-row')?.remove();
+            updateTrafficTotal();
+        }
+
+        function updateTrafficTotal() {
+            const total = Array.from(document.querySelectorAll('.variant-traffic'))
+                .reduce((sum, input) => sum + (parseFloat(input.value) || 0), 0);
+
+            const label = document.getElementById('trafficTotal');
+            if (label) {
+                label.textContent = `Totale traffico: ${total}%`;
+                label.style.color = Math.abs(total - 100) < 0.01 ? '#059669' : '#ef4444';
+            }
+        }
+
+        document.addEventListener('input', (event) => {
+            if (event.target.classList.contains('variant-traffic')) {
+                updateTrafficTotal();
+            }
+        });
+
+        document.addEventListener('DOMContentLoaded', initVariants);
         async function createTest(event) {
             event.preventDefault();
 
             const formData = new FormData(event.target);
             const data = Object.fromEntries(formData);
 
-            // TODO: Aggiungi UI per definire varianti
-            data.variants = [
-                {
-                    name: 'Control',
-                    key: 'control',
-                    is_control: true,
-                    traffic_allocation: 50,
-                    config: {}
-                },
-                {
-                    name: 'Variant A',
-                    key: 'variant_a',
-                    is_control: false,
-                    traffic_allocation: 50,
-                    config: {}
+            const variantRows = Array.from(document.querySelectorAll('#variantsContainer .variant-row'));
+            const variants = [];
+
+            variantRows.forEach((row) => {
+                const name = (row.querySelector('.variant-name')?.value || '').trim();
+                const traffic = parseFloat(row.querySelector('.variant-traffic')?.value || '0');
+                const isControl = row.querySelector('.variant-control input')?.checked || false;
+
+                if (!name) {
+                    return;
                 }
-            ];
+
+                const key = name.toLowerCase().replace(/\s+/g, '_').replace(/[^a-z0-9_]/g, '');
+
+                variants.push({
+                    name: name,
+                    key: key || undefined,
+                    is_control: isControl,
+                    traffic_allocation: traffic || 0,
+                    config: {}
+                });
+            });
+
+            if (variants.length < 2) {
+                alert('Inserisci almeno 2 varianti con nome e traffico.');
+                return;
+            }
+
+            const totalTraffic = variants.reduce((sum, v) => sum + (v.traffic_allocation || 0), 0);
+            if (Math.abs(totalTraffic - 100) > 0.01) {
+                alert('La somma del traffico deve essere 100%. Attuale: ' + totalTraffic + '%');
+                return;
+            }
+
+            if (!variants.some(v => v.is_control)) {
+                variants[0].is_control = true;
+            }
+
+            data.variants = variants;
 
             try {
                 const response = await fetch('../api/ab-testing.php', {

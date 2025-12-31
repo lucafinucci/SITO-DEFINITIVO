@@ -176,6 +176,7 @@ Data: " . date('d/m/Y H:i');
 <html lang="it">
 <head>
   <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
   <title>Richiedi Addestramento Modello - Finch-AI</title>
   <link rel="stylesheet" href="/area-clienti/css/style.css">
   <style>
@@ -246,6 +247,7 @@ Data: " . date('d/m/Y H:i');
   </style>
 </head>
 <body>
+<?php include __DIR__ . '/includes/layout-start.php'; ?>
 <?php include __DIR__ . '/includes/header.php'; ?>
 <main class="container">
 
@@ -597,5 +599,6 @@ document.getElementById('training-form').addEventListener('submit', async (e) =>
 </script>
 
 <?php include __DIR__ . '/includes/footer.php'; ?>
+<?php include __DIR__ . '/includes/layout-end.php'; ?>
 </body>
 </html>

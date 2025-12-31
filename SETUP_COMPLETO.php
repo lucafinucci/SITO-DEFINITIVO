@@ -194,7 +194,7 @@ echo "\n[4/4] Inserimento dati iniziali...\n";
 
 // Utente demo
 if (mysqli_query($conn, "INSERT INTO utenti (email, password_hash, nome, cognome, azienda, attivo) VALUES
-    ('demo@finch-ai.it', '\$2y\$10\$92IXUNpkjO0rOQ5byMi.Ye4oKoEa3Ro9llC/.og/at2.uheWG/igi', 'Demo', 'User', 'Demo Company', TRUE)")) {
+    ('demo@finch-ai.it', '\$2y\$10\$sy1aBPONuwKREhutPj7BFeX4jMCdRpMOAYHrFTjEn3fI3bERIpJ4q', 'Demo', 'User', 'Demo Company', TRUE)")) {
     echo "<span class='ok'>[OK] Utente demo creato</span>\n";
 } else {
     echo "<span class='err'>[ERRORE] Utente demo: " . mysqli_error($conn) . "</span>\n";
@@ -223,7 +223,7 @@ echo "<span class='ok'>   SETUP COMPLETATO CON SUCCESSO!</span>\n";
 echo "===========================================\n\n";
 echo "<span class='info'>Credenziali di accesso:</span>\n";
 echo "Email: demo@finch-ai.it\n";
-echo "Password: password\n\n";
+echo "Password: Demo123!\n\n";
 echo "Vai al login: <a href='/SITO/area-clienti/login.php' style='color:#0ff;'>CLICCA QUI</a>\n";
 echo "</pre></body></html>";
 ?>

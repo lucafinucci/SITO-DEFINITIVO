@@ -377,6 +377,7 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
     </style>
 </head>
 <body>
+<?php include __DIR__ . '/includes/layout-start.php'; ?>
     <div class="container">
         <div class="header">
             <h1>Preferenze Notifiche</h1>
@@ -632,5 +633,6 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
             </div>
         </form>
     </div>
+<?php include __DIR__ . '/includes/layout-end.php'; ?>
 </body>
 </html>

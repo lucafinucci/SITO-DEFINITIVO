@@ -71,21 +71,18 @@ try {
     }
 
     // Configurazione API esterna
-    // Per test in locale, usa: http://localhost/area-clienti/api/mock-kpi-webapp.php
-    // Per produzione, usa: https://app.finch-ai.it/api/kpi/documenti
-    $useMockApi = true; // Cambia in false quando hai la webapp pronta
+    $apiEndpoint = Config::get('WEBAPP_API_URL', '');
+    $apiToken = Config::get('WEBAPP_API_TOKEN', '');
 
-    if ($useMockApi) {
-        // URL locale per testing
+    if (empty($apiEndpoint)) {
         $protocol = isset($_SERVER['HTTPS']) && $_SERVER['HTTPS'] === 'on' ? 'https' : 'http';
-        $host = $_SERVER['HTTP_HOST'];
+        $host = $_SERVER['HTTP_HOST'] ?? 'localhost';
         $apiEndpoint = $protocol . '://' . $host . '/area-clienti/api/mock-kpi-webapp.php';
-    } else {
-        // URL produzione webapp esterna
-        $apiEndpoint = 'https://app.finch-ai.it/api/kpi/documenti';
     }
 
-    $apiToken = 'test_token_locale_123456'; // TODO: Spostare in config
+    if (empty($apiToken) && strpos($apiEndpoint, 'mock-kpi-webapp.php') !== false) {
+        $apiToken = 'test_token_locale_123456';
+    }
 
     $risultati = [];
 

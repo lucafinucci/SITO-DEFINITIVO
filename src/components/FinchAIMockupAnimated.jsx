@@ -1,5 +1,4 @@
 import { useEffect, useRef, useState } from "react";
-import { modules as moduleStack } from "@/data/modules";
 import ContactForm from "./ContactForm";
 
 export default function FinchAIMockupAnimated() {
@@ -133,7 +132,113 @@ export default function FinchAIMockupAnimated() {
     { id: "hero", label: "Finch-AI Platform" },
     { id: "come-funziona", label: "Soluzioni" },
     { id: "contatti", label: "Demo" },
-    { id: "area-clienti", label: "Area Clienti", href: "/area-clienti/login.php" },
+    {
+      id: "area-clienti",
+      label: "Area Clienti",
+      href: import.meta.env.VITE_AREA_CLIENTI_URL || "/area-clienti/login.php",
+    },
+  ];
+
+  const platformApps = [
+    {
+      title: "Finch-AI Document Intelligence",
+      value: "Automazione documentale basata su AI per ridurre errori e tempi operativi.",
+      description: "Configurazione autonoma assistita dall'AI.",
+      output: "Dati documentali strutturati e verificati",
+      status: "Operativo",
+      cta: "Scopri come funziona",
+      icon: (
+        <svg
+          viewBox="0 0 24 24"
+          className="h-6 w-6"
+          fill="none"
+          stroke="currentColor"
+          strokeWidth="1.6"
+          strokeLinecap="round"
+          strokeLinejoin="round"
+          aria-hidden="true"
+        >
+          <path d="M7 3h7l5 5v13a1 1 0 0 1-1 1H7a1 1 0 0 1-1-1V4a1 1 0 0 1 1-1z" />
+          <path d="M14 3v5h5" />
+          <path d="M9 13h6M9 17h6" />
+        </svg>
+      ),
+    },
+    {
+      title: "Finch-AI Production Intelligence",
+      value: "Pianificazione e supporto decisionale potenziati dall'AI.",
+      description: "Configurazione e gestione assistite dall'AI in tutte le fasi.",
+      output: "Pianificazione operativa e supporto decisionale in produzione",
+      status: "Operativo",
+      cta: "Vedi la produzione",
+      icon: (
+        <svg
+          viewBox="0 0 24 24"
+          className="h-6 w-6"
+          fill="none"
+          stroke="currentColor"
+          strokeWidth="1.6"
+          strokeLinecap="round"
+          strokeLinejoin="round"
+          aria-hidden="true"
+        >
+          <path d="M4 19h16" />
+          <path d="M6 16l4-6 4 3 4-5" />
+          <circle cx="6" cy="16" r="1.2" fill="currentColor" />
+          <circle cx="10" cy="10" r="1.2" fill="currentColor" />
+          <circle cx="14" cy="13" r="1.2" fill="currentColor" />
+          <circle cx="18" cy="8" r="1.2" fill="currentColor" />
+        </svg>
+      ),
+    },
+    {
+      title: "Finch-AI Finance Intelligence",
+      value: "Analisi automatica di costi, ricavi e cash flow.",
+      description: "Previsioni economico-finanziarie per guidare le decisioni.",
+      output: "Forecast e indicatori economici intelligenti",
+      status: "Operativo",
+      cta: "Esplora la finanza",
+      icon: (
+        <svg
+          viewBox="0 0 24 24"
+          className="h-6 w-6"
+          fill="none"
+          stroke="currentColor"
+          strokeWidth="1.6"
+          strokeLinecap="round"
+          strokeLinejoin="round"
+          aria-hidden="true"
+        >
+          <rect x="3" y="6" width="18" height="12" rx="2" />
+          <circle cx="12" cy="12" r="3" />
+          <path d="M7 9h.01M17 15h.01" />
+        </svg>
+      ),
+    },
+    {
+      title: "Finch-AI Warehouse Intelligence",
+      value: "Gestione integrata di magazzino, ordini e offerte.",
+      description: "Decisioni e operatività potenziate dall'AI.",
+      output: "Magazzino, ordini e offerte sincronizzati in un unico flusso",
+      status: "Operativo",
+      cta: "Scopri il magazzino",
+      icon: (
+        <svg
+          viewBox="0 0 24 24"
+          className="h-6 w-6"
+          fill="none"
+          stroke="currentColor"
+          strokeWidth="1.6"
+          strokeLinecap="round"
+          strokeLinejoin="round"
+          aria-hidden="true"
+        >
+          <path d="M3 7l9-4 9 4v10l-9 4-9-4V7z" />
+          <path d="M3 7l9 4 9-4" />
+          <path d="M12 11v10" />
+        </svg>
+      ),
+    },
   ];
 
   return (
@@ -275,7 +380,10 @@ export default function FinchAIMockupAnimated() {
             </h1>
 
             <p className="mt-5 text-lg text-slate-300/90 animate-[fadeUp_0.9s_ease_0.2s_both]">
-              Piattaforma AI che trasforma documenti, dati produttivi e indicatori finanziari in insight azionabili per la tua azienda
+              Soluzioni AI che trasformano documenti, dati produttivi e indicatori finanziari in insight azionabili per la tua azienda
+            </p>
+            <p className="mt-4 text-base text-slate-300/90 animate-[fadeUp_0.9s_ease_0.24s_both]">
+              Semplifichiamo l'Intelligenza Artificiale per la tua PMI, cos&igrave; puoi ottenere risultati concreti senza dover essere un esperto di AI.
             </p>
 
             <div className="mt-7 flex flex-col items-center justify-center gap-3 sm:flex-row animate-[fadeUp_0.9s_ease_0.28s_both] w-full sm:w-auto px-4 sm:px-0">
@@ -283,7 +391,7 @@ export default function FinchAIMockupAnimated() {
                 href="#contatti"
                 className="group inline-flex items-center justify-center gap-2 rounded-xl bg-gradient-to-r from-cyan-500 to-blue-600 px-6 py-4 sm:px-5 sm:py-3 font-semibold text-white shadow-lg shadow-cyan-500/20 transition hover:brightness-110 w-full sm:w-auto text-center min-h-[48px]"
               >
-                Scopri il Tuo Potenziale di Risparmio
+                Avvia la tua trasformazione AI
                 <svg className="h-4 w-4 transition-transform group-hover:translate-x-0.5" viewBox="0 0 24 24" fill="none">
                   <path d="M5 12h14M13 5l7 7-7 7" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round"/>
                 </svg>
@@ -302,7 +410,7 @@ export default function FinchAIMockupAnimated() {
                 { value: "70%", label: "Riduzione tempi" },
                 { value: "+1000", label: "Doc/giorno" },
                 { value: "99.2%", label: "Accuratezza" },
-                { value: "2-4 sett", label: "Deploy" }
+                { value: "4-8 sett", label: "Deploy" }
               ].map((stat, i) => (
                 <div key={i} className="text-center p-4 rounded-xl bg-slate-900/40 border border-slate-700/50 backdrop-blur">
                   <div className="text-3xl font-bold text-cyan-400 mb-1">{stat.value}</div>
@@ -324,7 +432,7 @@ export default function FinchAIMockupAnimated() {
                 Il Caos che <span className="bg-clip-text text-transparent bg-gradient-to-r from-red-400 to-orange-500">Rallenta la Tua Azienda</span>
               </h2>
               <p className="text-lg sm:text-xl text-slate-300/90 max-w-3xl mx-auto leading-relaxed">
-                Documenti dispersi, dati non integrati, decisioni basate su informazioni frammentate
+                Dati cartacei non integrati, decisioni basate su informazioni frammentate
               </p>
             </div>
 
@@ -378,74 +486,6 @@ export default function FinchAIMockupAnimated() {
           </div>
         </section>
 
-        {/* SEZIONE 2: LA SOLUZIONE */}
-        <section className="py-20 bg-gradient-to-b from-slate-900/50 to-transparent">
-          <div className="mx-auto max-w-5xl">
-            <div className="text-center mb-16">
-              <span className="inline-flex items-center gap-2 rounded-full border border-cyan-500/30 bg-cyan-500/10 px-4 py-1.5 text-xs font-semibold uppercase tracking-wider text-cyan-300 mb-6">
-                La Soluzione
-              </span>
-              <h2 className="text-3xl sm:text-4xl lg:text-5xl font-extrabold text-white mb-6">
-                Un'Unica <span className="bg-clip-text text-transparent bg-gradient-to-r from-cyan-300 to-blue-500">Piattaforma Integrata</span>
-              </h2>
-              <p className="text-lg sm:text-xl text-slate-300/90 max-w-3xl mx-auto leading-relaxed">
-                Finch-AI unisce automazione documentale, analisi produttiva e controllo finanziario in un ecosistema intelligente che lavora per te
-              </p>
-            </div>
-
-            <div className="grid gap-8 lg:grid-cols-2 items-center mb-12">
-              <div className="space-y-6">
-                <div className="relative pl-6 border-l-4 border-cyan-500">
-                  <h3 className="text-xl sm:text-2xl font-bold text-white mb-3">
-                    Tutto Integrato, Sempre Sincronizzato
-                  </h3>
-                  <p className="text-slate-300/90 leading-relaxed">
-                    I tuoi documenti, dati e sistemi dialogano automaticamente. L'AI legge, estrae, valida e integra informazioni in tempo reale, eliminando data entry manuale e errori.
-                  </p>
-                </div>
-
-                <div className="relative pl-6 border-l-4 border-blue-500">
-                  <h3 className="text-xl sm:text-2xl font-bold text-white mb-3">
-                    Intelligenza che Cresce con Te
-                  </h3>
-                  <p className="text-slate-300/90 leading-relaxed">
-                    La piattaforma impara dai tuoi processi, si adatta alle tue esigenze specifiche e migliora continuamente. Non un software rigido, ma un partner intelligente.
-                  </p>
-                </div>
-
-                <div className="relative pl-6 border-l-4 border-emerald-500">
-                  <h3 className="text-xl sm:text-2xl font-bold text-white mb-3">
-                    Controllo Completo, Zero Complessità
-                  </h3>
-                  <p className="text-slate-300/90 leading-relaxed">
-                    Dashboard unificata con visibilità real-time su produzione, finanza e operations. Decisioni informate in secondi, non giorni.
-                  </p>
-                </div>
-              </div>
-
-              <div className="relative">
-                <div className="absolute inset-0 bg-gradient-to-br from-cyan-500/20 to-blue-500/20 blur-3xl rounded-3xl" />
-                <div className="relative rounded-2xl border border-cyan-500/30 bg-slate-900/60 backdrop-blur p-8">
-                  <h4 className="text-2xl font-bold text-white mb-6">Benefici Immediati</h4>
-                  <div className="space-y-4">
-                    {[
-                      { metric: "90%", label: "Riduzione tempo elaborazione documenti" },
-                      { metric: "99.2%", label: "Accuratezza estrazione dati" },
-                      { metric: "3x", label: "Velocità decisionale aumentata" },
-                      { metric: "100%", label: "Visibilità real-time su tutti i processi" }
-                    ].map((item, i) => (
-                      <div key={i} className="flex items-center gap-4 p-4 rounded-xl bg-slate-800/50 border border-slate-700/40">
-                        <div className="text-3xl font-bold text-cyan-400">{item.metric}</div>
-                        <div className="text-sm text-slate-300">{item.label}</div>
-                      </div>
-                    ))}
-                  </div>
-                </div>
-              </div>
-            </div>
-          </div>
-        </section>
-
         {/* ECOSISTEMA FINCH-AI */}
         <section className="py-16">
           <div className="mx-auto max-w-5xl">
@@ -472,7 +512,7 @@ export default function FinchAIMockupAnimated() {
                     },
                     {
                       title: "Sistema, non solo piattaforma",
-                      desc: "I moduli collaborano tra loro: documenti, produzione, finanza, magazzino e assistenti conversazionali si parlano in tempo reale."
+                      desc: "I moduli collaborano tra loro: documenti, produzione, finanza e magazzino si parlano in tempo reale."
                     },
                     {
                       title: "Ecosistema modulare",
@@ -504,194 +544,61 @@ export default function FinchAIMockupAnimated() {
                 I Moduli
               </span>
               <h2 className="text-3xl sm:text-4xl lg:text-5xl font-extrabold text-white mb-6">
-                7 Moduli, un <span className="bg-clip-text text-transparent bg-gradient-to-r from-purple-400 to-pink-500">Ecosistema Unico</span>
+                Un ecosistema intelligente, <span className="bg-clip-text text-transparent bg-gradient-to-r from-purple-400 to-pink-500">già operativo</span>
               </h2>
               <p className="text-lg sm:text-xl text-slate-300/90 max-w-3xl mx-auto leading-relaxed">
-                Ogni modulo risolve un problema concreto; insieme lavorano come un sistema integrato che cresce con la tua azienda.
+                Quattro applicazioni già operative, integrate in un unico ecosistema AI pensato per adattarsi all'identità di ogni azienda.
               </p>
             </div>
 
-            {/* Stack completo dei 7 moduli AI */}
-            <div className="grid gap-4 sm:grid-cols-2 lg:grid-cols-3 mb-12">
-              {moduleStack.map((module) => (
+            {/* Moduli operativi */}
+            <div className="grid gap-6 sm:grid-cols-2">
+              {platformApps.map((app) => (
                 <div
-                  key={module.key}
-                  className="group relative overflow-hidden rounded-2xl border border-slate-700/60 bg-slate-900/50 p-5 backdrop-blur transition hover:border-cyan-500/50 hover:shadow-[0_0_30px_rgba(34,211,238,0.2)]"
+                  key={app.title}
+                  className="group relative overflow-hidden rounded-2xl border border-slate-700/60 bg-slate-900/50 p-6 backdrop-blur transition hover:border-cyan-500/50 hover:bg-slate-900/70 hover:shadow-[0_0_30px_rgba(34,211,238,0.2)]"
                 >
                   <div className="absolute -inset-px opacity-0 group-hover:opacity-100 transition-opacity">
-                    <div className="h-full w-full bg-[radial-gradient(600px_250px_at_var(--x,50%)_0,rgba(34,211,238,0.12),transparent)]" />
+                    <div className="h-full w-full bg-[radial-gradient(600px_240px_at_var(--x,50%)_0,rgba(34,211,238,0.12),transparent)]" />
                   </div>
-                  <div className="relative flex flex-col gap-3 h-full">
-                    <span className="text-2xl" aria-hidden="true">{module.emoji}</span>
-                    <h3 className="text-xl font-semibold text-white">{module.title}</h3>
-                    <p className="text-sm text-slate-300 leading-relaxed">{module.desc}</p>
-                    <p className="text-sm font-semibold text-cyan-300">Output: {module.output}</p>
+                  <div className="relative flex h-full flex-col gap-4">
+                    <div className="flex items-start justify-between gap-4">
+                      <div className="inline-flex h-12 w-12 items-center justify-center rounded-xl border border-cyan-500/30 bg-cyan-500/10 text-cyan-300">
+                        {app.icon}
+                      </div>
+                      <span className="inline-flex items-center rounded-full border border-emerald-500/30 bg-emerald-500/10 px-3 py-1 text-xs font-semibold uppercase tracking-wider text-emerald-200">
+                        {app.status}
+                      </span>
+                    </div>
+                    <div>
+                      <h3 className="text-xl font-semibold text-white">{app.title}</h3>
+                      <p className="mt-2 text-sm font-semibold text-slate-200">
+                        {app.value}
+                      </p>
+                      <p className="mt-2 text-sm text-slate-300/90">
+                        {app.description}
+                      </p>
+                    </div>
+                    <div className="mt-auto space-y-3">
+                      <p className="text-sm font-semibold text-cyan-300">Output: {app.output}</p>
+                      <a
+                        href="#contatti"
+                        className="inline-flex items-center gap-2 rounded-lg border border-slate-700/70 bg-slate-900/40 px-3 py-2 text-sm font-semibold text-slate-200 transition hover:border-cyan-500/60 hover:text-cyan-200"
+                      >
+                        {app.cta}
+                        <svg className="h-4 w-4" viewBox="0 0 24 24" fill="none" stroke="currentColor">
+                          <path d="M5 12h14M13 5l7 7-7 7" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round" />
+                        </svg>
+                      </a>
+                    </div>
                   </div>
                 </div>
               ))}
             </div>
 
-            <div className="space-y-8">
-              {/* Modulo 1: Document Intelligence */}
-              <div className="group relative overflow-hidden rounded-3xl border border-slate-700/60 bg-slate-900/40 p-8 sm:p-10 backdrop-blur transition hover:border-cyan-500/50 hover:shadow-[0_0_40px_rgba(34,211,238,0.2)]">
-                <div className="absolute -inset-px opacity-0 group-hover:opacity-100 transition-opacity">
-                  <div className="h-full w-full bg-[radial-gradient(800px_300px_at_var(--x,50%)_0,rgba(34,211,238,0.15),transparent)]" />
-                </div>
-
-                <div className="relative grid lg:grid-cols-2 gap-8 items-center">
-                  <div>
-                    <div className="inline-flex items-center gap-3 mb-6">
-                      <div className="rounded-xl border border-cyan-500/30 bg-cyan-500/10 p-3 text-cyan-300">
-                        <svg viewBox="0 0 24 24" className="h-8 w-8"><path d="M4 4h10l6 6v10a2 2 0 0 1-2 2H4V4z" fill="none" stroke="currentColor" strokeWidth="1.8"/><path d="M14 4v6h6" fill="none" stroke="currentColor" strokeWidth="1.8"/></svg>
-                      </div>
-                      <h3 className="text-2xl sm:text-3xl font-bold text-white">Finch-AI Document Intelligence</h3>
-                    </div>
-
-                    <p className="text-lg text-slate-300/90 mb-6 leading-relaxed">
-                      OCR + AI per leggere DDT, fatture, ordini, contratti e documenti tecnici. Il tutto con validazioni di dominio specifiche per il tuo settore.
-                    </p>
-
-                    <div className="space-y-3 mb-6">
-                      {[
-                        "Estrazione automatica da DDT, fatture, ordini",
-                        "Validazione intelligente con regole business",
-                        "Integrazione diretta con ERP/gestionale",
-                        "Gestione eccezioni e anomalie"
-                      ].map((feature, i) => (
-                        <div key={i} className="flex items-start gap-3">
-                          <svg className="h-6 w-6 text-cyan-400 flex-shrink-0 mt-0.5" fill="none" viewBox="0 0 24 24" stroke="currentColor">
-                            <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M5 13l4 4L19 7" />
-                          </svg>
-                          <span className="text-slate-300">{feature}</span>
-                        </div>
-                      ))}
-                    </div>
-                  </div>
-
-                  <div className="space-y-4">
-                    <div className="rounded-2xl border border-cyan-500/30 bg-gradient-to-br from-cyan-500/10 to-blue-500/10 p-6">
-                      <div className="text-4xl font-bold text-cyan-400 mb-2">90%</div>
-                      <div className="text-sm text-slate-300">Riduzione tempo elaborazione documenti</div>
-                    </div>
-                    <div className="rounded-2xl border border-cyan-500/30 bg-gradient-to-br from-cyan-500/10 to-blue-500/10 p-6">
-                      <div className="text-4xl font-bold text-cyan-400 mb-2">99.2%</div>
-                      <div className="text-sm text-slate-300">Accuratezza estrazione dati</div>
-                    </div>
-                    <div className="rounded-2xl border border-cyan-500/30 bg-gradient-to-br from-cyan-500/10 to-blue-500/10 p-6">
-                      <div className="text-4xl font-bold text-cyan-400 mb-2">Zero</div>
-                      <div className="text-sm text-slate-300">Data entry manuale richiesto</div>
-                    </div>
-                  </div>
-                </div>
-              </div>
-
-              {/* Modulo 2: Finch-AI Production */}
-              <div className="group relative overflow-hidden rounded-3xl border border-slate-700/60 bg-slate-900/40 p-8 sm:p-10 backdrop-blur transition hover:border-purple-500/50 hover:shadow-[0_0_40px_rgba(168,85,247,0.2)]">
-                <div className="absolute -inset-px opacity-0 group-hover:opacity-100 transition-opacity">
-                  <div className="h-full w-full bg-[radial-gradient(800px_300px_at_var(--x,50%)_0,rgba(168,85,247,0.15),transparent)]" />
-                </div>
-
-                <div className="relative grid lg:grid-cols-2 gap-8 items-center">
-                  <div className="order-2 lg:order-1 space-y-4">
-                    <div className="rounded-2xl border border-purple-500/30 bg-gradient-to-br from-purple-500/10 to-pink-500/10 p-6">
-                      <div className="text-4xl font-bold text-purple-400 mb-2">Real-time</div>
-                      <div className="text-sm text-slate-300">Monitoraggio OEE e produttività</div>
-                    </div>
-                    <div className="rounded-2xl border border-purple-500/30 bg-gradient-to-br from-purple-500/10 to-pink-500/10 p-6">
-                      <div className="text-4xl font-bold text-purple-400 mb-2">3x</div>
-                      <div className="text-sm text-slate-300">Velocità decisioni strategiche</div>
-                    </div>
-                    <div className="rounded-2xl border border-purple-500/30 bg-gradient-to-br from-purple-500/10 to-pink-500/10 p-6">
-                      <div className="text-4xl font-bold text-purple-400 mb-2">100%</div>
-                      <div className="text-sm text-slate-300">Visibilità su tutti i reparti</div>
-                    </div>
-                  </div>
-
-                  <div className="order-1 lg:order-2">
-                    <div className="inline-flex items-center gap-3 mb-6">
-                      <div className="rounded-xl border border-purple-500/30 bg-purple-500/10 p-3 text-purple-300">
-                        <svg viewBox="0 0 24 24" className="h-8 w-8"><path d="M4 19h16M6 16V8m6 8V5m6 11v-7" fill="none" stroke="currentColor" strokeWidth="1.8"/></svg>
-                      </div>
-                      <h3 className="text-2xl sm:text-3xl font-bold text-white">Finch-AI Production</h3>
-                    </div>
-
-                    <p className="text-lg text-slate-300/90 mb-6 leading-relaxed">
-                      Analisi, pianificazione e ottimizzazione della produzione con algoritmi predittivi. KPI real-time, anomalie anticipate e schedulazione ottimizzata.
-                    </p>
-
-                    <div className="space-y-3 mb-6">
-                      {[
-                        "KPI real-time: OEE, disponibilità, performance",
-                        "Analisi predittiva per manutenzione e scorte",
-                        "Alert automatici su anomalie e inefficienze",
-                        "Report personalizzati per ogni reparto"
-                      ].map((feature, i) => (
-                        <div key={i} className="flex items-start gap-3">
-                          <svg className="h-6 w-6 text-purple-400 flex-shrink-0 mt-0.5" fill="none" viewBox="0 0 24 24" stroke="currentColor">
-                            <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M5 13l4 4L19 7" />
-                          </svg>
-                          <span className="text-slate-300">{feature}</span>
-                        </div>
-                      ))}
-                    </div>
-                  </div>
-                </div>
-              </div>
-
-              {/* Modulo 3: Finch-AI Finance */}
-              <div className="group relative overflow-hidden rounded-3xl border border-slate-700/60 bg-slate-900/40 p-8 sm:p-10 backdrop-blur transition hover:border-emerald-500/50 hover:shadow-[0_0_40px_rgba(16,185,129,0.2)]">
-                <div className="absolute -inset-px opacity-0 group-hover:opacity-100 transition-opacity">
-                  <div className="h-full w-full bg-[radial-gradient(800px_300px_at_var(--x,50%)_0,rgba(16,185,129,0.15),transparent)]" />
-                </div>
-
-                <div className="relative grid lg:grid-cols-2 gap-8 items-center">
-                  <div>
-                    <div className="inline-flex items-center gap-3 mb-6">
-                      <div className="rounded-xl border border-emerald-500/30 bg-emerald-500/10 p-3 text-emerald-300">
-                        <svg viewBox="0 0 24 24" className="h-8 w-8"><path d="M7 8h10M4 12h16M7 16h10" fill="none" stroke="currentColor" strokeWidth="1.8"/></svg>
-                      </div>
-                      <h3 className="text-2xl sm:text-3xl font-bold text-white">Finch-AI Finance</h3>
-                    </div>
-
-                    <p className="text-lg text-slate-300/90 mb-6 leading-relaxed">
-                      Analisi automatica di costi, ricavi, cash flow e previsioni economico-finanziarie con AI.
-                    </p>
-
-                    <div className="space-y-3 mb-6">
-                      {[
-                        "Integrazione automatica con ERP/gestionali",
-                        "Riconciliazione documenti e pagamenti",
-                        "Forecast cash-flow e marginalità",
-                        "Forecast + indicatori economici intelligenti"
-                      ].map((feature, i) => (
-                        <div key={i} className="flex items-start gap-3">
-                          <svg className="h-6 w-6 text-emerald-400 flex-shrink-0 mt-0.5" fill="none" viewBox="0 0 24 24" stroke="currentColor">
-                            <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M5 13l4 4L19 7" />
-                          </svg>
-                          <span className="text-slate-300">{feature}</span>
-                        </div>
-                      ))}
-                    </div>
-                  </div>
-
-                  <div className="space-y-4">
-                    <div className="rounded-2xl border border-emerald-500/30 bg-gradient-to-br from-emerald-500/10 to-teal-500/10 p-6">
-                      <div className="text-4xl font-bold text-emerald-400 mb-2">Zero</div>
-                      <div className="text-sm text-slate-300">Attrito nelle integrazioni</div>
-                    </div>
-                    <div className="rounded-2xl border border-emerald-500/30 bg-gradient-to-br from-emerald-500/10 to-teal-500/10 p-6">
-                      <div className="text-4xl font-bold text-emerald-400 mb-2">100%</div>
-                      <div className="text-sm text-slate-300">Sincronizzazione automatica</div>
-                    </div>
-                    <div className="rounded-2xl border border-emerald-500/30 bg-gradient-to-br from-emerald-500/10 to-teal-500/10 p-6">
-                      <div className="text-4xl font-bold text-emerald-400 mb-2">24/7</div>
-                      <div className="text-sm text-slate-300">Controllo finanziario operativo</div>
-                    </div>
-                  </div>
-                </div>
-              </div>
-
-            </div>
+            <p className="mt-10 text-center text-sm text-slate-400">
+              Finch-AI non è una collezione di strumenti, ma un ecosistema che cresce insieme alla tua azienda, partendo da ciò che conta davvero.
+            </p>
           </div>
         </section>
 
@@ -864,7 +771,7 @@ export default function FinchAIMockupAnimated() {
               {[
                 {
                   title: "Deploy Rapido",
-                  desc: "Operativi in 2-4 settimane, non mesi. Integrazione plug-and-play con i tuoi sistemi esistenti.",
+                  desc: "Operativi in 4-8 settimane, non mesi. Integrazione plug-and-play con i tuoi sistemi esistenti.",
                   icon: "🚀"
                 },
                 {
@@ -1045,7 +952,7 @@ export default function FinchAIMockupAnimated() {
               <div className="rounded-2xl border border-slate-700/60 bg-slate-900/60 p-6 backdrop-blur">
                 <h3 className="text-xl font-semibold text-white mb-3">Team</h3>
                 <p className="text-sm text-slate-300">
-                  Data scientist e ingegneri con esperienza in manufacturing, supply chain e sistemi ERP. Delivery rapido (2–4 settimane) e modelli adattati sui tuoi processi.
+                  Data scientist e ingegneri con esperienza in manufacturing, supply chain e sistemi ERP. Delivery rapido (4–8 settimane) e modelli adattati sui tuoi processi.
                 </p>
               </div>
               <div className="rounded-2xl border border-slate-700/60 bg-slate-900/60 p-6 backdrop-blur">
@@ -1066,7 +973,7 @@ export default function FinchAIMockupAnimated() {
                 <div className="text-sm text-slate-400">Accuratezza estrazione dati</div>
               </div>
               <div className="p-5 rounded-2xl bg-slate-900/50 border border-slate-700/50 text-center">
-                <div className="text-3xl font-bold text-cyan-400 mb-1">2–4 sett</div>
+                <div className="text-3xl font-bold text-cyan-400 mb-1">4–8 sett</div>
                 <div className="text-sm text-slate-400">Go-live medio</div>
               </div>
             </div>
@@ -1218,7 +1125,7 @@ export default function FinchAIMockupAnimated() {
                 <div className="text-sm text-slate-400">Setup demo personalizzata</div>
               </div>
               <div className="p-6 rounded-2xl bg-slate-900/40 border border-slate-700/50">
-                <div className="text-3xl font-bold text-cyan-400 mb-2">2-4 sett</div>
+                <div className="text-3xl font-bold text-cyan-400 mb-2">4-8 sett</div>
                 <div className="text-sm text-slate-400">Deployment completo</div>
               </div>
               <div className="p-6 rounded-2xl bg-slate-900/40 border border-slate-700/50">

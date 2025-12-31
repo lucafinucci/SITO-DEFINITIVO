@@ -38,10 +38,45 @@
 body {
   font-family: 'Inter', -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, sans-serif;
   line-height: 1.6;
-  color: var(--gray-800);
-  background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
-  background-attachment: fixed;
+  color: var(--gray-100);
+  background: #0b1220;
   min-height: 100vh;
+  position: relative;
+  overflow-x: hidden;
+}
+
+/* Canvas della rete neurale - sfondo fisso */
+#neural-canvas {
+  position: fixed;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  z-index: -10;
+  pointer-events: none;
+}
+
+/* Layer decorativi aggiuntivi */
+.bg-layers {
+  position: fixed;
+  inset: 0;
+  z-index: -10;
+  pointer-events: none;
+}
+
+.bg-diagonal-gradient {
+  position: absolute;
+  inset: 0;
+  opacity: 0.4;
+  background: linear-gradient(120deg, #0b1220 20%, #0a1a2b 60%, #03101f 85%);
+}
+
+.bg-scanlines {
+  position: absolute;
+  inset: 0;
+  background: linear-gradient(rgba(255,255,255,0.05) 1px, transparent 1px);
+  background-size: 100% 28px;
+  mix-blend-mode: overlay;
 }
 
 /* Layout */
@@ -49,113 +84,43 @@ body {
   max-width: 1200px;
   margin: 0 auto;
   padding: 24px;
+  padding-top: 2rem;
 }
 
-/* Header moderno */
-header {
-  background: rgba(255, 255, 255, 0.95);
-  backdrop-filter: blur(20px);
-  border-bottom: 1px solid rgba(255, 255, 255, 0.2);
-  padding: 1rem 0;
-  margin-bottom: 2rem;
-  position: sticky;
-  top: 0;
-  z-index: 100;
-  box-shadow: var(--shadow-sm);
-}
-
-.header-content {
-  max-width: 1200px;
-  margin: 0 auto;
-  padding: 0 24px;
-  display: flex;
-  justify-content: space-between;
-  align-items: center;
-}
-
-.brand {
-  display: flex;
-  align-items: center;
-  gap: 12px;
-  font-weight: 700;
-  font-size: 1.5rem;
-  color: var(--dark);
-  text-decoration: none;
-}
-
-.logo-dot {
-  width: 40px;
-  height: 40px;
-  background: linear-gradient(135deg, var(--primary), var(--secondary));
-  border-radius: var(--radius);
-  display: flex;
-  align-items: center;
-  justify-content: center;
-  box-shadow: var(--shadow-md);
-  transition: transform 0.2s ease;
-}
-
-.logo-dot:hover {
-  transform: scale(1.05);
-}
-
-.logo-dot::after {
-  content: 'F';
-  color: white;
-  font-weight: bold;
-  font-size: 20px;
-}
-
-.nav-links {
-  display: flex;
-  gap: 2rem;
-  align-items: center;
-}
-
-.nav-links a {
-  color: var(--gray-600);
-  text-decoration: none;
-  font-weight: 500;
-  padding: 8px 16px;
-  border-radius: 8px;
-  transition: all 0.2s ease;
-  position: relative;
-}
-
-.nav-links a:hover {
-  color: var(--primary);
-  background: rgba(99, 102, 241, 0.1);
-}
-
-/* Cards moderne con glassmorphism */
+/* Cards moderne con glassmorphism - dark mode */
 .card {
-  background: rgba(255, 255, 255, 0.95);
+  background: rgba(30, 41, 59, 0.6);
   backdrop-filter: blur(20px);
   border-radius: var(--radius-lg);
   padding: 32px;
-  box-shadow: var(--shadow-xl);
-  border: 1px solid rgba(255, 255, 255, 0.2);
+  box-shadow: 0 20px 25px -5px rgb(0 0 0 / 0.3), 0 8px 10px -6px rgb(0 0 0 / 0.3);
+  border: 1px solid rgba(100, 116, 139, 0.2);
   margin-bottom: 32px;
   transition: all 0.3s ease;
 }
 
 .card:hover {
   transform: translateY(-2px);
-  box-shadow: 0 25px 50px -12px rgb(0 0 0 / 0.25);
+  box-shadow: 0 25px 50px -12px rgba(34, 211, 238, 0.3);
+  border-color: rgba(34, 211, 238, 0.3);
 }
 
 .card h3 {
   margin-bottom: 24px;
-  color: var(--dark);
+  color: transparent;
   font-size: 1.5rem;
   font-weight: 700;
-  background: linear-gradient(135deg, var(--primary), var(--secondary));
+  background: linear-gradient(135deg, #22d3ee, #3b82f6);
   -webkit-background-clip: text;
   -webkit-text-fill-color: transparent;
   background-clip: text;
 }
 
-/* Buttons moderni */
+.card h4 {
+  color: var(--gray-100);
+}
+
+/* Buttons moderni - dark mode */
 .btn {
   display: inline-flex;
   align-items: center;
@@ -163,8 +128,8 @@ header {
   padding: 14px 24px;
   border: none;
   border-radius: var(--radius);
-  background: var(--white);
-  color: var(--gray-700);
+  background: rgba(51, 65, 85, 0.8);
+  color: var(--gray-200);
   text-decoration: none;
   font-weight: 600;
   font-size: 14px;
@@ -196,13 +161,13 @@ header {
 }
 
 .btn.primary {
-  background: linear-gradient(135deg, var(--primary), var(--primary-dark));
+  background: linear-gradient(135deg, #22d3ee, #3b82f6);
   color: white;
-  box-shadow: 0 4px 15px rgba(99, 102, 241, 0.4);
+  box-shadow: 0 4px 15px rgba(34, 211, 238, 0.4);
 }
 
 .btn.primary:hover {
-  box-shadow: 0 8px 25px rgba(99, 102, 241, 0.6);
+  box-shadow: 0 8px 25px rgba(34, 211, 238, 0.6);
 }
 
 .btn.small {
@@ -212,15 +177,15 @@ header {
 
 .btn.ghost {
   background: transparent;
-  color: var(--gray-600);
+  color: var(--gray-300);
   box-shadow: none;
-  border: 1px solid var(--gray-300);
+  border: 1px solid rgba(100, 116, 139, 0.5);
 }
 
 .btn.ghost:hover {
-  background: rgba(255, 255, 255, 0.1);
-  color: var(--primary);
-  border-color: var(--primary);
+  background: rgba(34, 211, 238, 0.1);
+  color: #22d3ee;
+  border-color: #22d3ee;
 }
 
 /* Forms moderne */
@@ -232,7 +197,7 @@ header {
 .form-grid label {
   display: block;
   font-weight: 600;
-  color: var(--gray-700);
+  color: var(--gray-200);
   margin-bottom: 8px;
   font-size: 14px;
 }
@@ -242,20 +207,21 @@ header {
 .form-grid textarea {
   width: 100%;
   padding: 16px;
-  border: 2px solid var(--gray-200);
+  border: 2px solid rgba(100, 116, 139, 0.3);
   border-radius: var(--radius);
   font-size: 14px;
   transition: all 0.2s ease;
-  background: rgba(255, 255, 255, 0.9);
+  background: rgba(30, 41, 59, 0.5);
   backdrop-filter: blur(10px);
+  color: var(--gray-100);
 }
 
 .form-grid input:focus,
 .form-grid select:focus,
 .form-grid textarea:focus {
   outline: none;
-  border-color: var(--primary);
-  box-shadow: 0 0 0 4px rgba(99, 102, 241, 0.1);
+  border-color: #22d3ee;
+  box-shadow: 0 0 0 4px rgba(34, 211, 238, 0.1);
   transform: translateY(-1px);
 }
 
@@ -270,12 +236,12 @@ header {
   justify-content: space-between;
   align-items: center;
   padding: 24px;
-  border: 2px solid transparent;
+  border: 2px solid rgba(100, 116, 139, 0.3);
   border-radius: var(--radius-lg);
   text-decoration: none;
   color: inherit;
   transition: all 0.3s ease;
-  background: rgba(255, 255, 255, 0.9);
+  background: rgba(30, 41, 59, 0.5);
   backdrop-filter: blur(10px);
   position: relative;
   overflow: hidden;
@@ -288,7 +254,7 @@ header {
   left: 0;
   right: 0;
   height: 4px;
-  background: linear-gradient(135deg, var(--primary), var(--secondary));
+  background: linear-gradient(135deg, #22d3ee, #3b82f6);
   transform: scaleX(0);
   transition: transform 0.3s ease;
 }
@@ -298,14 +264,14 @@ header {
 }
 
 .service-item:hover {
-  border-color: var(--primary);
+  border-color: #22d3ee;
   transform: translateY(-4px);
-  box-shadow: 0 20px 40px rgba(99, 102, 241, 0.2);
+  box-shadow: 0 20px 40px rgba(34, 211, 238, 0.3);
 }
 
 .service-info h4 {
   margin: 0 0 8px 0;
-  color: var(--dark);
+  color: var(--gray-100);
   font-weight: 700;
   font-size: 1.1rem;
 }
@@ -380,7 +346,7 @@ header {
 
 /* Utilities */
 .muted {
-  color: var(--gray-500);
+  color: var(--gray-400);
 }
 
 .small {
@@ -396,26 +362,15 @@ header {
   border-bottom: 2px solid var(--gray-100);
 }
 
-/* Auth pages moderne */
+/* Auth pages moderne - dark mode */
 .auth-body {
-  background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+  background: #0b1220;
   min-height: 100vh;
   display: flex;
   align-items: center;
   justify-content: center;
   padding: 20px;
   position: relative;
-}
-
-.auth-body::before {
-  content: '';
-  position: absolute;
-  top: 0;
-  left: 0;
-  right: 0;
-  bottom: 0;
-  background: url('data:image/svg+xml,<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 100 100"><defs><pattern id="grain" width="100" height="100" patternUnits="userSpaceOnUse"><circle cx="50" cy="50" r="1" fill="%23ffffff" opacity="0.1"/></pattern></defs><rect width="100" height="100" fill="url(%23grain)"/></svg>') repeat;
-  pointer-events: none;
 }
 
 .auth-card {
@@ -450,13 +405,13 @@ header {
 .ticket-item {
   display: block;
   padding: 20px;
-  border: 2px solid transparent;
+  border: 2px solid rgba(100, 116, 139, 0.3);
   border-radius: var(--radius);
   text-decoration: none;
   color: inherit;
   transition: all 0.3s ease;
   margin-bottom: 16px;
-  background: rgba(255, 255, 255, 0.9);
+  background: rgba(30, 41, 59, 0.5);
   backdrop-filter: blur(10px);
   position: relative;
   overflow: hidden;
@@ -469,7 +424,7 @@ header {
   left: 0;
   right: 0;
   height: 3px;
-  background: linear-gradient(135deg, var(--primary), var(--secondary));
+  background: linear-gradient(135deg, #22d3ee, #3b82f6);
   transform: scaleX(0);
   transition: transform 0.3s ease;
 }
@@ -479,15 +434,15 @@ header {
 }
 
 .ticket-item:hover {
-  border-color: var(--primary);
+  border-color: #22d3ee;
   transform: translateY(-2px);
-  box-shadow: var(--shadow-lg);
+  box-shadow: 0 10px 15px -3px rgba(34, 211, 238, 0.3);
 }
 
 .ticket-title {
   font-weight: 700;
   margin: 0 0 12px 0;
-  color: var(--dark);
+  color: var(--gray-100);
   font-size: 1.1rem;
 }
 

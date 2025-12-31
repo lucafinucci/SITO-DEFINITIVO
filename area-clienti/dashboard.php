@@ -111,36 +111,60 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST' && ($_POST['action'] ?? '') === 'creat
 <head>
   <meta charset="utf-8">
   <title>Dashboard - Area Clienti Finch-AI</title>
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
   <link rel="preconnect" href="https://fonts.googleapis.com">
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
   <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800&display=swap" rel="stylesheet">
   <link rel="stylesheet" href="/area-clienti/css/style.css">
+  <style>
+    .service-item.clickable {
+      cursor: pointer;
+      transition: all 0.2s ease;
+    }
+    .service-item.clickable:hover {
+      transform: translateY(-2px);
+      box-shadow: 0 4px 12px rgba(34, 211, 238, 0.3);
+      border-color: #22d3ee !important;
+    }
+  </style>
 </head>
 <body>
+<!-- Canvas della rete neurale -->
+<canvas id="neural-canvas"></canvas>
+
+<!-- Layer decorativi aggiuntivi -->
+<div class="bg-layers">
+  <div class="bg-diagonal-gradient"></div>
+  <div class="bg-scanlines"></div>
+</div>
+
 <?php include __DIR__ . '/includes/header.php'; ?>
 <main class="container">
 
   <?php
-  // Recupera servizi attivi dell'utente
+  // Recupera servizi attivi dell'utente (ora a livello aziendale)
   $stmt = $pdo->prepare('
     SELECT s.id, s.nome, s.descrizione, s.codice, s.prezzo_mensile, s.costo_per_pagina,
-           pp.prezzo_mensile AS prezzo_personalizzato,
-           pp.costo_per_pagina AS costo_per_pagina_personalizzato,
-           COALESCE(pp.prezzo_mensile, s.prezzo_mensile) AS prezzo_finale,
-           COALESCE(pp.costo_per_pagina, s.costo_per_pagina) AS costo_per_pagina_finale,
-           us.data_attivazione, us.stato
-    FROM utenti_servizi us
-    JOIN servizi s ON us.servizio_id = s.id
-    LEFT JOIN clienti_prezzi_personalizzati pp
-      ON pp.cliente_id = us.user_id AND pp.servizio_id = s.id
-    WHERE us.user_id = :user_id AND us.stato = "attivo"
-    ORDER BY us.data_attivazione DESC
+           app.prezzo_mensile AS prezzo_personalizzato,
+           app.costo_per_pagina AS costo_per_pagina_personalizzato,
+           COALESCE(app.prezzo_mensile, s.prezzo_mensile) AS prezzo_finale,
+           COALESCE(app.costo_per_pagina, s.costo_per_pagina) AS costo_per_pagina_finale,
+           ase.data_attivazione, ase.stato
+    FROM utenti u
+    INNER JOIN aziende_servizi ase ON u.azienda_id = ase.azienda_id
+    JOIN servizi s ON ase.servizio_id = s.id
+    LEFT JOIN aziende_prezzi_personalizzati app
+      ON app.azienda_id = u.azienda_id AND app.servizio_id = s.id
+    WHERE u.id = :user_id AND ase.stato = "attivo"
+    ORDER BY ase.data_attivazione DESC
   ');
   $stmt->execute(['user_id' => $clienteId]);
   $serviziAttivi = $stmt->fetchAll();
 
   $currentPeriod = date('Y-m');
   $usageByService = [];
+  // TODO: Aggiornare per usare aziende_servizi_uso
+  /*
   $stmt = $pdo->prepare('
     SELECT servizio_id, documenti_usati
     FROM servizi_quota_uso
@@ -153,6 +177,7 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST' && ($_POST['action'] ?? '') === 'creat
   foreach ($stmt->fetchAll() as $row) {
     $usageByService[(int)$row['servizio_id']] = (int)$row['documenti_usati'];
   }
+  */
 
   // Recupera fatture recenti
   $whereFatture = "$colCliente = :cliente_id";
@@ -266,30 +291,30 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST' && ($_POST['action'] ?? '') === 'creat
 
     <div class="services-list">
       <?php foreach ($fattureRecenti as $fattura): ?>
-        <div class="service-item" style="display: flex; justify-content: space-between; align-items: center; padding: 15px; border: 1px solid var(--border); border-radius: 8px; margin-bottom: 10px;">
+        <?php
+        $statoClass = match($fattura['stato']) {
+          'pagata' => 'success',
+          'scaduta' => 'danger',
+          'inviata' => 'info',
+          default => 'default'
+        };
+        $statoLabel = match($fattura['stato']) {
+          'bozza' => 'Bozza',
+          'emessa' => 'Emessa',
+          'inviata' => 'Inviata',
+          'pagata' => 'Pagata',
+          'scaduta' => 'Scaduta',
+          'annullata' => 'Annullata',
+          default => $fattura['stato']
+        };
+        ?>
+        <div class="service-item clickable" style="display: flex; justify-content: space-between; align-items: center; padding: 15px; border: 1px solid var(--border); border-radius: 8px; margin-bottom: 10px;" onclick="console.log('Click fattura ID: <?= $fattura['id'] ?>'); window.location.href='/area-clienti/fattura-dettaglio.php?id=<?= $fattura['id'] ?>'">
           <div class="service-info">
             <h4 style="margin: 0 0 5px 0;">Fattura <?= htmlspecialchars($fattura['numero_fattura']) ?></h4>
             <p class="muted small" style="margin: 0;">
               Emessa il <?= date('d/m/Y', strtotime($fattura['data_emissione'])) ?> -
               Scadenza: <?= date('d/m/Y', strtotime($fattura['data_scadenza'])) ?>
             </p>
-            <?php
-            $statoClass = match($fattura['stato']) {
-              'pagata' => 'success',
-              'scaduta' => 'danger',
-              'inviata' => 'info',
-              default => 'default'
-            };
-            $statoLabel = match($fattura['stato']) {
-              'bozza' => 'Bozza',
-              'emessa' => 'Emessa',
-              'inviata' => 'Inviata',
-              'pagata' => 'Pagata',
-              'scaduta' => 'Scaduta',
-              'annullata' => 'Annullata',
-              default => $fattura['stato']
-            };
-            ?>
             <span class="badge <?= $statoClass ?>" style="margin-top: 8px; display: inline-block;">
               <?= $statoLabel ?>
             </span>
@@ -298,13 +323,16 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST' && ($_POST['action'] ?? '') === 'creat
             <div class="service-price">
               <span class="price">€<?= number_format($fattura['totale'], 2, ',', '.') ?></span>
             </div>
+            <a href="/area-clienti/api/download-fattura.php?id=<?= $fattura['id'] ?>" class="btn small" style="background: #6366f1; color: white; border-color: #6366f1; text-decoration: none; padding: 8px 16px; border-radius: 6px;" onclick="event.stopPropagation();" title="Scarica PDF">
+              📥 PDF
+            </a>
             <?php if (in_array($fattura['stato'], ['emessa', 'inviata', 'scaduta'], true)): ?>
               <?php if ($gatewayAttivo): ?>
-                <a href="/area-clienti/paga-fattura.php?id=<?= $fattura['id'] ?>" class="btn small" style="background: #10b981; color: white; border-color: #10b981; text-decoration: none; padding: 8px 16px; border-radius: 6px;">
+                <a href="/area-clienti/paga-fattura.php?id=<?= $fattura['id'] ?>" class="btn small" style="background: #10b981; color: white; border-color: #10b981; text-decoration: none; padding: 8px 16px; border-radius: 6px;" onclick="event.stopPropagation();">
                   💳 Paga Ora
                 </a>
               <?php else: ?>
-                <button class="btn small" type="button" style="background: #10b981; color: white; border-color: #10b981; text-decoration: none; padding: 8px 16px; border-radius: 6px; opacity: 0.5; cursor: not-allowed;" title="Gateway pagamento non configurato" disabled>
+                <button class="btn small" type="button" style="background: #10b981; color: white; border-color: #10b981; text-decoration: none; padding: 8px 16px; border-radius: 6px; opacity: 0.5; cursor: not-allowed;" title="Gateway pagamento non configurato" disabled onclick="event.stopPropagation();">
                   💳 Paga Ora
                 </button>
               <?php endif; ?>
@@ -392,107 +420,11 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST' && ($_POST['action'] ?? '') === 'creat
     </div>
   </section>
 
-  <!-- Sezione KPI Document Intelligence -->
-  <section class="card" style="margin-top: 30px;">
-    <div class="card-header">
-      <h3>📊 Document Intelligence - KPI</h3>
-      <button class="btn ghost small" onclick="refreshKPI()">🔄 Aggiorna</button>
-    </div>
-
-    <div id="kpi-loading" style="text-align: center; padding: 40px;">
-      <p class="muted">Caricamento KPI in corso...</p>
-    </div>
-
-    <div id="kpi-content" style="display: none;">
-      <div class="kpi-grid" style="display: grid; grid-template-columns: repeat(auto-fit, minmax(200px, 1fr)); gap: 20px; margin-bottom: 20px;">
-        <div class="kpi-card" style="background: linear-gradient(135deg, #667eea 0%, #764ba2 100%); padding: 20px; border-radius: 12px; color: white;">
-          <div style="font-size: 14px; opacity: 0.9; margin-bottom: 8px;">Documenti Totali</div>
-          <div style="font-size: 32px; font-weight: 700;" id="kpi-documenti-totali">0</div>
-        </div>
-
-        <div class="kpi-card" style="background: linear-gradient(135deg, #f093fb 0%, #f5576c 100%); padding: 20px; border-radius: 12px; color: white;">
-          <div style="font-size: 14px; opacity: 0.9; margin-bottom: 8px;">Processati</div>
-          <div style="font-size: 32px; font-weight: 700;" id="kpi-documenti-processati">0</div>
-        </div>
-
-        <div class="kpi-card" style="background: linear-gradient(135deg, #4facfe 0%, #00f2fe 100%); padding: 20px; border-radius: 12px; color: white;">
-          <div style="font-size: 14px; opacity: 0.9; margin-bottom: 8px;">Questo Mese</div>
-          <div style="font-size: 32px; font-weight: 700;" id="kpi-documenti-mese">0</div>
-        </div>
-
-        <div class="kpi-card" style="background: linear-gradient(135deg, #43e97b 0%, #38f9d7 100%); padding: 20px; border-radius: 12px; color: white;">
-          <div style="font-size: 14px; opacity: 0.9; margin-bottom: 8px;">Pagine Analizzate</div>
-          <div style="font-size: 32px; font-weight: 700;" id="kpi-pagine-mese">0</div>
-        </div>
-      </div>
-
-      <p class="muted small" style="text-align: right;">
-        Ultimo aggiornamento: <span id="kpi-last-update">-</span>
-      </p>
-    </div>
-
-    <div id="kpi-error" style="display: none;" class="alert error"></div>
-  </section>
-
-  <section class="card" style="margin-top: 30px;">
-    <div class="card-header">
-      <h3>📖 FAQ e Guide</h3>
-      <a class="btn ghost small" href="/area-clienti/knowledge-base.php">🔍 Apri Base Conoscenza</a>
-    </div>
-    <p class="muted">Risposte rapide e guide operative per usare i servizi al meglio.</p>
-  </section>
 </main>
 
-<script>
-// Funzione per caricare KPI dalla WebApp
-async function loadKPI() {
-  const loadingEl = document.getElementById('kpi-loading');
-  const contentEl = document.getElementById('kpi-content');
-  const errorEl = document.getElementById('kpi-error');
-
-  loadingEl.style.display = 'block';
-  contentEl.style.display = 'none';
-  errorEl.style.display = 'none';
-
-  try {
-    const response = await fetch('/area-clienti/api/kpi-documenti.php');
-    const result = await response.json();
-
-    if (!result.success) {
-      throw new Error(result.error || 'Errore nel caricamento KPI');
-    }
-
-    const data = result.data;
-
-    // Aggiorna i valori
-    document.getElementById('kpi-documenti-totali').textContent = data.documenti_totali || 0;
-    document.getElementById('kpi-documenti-processati').textContent = data.documenti_processati || 0;
-    document.getElementById('kpi-documenti-mese').textContent = data.documenti_mese_corrente || 0;
-    document.getElementById('kpi-pagine-mese').textContent = data.pagine_mese_corrente || 0;
-    document.getElementById('kpi-last-update').textContent = new Date().toLocaleString('it-IT');
-
-    loadingEl.style.display = 'none';
-    contentEl.style.display = 'block';
-
-  } catch (error) {
-    console.error('Errore KPI:', error);
-    errorEl.textContent = 'Errore nel caricamento dei KPI: ' + error.message;
-    errorEl.style.display = 'block';
-    loadingEl.style.display = 'none';
-  }
-}
-
-function refreshKPI() {
-  loadKPI();
-}
-
-// Carica KPI all'avvio
-document.addEventListener('DOMContentLoaded', loadKPI);
-
-// Auto-refresh ogni 5 minuti
-setInterval(loadKPI, 5 * 60 * 1000);
-</script>
-
 <?php include __DIR__ . '/includes/footer.php'; ?>
+
+<!-- Script per animazione rete neurale -->
+<script src="/area-clienti/js/neural-network.js"></script>
 </body>
 </html>

@@ -4,6 +4,7 @@
  * Carica variabili d'ambiente da .env
  */
 
+if (!class_exists('Config')) {
 class Config {
     private static $config = [];
     private static $loaded = false;
@@ -69,8 +70,8 @@ class Config {
 
             // WebApp API Configuration
             // LOCALE: usa mock API
-            'WEBAPP_API_URL' => 'http://localhost/area-clienti/api/mock-webapp-api.php',
-            'WEBAPP_API_TOKEN' => 'test_token_locale', // Token per test locale
+            'WEBAPP_API_URL' => 'http://localhost/area-clienti/api/mock-kpi-webapp.php',
+            'WEBAPP_API_TOKEN' => 'test_token_locale_123456', // Token per test locale
 
             // PRODUZIONE: decommentare quando vai online
             // 'WEBAPP_API_URL' => 'https://app.finch-ai.it/api',
@@ -114,6 +115,7 @@ class Config {
     public static function isProduction() {
         return self::get('APP_ENV', 'production') === 'production';
     }
+}
 }
 
 // Auto-load

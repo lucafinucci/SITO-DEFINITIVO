@@ -19,10 +19,12 @@ $servizi = $stmt->fetchAll();
 <html lang="it">
 <head>
   <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
   <title>Servizi attivi - Finch-AI</title>
   <link rel="stylesheet" href="/area-clienti/css/style.css">
 </head>
 <body>
+<?php include __DIR__ . '/includes/layout-start.php'; ?>
 <?php include __DIR__ . '/includes/header.php'; ?>
 <main class="container">
   <div class="card">
@@ -43,5 +45,6 @@ $servizi = $stmt->fetchAll();
   </div>
 </main>
 <?php include __DIR__ . '/includes/footer.php'; ?>
+<?php include __DIR__ . '/includes/layout-end.php'; ?>
 </body>
 </html>

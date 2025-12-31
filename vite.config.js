@@ -33,11 +33,7 @@ export default defineConfig({
           });
         },
       },
-      '/assets': {
-        target: 'http://localhost',
-        changeOrigin: true,
-        rewrite: (path) => path.replace(/^\/assets/, '/SITO/assets'),
-      },
+      // RIMOSSO il proxy per /assets - Vite serve direttamente da public/
     },
   },
 })

@@ -5,19 +5,42 @@ require __DIR__ . '/includes/db.php';
 $clienteId = $_SESSION['cliente_id'];
 $ticketId = (int)($_GET['id'] ?? 0);
 
+
+$hasAssignedAdmin = false;
+try {
+    $stmtCols = $pdo->prepare("
+        SELECT COLUMN_NAME
+        FROM INFORMATION_SCHEMA.COLUMNS
+        WHERE TABLE_SCHEMA = DATABASE()
+          AND TABLE_NAME = 'support_tickets'
+          AND COLUMN_NAME = 'assigned_admin_id'
+    ");
+    $stmtCols->execute();
+    $hasAssignedAdmin = (bool)$stmtCols->fetchColumn();
+} catch (PDOException $e) {
+    $hasAssignedAdmin = false;
+}
+
+$assignedSelect = 'NULL AS assigned_nome, NULL AS assigned_cognome';
+$assignedJoin = '';
+if ($hasAssignedAdmin) {
+    $assignedSelect = 'a.nome AS assigned_nome, a.cognome AS assigned_cognome';
+    $assignedJoin = 'LEFT JOIN utenti a ON a.id = t.assigned_admin_id';
+}
+
 if ($ticketId <= 0) {
     header('Location: /area-clienti/dashboard.php');
     exit;
 }
 
-$stmt = $pdo->prepare('
-    SELECT t.*, u.azienda, u.email,
-           a.nome AS assigned_nome, a.cognome AS assigned_cognome
+$sql = "
+    SELECT t.*, u.azienda, u.email, {$assignedSelect}
     FROM support_tickets t
     JOIN utenti u ON u.id = t.cliente_id
-    LEFT JOIN utenti a ON a.id = t.assigned_admin_id
+    {$assignedJoin}
     WHERE t.id = :id AND t.cliente_id = :cliente_id
-');
+";
+$stmt = $pdo->prepare($sql);
 $stmt->execute([
     'id' => $ticketId,
     'cliente_id' => $clienteId
@@ -105,10 +128,12 @@ if (!$ticketNotFound) {
 <html lang="it">
 <head>
   <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
   <title>Ticket Supporto - Area Clienti</title>
   <link rel="stylesheet" href="/area-clienti/css/style.css">
 </head>
 <body>
+<?php include __DIR__ . '/includes/layout-start.php'; ?>
 <?php include __DIR__ . '/includes/header.php'; ?>
 <main class="container">
 
@@ -194,5 +219,6 @@ if (!$ticketNotFound) {
 </main>
 
 <?php include __DIR__ . '/includes/footer.php'; ?>
+<?php include __DIR__ . '/includes/layout-end.php'; ?>
 </body>
 </html>

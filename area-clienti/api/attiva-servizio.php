@@ -58,30 +58,41 @@ if (!$servizio) {
     exit;
 }
 
-// Verifica che il servizio non sia già attivo per questo utente
+// Ottieni azienda_id dell'utente
+$stmt = $pdo->prepare('SELECT azienda_id FROM utenti WHERE id = :id');
+$stmt->execute(['id' => $userId]);
+$aziendaId = $stmt->fetchColumn();
+
+if (!$aziendaId) {
+    http_response_code(400);
+    echo json_encode(['success' => false, 'error' => 'Utente non associato a nessuna azienda']);
+    exit;
+}
+
+// Verifica che il servizio non sia già attivo per questa azienda
 $stmt = $pdo->prepare('
-    SELECT id FROM utenti_servizi
-    WHERE user_id = :user_id AND servizio_id = :servizio_id AND stato = "attivo"
+    SELECT id FROM aziende_servizi
+    WHERE azienda_id = :azienda_id AND servizio_id = :servizio_id AND stato = "attivo"
 ');
 $stmt->execute([
-    'user_id' => $userId,
+    'azienda_id' => $aziendaId,
     'servizio_id' => $servizioId
 ]);
 if ($stmt->fetch()) {
     http_response_code(400);
-    echo json_encode(['success' => false, 'error' => 'Servizio già attivo per questo cliente']);
+    echo json_encode(['success' => false, 'error' => 'Servizio già attivo per questa azienda']);
     exit;
 }
 
-// Attiva il servizio
+// Attiva il servizio a livello aziendale
 try {
     $stmt = $pdo->prepare('
-        INSERT INTO utenti_servizi (user_id, servizio_id, data_attivazione, stato, note)
-        VALUES (:user_id, :servizio_id, :data_attivazione, "attivo", :note)
+        INSERT INTO aziende_servizi (azienda_id, servizio_id, data_attivazione, stato, note)
+        VALUES (:azienda_id, :servizio_id, :data_attivazione, "attivo", :note)
     ');
 
     $stmt->execute([
-        'user_id' => $userId,
+        'azienda_id' => $aziendaId,
         'servizio_id' => $servizioId,
         'data_attivazione' => $dataAttivazione,
         'note' => $note

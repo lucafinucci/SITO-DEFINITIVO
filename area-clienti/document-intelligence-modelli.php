@@ -48,6 +48,7 @@ $uploadSuccess = isset($_GET['upload']) && $_GET['upload'] === 'success';
 <html lang="it">
 <head>
   <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
   <title>Modelli AI Addestrati - Finch-AI</title>
   <link rel="stylesheet" href="/area-clienti/css/style.css">
   <style>
@@ -95,6 +96,7 @@ $uploadSuccess = isset($_GET['upload']) && $_GET['upload'] === 'success';
   </style>
 </head>
 <body>
+<?php include __DIR__ . '/includes/layout-start.php'; ?>
 <?php include __DIR__ . '/includes/header.php'; ?>
 <main class="container">
 
@@ -259,5 +261,6 @@ function viewModelDetails(modelId) {
 </script>
 
 <?php include __DIR__ . '/includes/footer.php'; ?>
+<?php include __DIR__ . '/includes/layout-end.php'; ?>
 </body>
 </html>

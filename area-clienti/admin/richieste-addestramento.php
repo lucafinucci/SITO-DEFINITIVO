@@ -93,7 +93,7 @@ $stmt = $pdo->prepare("
         r.tipo_modello,
         r.descrizione,
         r.num_documenti_stimati,
-        r.note,
+        r.note_admin AS note,
         r.stato,
         r.created_at,
         u.nome,
@@ -481,11 +481,11 @@ if (!empty($richieste)) {
               </button>
             <?php endif; ?>
 
-            <button class="btn ghost small" onclick="apriEmailModal(<?= $richiesta['id'] ?>, '<?= htmlspecialchars($richiesta['email']) ?>')">
+            <button class="btn ghost small" onclick="apriEmailModal(<?= $richiesta['id'] ?>, <?= htmlspecialchars(json_encode($richiesta['email'], JSON_HEX_APOS | JSON_HEX_QUOT), ENT_QUOTES, 'UTF-8') ?>)">
               ✉️ Invia Email
             </button>
 
-            <button class="btn ghost small" onclick="cancellaRichiesta(<?= $richiesta['id'] ?>, '<?= htmlspecialchars($richiesta['azienda']) ?>')" style="color: #ef4444; border-color: #ef4444;">
+            <button class="btn ghost small" onclick="cancellaRichiesta(<?= $richiesta['id'] ?>, <?= htmlspecialchars(json_encode($richiesta['azienda'], JSON_HEX_APOS | JSON_HEX_QUOT), ENT_QUOTES, 'UTF-8') ?>)" style="color: #ef4444; border-color: #ef4444;">
               🗑️ Cancella
             </button>
           </div>
@@ -663,7 +663,7 @@ document.getElementById('formEmail').addEventListener('submit', async function(e
     const result = await response.json();
 
     if (!response.ok || !result.success) {
-      throw new Error(result.error || 'Impossibile inviare l'email');
+      throw new Error(result.error || "Impossibile inviare l'email");
     }
 
     alert('✅ Email inviata con successo!');

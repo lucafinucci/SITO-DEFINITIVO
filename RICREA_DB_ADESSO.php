@@ -161,7 +161,7 @@ try {
     // INSERT UTENTE DEMO
     echo "<br>Creo utente demo...<br>";
     $pdo->exec("INSERT INTO utenti (email, password_hash, nome, cognome, azienda, attivo) VALUES
-        ('demo@finch-ai.it', '\$2y\$10\$92IXUNpkjO0rOQ5byMi.Ye4oKoEa3Ro9llC/.og/at2.uheWG/igi', 'Demo', 'User', 'Demo Company', TRUE)");
+        ('demo@finch-ai.it', '\$2y\$10\$sy1aBPONuwKREhutPj7BFeX4jMCdRpMOAYHrFTjEn3fI3bERIpJ4q', 'Demo', 'User', 'Demo Company', TRUE)");
     echo "<p class='ok'>✅ Utente demo creato</p>";
 
     // INSERT SERVIZIO
@@ -176,7 +176,7 @@ try {
     echo "<p class='ok'>✅ Servizio assegnato all'utente demo</p>";
 
     echo "<br><h2 style='color:#10b981;'>✅ FATTO!</h2>";
-    echo "<p><strong>Credenziali:</strong><br>Email: demo@finch-ai.it<br>Password: password</p>";
+    echo "<p><strong>Credenziali:</strong><br>Email: demo@finch-ai.it<br>Password: Demo123!</p>";
     echo "<p><a href='/SITO/area-clienti/login.php' style='background:#22d3ee;color:#0b1220;padding:12px 24px;text-decoration:none;border-radius:8px;display:inline-block;font-weight:600;'>VAI AL LOGIN</a></p>";
 
 } catch (PDOException $e) {

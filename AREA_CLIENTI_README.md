@@ -7,7 +7,7 @@ Sistema completo di area clienti con autenticazione sicura, gestione fatture, se
 ### ✨ Funzionalità Implementate
 
 - ✅ **Autenticazione sicura** con password hashing (bcrypt)
-- ✅ **JWT (JSON Web Tokens)** per autenticazione stateless
+- ✅ **Sessioni PHP** per autenticazione server-side
 - ✅ **MFA/TOTP** (Google Authenticator compatibile)
 - ✅ **Dashboard clienti** con statistiche e dati
 - ✅ **Gestione fatture** con download PDF
@@ -22,36 +22,35 @@ Sistema completo di area clienti con autenticazione sicura, gestione fatture, se
 
 ```
 SITO/
+├── area-clienti/
+│   ├── login.php                # Login area clienti
+│   ├── dashboard.php            # Dashboard post-login
+│   ├── mfa-setup.php            # Configurazione MFA
+│   ├── fatture.php              # Fatture cliente
+│   ├── servizi.php              # Servizi attivi
+│   ├── profilo.php              # Profilo utente
+│   ├── api/
+│   │   ├── download-fattura.php # Download PDF fattura
+│   │   ├── genera-pdf-fattura.php
+│   │   ├── kpi-proxy.php        # Proxy KPI cliente
+│   │   ├── admin-kpi-clienti.php
+│   │   └── ...
+│   ├── admin/
+│   │   ├── gestione-servizi.php
+│   │   ├── fatture.php
+│   │   ├── scadenzario.php
+│   │   └── ...
+│   ├── includes/
+│   │   ├── auth.php
+│   │   ├── db.php
+│   │   ├── config.php
+│   │   └── ...
+│   ├── css/
+│   └── js/
 ├── database/
-│   ├── schema.sql          # Schema database MySQL
-│   ├── seed.sql            # Dati demo (non necessario)
-│   └── init.php            # Script inizializzazione (ELIMINARE dopo uso)
-│
-├── public/
-│   ├── area-clienti.html   # Pagina login
-│   ├── dashboard.html      # Dashboard post-login
-│   ├── mfa-setup.html      # Configurazione MFA
-│   │
-│   └── api/
-│       ├── config/
-│       │   └── database.php      # Configurazione DB e JWT
-│       │
-│       ├── lib/
-│       │   ├── jwt.php           # Funzioni JWT
-│       │   └── totp.php          # Funzioni TOTP/MFA
-│       │
-│       ├── auth/
-│       │   ├── login.php         # API Login
-│       │   ├── logout.php        # API Logout
-│       │   ├── check-session.php # Verifica sessione
-│       │   └── mfa-setup.php     # Gestione MFA
-│       │
-│       └── clienti/
-│           ├── fatture.php       # Lista fatture
-│           ├── servizi.php       # Lista servizi
-│           ├── scadenze.php      # Lista scadenze
-│           └── download-fattura.php # Download PDF
+└── ...
 ```
+
 
 ---
 
@@ -66,21 +65,17 @@ SITO/
 
 ### 2️⃣ Configura Credenziali
 
-Modifica `public/api/config/database.php`:
+Modifica `.env` (consigliato) oppure i default in `area-clienti/includes/config.php`:
 
-```php
-define('DB_HOST', 'tuo-host-mysql.aruba.it');
-define('DB_NAME', 'finch_ai_clienti');
-define('DB_USER', 'tuo-username');
-define('DB_PASS', 'tua-password');
+```env
+DB_HOST=tuo-host-mysql.aruba.it
+DB_NAME=finch_ai_clienti
+DB_USER=tuo-username
+DB_PASS=tua-password
 
-// IMPORTANTE: Cambia questa chiave segreta!
-define('JWT_SECRET', 'GENERA_UNA_CHIAVE_CASUALE_LUNGA_E_SICURA');
-```
-
-**Genera JWT_SECRET**: Usa [random.org](https://www.random.org/strings/) o:
-```bash
-openssl rand -base64 32
+APP_URL=https://tuosito.it
+WEBAPP_API_URL=https://app.finch-ai.it/api/kpi/documenti
+WEBAPP_API_TOKEN=INSERISCI_TOKEN
 ```
 
 ### 3️⃣ Inizializza Database
@@ -92,7 +87,7 @@ openssl rand -base64 32
 
 ### 4️⃣ Testa il Sistema
 
-Visita: `https://tuosito.it/area-clienti.html`
+Visita: `https://tuosito.it/area-clienti/login.php`
 
 **Credenziali Demo**:
 - **Email**: `demo@finch-ai.it`
@@ -121,12 +116,12 @@ $hash = password_hash($password, PASSWORD_DEFAULT);
 password_verify($password, $hash); // Verifica
 ```
 
-### JWT Tokens
+### Sessioni PHP
 
-Token firmati con HMAC-SHA256:
-- Scadenza: **2 ore**
-- Archiviati in `localStorage` del browser
-- Verificati ad ogni richiesta API
+Autenticazione tramite sessione server-side:
+- Cookie di sessione gestito dal server
+- Timeout configurabile in `.env`
+- Nessun JWT richiesto lato browser
 
 ### MFA/TOTP
 
@@ -138,7 +133,7 @@ Compatibile con:
 
 **Per abilitare MFA**:
 1. Login sulla dashboard
-2. Vai su `/mfa-setup.html`
+2. Vai su `/area-clienti/mfa-setup.php`
 3. Scansiona QR code con app
 4. Inserisci codice a 6 cifre per confermare
 
@@ -166,7 +161,7 @@ RewriteRule ^(.*)$ https://%{HTTP_HOST}%{REQUEST_URI} [L,R=301]
 ### Tabelle Principali
 
 - **utenti**: Dati utenti e credenziali
-- **sessioni**: Token JWT attivi
+- **sessioni**: Sessioni PHP attive
 - **servizi**: Catalogo servizi Finch-AI
 - **utenti_servizi**: Servizi attivi per cliente
 - **fatture**: Fatture emesse
@@ -216,93 +211,34 @@ Per PDF reali, carica i file nella cartella `/fatture/`.
 
 ## 🛠️ API Endpoints
 
-### Autenticazione
+Le API dell'area clienti sono sotto `/area-clienti/api/` e usano la sessione PHP (non JWT).
+
+### Endpoint principali
 
 | Endpoint | Metodo | Descrizione |
 |----------|--------|-------------|
-| `/api/auth/login.php` | POST | Login con email/password/OTP |
-| `/api/auth/logout.php` | POST | Logout (revoca token) |
-| `/api/auth/check-session.php` | GET | Verifica token JWT |
-| `/api/auth/mfa-setup.php` | GET/POST/DELETE | Gestione MFA |
-
-### Clienti (richiedono JWT)
-
-| Endpoint | Metodo | Descrizione |
-|----------|--------|-------------|
-| `/api/clienti/fatture.php` | GET | Lista fatture utente |
-| `/api/clienti/servizi.php` | GET | Servizi attivi |
-| `/api/clienti/scadenze.php` | GET | Scadenze future |
-| `/api/clienti/download-fattura.php?id=X` | GET | Download PDF fattura |
-
-### Autenticazione Richieste
-
-Tutte le API clienti richiedono header:
-```
-Authorization: Bearer <JWT_TOKEN>
-```
+| `/area-clienti/login.php` | GET/POST | Login area clienti |
+| `/area-clienti/logout.php` | GET | Logout |
+| `/area-clienti/api/download-fattura.php?id=X` | GET | Download PDF fattura |
+| `/area-clienti/api/genera-pdf-fattura.php?id=X` | GET | PDF fattura (HTML con `format=html`) |
+| `/area-clienti/api/kpi-proxy.php` | GET | KPI cliente (proxy) |
+| `/area-clienti/api/admin-kpi-clienti.php` | GET | KPI admin per clienti DOC-INT |
 
 ---
 
 ## 🧪 Testing
 
-### 1. Test Login
-
-```bash
-curl -X POST https://tuosito.it/api/auth/login.php \
-  -H "Content-Type: application/json" \
-  -d '{"email":"demo@finch-ai.it","password":"Demo123!"}'
-```
-
-Risposta attesa:
-```json
-{
-  "success": true,
-  "token": "eyJ0eXAiOiJKV1QiLCJhbGc...",
-  "user": {
-    "id": 2,
-    "name": "Luigi Verdi",
-    "email": "demo@finch-ai.it",
-    "azienda": "Azienda Demo Srl"
-  }
-}
-```
-
-### 2. Test API con JWT
-
-```bash
-curl https://tuosito.it/api/clienti/fatture.php \
-  -H "Authorization: Bearer <IL_TUO_TOKEN>"
-```
+1. Apri `https://tuosito.it/area-clienti/login.php`
+2. Effettua login con un utente demo
+3. Verifica: `/area-clienti/dashboard.php`, `/area-clienti/fatture.php`
+4. (Admin) Verifica: `/area-clienti/admin/gestione-servizi.php`
 
 ---
 
 ## 📱 Frontend
 
-### Login Form
-
-```javascript
-// area-clienti.html
-const res = await fetch('/api/auth/login.php', {
-  method: 'POST',
-  headers: { 'Content-Type': 'application/json' },
-  body: JSON.stringify({ email, password, otp })
-});
-
-const data = await res.json();
-localStorage.setItem('auth_token', data.token);
-window.location.href = '/dashboard.html';
-```
-
-### Dashboard
-
-```javascript
-// dashboard.html
-const token = localStorage.getItem('auth_token');
-const res = await fetch('/api/clienti/fatture.php', {
-  headers: { 'Authorization': `Bearer ${token}` }
-});
-const fatture = await res.json();
-```
+Le pagine dell'area clienti sono renderizzate server-side in PHP dentro `area-clienti/`.
+Non e' richiesta autenticazione JWT lato browser: la sessione viene gestita dal server.
 
 ---
 
@@ -349,15 +285,15 @@ LIMIT 50;
 
 ### Errore: "Database connection failed"
 
-- Verifica credenziali in `api/config/database.php`
+- Verifica credenziali in `.env` o `area-clienti/includes/config.php`
 - Controlla che il database esista su Aruba
 - Verifica che l'utente abbia permessi sul database
 
-### Errore: "Token non valido"
+### Errore: "Sessione non valida"
 
-- Token scaduto (2 ore). Rifare login
-- JWT_SECRET modificato dopo login
-- Verifica che `localStorage` non sia bloccato
+- Sessione scaduta. Rifare login
+- Cookie/sessione cancellati dal browser
+- Verifica che i cookie siano abilitati
 
 ### Errore download fattura
 
@@ -417,7 +353,7 @@ Per problemi o domande:
 **🎉 Installazione completata!**
 
 Hai ora un sistema completo di area clienti enterprise-grade con:
-✅ Sicurezza avanzata (JWT + MFA)
+✅ Sicurezza avanzata (MFA)
 ✅ Dashboard professionale
 ✅ Gestione fatture e servizi
 ✅ Log audit completi

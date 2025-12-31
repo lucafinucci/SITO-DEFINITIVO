@@ -48,12 +48,13 @@ try {
 
 // Download handler
 if (isset($_GET['file'])) {
-    // Questa logica di download è gestita dall'API sicura, non da qui.
-    // Per coerenza, reindirizziamo all'endpoint API corretto.
-    // Nota: questo richiede che l'utente sia loggato anche nel sistema API/JWT.
-    // Una soluzione migliore sarebbe un proxy PHP che gestisce il download.
-    // Per ora, lasciamo un placeholder.
-    echo "Il download è gestito tramite l'endpoint API sicuro.";
+    $fatturaId = (int)$_GET['file'];
+    if ($fatturaId <= 0) {
+        http_response_code(400);
+        echo 'ID fattura mancante';
+        exit;
+    }
+    header('Location: /area-clienti/api/download-fattura.php?id=' . $fatturaId);
     exit;
 }
 
@@ -119,10 +120,12 @@ if (!empty($rows)) {
 <html lang="it">
 <head>
   <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
   <title>Fatture - Finch-AI</title>
   <link rel="stylesheet" href="/area-clienti/css/style.css">
 </head>
 <body>
+<?php include __DIR__ . '/includes/layout-start.php'; ?>
 <?php include __DIR__ . '/includes/header.php'; ?>
 <main class="container">
   <div class="card">
@@ -184,7 +187,7 @@ if (!empty($rows)) {
                 }
               ?>
               <td><?php echo $serviziHtml; ?></td>
-              <td><a class="btn primary" href="/area-clienti/api/genera-pdf-fattura.php?id=<?php echo (int)$r['id']; ?>" target="_blank">PDF</a></td>
+              <td><a class="btn primary" href="/area-clienti/api/download-fattura.php?id=<?php echo (int)$r['id']; ?>" target="_blank">Download</a></td>
             </tr>
           <?php endforeach; ?>
         </tbody>
@@ -193,5 +196,6 @@ if (!empty($rows)) {
   </div>
 </main>
 <?php include __DIR__ . '/includes/footer.php'; ?>
+<?php include __DIR__ . '/includes/layout-end.php'; ?>
 </body>
 </html>

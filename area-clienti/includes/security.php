@@ -6,6 +6,7 @@
 
 require_once __DIR__ . '/config.php';
 
+if (!class_exists('Security')) {
 class Security {
     /**
      * ===========================
@@ -292,4 +293,5 @@ class Security {
     public static function hashIdentifier($identifier) {
         return hash('sha256', $identifier);
     }
+}
 }

@@ -593,7 +593,7 @@ $ruoli = $rbac->getRuoli();
                             <td>
                                 <div class="actions">
                                     <?php if ($rbac->can('can_edit_admin') && $rbac->canManageAdmin($admin['id'])): ?>
-                                        <button class="action-btn action-edit" onclick="editAdmin(<?php echo $admin['id']; ?>)" title="Modifica">
+                                        <button class="action-btn action-edit" onclick="editAdmin(this)" title="Modifica" data-id="<?php echo $admin['id']; ?>" data-nome="<?php echo htmlspecialchars($admin['nome'], ENT_QUOTES); ?>" data-cognome="<?php echo htmlspecialchars($admin['cognome'], ENT_QUOTES); ?>" data-email="<?php echo htmlspecialchars($admin['email'], ENT_QUOTES); ?>" data-ruolo="<?php echo (int)$admin['ruolo_id']; ?>" data-super="<?php echo $admin['is_super_admin'] ? '1' : '0'; ?>">
                                             <i class="fas fa-edit"></i>
                                         </button>
 
@@ -679,6 +679,62 @@ $ruoli = $rbac->getRuoli();
         </div>
     </div>
 
+
+    <!-- Modal Modifica -->
+    <div class="modal" id="editModal">
+        <div class="modal-content">
+            <div class="modal-header">
+                <h3>Modifica Admin</h3>
+                <button class="modal-close" onclick="closeModal('editModal')">
+                    <i class="fas fa-times"></i>
+                </button>
+            </div>
+            <form id="editForm" onsubmit="submitEdit(event)">
+                <div class="modal-body">
+                    <input type="hidden" name="admin_id" value="">
+                    <div class="form-group">
+                        <label>Nome *</label>
+                        <input type="text" name="nome" required>
+                    </div>
+
+                    <div class="form-group">
+                        <label>Cognome *</label>
+                        <input type="text" name="cognome" required>
+                    </div>
+
+                    <div class="form-group">
+                        <label>Email *</label>
+                        <input type="email" name="email" required>
+                    </div>
+
+                    <div class="form-group">
+                        <label>Ruolo</label>
+                        <select name="ruolo_id" <?php echo $rbac->can('can_assign_roles') ? '' : 'disabled'; ?>>
+                            <option value="">Seleziona ruolo...</option>
+                            <?php foreach ($ruoli as $ruolo): ?>
+                                <?php if (!$ruolo['is_super_admin'] || $rbac->isSuperAdmin()): ?>
+                                    <option value="<?php echo $ruolo['id']; ?>">
+                                        <?php echo htmlspecialchars($ruolo['display_name']); ?>
+                                        (Livello <?php echo $ruolo['livello_accesso']; ?>)
+                                    </option>
+                                <?php endif; ?>
+                            <?php endforeach; ?>
+                        </select>
+                    </div>
+                </div>
+
+                <div class="form-actions">
+                    <button type="button" class="btn btn-secondary" onclick="closeModal('editModal')">
+                        Annulla
+                    </button>
+                    <button type="submit" class="btn btn-primary">
+                        <i class="fas fa-save"></i>
+                        Salva modifiche
+                    </button>
+                </div>
+            </form>
+        </div>
+    </div>
     <script>
         function filterTable() {
             const input = document.getElementById('searchInput');
@@ -782,9 +838,50 @@ $ruoli = $rbac->getRuoli();
             }
         }
 
-        function editAdmin(id) {
-            // TODO: Implementare modal modifica
-            alert('Funzionalità in sviluppo');
+        
+        async function submitEdit(e) {
+            e.preventDefault();
+            const formData = new FormData(e.target);
+
+            try {
+                const response = await fetch('../api/team-admin.php?action=update', {
+                    method: 'POST',
+                    body: formData
+                });
+
+                const data = await response.json();
+
+                if (data.success) {
+                    closeModal('editModal');
+                    location.reload();
+                } else {
+                    alert('Errore: ' + data.error);
+                }
+            } catch (error) {
+                alert('Errore di rete: ' + error.message);
+            }
+        }
+        function editAdmin(button) {
+            const form = document.getElementById('editForm');
+            const modal = document.getElementById('editModal');
+            const canAssignRoles = <?php echo $rbac->can('can_assign_roles') ? 'true' : 'false'; ?>;
+
+            form.admin_id.value = button.dataset.id || '';
+            form.nome.value = button.dataset.nome || '';
+            form.cognome.value = button.dataset.cognome || '';
+            form.email.value = button.dataset.email || '';
+
+            const roleSelect = form.querySelector('select[name="ruolo_id"]');
+            if (roleSelect) {
+                roleSelect.value = button.dataset.ruolo || '';
+                if (canAssignRoles) {
+                    roleSelect.removeAttribute('disabled');
+                } else {
+                    roleSelect.setAttribute('disabled', 'disabled');
+                }
+            }
+
+            modal.classList.add('show');
         }
     </script>
 </body>

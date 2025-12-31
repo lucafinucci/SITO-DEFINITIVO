@@ -6,6 +6,7 @@
 
 require_once __DIR__ . '/config.php';
 
+if (!class_exists('ErrorHandler')) {
 class ErrorHandler {
     private static $errorLog = __DIR__ . '/../../logs/error.log';
     private static $accessLog = __DIR__ . '/../../logs/access.log';
@@ -248,6 +249,7 @@ class ErrorHandler {
         echo json_encode($response);
         exit;
     }
+}
 }
 
 // Auto-init

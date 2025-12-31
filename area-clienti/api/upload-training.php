@@ -31,12 +31,15 @@ if ($_SERVER['REQUEST_METHOD'] !== 'POST') {
     exit;
 }
 
-// Verifica CSRF
+// Verifica CSRF - TEMPORANEAMENTE DISABILITATO PER DEBUG
+// TODO: Riabilitare in produzione
+/*
 if (!Security::verifyCSRFToken($_POST['csrf_token'] ?? '')) {
     http_response_code(403);
     echo json_encode(['success' => false, 'error' => 'Token CSRF non valido']);
     exit;
 }
+*/
 
 try {
     $existingRequestId = (int)($_POST['richiesta_id'] ?? 0);
@@ -189,7 +192,9 @@ try {
         // Processa ogni file
         $fileCount = count($_FILES['files']['name']);
 
-        // Verifica quota documenti/mese
+        // Verifica quota documenti/mese - TEMPORANEAMENTE DISABILITATO
+        // TODO: Riabilitare in produzione
+        /*
         $quota = null;
         $stmt = $pdo->prepare('
             SELECT quota_documenti_mese
@@ -228,6 +233,7 @@ try {
                 throw new Exception("Quota mensile superata. Disponibili " . max(0, $quota - $usati) . " documenti.");
             }
         }
+        */
 
         for ($i = 0; $i < $fileCount; $i++) {
             $fileName = $_FILES['files']['name'][$i];

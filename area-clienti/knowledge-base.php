@@ -5,6 +5,7 @@ require __DIR__ . '/includes/auth.php';
 <html lang="it">
 <head>
   <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
   <title>FAQ e Guide - Area Clienti</title>
   <link rel="stylesheet" href="/area-clienti/css/style.css">
   <style>
@@ -45,6 +46,7 @@ require __DIR__ . '/includes/auth.php';
   </style>
 </head>
 <body>
+<?php include __DIR__ . '/includes/layout-start.php'; ?>
 <?php include __DIR__ . '/includes/header.php'; ?>
 <main class="container">
   <section class="card">
@@ -133,5 +135,6 @@ require __DIR__ . '/includes/auth.php';
 </main>
 
 <?php include __DIR__ . '/includes/footer.php'; ?>
+<?php include __DIR__ . '/includes/layout-end.php'; ?>
 </body>
 </html>

@@ -91,17 +91,20 @@ $righe = $stmt->fetchAll();
 // Genera HTML della fattura
 $html = generaHTMLFattura($fattura, $righe);
 
-// Output HTML per preview o conversione PDF
-header('Content-Type: text/html; charset=utf-8');
-echo $html;
+$format = $_GET['format'] ?? 'pdf';
+if ($format == 'html') {
+    header('Content-Type: text/html; charset=utf-8');
+    echo $html;
+    exit;
+}
 
-// TODO: Per produzione, integrare una libreria PDF come TCPDF, mPDF o Dompdf
-// Esempio con TCPDF:
-// require_once('tcpdf/tcpdf.php');
-// $pdf = new TCPDF('P', 'mm', 'A4', true, 'UTF-8');
-// $pdf->AddPage();
-// $pdf->writeHTML($html, true, false, true, false, '');
-// $pdf->Output('fattura.pdf', 'D');
+$pdf = generaPDFFattura($fattura, $righe);
+$filename = preg_replace('/[^A-Za-z0-9._-]/', '_', (string)$fattura['numero_fattura']) . '.pdf';
+header('Content-Type: application/pdf');
+header('Content-Disposition: inline; filename="' . $filename . '"');
+header('Content-Length: ' . strlen($pdf));
+echo $pdf;
+exit;
 
 function generaHTMLFattura($fattura, $righe) {
     $company = require __DIR__ . '/../includes/company-info.php';
@@ -373,4 +376,143 @@ function generaHTMLFattura($fattura, $righe) {
 </html>';
 
     return $html;
+}
+
+function generaPDFFattura($fattura, $righe) {
+    $company = require __DIR__ . '/../includes/company-info.php';
+
+    $lines = [];
+    $lines[] = $company['ragione_sociale'] ?? 'Finch-AI';
+    $lines[] = $company['indirizzo'] ?? '';
+    $lines[] = $company['piva'] ?? '';
+    $lines[] = $company['telefono'] ?? '';
+    $lines[] = $company['email'] ?? '';
+    $lines[] = $company['web'] ?? '';
+    $lines[] = '';
+
+    $numero = (string)$fattura['numero_fattura'];
+    $lines[] = 'Fattura ' . $numero;
+    $lines[] = 'Data emissione: ' . date('d/m/Y', strtotime($fattura['data_emissione']));
+    $lines[] = 'Data scadenza: ' . date('d/m/Y', strtotime($fattura['data_scadenza']));
+    $lines[] = 'Periodo: ' . sprintf('%02d/%d', $fattura['mese'], $fattura['anno']);
+    $lines[] = '';
+
+    $clienteNome = trim($fattura['cliente_nome'] . ' ' . $fattura['cliente_cognome']);
+    $lines[] = 'Cliente: ' . $clienteNome;
+    if (!empty($fattura['azienda'])) {
+        $lines[] = 'Azienda: ' . $fattura['azienda'];
+    }
+    if (!empty($fattura['cliente_email'])) {
+        $lines[] = 'Email: ' . $fattura['cliente_email'];
+    }
+    if (!empty($fattura['telefono'])) {
+        $lines[] = 'Telefono: ' . $fattura['telefono'];
+    }
+    $lines[] = '';
+
+    $lines[] = 'Righe fattura:';
+    if (!empty($righe)) {
+        foreach ($righe as $idx => $riga) {
+            $descrizione = (string)($riga['descrizione'] ?? 'Servizio');
+            $quantita = (float)($riga['quantita'] ?? 1);
+            $prezzo = (float)($riga['prezzo_unitario'] ?? 0);
+            $totale = (float)($riga['totale'] ?? ($quantita * $prezzo));
+            $lines[] = sprintf(
+                '%d) %s | Qta %s x %s = %s',
+                $idx + 1,
+                $descrizione,
+                number_format($quantita, 2, ',', '.'),
+                number_format($prezzo, 2, ',', '.'),
+                number_format($totale, 2, ',', '.')
+            );
+        }
+    } else {
+        $lines[] = '- Nessuna riga';
+    }
+
+    $lines[] = '';
+    $lines[] = 'Imponibile: ' . number_format((float)$fattura['imponibile'], 2, ',', '.');
+    $lines[] = 'IVA (' . number_format((float)$fattura['iva_percentuale'], 0, ',', '.') . '%): ' . number_format((float)$fattura['iva_importo'], 2, ',', '.');
+    $lines[] = 'Totale: ' . number_format((float)$fattura['totale'], 2, ',', '.');
+
+    return buildSimplePdf($lines);
+}
+
+function buildSimplePdf(array $lines) {
+    $lineHeight = 14;
+    $contentLines = [
+        'BT',
+        '/F1 12 Tf',
+        '50 770 Td'
+    ];
+
+    foreach ($lines as $line) {
+        $contentLines[] = '(' . pdfEscape((string)$line) . ') Tj';
+        $contentLines[] = '0 -' . $lineHeight . ' Td';
+    }
+
+    $contentLines[] = 'ET';
+    $content = implode("
+", $contentLines);
+    $length = strlen($content);
+
+    $objects = [];
+    $objects[] = "1 0 obj
+<< /Type /Catalog /Pages 2 0 R >>
+endobj
+";
+    $objects[] = "2 0 obj
+<< /Type /Pages /Kids [3 0 R] /Count 1 >>
+endobj
+";
+    $objects[] = "3 0 obj
+<< /Type /Page /Parent 2 0 R /MediaBox [0 0 612 792] /Contents 4 0 R /Resources << /Font << /F1 5 0 R >> >> >>
+endobj
+";
+    $objects[] = "4 0 obj
+<< /Length {$length} >>
+stream
+{$content}
+endstream
+endobj
+";
+    $objects[] = "5 0 obj
+<< /Type /Font /Subtype /Type1 /BaseFont /Helvetica >>
+endobj
+";
+
+    $pdf = "%PDF-1.4
+";
+    $offsets = [0];
+    foreach ($objects as $obj) {
+        $offsets[] = strlen($pdf);
+        $pdf .= $obj;
+    }
+
+    $xrefOffset = strlen($pdf);
+    $pdf .= "xref
+0 " . (count($objects) + 1) . "
+";
+    $pdf .= "0000000000 65535 f 
+";
+    foreach (array_slice($offsets, 1) as $offset) {
+        $pdf .= sprintf("%010d 00000 n 
+", $offset);
+    }
+
+    $pdf .= "trailer
+<< /Size " . (count($objects) + 1) . " /Root 1 0 R >>
+";
+    $pdf .= "startxref
+" . $xrefOffset . "
+%%EOF";
+
+    return $pdf;
+}
+
+function pdfEscape($text) {
+    $text = str_replace('\\', '\\\\', $text);
+    $text = str_replace('(', '\\(', $text);
+    $text = str_replace(')', '\\)', $text);
+    return $text;
 }

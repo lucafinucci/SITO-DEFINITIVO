@@ -29,6 +29,29 @@ if (!$servizio) {
   exit;
 }
 
+$webappUrl = null;
+try {
+  $stmtCols = $pdo->prepare("
+    SELECT COLUMN_NAME
+    FROM INFORMATION_SCHEMA.COLUMNS
+    WHERE TABLE_SCHEMA = DATABASE()
+      AND TABLE_NAME = 'utenti'
+      AND COLUMN_NAME = 'webapp_url'
+  ");
+  $stmtCols->execute();
+  $hasWebappUrl = (bool)$stmtCols->fetchColumn();
+  if ($hasWebappUrl) {
+    $stmt = $pdo->prepare('SELECT webapp_url FROM utenti WHERE id = :id');
+    $stmt->execute(['id' => $clienteId]);
+    $webappUrlValue = trim((string)$stmt->fetchColumn());
+    if ($webappUrlValue !== '') {
+      $webappUrl = $webappUrlValue;
+    }
+  }
+} catch (PDOException $e) {
+  $webappUrl = null;
+}
+
 $currentPeriod = date('Y-m');
 $docUsage = 0;
 $stmt = $pdo->prepare('
@@ -107,11 +130,13 @@ $hasOtherSeries = false;
 <html lang="it">
 <head>
   <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
   <title><?= htmlspecialchars($servizio['nome']) ?> - Dettagli Servizio</title>
   <link rel="stylesheet" href="/area-clienti/css/style.css">
   <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
 </head>
 <body>
+<?php include __DIR__ . '/includes/layout-start.php'; ?>
 <?php include __DIR__ . '/includes/header.php'; ?>
 <main class="container">
   <div class="breadcrumb" style="margin-bottom: 20px;">
@@ -188,7 +213,7 @@ $hasOtherSeries = false;
 
     <div style="margin-top: 24px; display: flex; gap: 12px; flex-wrap: wrap;">
       <?php if ($servizio['codice'] === 'DOC-INT'): ?>
-        <a href="https://app.finch-ai.it/document-intelligence" class="btn primary" target="_blank" rel="noopener">
+        <a href="<?= htmlspecialchars($webappUrl ?? 'https://app.finch-ai.it/document-intelligence') ?>" class="btn primary" target="_blank" rel="noopener">
           🚀 Accedi alla WebApp
         </a>
         <a href="/area-clienti/fatture.php" class="btn ghost">
@@ -553,6 +578,7 @@ $hasOtherSeries = false;
 
 </main>
 <?php include __DIR__ . '/includes/footer.php'; ?>
+<?php include __DIR__ . '/includes/layout-end.php'; ?>
 
 <?php if ($servizio['codice'] === 'DOC-INT'): ?>
 <script>

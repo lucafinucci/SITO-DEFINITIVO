@@ -3,6 +3,7 @@ require '../includes/auth.php';
 require '../includes/db.php';
 require '../includes/rbac-manager.php';
 require '../includes/audit-logger.php';
+require '../includes/email-manager.php';
 
 header('Content-Type: application/json');
 
@@ -62,8 +63,68 @@ try {
 
             $inviteId = $pdo->lastInsertId();
 
-            // TODO: Invia email invito
-            $linkInvito = "https://finch-ai.it/area-clienti/accept-invite.php?token=$token";
+            $baseUrl = Config::get('APP_URL', '');
+            if (empty($baseUrl)) {
+                $protocol = isset($_SERVER['HTTPS']) && $_SERVER['HTTPS'] == 'on' ? 'https' : 'http';
+                $host = $_SERVER['HTTP_HOST'] ?? 'localhost';
+                $baseUrl = $protocol . '://' . $host;
+            }
+
+            $linkInvito = rtrim($baseUrl, '/') . '/area-clienti/accept-invite.php?token=' . $token;
+
+            $subject = 'Invito Area Admin Finch-AI';
+            $destinatarioNome = trim($nome . ' ' . $cognome);
+            $messagePersonal = $messaggio ? nl2br(htmlspecialchars($messaggio)) : null;
+
+            $bodyHtml = '<!DOCTYPE html>'
+                . '<html lang="it">'
+                . '<head><meta charset="UTF-8"></head>'
+                . '<body style="font-family: Arial, sans-serif; color: #111827;">'
+                . '<p>Ciao ' . htmlspecialchars($destinatarioNome) . ',</p>'
+                . '<p>Sei stato invitato ad accedere all&#39;Area Admin di Finch-AI.</p>'
+                . '<p><a href="' . htmlspecialchars($linkInvito) . '" style="display:inline-block;padding:10px 16px;background:#7c3aed;color:#fff;text-decoration:none;border-radius:6px;">Accetta invito</a></p>'
+                . '<p>Questo invito scade il ' . date('d/m/Y', strtotime($expiresAt)) . '.</p>'
+                . ($messagePersonal ? '<p>Messaggio personale:</p><blockquote style="margin:0 0 16px 0;padding:12px;border-left:3px solid #e5e7eb;background:#f9fafb;">' . $messagePersonal . '</blockquote>' : '')
+                . '<p>Se non ti aspettavi questa email, puoi ignorarla.</p>'
+                . '</body></html>';
+
+            $bodyText = "Ciao {$destinatarioNome},
+
+"
+                . "Sei stato invitato ad accedere all'Area Admin di Finch-AI.
+"
+                . "Accetta invito: {$linkInvito}
+
+"
+                . "L'invito scade il " . date('d/m/Y', strtotime($expiresAt)) . ".
+"
+                . ($messaggio ? "
+Messaggio personale:
+{$messaggio}
+" : '')
+                . "
+Se non ti aspettavi questa email, puoi ignorarla.";
+
+            $emailManager = new EmailManager($pdo);
+            $emailQueueId = $emailManager->addToQueue([
+                'template_id' => null,
+                'destinatario_email' => $email,
+                'destinatario_nome' => $destinatarioNome,
+                'oggetto' => $subject,
+                'corpo_html' => $bodyHtml,
+                'corpo_testo' => $bodyText,
+                'mittente_email' => 'noreply@finch-ai.it',
+                'mittente_nome' => 'Finch-AI',
+                'reply_to' => null,
+                'cliente_id' => null,
+                'fattura_id' => null,
+                'variabili' => json_encode([
+                    'invito_link' => $linkInvito,
+                    'scadenza' => $expiresAt
+                ]),
+                'priorita' => 'alta',
+                'data_pianificazione' => null
+            ]);
 
             // Log audit
             $audit->log([
@@ -182,6 +243,79 @@ try {
             echo json_encode([
                 'success' => $success,
                 'message' => 'Ruolo assegnato'
+            ]);
+            break;
+
+
+        case 'update':
+            // Aggiorna dati admin
+            $rbac->requirePermission('can_edit_admin');
+
+            $adminId = (int)($_POST['admin_id'] ?? 0);
+            $nome = trim($_POST['nome'] ?? '');
+            $cognome = trim($_POST['cognome'] ?? '');
+            $email = trim($_POST['email'] ?? '');
+            $ruoloId = (int)($_POST['ruolo_id'] ?? 0);
+
+            if (!$adminId || $nome == '' || $cognome == '' || $email == '') {
+                throw new Exception('Dati mancanti');
+            }
+
+            if (!filter_var($email, FILTER_VALIDATE_EMAIL)) {
+                throw new Exception('Email non valida');
+            }
+
+            if (!$rbac->canManageAdmin($adminId)) {
+                throw new PermissionDeniedException('Non hai permesso di gestire questo admin');
+            }
+
+            $stmt = $pdo->prepare('SELECT id, nome, cognome, email, admin_ruolo_id, is_super_admin FROM utenti WHERE id = :id AND ruolo = "admin"');
+            $stmt->execute(['id' => $adminId]);
+            $adminData = $stmt->fetch();
+
+            if (!$adminData) {
+                throw new Exception('Admin non trovato');
+            }
+
+            $stmt = $pdo->prepare('SELECT id FROM utenti WHERE email = :email AND id != :id LIMIT 1');
+            $stmt->execute(['email' => $email, 'id' => $adminId]);
+            if ($stmt->fetch()) {
+                throw new Exception('Email già registrata');
+            }
+
+            $stmt = $pdo->prepare('UPDATE utenti SET nome = :nome, cognome = :cognome, email = :email WHERE id = :id');
+            $stmt->execute([
+                'nome' => $nome,
+                'cognome' => $cognome,
+                'email' => $email,
+                'id' => $adminId
+            ]);
+
+            $newData = [
+                'nome' => $nome,
+                'cognome' => $cognome,
+                'email' => $email,
+                'ruolo_id' => $adminData['admin_ruolo_id']
+            ];
+
+            if ($ruoloId && $ruoloId != (int)$adminData['admin_ruolo_id']) {
+                if (!$rbac->can('can_assign_roles')) {
+                    throw new PermissionDeniedException('Permesso negato: can_assign_roles richiesto');
+                }
+                $rbac->assegnaRuolo($adminId, $ruoloId);
+                $newData['ruolo_id'] = $ruoloId;
+            }
+
+            $audit->logUpdate('admin', $adminId, [
+                'nome' => $adminData['nome'],
+                'cognome' => $adminData['cognome'],
+                'email' => $adminData['email'],
+                'ruolo_id' => $adminData['admin_ruolo_id']
+            ], $newData, 'Aggiornamento dati admin');
+
+            echo json_encode([
+                'success' => true,
+                'message' => 'Admin aggiornato'
             ]);
             break;
 

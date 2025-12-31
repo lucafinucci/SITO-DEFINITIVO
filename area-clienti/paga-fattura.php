@@ -307,6 +307,7 @@ if (!$stripeEnabled && !$paypalEnabled) {
     </style>
 </head>
 <body>
+<?php include __DIR__ . '/includes/layout-start.php'; ?>
     <div class="payment-container">
         <a href="dashboard.php" class="back-link">← Torna alla Dashboard</a>
 
@@ -587,5 +588,6 @@ if (!$stripeEnabled && !$paypalEnabled) {
         selectGateway('paypal');
         <?php endif; ?>
     </script>
+<?php include __DIR__ . '/includes/layout-end.php'; ?>
 </body>
 </html>

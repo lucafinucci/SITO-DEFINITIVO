@@ -171,7 +171,7 @@ try {
         echo "<pre>INSERT INTO utenti (email, password_hash, nome, cognome, azienda, attivo)
 VALUES (
   'demo@finch-ai.it',
-  '\$2y\$10\$92IXUNpkjO0rOQ5byMi.Ye4oKoEa3Ro9llC/.og/at2.uheWG/igi', -- password: \"password\"
+  '\$2y\$10\$sy1aBPONuwKREhutPj7BFeX4jMCdRpMOAYHrFTjEn3fI3bERIpJ4q', -- password: \"Demo123!\"
   'Demo',
   'User',
   'Demo Company',
