@@ -58,15 +58,14 @@ Esistevano **pagine duplicate** con funzionalità sovrapposte:
 ### 2. Rimozione Pagina Duplicata
 
 **File eliminato**: `document-intelligence.php`
-- **Backup creato**: `document-intelligence.php.BACKUP`
-- **Nuovo file**: Redirect automatico a `servizio-dettaglio.php?id=1`
+- ~~**Backup creato**: `document-intelligence.php.BACKUP`~~ (eliminato anche questo)
+- ~~**Nuovo file**: Redirect automatico a `servizio-dettaglio.php?id=1`~~
 
-```php
-<?php
-header('Location: /area-clienti/servizio-dettaglio.php?id=1');
-exit;
-?>
-```
+**AGGIORNAMENTO 16/12/2024**:
+- ✅ File `document-intelligence.php` **completamente eliminato**
+- ✅ File backup `document-intelligence.php.BACKUP` **eliminato**
+- ✅ Nessun redirect intermedio, navigazione diretta a `servizio-dettaglio.php?id=1`
+- ✅ Verificato: nessun riferimento nel codice
 
 ---
 
@@ -84,7 +83,6 @@ area-clienti/
 ├── servizio-dettaglio.php             → PAGINA PRINCIPALE Document Intelligence
 ├── richiedi-addestramento.php         → Form upload training
 ├── document-intelligence-modelli.php  → Vista lista modelli (opzionale)
-├── document-intelligence.php          → REDIRECT a servizio-dettaglio.php?id=1
 ├── fatture.php                        → Gestione fatture
 ├── profilo.php                        → Profilo utente
 ├── mfa-setup.php                      → 2FA setup

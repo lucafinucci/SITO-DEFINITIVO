@@ -45,6 +45,7 @@ CREATE TABLE IF NOT EXISTS servizi (
     descrizione TEXT,
     codice VARCHAR(50) UNIQUE NOT NULL,
     prezzo_mensile DECIMAL(10, 2),
+    costo_per_pagina DECIMAL(10, 4) NOT NULL DEFAULT 0.0000,
     attivo BOOLEAN DEFAULT TRUE,
     created_at TIMESTAMP DEFAULT CURRENT_TIMESTAMP,
     INDEX idx_codice (codice)

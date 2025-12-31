@@ -9,17 +9,18 @@ if (session_status() === PHP_SESSION_NONE) {
     session_start();
 }
 ?>
-<header class="topbar">
-  <div class="container topbar-inner">
-    <div class="brand">
+<header>
+  <div class="header-content">
+    <a href="/area-clienti/dashboard.php" class="brand">
       <span class="logo-dot"></span>
-      <span class="brand-name">Finch-AI · Area Clienti</span>
-    </div>
-    <div class="topbar-actions">
+      <span class="brand-name">Finch-AI</span>
+    </a>
+    <div class="nav-links">
       <?php if (!empty($_SESSION['cliente_email'])): ?>
-        <span class="user-email"><?php echo htmlspecialchars($_SESSION['cliente_email']); ?></span>
+        <span class="muted small"><?php echo htmlspecialchars($_SESSION['cliente_nome_completo'] ?? $_SESSION['cliente_email']); ?></span>
+        <a href="/area-clienti/profilo.php" class="btn ghost small">👤 Profilo</a>
+        <a href="/area-clienti/logout.php" class="btn ghost small">Esci</a>
       <?php endif; ?>
-      <a class="btn ghost" href="/area-clienti/logout.php">Esci</a>
     </div>
   </div>
 </header>

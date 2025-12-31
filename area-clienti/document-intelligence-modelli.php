@@ -40,6 +40,9 @@ $stmt = $pdo->prepare('
 ');
 $stmt->execute(['user_id' => $clienteId]);
 $richiesteInCorso = $stmt->fetchAll();
+
+// Messaggio di successo dopo upload training
+$uploadSuccess = isset($_GET['upload']) && $_GET['upload'] === 'success';
 ?>
 <!doctype html>
 <html lang="it">
@@ -98,6 +101,12 @@ $richiesteInCorso = $stmt->fetchAll();
   <div style="margin-bottom: 20px;">
     <a href="/area-clienti/servizio-dettaglio.php?id=1" style="color: var(--accent1);">← Torna a Document Intelligence</a>
   </div>
+
+  <?php if ($uploadSuccess): ?>
+  <div class="alert success" style="margin-bottom: 20px;">
+    ✅ <strong>Richiesta inviata con successo!</strong> Il nostro team analizzerà la tua richiesta di addestramento entro 24 ore. Riceverai un'email con il preventivo e la timeline.
+  </div>
+  <?php endif; ?>
 
   <section class="card">
     <div style="display: flex; justify-content: space-between; align-items: center; margin-bottom: 30px;">

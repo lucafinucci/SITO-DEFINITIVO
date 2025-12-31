@@ -133,7 +133,7 @@ export default function FinchAIMockupAnimated() {
     { id: "hero", label: "Finch-AI Platform" },
     { id: "come-funziona", label: "Soluzioni" },
     { id: "contatti", label: "Demo" },
-    { id: "area-clienti", label: "Area Clienti", href: "/area-clienti/" },
+    { id: "area-clienti", label: "Area Clienti", href: "/area-clienti/login.php" },
   ];
 
   return (

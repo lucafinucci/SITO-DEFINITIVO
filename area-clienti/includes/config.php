@@ -66,8 +66,16 @@ class Config {
             'CSRF_TOKEN_LIFETIME' => '3600',
             'LOGIN_MAX_ATTEMPTS' => '5',
             'LOGIN_LOCKOUT_TIME' => '900',
-            'KPI_API_ENDPOINT' => 'https://app.finch-ai.it/api/kpi/documenti',
-            'KPI_API_KEY' => '',
+
+            // WebApp API Configuration
+            // LOCALE: usa mock API
+            'WEBAPP_API_URL' => 'http://localhost/area-clienti/api/mock-webapp-api.php',
+            'WEBAPP_API_TOKEN' => 'test_token_locale', // Token per test locale
+
+            // PRODUZIONE: decommentare quando vai online
+            // 'WEBAPP_API_URL' => 'https://app.finch-ai.it/api',
+            // 'WEBAPP_API_TOKEN' => '', // Inserire token di autenticazione
+
             'APP_ENV' => 'production',
             'APP_DEBUG' => 'false',
             'APP_URL' => 'http://localhost',

@@ -13,8 +13,30 @@ export default defineConfig({
   server: {
     proxy: {
       '/area-clienti': {
-        target: 'http://localhost/SITO',
+        target: 'http://localhost',
         changeOrigin: true,
+        secure: false,
+        rewrite: (path) => path.replace(/^\/area-clienti/, '/SITO/area-clienti'),
+        configure: (proxy) => {
+          proxy.on('proxyReq', (proxyReq, req) => {
+            // Forward cookies from browser to backend
+            if (req.headers.cookie) {
+              proxyReq.setHeader('cookie', req.headers.cookie);
+            }
+          });
+          proxy.on('proxyRes', (proxyRes) => {
+            // Forward Set-Cookie headers from backend to browser
+            const setCookie = proxyRes.headers['set-cookie'];
+            if (setCookie) {
+              proxyRes.headers['set-cookie'] = setCookie;
+            }
+          });
+        },
+      },
+      '/assets': {
+        target: 'http://localhost',
+        changeOrigin: true,
+        rewrite: (path) => path.replace(/^\/assets/, '/SITO/assets'),
       },
     },
   },

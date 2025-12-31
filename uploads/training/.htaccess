@@ -1,0 +1,14 @@
+# Blocca accesso diretto ai file caricati
+# Solo gli script PHP autenticati possono accedere a questi file
+
+Order Deny,Allow
+Deny from all
+
+# Opzionale: permetti solo al server locale di accedere
+# Allow from 127.0.0.1
+# Allow from ::1
+
+<Files ~ "\.(php|html|htm)$">
+    # Blocca esecuzione di script PHP caricati
+    deny from all
+</Files>

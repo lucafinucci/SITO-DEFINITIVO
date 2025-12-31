@@ -14,12 +14,6 @@ class ErrorHandler {
      * Inizializza error handler
      */
     public static function init() {
-        // TEMPORANEAMENTE DISABILITATO PER DEBUG
-        // Mostra TUTTI gli errori
-        error_reporting(E_ALL);
-        ini_set('display_errors', '1');
-        return; // Salta l'inizializzazione custom
-
         // Custom error handler
         set_error_handler([self::class, 'handleError']);
 
@@ -29,13 +23,16 @@ class ErrorHandler {
         // Shutdown handler per fatal errors
         register_shutdown_function([self::class, 'handleShutdown']);
 
-        // Configura error reporting
+        // Configura error reporting basato sull'ambiente
         if (Config::isDebug()) {
+            // Modalità debug: mostra tutti gli errori
             error_reporting(E_ALL);
             ini_set('display_errors', '1');
         } else {
+            // Modalità produzione: logga errori ma non mostrarli
             error_reporting(E_ALL & ~E_DEPRECATED & ~E_STRICT);
             ini_set('display_errors', '0');
+            ini_set('log_errors', '1');
         }
     }
 
@@ -114,7 +111,7 @@ class ErrorHandler {
     /**
      * Log error to file
      */
-    private static function logError($message) {
+    public static function logError($message) {
         $logDir = dirname(self::$errorLog);
 
         if (!is_dir($logDir)) {

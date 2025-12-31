@@ -9,6 +9,11 @@ if (session_status() === PHP_SESSION_NONE) {
     session_start();
 }
 
+// CSRF token per richieste POST
+if (empty($_SESSION['csrf_token'])) {
+    $_SESSION['csrf_token'] = bin2hex(random_bytes(32));
+}
+
 // Verifica autenticazione
 if (!isset($_SESSION['cliente_id'])) {
     header('Location: /area-clienti/login.php');

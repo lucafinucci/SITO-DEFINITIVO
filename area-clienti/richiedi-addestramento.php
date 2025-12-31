@@ -6,22 +6,93 @@ require __DIR__ . '/includes/security.php';
 $clienteId = $_SESSION['cliente_id'];
 $clienteEmail = $_SESSION['cliente_email'];
 
+$requestedServizioId = (int)($_GET['servizio_id'] ?? $_POST['servizio_id'] ?? 0);
+$requestedRichiestaId = (int)($_GET['richiesta_id'] ?? $_POST['richiesta_id'] ?? 0);
+$servizioId = 0;
+
+if ($requestedServizioId > 0) {
+    $stmt = $pdo->prepare('
+        SELECT 1
+        FROM utenti_servizi
+        WHERE user_id = :user_id AND servizio_id = :servizio_id AND stato = "attivo"
+        LIMIT 1
+    ');
+    $stmt->execute([
+        'user_id' => $clienteId,
+        'servizio_id' => $requestedServizioId
+    ]);
+    if ($stmt->fetchColumn()) {
+        $servizioId = $requestedServizioId;
+    }
+}
+
+if ($servizioId <= 0) {
+    // Preferisci Document Intelligence se presente/attivo
+    $stmt = $pdo->prepare('
+        SELECT s.id
+        FROM utenti_servizi us
+        JOIN servizi s ON us.servizio_id = s.id
+        WHERE us.user_id = :user_id AND us.stato = "attivo" AND s.codice = "DOC-INT"
+        ORDER BY us.data_attivazione DESC
+        LIMIT 1
+    ');
+    $stmt->execute(['user_id' => $clienteId]);
+    $servizioId = (int)($stmt->fetchColumn() ?: 0);
+}
+
+if ($servizioId <= 0) {
+    // Fallback: primo servizio attivo dell'utente
+    $stmt = $pdo->prepare('
+        SELECT s.id
+        FROM utenti_servizi us
+        JOIN servizi s ON us.servizio_id = s.id
+        WHERE us.user_id = :user_id AND us.stato = "attivo"
+        ORDER BY us.data_attivazione DESC
+        LIMIT 1
+    ');
+    $stmt->execute(['user_id' => $clienteId]);
+    $servizioId = (int)($stmt->fetchColumn() ?: 0);
+}
+
+$returnUrl = $servizioId > 0
+    ? ('/area-clienti/servizio-dettaglio.php?id=' . $servizioId . '&upload=success')
+    : '/area-clienti/dashboard.php?upload=success';
+
+// URL di ritorno dopo invio richiesta (sempre servizio-dettaglio)
+
 // Recupera info utente
 $stmt = $pdo->prepare('SELECT nome, cognome, azienda FROM utenti WHERE id = :id');
 $stmt->execute(['id' => $clienteId]);
 $utente = $stmt->fetch();
 
-// Pre-compila il tipo di modello se passato via URL
-$tipoPrecompilato = '';
-if (isset($_GET['tipo'])) {
+// Se c'è una richiesta in corso, consenti "ripresa" senza reinserire tutto
+$resumeRichiesta = null;
+if ($requestedRichiestaId > 0) {
+    $stmt = $pdo->prepare('
+        SELECT id, tipo_modello, descrizione, num_documenti_stimati, stato
+        FROM richieste_addestramento
+        WHERE id = :id AND user_id = :user_id AND stato IN ("in_attesa", "in_lavorazione")
+        LIMIT 1
+    ');
+    $stmt->execute(['id' => $requestedRichiestaId, 'user_id' => $clienteId]);
+    $resumeRichiesta = $stmt->fetch(PDO::FETCH_ASSOC) ?: null;
+}
+
+  // Pre-compila il tipo di modello se passato via URL
+  $tipoPrecompilato = '';
+  if (isset($_GET['tipo'])) {
     $tipoMappato = [
         'DDT & Fatture' => 'fatture',
         'Logistica' => 'bolle',
         'Contratti' => 'contratti',
         'Procurement' => 'ordini'
     ];
-    $tipoPrecompilato = $tipoMappato[$_GET['tipo']] ?? '';
-}
+  $tipoPrecompilato = $tipoMappato[$_GET['tipo']] ?? '';
+  }
+
+  if ($resumeRichiesta) {
+      $tipoPrecompilato = $resumeRichiesta['tipo_modello'] ?? $tipoPrecompilato;
+  }
 
 $success = $error = '';
 
@@ -73,9 +144,26 @@ Data: " . date('d/m/Y H:i');
                 $headers = "From: noreply@finch-ai.it\r\n";
                 $headers .= "Reply-To: {$clienteEmail}\r\n";
 
-                @mail($to, $subject, $message, $headers);
+                $mailSent = mail($to, $subject, $message, $headers);
+
+                if (!$mailSent) {
+                    ErrorHandler::logError('Failed to send training request email', [
+                        'richiesta_id' => $richiestaId,
+                        'user_id' => $clienteId,
+                        'email_to' => $to
+                    ]);
+                } else {
+                    ErrorHandler::logAccess('Training request email sent', [
+                        'richiesta_id' => $richiestaId,
+                        'user_id' => $clienteId
+                    ]);
+                }
 
                 $success = 'Richiesta inviata con successo! Ti contatteremo a breve.';
+
+                // Redirect alla pagina di origine
+                header('Location: ' . $returnUrl);
+                exit;
             } catch (PDOException $e) {
                 ErrorHandler::logError('Errore salvataggio richiesta addestramento: ' . $e->getMessage());
                 $error = 'Errore nel salvataggio della richiesta. Riprova.';
@@ -162,7 +250,9 @@ Data: " . date('d/m/Y H:i');
 <main class="container">
 
   <div style="margin-bottom: 20px;">
-    <a href="/area-clienti/servizio-dettaglio.php?id=1" style="color: var(--accent1);">← Torna a Document Intelligence</a>
+    <a href="/area-clienti/servizio-dettaglio.php?id=1" style="color: var(--accent1);">
+      ← Torna a Document Intelligence
+    </a>
   </div>
 
   <?php if ($success): ?>
@@ -179,13 +269,25 @@ Data: " . date('d/m/Y H:i');
 
     <form method="post" id="training-form" enctype="multipart/form-data" style="margin-top: 30px;">
       <?php echo Security::csrfField(); ?>
+      <?php if ($servizioId > 0): ?>
+        <input type="hidden" name="servizio_id" value="<?= (int)$servizioId ?>">
+      <?php endif; ?>
+      <?php if (!empty($resumeRichiesta['id'])): ?>
+        <input type="hidden" name="richiesta_id" value="<?= (int)$resumeRichiesta['id'] ?>">
+        <div class="alert" style="margin-bottom: 20px;">
+          Stai aggiungendo documenti alla richiesta in corso (#<?= (int)$resumeRichiesta['id'] ?>).
+        </div>
+      <?php endif; ?>
 
       <!-- Tipo Modello -->
       <div style="margin-bottom: 24px;">
         <label style="display: block; margin-bottom: 8px; font-weight: 600;">
           Tipo di Modello <span style="color: #ef4444;">*</span>
         </label>
-        <select name="tipo_modello" required style="width: 100%; padding: 12px; background: #0f172a; border: 1px solid var(--border); border-radius: 8px; color: var(--text);">
+        <?php if (!empty($resumeRichiesta['id'])): ?>
+          <input type="hidden" name="tipo_modello" value="<?= htmlspecialchars($tipoPrecompilato) ?>">
+        <?php endif; ?>
+        <select name="tipo_modello" required <?= !empty($resumeRichiesta['id']) ? 'disabled' : '' ?> style="width: 100%; padding: 12px; background: #0f172a; border: 1px solid var(--border); border-radius: 8px; color: var(--text);">
           <option value="">Seleziona tipo di modello...</option>
           <option value="fatture" <?= $tipoPrecompilato === 'fatture' ? 'selected' : '' ?>>Fatture Elettroniche</option>
           <option value="ddt" <?= $tipoPrecompilato === 'ddt' ? 'selected' : '' ?>>DDT (Documenti di Trasporto)</option>
@@ -208,7 +310,8 @@ Data: " . date('d/m/Y H:i');
           rows="5"
           placeholder="Descrivi il tipo di documenti e i dati che vuoi estrarre automaticamente..."
           style="width: 100%; padding: 12px; background: #0f172a; border: 1px solid var(--border); border-radius: 8px; color: var(--text); resize: vertical; font-family: inherit;"
-        ></textarea>
+          <?= !empty($resumeRichiesta['id']) ? 'readonly' : '' ?>
+        ><?= !empty($resumeRichiesta['id']) ? htmlspecialchars((string)$resumeRichiesta['descrizione']) : '' ?></textarea>
         <p class="muted small" style="margin-top: 4px;">
           Es: "Fatture fornitori con estrazione di: codice fornitore, data, importo, IVA, codici articolo"
         </p>
@@ -227,6 +330,8 @@ Data: " . date('d/m/Y H:i');
           required
           placeholder="Es: 50"
           style="width: 100%; padding: 12px; background: #0f172a; border: 1px solid var(--border); border-radius: 8px; color: var(--text);"
+          value="<?= !empty($resumeRichiesta['id']) ? (int)$resumeRichiesta['num_documenti_stimati'] : '' ?>"
+          <?= !empty($resumeRichiesta['id']) ? 'readonly' : '' ?>
         >
         <p class="muted small" style="margin-top: 4px;">
           Consigliati: minimo 30 documenti per un addestramento accurato
@@ -438,19 +543,35 @@ document.getElementById('training-form').addEventListener('submit', async (e) =>
     });
 
     xhr.addEventListener('load', () => {
+      console.log('XHR Status:', xhr.status);
+      console.log('XHR Response:', xhr.responseText);
+
       if (xhr.status === 200) {
-        const response = JSON.parse(xhr.responseText);
-        if (response.success) {
-          // VERSIONE AGGIORNATA 2024-12-15 v2
-          console.log('Upload completato! Redirect URL:', response.redirect_url);
-          const redirectUrl = response.redirect_url || '/area-clienti/servizio-dettaglio.php?id=1';
-          window.location.href = redirectUrl;
-        } else {
-          alert('Errore: ' + response.error);
+        try {
+          const response = JSON.parse(xhr.responseText);
+          console.log('Parsed response:', response);
+
+          if (response.success) {
+            // VERSIONE AGGIORNATA 2024-12-16 v4 - Sempre redirect a servizio-dettaglio
+            console.log('Upload completato! Redirect URL:', response.redirect_url);
+            const redirectUrl = response.redirect_url || <?php echo json_encode($returnUrl, JSON_UNESCAPED_SLASHES); ?>;
+            console.log('Redirecting to:', redirectUrl);
+            window.location.href = redirectUrl;
+          } else {
+            console.error('API returned error:', response.error);
+            alert('Errore: ' + response.error);
+            uploadProgress.style.display = 'none';
+            submitBtn.disabled = false;
+          }
+        } catch (e) {
+          console.error('JSON parse error:', e);
+          console.error('Response was:', xhr.responseText);
+          alert('Errore nel parsing della risposta');
           uploadProgress.style.display = 'none';
           submitBtn.disabled = false;
         }
       } else {
+        console.error('HTTP error:', xhr.status);
         alert('Errore di caricamento. Riprova.');
         uploadProgress.style.display = 'none';
         submitBtn.disabled = false;
