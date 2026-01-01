@@ -1,5 +1,11 @@
 import { useEffect, useRef, useState } from "react";
 import ContactForm from "./ContactForm";
+import { 
+  FileStack, Network, TrendingDown, Clock, DollarSign, Target,
+  Factory, Truck, Briefcase, ShoppingCart, Zap, Rocket, Unlock, TrendingUp,
+  Eye, FileText, Settings, Wallet, Package, BarChart3, MessageSquare, Globe,
+  FileText as FileTextIcon, LineChart, Wallet as WalletIcon, Warehouse
+} from "lucide-react";
 
 export default function FinchAIMockupAnimated() {
   const canvasRef = useRef(null);
@@ -147,22 +153,7 @@ export default function FinchAIMockupAnimated() {
       output: "Dati documentali strutturati e verificati",
       status: "Operativo",
       cta: "Scopri come funziona",
-      icon: (
-        <svg
-          viewBox="0 0 24 24"
-          className="h-6 w-6"
-          fill="none"
-          stroke="currentColor"
-          strokeWidth="1.6"
-          strokeLinecap="round"
-          strokeLinejoin="round"
-          aria-hidden="true"
-        >
-          <path d="M7 3h7l5 5v13a1 1 0 0 1-1 1H7a1 1 0 0 1-1-1V4a1 1 0 0 1 1-1z" />
-          <path d="M14 3v5h5" />
-          <path d="M9 13h6M9 17h6" />
-        </svg>
-      ),
+      icon: <FileTextIcon className="h-6 w-6" strokeWidth={1.5} />,
     },
     {
       title: "Finch-AI Production Intelligence",
@@ -171,25 +162,7 @@ export default function FinchAIMockupAnimated() {
       output: "Pianificazione operativa e supporto decisionale in produzione",
       status: "Operativo",
       cta: "Vedi la produzione",
-      icon: (
-        <svg
-          viewBox="0 0 24 24"
-          className="h-6 w-6"
-          fill="none"
-          stroke="currentColor"
-          strokeWidth="1.6"
-          strokeLinecap="round"
-          strokeLinejoin="round"
-          aria-hidden="true"
-        >
-          <path d="M4 19h16" />
-          <path d="M6 16l4-6 4 3 4-5" />
-          <circle cx="6" cy="16" r="1.2" fill="currentColor" />
-          <circle cx="10" cy="10" r="1.2" fill="currentColor" />
-          <circle cx="14" cy="13" r="1.2" fill="currentColor" />
-          <circle cx="18" cy="8" r="1.2" fill="currentColor" />
-        </svg>
-      ),
+      icon: <LineChart className="h-6 w-6" strokeWidth={1.5} />,
     },
     {
       title: "Finch-AI Finance Intelligence",
@@ -198,22 +171,7 @@ export default function FinchAIMockupAnimated() {
       output: "Forecast e indicatori economici intelligenti",
       status: "Operativo",
       cta: "Esplora la finanza",
-      icon: (
-        <svg
-          viewBox="0 0 24 24"
-          className="h-6 w-6"
-          fill="none"
-          stroke="currentColor"
-          strokeWidth="1.6"
-          strokeLinecap="round"
-          strokeLinejoin="round"
-          aria-hidden="true"
-        >
-          <rect x="3" y="6" width="18" height="12" rx="2" />
-          <circle cx="12" cy="12" r="3" />
-          <path d="M7 9h.01M17 15h.01" />
-        </svg>
-      ),
+      icon: <WalletIcon className="h-6 w-6" strokeWidth={1.5} />,
     },
     {
       title: "Finch-AI Warehouse Intelligence",
@@ -222,22 +180,7 @@ export default function FinchAIMockupAnimated() {
       output: "Magazzino, ordini e offerte sincronizzati in un unico flusso",
       status: "Operativo",
       cta: "Scopri il magazzino",
-      icon: (
-        <svg
-          viewBox="0 0 24 24"
-          className="h-6 w-6"
-          fill="none"
-          stroke="currentColor"
-          strokeWidth="1.6"
-          strokeLinecap="round"
-          strokeLinejoin="round"
-          aria-hidden="true"
-        >
-          <path d="M3 7l9-4 9 4v10l-9 4-9-4V7z" />
-          <path d="M3 7l9 4 9-4" />
-          <path d="M12 11v10" />
-        </svg>
-      ),
+      icon: <Warehouse className="h-6 w-6" strokeWidth={1.5} />,
     },
   ];
 
@@ -436,41 +379,45 @@ export default function FinchAIMockupAnimated() {
             <div className="grid gap-6 md:grid-cols-2 lg:grid-cols-3">
               {[
                 {
-                  icon: "📄",
+                  icon: FileStack,
                   title: "Documenti Caotici",
                   desc: "DDT, fatture e ordini gestiti manualmente. Ore perse in data entry, errori frequenti, informazioni che si perdono tra email e fogli di calcolo."
                 },
                 {
-                  icon: "🔌",
+                  icon: Network,
                   title: "Sistemi Isolati",
                   desc: "ERP, CRM, gestionale produzione non comunicano. Dati duplicati, sincronizzazione manuale, visibilità zero sull'insieme."
                 },
                 {
-                  icon: "📊",
+                  icon: TrendingDown,
                   title: "Decisioni al Buio",
                   desc: "Report obsoleti, KPI non aggiornati, analisi che arrivano troppo tardi. Opportunità perse e problemi scoperti in ritardo."
                 },
                 {
-                  icon: "⏱️",
+                  icon: Clock,
                   title: "Tempo Sprecato",
                   desc: "Il tuo team passa ore a cercare informazioni, verificare dati e creare report invece di concentrarsi su attività strategiche."
                 },
                 {
-                  icon: "💸",
+                  icon: DollarSign,
                   title: "Costi Nascosti",
                   desc: "Inefficienze operative, errori di processo, opportunità di ottimizzazione non colte. Il ROI potenziale che sta sfuggendo."
                 },
                 {
-                  icon: "🎯",
+                  icon: Target,
                   title: "Controllo Limitato",
                   desc: "Manca una visione unificata di produzione, finanza e operations. Impossibile prendere decisioni data-driven in tempo reale."
                 }
-              ].map((problem, i) => (
+              ].map((problem, i) => {
+                const IconComponent = problem.icon;
+                return (
                 <div
                   key={i}
                   className="group relative overflow-hidden rounded-2xl border border-slate-700/60 bg-slate-900/60 backdrop-blur p-6 transition-all hover:border-red-500/50 hover:bg-slate-900/80 hover:shadow-[0_0_30px_rgba(239,68,68,0.2)]"
                 >
-                  <div className="text-4xl mb-4">{problem.icon}</div>
+                  <div className="mb-4 text-red-400">
+                    <IconComponent className="h-10 w-10" strokeWidth={1.5} />
+                  </div>
                   <h3 className="text-xl font-bold text-white mb-3 group-hover:text-red-300 transition-colors">
                     {problem.title}
                   </h3>
@@ -478,7 +425,8 @@ export default function FinchAIMockupAnimated() {
                     {problem.desc}
                   </p>
                 </div>
-              ))}
+                );
+              })}
             </div>
           </div>
         </section>
@@ -493,7 +441,8 @@ export default function FinchAIMockupAnimated() {
               </div>
               <div className="relative space-y-6">
                 <div className="inline-flex items-center gap-2 rounded-full border border-cyan-500/40 bg-cyan-500/10 px-4 py-1.5 text-xs font-semibold uppercase tracking-wider text-cyan-200">
-                  🌐 Ecosistema Finch-AI
+                  <Globe className="h-4 w-4" />
+                  Ecosistema Finch-AI
                 </div>
                 <h2 className="text-3xl sm:text-4xl font-extrabold text-white">
                   L'intelligenza artificiale che cresce con la tua azienda.
@@ -618,7 +567,7 @@ export default function FinchAIMockupAnimated() {
               {[
                 {
                   sector: "Manufacturing & Produzione",
-                  icon: "🏭",
+                  icon: Factory,
                   challenges: "Gestione DDT, tracciabilità lotti, integrazione MES/ERP, monitoraggio OEE",
                   solutions: [
                     "Automazione completa ciclo DDT in/out",
@@ -630,7 +579,7 @@ export default function FinchAIMockupAnimated() {
                 },
                 {
                   sector: "Logistica & Distribuzione",
-                  icon: "🚚",
+                  icon: Truck,
                   challenges: "Volume documenti elevato, multi-vettore, gestione resi, fatturazione automatica",
                   solutions: [
                     "OCR multi-formato per ogni vettore",
@@ -642,7 +591,7 @@ export default function FinchAIMockupAnimated() {
                 },
                 {
                   sector: "Servizi & Consulenza",
-                  icon: "💼",
+                  icon: Briefcase,
                   challenges: "Timesheet, fatturazione progetti, controllo margini, reportistica clienti",
                   solutions: [
                     "Automazione timesheet e approval",
@@ -654,7 +603,7 @@ export default function FinchAIMockupAnimated() {
                 },
                 {
                   sector: "Retail & E-commerce",
-                  icon: "🛒",
+                  icon: ShoppingCart,
                   challenges: "Gestione ordini multi-canale, inventario, fornitori, riconciliazione pagamenti",
                   solutions: [
                     "Unificazione ordini da tutti i canali",
@@ -664,12 +613,16 @@ export default function FinchAIMockupAnimated() {
                   ],
                   results: "100% visibilità stock, zero rotture di stock critiche"
                 }
-              ].map((item, i) => (
+              ].map((item, i) => {
+                const IconComponent = item.icon;
+                return (
                 <div
                   key={i}
                   className="group relative overflow-hidden rounded-3xl border border-slate-700/60 bg-slate-900/60 backdrop-blur p-8 transition-all hover:border-blue-500/50 hover:bg-slate-900/80 hover:shadow-[0_0_40px_rgba(59,130,246,0.2)]"
                 >
-                  <div className="text-5xl mb-4">{item.icon}</div>
+                  <div className="mb-4 text-blue-400">
+                    <IconComponent className="h-12 w-12" strokeWidth={1.5} />
+                  </div>
                   <h3 className="text-2xl font-bold text-white mb-4 group-hover:text-blue-300 transition-colors">
                     {item.sector}
                   </h3>
@@ -697,7 +650,8 @@ export default function FinchAIMockupAnimated() {
                     <div className="text-sm font-semibold text-blue-400">{item.results}</div>
                   </div>
                 </div>
-              ))}
+                );
+              })}
             </div>
           </div>
         </section>
@@ -723,28 +677,30 @@ export default function FinchAIMockupAnimated() {
                 {
                   metric: "70%",
                   label: "Riduzione tempo elaborazione documenti",
-                  icon: "⚡",
+                  icon: Zap,
                   desc: "Da ore a minuti per processare DDT, fatture e ordini"
                 },
                 {
                   metric: "+1000",
                   label: "Documenti/giorno analizzati automaticamente",
-                  icon: "📄",
+                  icon: FileText,
                   desc: "Capacità di elaborazione scalabile senza limiti"
                 },
                 {
                   metric: "99.2%",
                   label: "Accuratezza estrazione dati",
-                  icon: "🎯",
+                  icon: Target,
                   desc: "OCR con validazione intelligente domain-specific"
                 },
                 {
                   metric: "24/7",
                   label: "Monitoraggio operativo continuo",
-                  icon: "👁️",
+                  icon: Eye,
                   desc: "Alert real-time su anomalie e opportunità"
                 }
-              ].map((item, i) => (
+              ].map((item, i) => {
+                const IconComponent = item.icon;
+                return (
                 <div
                   key={i}
                   className="group relative overflow-hidden rounded-2xl border border-slate-700/60 bg-gradient-to-br from-slate-900/80 to-slate-900/40 backdrop-blur p-6 transition-all hover:border-cyan-500/50 hover:shadow-[0_0_30px_rgba(34,211,238,0.2)]"
@@ -754,13 +710,16 @@ export default function FinchAIMockupAnimated() {
                   </div>
 
                   <div className="relative">
-                    <div className="text-4xl mb-4">{item.icon}</div>
+                    <div className="mb-4 text-cyan-400">
+                      <IconComponent className="h-10 w-10" strokeWidth={1.5} />
+                    </div>
                     <div className="text-4xl font-bold text-cyan-400 mb-2">{item.metric}</div>
                     <div className="text-sm font-semibold text-white mb-2">{item.label}</div>
                     <div className="text-xs text-slate-400 leading-relaxed">{item.desc}</div>
                   </div>
                 </div>
-              ))}
+                );
+              })}
             </div>
 
             {/* Vantaggi Competitivi */}
@@ -769,28 +728,33 @@ export default function FinchAIMockupAnimated() {
                 {
                   title: "Deploy Rapido",
                   desc: "Operativi in 4-8 settimane, non mesi. Integrazione plug-and-play con i tuoi sistemi esistenti.",
-                  icon: "🚀"
+                  icon: Rocket
                 },
                 {
                   title: "Zero Vendor Lock-in",
                   desc: "Dati sempre tuoi, esportabili, API aperte. Integrazione con qualsiasi ERP, CRM o gestionale.",
-                  icon: "🔓"
+                  icon: Unlock
                 },
                 {
                   title: "ROI Garantito",
                   desc: "Break-even medio in 6 mesi. Calcolo ROI personalizzato prima di partire. Nessun costo nascosto.",
-                  icon: "💰"
+                  icon: TrendingUp
                 }
-              ].map((item, i) => (
+              ].map((item, i) => {
+                const IconComponent = item.icon;
+                return (
                 <div
                   key={i}
                   className="relative overflow-hidden rounded-2xl border border-slate-700/60 bg-slate-900/60 backdrop-blur p-6 transition-all hover:border-blue-500/50 hover:bg-slate-900/80"
                 >
-                  <div className="text-4xl mb-4">{item.icon}</div>
+                  <div className="mb-4 text-blue-400">
+                    <IconComponent className="h-10 w-10" strokeWidth={1.5} />
+                  </div>
                   <h3 className="text-xl font-bold text-white mb-3">{item.title}</h3>
                   <p className="text-sm text-slate-300/90 leading-relaxed">{item.desc}</p>
                 </div>
-              ))}
+                );
+              })}
             </div>
           </div>
         </section>
@@ -895,15 +859,17 @@ export default function FinchAIMockupAnimated() {
           {/* Stats Bar - Mobile Horizontal Scroll */}
           <div className="mt-8 flex sm:grid gap-4 sm:grid-cols-3 overflow-x-auto snap-x snap-mandatory scrollbar-hide pb-4 -mx-4 px-4 sm:mx-0 sm:px-0 sm:overflow-visible">
             {[
-              { icon: "📊", label: "Reports generati", value: "1.2K", trend: "+12%" },
-              { icon: "⚡", label: "Automazioni attive", value: "47", trend: "+8%" },
-              { icon: "🎯", label: "Accuracy media", value: "98.5%", trend: "+2.1%" },
-            ].map((stat, i) => (
+              { icon: BarChart3, label: "Reports generati", value: "1.2K", trend: "+12%" },
+              { icon: Zap, label: "Automazioni attive", value: "47", trend: "+8%" },
+              { icon: Target, label: "Accuracy media", value: "98.5%", trend: "+2.1%" },
+            ].map((stat, i) => {
+              const IconComponent = stat.icon;
+              return (
               <div key={i} className="group relative overflow-hidden rounded-xl border border-slate-700/60 bg-slate-900/60 p-4 backdrop-blur transition-all hover:border-cyan-500/40 hover:shadow-lg hover:shadow-cyan-500/10 min-w-[75vw] sm:min-w-0 snap-center touch-pan-x">
                 <div className="flex items-center justify-between">
                   <div className="w-full">
                     <div className="flex items-center gap-2 mb-1">
-                      <span className="text-xl sm:text-2xl">{stat.icon}</span>
+                      <IconComponent className="h-5 w-5 sm:h-6 sm:w-6 text-cyan-400" strokeWidth={1.5} />
                       <span className="text-xs font-medium text-slate-400">{stat.label}</span>
                     </div>
                     <div className="flex items-baseline gap-2">
@@ -913,7 +879,8 @@ export default function FinchAIMockupAnimated() {
                   </div>
                 </div>
               </div>
-            ))}
+              );
+            })}
           </div>
 
           {/* Scroll Indicator for Mobile */}

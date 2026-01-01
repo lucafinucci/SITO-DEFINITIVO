@@ -1,6 +1,7 @@
 import { useState } from 'react';
 import { motion, AnimatePresence } from 'framer-motion';
 import './ChatbotDemo.css';
+import { Link, Smartphone, Brain, Zap, Lock, BarChart3 } from 'lucide-react';
 
 function ChatbotDemo() {
   const [isOpen, setIsOpen] = useState(false);
@@ -165,42 +166,54 @@ function ChatbotDemo() {
             <h3>✨ Funzionalità</h3>
             <ul className="features-list">
               <li>
-                <span className="feature-icon">🔗</span>
+                <span className="feature-icon">
+                  <Link className="h-5 w-5" strokeWidth={1.5} />
+                </span>
                 <div>
                   <strong>Integrazione Multi-Sistema</strong>
                   <p>Accesso unificato a ERP, CRM, Excel, database</p>
                 </div>
               </li>
               <li>
-                <span className="feature-icon">📱</span>
+                <span className="feature-icon">
+                  <Smartphone className="h-5 w-5" strokeWidth={1.5} />
+                </span>
                 <div>
                   <strong>Multicanale</strong>
                   <p>Web, Teams, WhatsApp, gestionale, mobile</p>
                 </div>
               </li>
               <li>
-                <span className="feature-icon">🧠</span>
+                <span className="feature-icon">
+                  <Brain className="h-5 w-5" strokeWidth={1.5} />
+                </span>
                 <div>
                   <strong>AI Contestuale</strong>
                   <p>Comprende domande complesse e context</p>
                 </div>
               </li>
               <li>
-                <span className="feature-icon">⚡</span>
+                <span className="feature-icon">
+                  <Zap className="h-5 w-5" strokeWidth={1.5} />
+                </span>
                 <div>
                   <strong>Risposte Real-Time</strong>
                   <p>Dati sempre aggiornati, zero latenza</p>
                 </div>
               </li>
               <li>
-                <span className="feature-icon">🔐</span>
+                <span className="feature-icon">
+                  <Lock className="h-5 w-5" strokeWidth={1.5} />
+                </span>
                 <div>
                   <strong>Sicurezza Enterprise</strong>
                   <p>Permessi granulari, GDPR compliant</p>
                 </div>
               </li>
               <li>
-                <span className="feature-icon">📊</span>
+                <span className="feature-icon">
+                  <BarChart3 className="h-5 w-5" strokeWidth={1.5} />
+                </span>
                 <div>
                   <strong>Visualizzazioni Automatiche</strong>
                   <p>Grafici e dashboard on-demand</p>

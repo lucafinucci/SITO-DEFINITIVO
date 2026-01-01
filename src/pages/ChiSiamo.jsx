@@ -1,3 +1,5 @@
+import { Target, Rocket, Wrench, Handshake, BarChart3, GraduationCap } from 'lucide-react';
+
 function ChiSiamo() {
   return (
     <div className="min-h-screen bg-gradient-to-b from-slate-950 to-slate-900 text-white">
@@ -20,7 +22,9 @@ function ChiSiamo() {
           {/* Mission & Vision */}
           <div className="grid md:grid-cols-2 gap-8 mb-16">
             <div className="rounded-3xl border border-slate-700/60 bg-slate-900/60 backdrop-blur p-8">
-              <div className="text-4xl mb-4">🎯</div>
+              <div className="mb-4 text-cyan-400">
+                <Target className="h-10 w-10" strokeWidth={1.5} />
+              </div>
               <h2 className="text-2xl font-bold text-white mb-4">La Nostra Missione</h2>
               <p className="text-slate-300/90 leading-relaxed">
                 Rendere l'intelligenza artificiale accessibile e concreta per le PMI italiane.
@@ -29,7 +33,9 @@ function ChiSiamo() {
             </div>
 
             <div className="rounded-3xl border border-slate-700/60 bg-slate-900/60 backdrop-blur p-8">
-              <div className="text-4xl mb-4">🚀</div>
+              <div className="mb-4 text-cyan-400">
+                <Rocket className="h-10 w-10" strokeWidth={1.5} />
+              </div>
               <h2 className="text-2xl font-bold text-white mb-4">La Nostra Visione</h2>
               <p className="text-slate-300/90 leading-relaxed">
                 Un'Italia dove ogni azienda, indipendentemente dalla dimensione,
@@ -44,32 +50,37 @@ function ChiSiamo() {
             <div className="grid sm:grid-cols-2 lg:grid-cols-4 gap-6">
               {[
                 {
-                  icon: "🔧",
+                  icon: Wrench,
                   title: "Pragmatismo",
                   desc: "Soluzioni concrete che risolvono problemi reali, non tecnologia fine a se stessa"
                 },
                 {
-                  icon: "🤝",
+                  icon: Handshake,
                   title: "Partnership",
                   desc: "Non siamo fornitori, siamo partner del tuo successo a lungo termine"
                 },
                 {
-                  icon: "📊",
+                  icon: BarChart3,
                   title: "Trasparenza",
                   desc: "ROI chiaro, metriche misurabili, nessun costo nascosto o promesse irrealistiche"
                 },
                 {
-                  icon: "🎓",
+                  icon: GraduationCap,
                   title: "Know-how",
                   desc: "Competenza tecnica profonda unita a comprensione del business manifatturiero"
                 }
-              ].map((value, i) => (
+              ].map((value, i) => {
+                const IconComponent = value.icon;
+                return (
                 <div key={i} className="rounded-2xl border border-slate-700/60 bg-slate-900/60 backdrop-blur p-6 text-center">
-                  <div className="text-4xl mb-3">{value.icon}</div>
+                  <div className="mb-3 text-cyan-400 flex justify-center">
+                    <IconComponent className="h-10 w-10" strokeWidth={1.5} />
+                  </div>
                   <h3 className="text-lg font-bold text-white mb-2">{value.title}</h3>
                   <p className="text-sm text-slate-300/90 leading-relaxed">{value.desc}</p>
                 </div>
-              ))}
+                );
+              })}
             </div>
           </div>
 

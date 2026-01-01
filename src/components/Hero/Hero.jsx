@@ -1,5 +1,6 @@
 import { motion } from 'framer-motion';
 import './Hero.css';
+import { Rocket, BarChart3, Lightbulb, Target } from 'lucide-react';
 
 function Hero() {
   const handleAssessmentClick = () => {
@@ -27,7 +28,10 @@ function Hero() {
           transition={{ duration: 0.7, ease: "easeOut" }}
           className="hero-badge"
         >
-          <span className="badge-text">🚀 La tua azienda merita l'intelligenza artificiale</span>
+          <span className="badge-text flex items-center gap-2">
+            <Rocket className="h-4 w-4" />
+            La tua azienda merita l'intelligenza artificiale
+          </span>
         </motion.div>
 
         <motion.h1
@@ -74,14 +78,18 @@ function Hero() {
           className="cta-container"
         >
           <button className="cta-primary" onClick={handleAssessmentClick}>
-            <span className="cta-icon">📊</span>
+            <span className="cta-icon">
+              <BarChart3 className="h-5 w-5" />
+            </span>
             <span className="cta-content">
               <strong>Richiedi Assessment Gratuito</strong>
               <small>Analisi personalizzata dei tuoi processi</small>
             </span>
           </button>
           <button className="cta-secondary" onClick={handleServicesClick}>
-            <span className="cta-icon">💡</span>
+            <span className="cta-icon">
+              <Lightbulb className="h-5 w-5" />
+            </span>
             <span className="cta-content">
               <strong>Scopri le Soluzioni AI</strong>
               <small>7 moduli per ogni esigenza aziendale</small>
@@ -95,7 +103,10 @@ function Hero() {
           transition={{ duration: 0.6, delay: 0.5 }}
           className="vision-badge"
         >
-          <span>🎯 La nostra missione: rendere ogni decisione aziendale più rapida, consapevole e strategica attraverso un ecosistema AI completo che ottimizza produzione, amministrazione e direzione.</span>
+          <span className="flex items-start gap-2">
+            <Target className="h-5 w-5 flex-shrink-0 mt-0.5" />
+            La nostra missione: rendere ogni decisione aziendale più rapida, consapevole e strategica attraverso un ecosistema AI completo che ottimizza produzione, amministrazione e direzione.
+          </span>
         </motion.div>
       </div>
     </section>

@@ -1,5 +1,6 @@
 import { motion } from 'framer-motion';
 import './Ecosystem.css';
+import { Puzzle, FileText, Settings, Briefcase, Package, BarChart3, MessageSquare, Rocket, Lightbulb } from 'lucide-react';
 
 const containerVariants = {
   hidden: { opacity: 0 },
@@ -24,7 +25,7 @@ function Ecosystem() {
   const modules = {
     diagnosi: [
       {
-        icon: '🧩',
+        icon: Puzzle,
         title: 'Finch-AI Assessment',
         description: 'Analisi intelligente di processi, dati e KPI per individuare inefficienze e opportunità.',
         output: "Diagnosi operativa + piano d'azione",
@@ -33,26 +34,26 @@ function Ecosystem() {
     ],
     esecuzione: [
       {
-        icon: '🧾',
+        icon: FileText,
         title: 'Finch-AI Document Intelligence',
         description: 'OCR + AI per leggere DDT, fatture, ordini, contratti e documenti tecnici.',
         output: 'Database strutturato integrabile con gestionale',
       },
       {
-        icon: '⚙️',
+        icon: Settings,
         title: 'Finch-AI Production',
         description: 'Analisi, pianificazione e ottimizzazione della produzione con algoritmi predittivi.',
         output: 'Piano produzione ottimizzato + KPI',
         type: 'highlight',
       },
       {
-        icon: '💼',
+        icon: Briefcase,
         title: 'Finch-AI Finance',
         description: 'Analisi automatica di costi, ricavi, cash flow e previsioni economico-finanziarie.',
         output: 'Forecast + indicatori economici intelligenti',
       },
       {
-        icon: '📦',
+        icon: Package,
         title: 'Finch-AI Warehouse',
         description: 'Gestione intelligente del magazzino: scorte, movimenti, OCR logistico, previsioni e ottimizzazioni.',
         output: 'Giacenze sincronizzate + previsioni riordino',
@@ -60,13 +61,13 @@ function Ecosystem() {
     ],
     strategia: [
       {
-        icon: '📊',
+        icon: BarChart3,
         title: 'Finch-AI Strategic Planner',
         description: 'Simulazione scenari produttivi, economici e strategici.',
-        output: 'Piani strategici + simulazioni “what-if”',
+        output: 'Piani strategici + simulazioni "what-if"',
       },
       {
-        icon: '💬',
+        icon: MessageSquare,
         title: 'Finch-AI Conversational Assistant',
         description: 'Chatbot AI multicanale per interrogare KPI e dati aziendali con linguaggio naturale.',
         output: 'Accesso immediato a dati operativi e strategici',
@@ -84,8 +85,9 @@ function Ecosystem() {
           variants={containerVariants}
           className="ecosystem-header"
         >
-          <motion.h2 variants={itemVariants}>
-            🚀 7 Moduli AI che Trasformano la Tua Azienda
+          <motion.h2 variants={itemVariants} className="flex items-center gap-2">
+            <Rocket className="h-6 w-6" />
+            7 Moduli AI che Trasformano la Tua Azienda
           </motion.h2>
           <motion.p variants={itemVariants} className="ecosystem-subtitle">
             Un ecosistema completo per ridurre costi, automatizzare processi e prendere decisioni basate sui dati. Dall'assessment iniziale alla pianificazione strategica, ogni modulo risolve un problema reale.
@@ -101,47 +103,71 @@ function Ecosystem() {
         >
           {/* Colonna Diagnosi */}
           <motion.div variants={itemVariants} className="column-diagnosis">
-            <h3>🧩 Fase 1: Assessment & Diagnosi</h3>
-            {modules.diagnosi.map((module, index) => (
+            <h3 className="flex items-center gap-2">
+              <Puzzle className="h-5 w-5" />
+              Fase 1: Assessment & Diagnosi
+            </h3>
+            {modules.diagnosi.map((module, index) => {
+              const IconComponent = module.icon;
+              return (
               <div key={index} className={`module-card ${module.type || ''}`}>
-                <div className="module-icon">{module.icon}</div>
+                <div className="module-icon">
+                  <IconComponent className="h-10 w-10" strokeWidth={1.5} />
+                </div>
                 <h4>{module.title}</h4>
                 <p>{module.description}</p>
                 <div className="output">
                   <strong>Output:</strong> {module.output}
                 </div>
               </div>
-            ))}
+              );
+            })}
           </motion.div>
 
           {/* Colonna Esecuzione */}
           <motion.div variants={itemVariants} className="column-execution">
-            <h3>⚙️ Fase 2: Automazione & Ottimizzazione</h3>
-            {modules.esecuzione.map((module, index) => (
+            <h3 className="flex items-center gap-2">
+              <Settings className="h-5 w-5" />
+              Fase 2: Automazione & Ottimizzazione
+            </h3>
+            {modules.esecuzione.map((module, index) => {
+              const IconComponent = module.icon;
+              return (
               <div key={index} className={`module-card ${module.type || ''}`}>
-                <div className="module-icon">{module.icon}</div>
+                <div className="module-icon">
+                  <IconComponent className="h-10 w-10" strokeWidth={1.5} />
+                </div>
                 <h4>{module.title}</h4>
                 <p>{module.description}</p>
                 <div className="output">
                   <strong>Output:</strong> {module.output}
                 </div>
               </div>
-            ))}
+              );
+            })}
           </motion.div>
 
           {/* Colonna Strategia */}
           <motion.div variants={itemVariants} className="column-strategy">
-            <h3>📊 Fase 3: Pianificazione & Decisione</h3>
-            {modules.strategia.map((module, index) => (
+            <h3 className="flex items-center gap-2">
+              <BarChart3 className="h-5 w-5" />
+              Fase 3: Pianificazione & Decisione
+            </h3>
+            {modules.strategia.map((module, index) => {
+              const IconComponent = module.icon;
+              return (
               <div key={index} className="module-card">
-                <div className="module-icon">{module.icon}</div>
+                <div className="module-icon">
+                  <IconComponent className="h-10 w-10" strokeWidth={1.5} />
+                </div>
                 <h4>{module.title}</h4>
                 <p>{module.description}</p>
                 <div className="output">
                   <strong>Output:</strong> {module.output}
                 </div>
               </div>
-            ))}
+              );
+            })}
           </motion.div>
         </motion.div>
 
@@ -154,7 +180,8 @@ function Ecosystem() {
           className="ecosystem-cta"
         >
           <p className="cta-text">
-            💡 <strong>Non serve implementare tutti i moduli subito.</strong> Inizia con l'assessment gratuito e scegli i moduli che risolvono i tuoi problemi più urgenti. ROI visibile in 3-6 mesi.
+            <Lightbulb className="h-5 w-5 inline-block mr-2" />
+            <strong>Non serve implementare tutti i moduli subito.</strong> Inizia con l'assessment gratuito e scegli i moduli che risolvono i tuoi problemi più urgenti. ROI visibile in 3-6 mesi.
           </p>
           <a href="#contatti" className="cta-button">
             Richiedi Assessment Gratuito →
