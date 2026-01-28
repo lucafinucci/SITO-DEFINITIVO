@@ -141,7 +141,7 @@ export default function FinchAIMockupAnimated() {
     {
       id: "area-clienti",
       label: "Area Clienti",
-      href: import.meta.env.VITE_AREA_CLIENTI_URL || "/area-clienti/login.php",
+      href: "/area-clienti",
     },
   ];
 

@@ -18,17 +18,29 @@ export default function AreaClienti() {
       const user = localStorage.getItem('user');
 
       if (user) {
-        // Opzionale: verifica la sessione con il backend
-        const response = await fetch('/api/auth/check-session.php', {
-          credentials: 'include'
-        });
+        // MOCK MODE: In sviluppo locale, accetta sempre l'utente dal localStorage
+        // In produzione, decommentare la chiamata API sottostante
+        setIsAuthenticated(true);
 
-        if (response.ok) {
+        /*
+        // Verifica la sessione con il backend (solo in produzione)
+        try {
+          const response = await fetch('/api/auth/check-session.php', {
+            credentials: 'include'
+          });
+
+          if (response.ok) {
+            setIsAuthenticated(true);
+          } else {
+            localStorage.removeItem('user');
+            setIsAuthenticated(false);
+          }
+        } catch (apiError) {
+          // Se l'API non è disponibile (sviluppo), usa localStorage
+          console.log('API non disponibile, usando localStorage');
           setIsAuthenticated(true);
-        } else {
-          localStorage.removeItem('user');
-          setIsAuthenticated(false);
         }
+        */
       } else {
         setIsAuthenticated(false);
       }
