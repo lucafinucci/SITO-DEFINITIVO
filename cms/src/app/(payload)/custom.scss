@@ -1,0 +1,33 @@
+// Custom styles for Payload Admin
+// Finch-AI branding colors
+
+:root {
+  --theme-elevation-0: #0f172a;
+  --theme-elevation-50: #1e293b;
+  --theme-elevation-100: #334155;
+  --theme-elevation-150: #475569;
+  --theme-elevation-200: #64748b;
+  --theme-elevation-250: #94a3b8;
+  --theme-elevation-300: #cbd5e1;
+  --theme-elevation-350: #e2e8f0;
+  --theme-elevation-400: #f1f5f9;
+  --theme-elevation-450: #f8fafc;
+  --theme-elevation-500: #ffffff;
+
+  --theme-success-50: #10b981;
+  --theme-success-100: #059669;
+  --theme-success-500: #065f46;
+
+  --theme-error-50: #f87171;
+  --theme-error-100: #ef4444;
+  --theme-error-500: #b91c1c;
+
+  --theme-warning-50: #fbbf24;
+  --theme-warning-100: #f59e0b;
+  --theme-warning-500: #b45309;
+}
+
+// Accent color - Cyan from Finch-AI branding
+.payload-admin {
+  --theme-elevation-0: #0f172a;
+}

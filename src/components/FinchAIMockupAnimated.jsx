@@ -137,6 +137,9 @@ export default function FinchAIMockupAnimated() {
   const navItems = [
     { id: "hero", label: "Finch-AI Platform" },
     { id: "come-funziona", label: "Soluzioni" },
+    { id: "use-cases", label: "Use Cases", href: "/use-cases" },
+    { id: "blog", label: "Blog", href: "/blog" },
+    { id: "team", label: "Team", href: "/team" },
     { id: "contatti", label: "Demo" },
     {
       id: "area-clienti",
@@ -1132,6 +1135,9 @@ export default function FinchAIMockupAnimated() {
               <ul className="space-y-2">
                 {[
                   { label: "Come Funziona", href: "#come-funziona" },
+                  { label: "Use Cases", href: "/use-cases" },
+                  { label: "Blog", href: "/blog" },
+                  { label: "Team", href: "/team" },
                   { label: "Chi Siamo", href: "#chi-siamo" },
                   { label: "Contatti", href: "#contatti" },
                 ].map((link, i) => (
