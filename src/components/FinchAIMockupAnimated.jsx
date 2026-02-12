@@ -135,7 +135,7 @@ export default function FinchAIMockupAnimated() {
   }, []);
 
   const navItems = [
-    { id: "hero", label: "Finch-AI Platform" },
+    { id: "hero", label: "Home" },
     { id: "come-funziona", label: "Soluzioni" },
     { id: "contatti", label: "Demo" },
     {
@@ -1024,62 +1024,8 @@ export default function FinchAIMockupAnimated() {
               </p>
             </div>
 
-            <div className="grid lg:grid-cols-2 gap-8 mb-12 items-stretch">
+            <div className="max-w-4xl mx-auto mb-12">
               <ContactForm />
-
-              <div className="space-y-6 h-full flex flex-col">
-                <div className="group relative overflow-hidden rounded-3xl border border-emerald-500/30 bg-gradient-to-br from-slate-900/60 to-slate-900/40 backdrop-blur p-6 transition-all hover:border-emerald-500/50 hover:shadow-[0_0_40px_rgba(16,185,129,0.2)] flex-1">
-                  <div className="absolute -inset-px opacity-0 group-hover:opacity-100 transition-opacity">
-                    <div className="h-full w-full bg-[radial-gradient(600px_300px_at_50%_0,rgba(16,185,129,0.1),transparent)]" />
-                  </div>
-                  <div className="relative space-y-3">
-                    <div className="inline-flex items-center gap-2 rounded-full border border-emerald-500/30 bg-emerald-500/10 px-3 py-1 text-xs font-semibold uppercase tracking-wider text-emerald-200">
-                      Contatto rapido
-                    </div>
-                    <h3 className="text-xl font-bold text-white">Preferisci parlare subito?</h3>
-                    <p className="text-sm text-slate-300/90">
-                      Chiamaci o scrivici su WhatsApp. Dal form possiamo richiamarti all'ora che preferisci.
-                    </p>
-                    <div className="flex flex-wrap items-center gap-3">
-                      {[{ label: "+39 328 717 1587", phone: "+393287171587" }, { label: "+41 76 436 6624", phone: "+41764366624" }, { label: "+39 375 647 5087", phone: "+393756475087" }].map((contact, idx) => (
-                        <span key={contact.phone} className="inline-flex items-center gap-2">
-                          <svg aria-hidden="true" className="h-4 w-4 text-emerald-400" viewBox="0 0 32 32" fill="currentColor">
-                            <path d="M16.02 5.333A10.68 10.68 0 0 0 5.333 16c0 1.874.5 3.704 1.458 5.312l-1.562 5.354 5.52-1.49A10.57 10.57 0 0 0 16 26.667 10.68 10.68 0 0 0 26.667 16 10.68 10.68 0 0 0 16.02 5.333Zm6.26 14.563c-.26.74-1.52 1.407-2.092 1.5-.573.094-1.316.133-2.12-.133-.487-.16-1.113-.364-1.918-.703-3.372-1.46-5.563-4.87-5.732-5.098-.167-.227-1.367-1.814-1.367-3.463 0-1.647.862-2.457 1.168-2.788.304-.333.665-.417.887-.417.222 0 .444 0 .64.012.207.01.486-.078.76.58.26.64.882 2.21.96 2.37.078.16.13.347.026.56-.108.227-.17.347-.333.534-.16.188-.34.418-.49.562-.162.162-.33.338-.14.665.188.333.836 1.376 1.795 2.227 1.233 1.1 2.27 1.45 2.604 1.61.333.162.528.14.72-.085.193-.222.83-.964 1.052-1.293.22-.333.44-.278.74-.167.304.11 1.914.904 2.24 1.068.333.16.553.245.64.38.084.13.084.74-.176 1.48Z" />
-                          </svg>
-                          <div className="flex items-center gap-2">
-                            <a href={formatWhatsappLink(contact.phone)} className="text-sm text-emerald-300 hover:text-emerald-200" target="_blank" rel="noopener noreferrer">
-                              WhatsApp
-                            </a>
-                            <span className="text-slate-600">|</span>
-                            <span className="text-sm text-emerald-200">{contact.label}</span>
-                          </div>
-                          {idx < 2 && <span className="text-slate-600">•</span>}
-                          {idx < 2 && <span className="text-slate-600">&bull;</span>}
-                        </span>
-                      ))}
-                    </div>
-                  </div>
-                </div>
-
-                <div className="group relative overflow-hidden rounded-3xl border border-slate-700/60 bg-gradient-to-br from-slate-900/60 to-slate-900/40 backdrop-blur p-6 transition-all hover:border-slate-500/60 hover:shadow-[0_0_30px_rgba(148,163,184,0.2)]">
-                  <div className="absolute -inset-px opacity-0 group-hover:opacity-100 transition-opacity">
-                    <div className="h-full w-full bg-[radial-gradient(600px_300px_at_50%_0,rgba(148,163,184,0.15),transparent)]" />
-                  </div>
-                  <div className="relative space-y-3">
-                    <div className="inline-flex items-center gap-2 rounded-full border border-slate-600/70 bg-slate-800/60 px-3 py-1 text-xs font-semibold uppercase tracking-wider text-slate-200">
-                      Email diretta
-                    </div>
-                    <h3 className="text-xl font-bold text-white">Se preferisci, scrivici</h3>
-                    <p className="text-sm text-slate-300/90">info@finch-ai.it</p>
-                    <a href="mailto:info@finch-ai.it" className="inline-flex items-center gap-2 text-sm font-semibold text-cyan-300 hover:text-cyan-200">
-                      Apri email
-                      <svg className="h-4 w-4" viewBox="0 0 24 24" fill="none" stroke="currentColor">
-                        <path d="M5 12h14M13 5l7 7-7 7" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round" />
-                      </svg>
-                    </a>
-                  </div>
-                </div>
-              </div>
             </div>
 
             {/* Trust Indicators */}
@@ -1203,7 +1149,9 @@ export default function FinchAIMockupAnimated() {
               <h4 className="mb-4 text-sm font-semibold uppercase tracking-wider text-white">Seguici</h4>
               <div className="flex gap-3 mb-6">
                 <a
-                  href="#"
+                  href="https://www.linkedin.com/company/finch-ai-srl/?viewAsMember=true"
+                  target="_blank"
+                  rel="noopener noreferrer"
                   aria-label="LinkedIn"
                   className="flex h-10 w-10 items-center justify-center rounded-lg border border-slate-700/60 bg-slate-900/40 text-slate-400 transition-all hover:border-cyan-500/50 hover:bg-slate-800/60 hover:text-cyan-400"
                 >
@@ -1242,7 +1190,10 @@ export default function FinchAIMockupAnimated() {
             <div className="flex flex-col items-center justify-between gap-4 sm:flex-row">
             <div className="text-center sm:text-left">
               <p className="text-sm text-slate-500">
-                © {new Date().getFullYear()} Finch-AI S.r.l. Tutti i diritti riservati.
+                © {new Date().getFullYear()} Finch-AI S.r.l. - P.IVA 02213890664
+              </p>
+              <p className="text-xs text-slate-600 mt-1">
+                Tutti i diritti riservati.
               </p>
             </div>
             <div className="flex flex-wrap items-center justify-center gap-2 text-xs text-slate-600" />
