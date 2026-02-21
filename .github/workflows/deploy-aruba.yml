@@ -23,12 +23,13 @@ jobs:
           password: ${{ secrets.ARUBA_FTP_PASS }}
           local-dir: ./
           server-dir: /public_html/
+
           exclude: |
-            **/.git*
-            **/.github/**
-            **/.claude/**
+            .git/**
+            .github/**
+            .claude/**
+            .vscode/**
+            node_modules/**
             **/.env
             **/.env.*
-            **/logs/**
-            **/node_modules/**
-            **/.vscode/**
+            logs/**
