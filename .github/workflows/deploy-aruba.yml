@@ -16,18 +16,20 @@ jobs:
       - name: Checkout
         uses: actions/checkout@v4
 
+      # -------- BUILD REACT/VITE --------
       - name: Setup Node
         uses: actions/setup-node@v4
         with:
           node-version: 20
 
       - name: Install dependencies
-        run: npm install
+        run: npm ci
 
       - name: Build project
         run: npm run build
 
-      - name: Deploy build folder via FTP
+      # -------- DEPLOY SITO PUBBLICO (dist) --------
+      - name: Deploy sito pubblico (dist) via FTP
         uses: SamKirkland/FTP-Deploy-Action@v4.3.5
         with:
           server: ${{ secrets.ARUBA_FTP_SERVER }}
@@ -37,6 +39,25 @@ jobs:
           local-dir: ./dist/
           server-dir: /www.finch-ai.it/
 
+          # NON toccare area-clienti e cartelle operative
+          exclude: |
+            area-clienti/**
+            logs/**
+            **/.env
+            **/.env.*
+
+      # -------- DEPLOY AREA CLIENTI (PHP) --------
+      - name: Deploy area-clienti (PHP) via FTP
+        uses: SamKirkland/FTP-Deploy-Action@v4.3.5
+        with:
+          server: ${{ secrets.ARUBA_FTP_SERVER }}
+          username: ${{ secrets.ARUBA_FTP_USER }}
+          password: ${{ secrets.ARUBA_FTP_PASS }}
+
+          local-dir: ./area-clienti/
+          server-dir: /www.finch-ai.it/area-clienti/
+
           exclude: |
             **/.env
             **/.env.*
+            **/logs/**
