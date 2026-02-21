@@ -396,9 +396,9 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
   <div class="login-card">
     <!-- Logo -->
     <div class="logo-container">
-      <a href="/SITO/" class="logo-wrapper">
+      <a href="https://www.finch-ai.it/" class="logo-wrapper">
         <div class="logo-box">
-          <img src="/SITO/assets/images/LOGO.png" alt="Finch-AI">
+          <img src="https://www.finch-ai.it/assets/images/LOGO.png" alt="Finch-AI">
         </div>
       </a>
 
