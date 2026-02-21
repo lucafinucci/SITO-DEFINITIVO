@@ -35,7 +35,7 @@ jobs:
           password: ${{ secrets.ARUBA_FTP_PASS }}
 
           local-dir: ./dist/
-          server-dir: /
+          server-dir: /www.finch-ai.it/
 
           exclude: |
             **/.env
