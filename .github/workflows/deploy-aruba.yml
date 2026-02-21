@@ -28,7 +28,7 @@ jobs:
 
           # Cartella corretta su Aruba (come da File Manager)
           server-dir: /www.finch-ai.it/
-
+          dangerous-clean-slate: true
           # Escludi tutto ciò che NON deve andare online
           exclude: |
             .git/**
