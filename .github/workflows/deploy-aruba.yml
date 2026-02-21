@@ -23,7 +23,7 @@ jobs:
           username: ${{ secrets.ARUBA_FTP_USER }}
           password: ${{ secrets.ARUBA_FTP_PASS }}
 
-          # Pubblica la ROOT del repository (index.html, assets/, ecc.)
+          # Pubblica la ROOT del repository (index.html, assets/, area-clienti/, ecc.)
           local-dir: ./
 
           # Cartella corretta su Aruba (come da File Manager)
@@ -40,16 +40,11 @@ jobs:
             database/**
             scripts/**
             uploads/**
+            public/**
+            dist/**
+            logs/**
+            **/.env
+            **/.env.*
             **/*.sql
             **/*.bat
             **/*.md
-            **/.env
-            **/.env.*
-            **/logs/**
-            public/**
-            dist/**
-          exclude: |
-            **/.env
-            **/.env.*
-            **/uploads/**
-            **/cache/**
