@@ -4,6 +4,10 @@ on:
   push:
     branches: ["main"]
 
+concurrency:
+  group: deploy-aruba
+  cancel-in-progress: true
+
 jobs:
   deploy:
     runs-on: ubuntu-latest
@@ -12,33 +16,38 @@ jobs:
       - name: Checkout
         uses: actions/checkout@v4
 
-      # ===== DEPLOY SITO PUBBLICO =====
-      - name: Deploy public folder
+      - name: Deploy sito (root) via FTP
         uses: SamKirkland/FTP-Deploy-Action@v4.3.5
         with:
           server: ${{ secrets.ARUBA_FTP_SERVER }}
           username: ${{ secrets.ARUBA_FTP_USER }}
           password: ${{ secrets.ARUBA_FTP_PASS }}
-          local-dir: ./public/
+
+          # Pubblica la ROOT del repository (index.html, assets/, ecc.)
+          local-dir: ./
+
+          # Cartella corretta su Aruba (come da File Manager)
           server-dir: /www.finch-ai.it/
+
+          # Escludi tutto ciò che NON deve andare online
           exclude: |
+            .git/**
+            .github/**
+            .claude/**
+            .vscode/**
+            node_modules/**
+            src/**
+            database/**
+            scripts/**
+            uploads/**
+            **/*.sql
+            **/*.bat
+            **/*.md
             **/.env
             **/.env.*
-            **/node_modules/**
-            **/.git*
-            **/.github/**
-            **/.claude/**
-            **/.vscode/**
-
-      # ===== DEPLOY AREA CLIENTI =====
-      - name: Deploy area-clienti folder
-        uses: SamKirkland/FTP-Deploy-Action@v4.3.5
-        with:
-          server: ${{ secrets.ARUBA_FTP_SERVER }}
-          username: ${{ secrets.ARUBA_FTP_USER }}
-          password: ${{ secrets.ARUBA_FTP_PASS }}
-          local-dir: ./area-clienti/
-          server-dir: /www.finch-ai.it/area-clienti/
+            **/logs/**
+            public/**
+            dist/**
           exclude: |
             **/.env
             **/.env.*
