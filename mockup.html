@@ -1,0 +1,552 @@
+<!DOCTYPE html>
+<html lang="it">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Finch-AI | Industrial Intelligence Reimagined</title>
+    <!-- Google Fonts: Inter & Outfit for a modern tech feel -->
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link
+        href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&family=Outfit:wght@400;600;700&display=swap"
+        rel="stylesheet">
+    <!-- Phosphor Icons -->
+    <script src="https://unpkg.com/@phosphor-icons/web@2.1.1"></script>
+    <style>
+        :root {
+            --bg-deep: #020617;
+            --bg-card: rgba(15, 23, 42, 0.6);
+            --primary: #3b82f6;
+            --primary-glow: rgba(59, 130, 246, 0.5);
+            --accent: #8b5cf6;
+            --text-main: #f8fafc;
+            --text-dim: #94a3b8;
+            --border: rgba(255, 255, 255, 0.1);
+            --glass-blur: blur(12px);
+        }
+
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        body {
+            font-family: 'Inter', sans-serif;
+            background-color: var(--bg-deep);
+            color: var(--text-main);
+            line-height: 1.6;
+            overflow-x: hidden;
+            -webkit-font-smoothing: antialiased;
+        }
+
+        h1,
+        h2,
+        h3 {
+            font-family: 'Outfit', sans-serif;
+            font-weight: 700;
+        }
+
+        /* --- Custom Scrollbar --- */
+        ::-webkit-scrollbar {
+            width: 8px;
+        }
+
+        ::-webkit-scrollbar-track {
+            background: var(--bg-deep);
+        }
+
+        ::-webkit-scrollbar-thumb {
+            background: #1e293b;
+            border-radius: 4px;
+        }
+
+        ::-webkit-scrollbar-thumb:hover {
+            background: #334155;
+        }
+
+        /* --- Header --- */
+        header {
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            padding: 1.5rem 5%;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            z-index: 1000;
+            background: rgba(2, 6, 23, 0.7);
+            backdrop-filter: var(--glass-blur);
+            border-bottom: 1px solid var(--border);
+        }
+
+        .logo {
+            font-size: 1.5rem;
+            font-weight: 700;
+            color: var(--text-main);
+            text-decoration: none;
+            display: flex;
+            align-items: center;
+            gap: 10px;
+        }
+
+        .logo i {
+            color: var(--primary);
+            font-size: 1.8rem;
+        }
+
+        nav ul {
+            display: flex;
+            list-style: none;
+            gap: 2rem;
+        }
+
+        nav a {
+            color: var(--text-dim);
+            text-decoration: none;
+            font-weight: 500;
+            transition: color 0.3s ease;
+            font-size: 0.95rem;
+        }
+
+        nav a:hover {
+            color: var(--primary);
+        }
+
+        .cta-button {
+            background: var(--primary);
+            color: white;
+            padding: 0.75rem 1.5rem;
+            border-radius: 99px;
+            text-decoration: none;
+            font-weight: 600;
+            font-size: 0.9rem;
+            transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
+            border: 1px solid transparent;
+            box-shadow: 0 4px 15px var(--primary-glow);
+        }
+
+        .cta-button:hover {
+            transform: translateY(-2px);
+            box-shadow: 0 8px 25px var(--primary-glow);
+            background: #2563eb;
+        }
+
+        /* --- Hero Section --- */
+        .hero {
+            height: 100vh;
+            display: flex;
+            align-items: center;
+            padding: 0 5%;
+            position: relative;
+            overflow: hidden;
+        }
+
+        .hero-content {
+            max-width: 700px;
+            z-index: 2;
+        }
+
+        .hero-tagline {
+            display: inline-block;
+            padding: 0.5rem 1rem;
+            background: rgba(59, 130, 246, 0.1);
+            color: var(--primary);
+            border: 1px solid rgba(59, 130, 246, 0.2);
+            border-radius: 99px;
+            font-size: 0.85rem;
+            font-weight: 600;
+            margin-bottom: 1.5rem;
+            text-transform: uppercase;
+            letter-spacing: 1px;
+        }
+
+        .hero h1 {
+            font-size: clamp(3rem, 8vw, 4.5rem);
+            line-height: 1.1;
+            margin-bottom: 1.5rem;
+            background: linear-gradient(to bottom right, #fff, #94a3b8);
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+        }
+
+        .hero p {
+            font-size: 1.2rem;
+            color: var(--text-dim);
+            margin-bottom: 2.5rem;
+            max-width: 550px;
+        }
+
+        .hero-image {
+            position: absolute;
+            right: -5%;
+            top: 50%;
+            transform: translateY(-50%);
+            width: 50%;
+            z-index: 1;
+            opacity: 0.6;
+            filter: blur(2px) brightness(0.8);
+            mask-image: linear-gradient(to left, rgba(0, 0, 0, 1) 50%, rgba(0, 0, 0, 0));
+        }
+
+        /* --- Grid Features (Bento Style) --- */
+        .section-container {
+            padding: 8rem 5%;
+        }
+
+        .section-title {
+            text-align: center;
+            margin-bottom: 4rem;
+        }
+
+        .section-title h2 {
+            font-size: 2.5rem;
+            margin-bottom: 1rem;
+        }
+
+        .section-title p {
+            color: var(--text-dim);
+            font-size: 1.1rem;
+        }
+
+        .features-grid {
+            display: grid;
+            grid-template-columns: repeat(3, 1fr);
+            gap: 1.5rem;
+        }
+
+        .feature-card {
+            background: var(--bg-card);
+            border: 1px solid var(--border);
+            padding: 2.5rem;
+            border-radius: 24px;
+            transition: all 0.4s ease;
+            position: relative;
+            overflow: hidden;
+            backdrop-filter: var(--glass-blur);
+        }
+
+        .feature-card:hover {
+            border-color: var(--primary);
+            transform: translateY(-5px);
+            background: rgba(15, 23, 42, 0.8);
+        }
+
+        .feature-card i {
+            font-size: 2.5rem;
+            color: var(--primary);
+            margin-bottom: 1.5rem;
+            display: block;
+        }
+
+        .feature-card h3 {
+            font-size: 1.5rem;
+            margin-bottom: 1rem;
+        }
+
+        .feature-card p {
+            color: var(--text-dim);
+            font-size: 1rem;
+        }
+
+        .feature-card.large {
+            grid-column: span 2;
+        }
+
+        /* --- Glass Progress Section --- */
+        .process {
+            background: linear-gradient(to bottom, var(--bg-deep), #0f172a);
+        }
+
+        .step-container {
+            display: flex;
+            gap: 2rem;
+            margin-top: 4rem;
+        }
+
+        .step {
+            flex: 1;
+            text-align: center;
+            position: relative;
+        }
+
+        .step-icon {
+            width: 80px;
+            height: 80px;
+            background: rgba(59, 130, 246, 0.1);
+            border: 1px solid var(--primary);
+            border-radius: 50%;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            margin: 0 auto 1.5rem;
+            font-size: 2rem;
+            color: var(--primary);
+            box-shadow: 0 0 20px var(--primary-glow);
+        }
+
+        /* --- Footer --- */
+        footer {
+            border-top: 1px solid var(--border);
+            padding: 4rem 5% 2rem;
+            background: var(--bg-deep);
+        }
+
+        .footer-grid {
+            display: grid;
+            grid-template-columns: 2fr 1fr 1fr 1fr;
+            gap: 4rem;
+            margin-bottom: 4rem;
+        }
+
+        .footer-logo {
+            margin-bottom: 1.5rem;
+        }
+
+        .footer-info p {
+            color: var(--text-dim);
+            max-width: 300px;
+        }
+
+        .footer-col h4 {
+            margin-bottom: 1.5rem;
+            font-size: 1.1rem;
+        }
+
+        .footer-col ul {
+            list-style: none;
+        }
+
+        .footer-col li {
+            margin-bottom: 0.75rem;
+        }
+
+        .footer-col a {
+            color: var(--text-dim);
+            text-decoration: none;
+            transition: color 0.3s ease;
+        }
+
+        .footer-col a:hover {
+            color: var(--primary);
+        }
+
+        .copyright {
+            text-align: center;
+            color: var(--text-dim);
+            font-size: 0.9rem;
+            padding-top: 2rem;
+            border-top: 1px solid var(--border);
+        }
+
+        /* --- Animations --- */
+        @keyframes float {
+            0% {
+                transform: translateY(0px);
+            }
+
+            50% {
+                transform: translateY(-10px);
+            }
+
+            100% {
+                transform: translateY(0px);
+            }
+        }
+
+        .floating {
+            animation: float 6s ease-in-out infinite;
+        }
+
+        /* --- Media Queries --- */
+        @media (max-width: 1024px) {
+            .hero-image {
+                display: none;
+            }
+
+            .hero {
+                text-align: center;
+                padding: 0 10%;
+            }
+
+            .hero-content {
+                margin: 0 auto;
+            }
+
+            .features-grid {
+                grid-template-columns: 1fr 1fr;
+            }
+
+            .footer-grid {
+                grid-template-columns: 1fr 1fr;
+            }
+        }
+
+        @media (max-width: 768px) {
+            nav {
+                display: none;
+            }
+
+            .features-grid {
+                grid-template-columns: 1fr;
+            }
+
+            .feature-card.large {
+                grid-column: span 1;
+            }
+
+            .footer-grid {
+                grid-template-columns: 1fr;
+                gap: 2rem;
+            }
+        }
+    </style>
+</head>
+
+<body>
+
+    <header>
+        <a href="#" class="logo">
+            <i class="ph-bold ph-framer-logo"></i>
+            <span>FINCH-AI</span>
+        </a>
+        <nav>
+            <ul>
+                <li><a href="#soluzioni">Soluzioni</a></li>
+                <li><a href="#tecnologia">Tecnologia</a></li>
+                <li><a href="#settori">Settori</a></li>
+                <li><a href="#contatti">Contatti</a></li>
+            </ul>
+        </nav>
+        <a href="#demo" class="cta-button">Richiedi Demo</a>
+    </header>
+
+    <section class="hero">
+        <div class="hero-content">
+            <span class="hero-tagline">Progetta il futuro industriale</span>
+            <h1>L'Intelligenza Artificiale per l'Industria 4.0</h1>
+            <p>Trasforma documenti grezzi in decisioni basate sui dati. Automazione end-to-end per DDT, KPI e logistica
+                con il 99.2% di accuratezza.</p>
+            <div style="display: flex; gap: 1rem;">
+                <a href="#scopri" class="cta-button">Inizia Ora</a>
+                <a href="#video"
+                    style="display: flex; align-items: center; gap: 8px; color: white; text-decoration: none; font-weight: 500;">
+                    <i class="ph-bold ph-play-circle" style="font-size: 1.5rem; color: var(--primary);"></i>
+                    Guarda come funziona
+                </a>
+            </div>
+        </div>
+        <img src="ai_abstract_hero_1772104243409.png" alt="AI Neural Network" class="hero-image floating">
+    </section>
+
+    <section class="section-container" id="soluzioni">
+        <div class="section-title">
+            <h2>Tecnologia di Nuova Generazione</h2>
+            <p>Semplifica la complessità operativa con i nostri moduli specializzati.</p>
+        </div>
+
+        <div class="features-grid">
+            <div class="feature-card large">
+                <i class="ph-bold ph-cpu"></i>
+                <h3>DocAI: Estrazione Intelligente</h3>
+                <p>Non più inserimento dati manuale. Il nostro motore OCR basato su Transformer legge e interpreta DDT,
+                    fatture e bolle con precisione chirurgica, interfacciandosi direttamente con il tuo ERP.</p>
+            </div>
+            <div class="feature-card">
+                <i class="ph-bold ph-chart-line-up"></i>
+                <h3>Real-time KPI</h3>
+                <p>Visualizza l'efficienza della tua produzione in tempo reale. Dashboard personalizzate per ogni
+                    settore.</p>
+            </div>
+            <div class="feature-card">
+                <i class="ph-bold ph-shield-check"></i>
+                <h3>GDPR & Sicurezza</h3>
+                <p>Dati protetti con protocolli di livello enterprise e conformità totale alle normative europee.</p>
+            </div>
+            <div class="feature-card large">
+                <i class="ph-bold ph-intersect"></i>
+                <h3>Integrazione Seamless</h3>
+                <p>Dimentica i silos di dati. Finch-AI si collega a SAP, Oracle, Microsoft Dynamics e i principali ERP
+                    proprietari in pochi giorni, non mesi.</p>
+            </div>
+        </div>
+    </section>
+
+    <section class="section-container process">
+        <div class="section-title">
+            <h2>Integrazione in 3 Semplici Step</h2>
+            <p>Un percorso guidato verso la trasformazione digitale.</p>
+        </div>
+
+        <div class="step-container">
+            <div class="step">
+                <div class="step-icon"><i class="ph-bold ph-database"></i></div>
+                <h3>Connessione</h3>
+                <p>Mappiamo i tuoi flussi dati esistenti.</p>
+            </div>
+            <div class="step">
+                <div class="step-icon"><i class="ph-bold ph-magic-wand"></i></div>
+                <h3>Addestramento</h3>
+                <p>L'AI impara a riconoscere i tuoi documenti specifici.</p>
+            </div>
+            <div class="step">
+                <div class="step-icon"><i class="ph-bold ph-rocket-launch"></i></div>
+                <h3>Esecuzione</h3>
+                <p>Automatizza i processi e analizza i risultati.</p>
+            </div>
+        </div>
+    </section>
+
+    <section class="section-container"
+        style="text-align: center; background: radial-gradient(circle at center, rgba(59, 130, 246, 0.1) 0%, transparent 70%);">
+        <h2 style="font-size: 3rem; margin-bottom: 2rem;">Pronto a scalare la tua azienda?</h2>
+        <p style="color: var(--text-dim); max-width: 600px; margin: 0 auto 3rem;">Unisciti alle startup e alle industrie
+            leader che hanno già eliminato i colli di bottiglia operativi con Finch-AI.</p>
+        <a href="#contatti" class="cta-button" style="padding: 1.2rem 3rem; font-size: 1.1rem;">Prenota una consulenza
+            gratuita</a>
+    </section>
+
+    <footer>
+        <div class="footer-grid">
+            <div class="footer-info">
+                <a href="#" class="logo footer-logo">
+                    <i class="ph-bold ph-framer-logo"></i>
+                    <span>FINCH-AI</span>
+                </a>
+                <p>Leader nell'automazione intelligente per l'industria. Trasformiamo dati in valore strategico.</p>
+            </div>
+            <div class="footer-col">
+                <h4>Prodotto</h4>
+                <ul>
+                    <li><a href="#">DocAI</a></li>
+                    <li><a href="#">Dashboard KPI</a></li>
+                    <li><a href="#">Integrazioni ERP</a></li>
+                </ul>
+            </div>
+            <div class="footer-col">
+                <h4>Azienda</h4>
+                <ul>
+                    <li><a href="#">Chi Siamo</a></li>
+                    <li><a href="#">Casi Studio</a></li>
+                    <li><a href="#">Contatti</a></li>
+                </ul>
+            </div>
+            <div class="footer-col">
+                <h4>Legal</h4>
+                <ul>
+                    <li><a href="#">Privacy Policy</a></li>
+                    <li><a href="#">Cookie Policy</a></li>
+                    <li><a href="#">Termini & Condizioni</a></li>
+                </ul>
+            </div>
+        </div>
+        <div class="copyright">
+            &copy; 2026 Finch-AI S.r.l. - Tutti i diritti riservati.
+        </div>
+    </footer>
+
+</body>
+
+</html>

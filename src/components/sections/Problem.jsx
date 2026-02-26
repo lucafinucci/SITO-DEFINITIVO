@@ -43,7 +43,7 @@ export default function Problem() {
                         Il Caos che <span className="bg-clip-text text-transparent bg-gradient-to-r from-red-500 to-orange-500">Rallenta la Tua Azienda</span>
                     </h2>
                     <p className="text-lg sm:text-xl text-slate-600 dark:text-slate-300/90 max-w-3xl mx-auto leading-relaxed">
-                        Documenti dispersi, dati non integrati, decisioni basate su informazioni frammentate
+                        Dati cartacei non integrati, decisioni basate su informazioni frammentate
                     </p>
                 </div>
 
