@@ -1,7 +1,21 @@
-import { useEffect, useRef } from "react";
+import { useEffect, useRef, useState } from "react";
 
 export default function BackgroundCanvas() {
   const canvasRef = useRef(null);
+  const [isDark, setIsDark] = useState(document.documentElement.classList.contains('dark'));
+
+  useEffect(() => {
+    const observer = new MutationObserver((mutations) => {
+      mutations.forEach((mutation) => {
+        if (mutation.attributeName === 'class') {
+          setIsDark(document.documentElement.classList.contains('dark'));
+        }
+      });
+    });
+
+    observer.observe(document.documentElement, { attributes: true });
+    return () => observer.disconnect();
+  }, []);
 
   useEffect(() => {
     const canvas = canvasRef.current;
@@ -11,15 +25,13 @@ export default function BackgroundCanvas() {
     let w = (canvas.width = window.innerWidth);
     let h = (canvas.height = window.innerHeight);
 
-    // Handle resize
     const onResize = () => {
       w = canvas.width = window.innerWidth;
       h = canvas.height = window.innerHeight;
     };
     window.addEventListener("resize", onResize);
 
-    // Particles
-    const PARTICLES = Math.min(90, Math.floor((w * h) / 18000)); // scale with viewport
+    const PARTICLES = Math.min(90, Math.floor((w * h) / 18000));
     const MAX_SPEED = 0.4;
     const LINK_DIST = Math.min(180, Math.max(110, Math.min(w, h) * 0.22));
 
@@ -36,44 +48,48 @@ export default function BackgroundCanvas() {
     let rafId;
     const gradientStroke = () => {
       const g = ctx.createLinearGradient(0, 0, w, h);
-      g.addColorStop(0, "rgba(0,224,255,0.85)"); // cyan
-      g.addColorStop(1, "rgba(59,130,246,0.85)"); // blue-500
+      if (isDark) {
+        g.addColorStop(0, "rgba(0,224,255,0.4)");
+        g.addColorStop(1, "rgba(59,130,246,0.4)");
+      } else {
+        g.addColorStop(0, "rgba(0,180,216,0.2)");
+        g.addColorStop(1, "rgba(0,119,182,0.2)");
+      }
       return g;
     };
 
     const draw = () => {
       ctx.clearRect(0, 0, w, h);
 
-      // subtle dark veil
-      ctx.fillStyle = "rgba(7,12,22,0.75)";
-      ctx.fillRect(0, 0, w, h);
+      if (isDark) {
+        ctx.fillStyle = "rgba(7,12,22,0.75)";
+        ctx.fillRect(0, 0, w, h);
 
-      // radial glow
-      const rg = ctx.createRadialGradient(w * 0.5, h * 0.3, 0, w * 0.5, h * 0.3, Math.max(w, h) * 0.7);
-      rg.addColorStop(0, "rgba(23,162,255,0.10)");
-      rg.addColorStop(1, "rgba(0,0,0,0)");
-      ctx.fillStyle = rg;
-      ctx.fillRect(0, 0, w, h);
+        const rg = ctx.createRadialGradient(w * 0.5, h * 0.3, 0, w * 0.5, h * 0.3, Math.max(w, h) * 0.7);
+        rg.addColorStop(0, "rgba(23,162,255,0.10)");
+        rg.addColorStop(1, "rgba(0,0,0,0)");
+        ctx.fillStyle = rg;
+        ctx.fillRect(0, 0, w, h);
+      } else {
+        ctx.fillStyle = "rgba(253,251,247,0.85)";
+        ctx.fillRect(0, 0, w, h);
+      }
 
-      // update & draw nodes
-      ctx.globalCompositeOperation = "lighter";
+      ctx.globalCompositeOperation = isDark ? "lighter" : "source-over";
       for (let i = 0; i < nodes.length; i++) {
         const n = nodes[i];
         n.x += n.vx;
         n.y += n.vy;
 
-        // bounce
         if (n.x < 0 || n.x > w) n.vx *= -1;
         if (n.y < 0 || n.y > h) n.vy *= -1;
 
-        // node point
         ctx.beginPath();
         ctx.arc(n.x, n.y, n.r, 0, Math.PI * 2);
-        ctx.fillStyle = "rgba(56,189,248,0.65)"; // cyan-400
+        ctx.fillStyle = isDark ? "rgba(56,189,248,0.5)" : "rgba(0,180,216,0.3)";
         ctx.fill();
       }
 
-      // links
       ctx.lineWidth = 0.7;
       ctx.strokeStyle = gradientStroke();
       for (let i = 0; i < nodes.length; i++) {
@@ -83,7 +99,7 @@ export default function BackgroundCanvas() {
           const dist = Math.hypot(dx, dy);
           if (dist < LINK_DIST) {
             const alpha = 1 - dist / LINK_DIST;
-            ctx.globalAlpha = alpha * 0.6;
+            ctx.globalAlpha = isDark ? alpha * 0.4 : alpha * 0.2;
             ctx.beginPath();
             ctx.moveTo(nodes[i].x, nodes[i].y);
             ctx.lineTo(nodes[j].x, nodes[j].y);
@@ -101,7 +117,7 @@ export default function BackgroundCanvas() {
       cancelAnimationFrame(rafId);
       window.removeEventListener("resize", onResize);
     };
-  }, []);
+  }, [isDark]);
 
   return (
     <>
@@ -111,8 +127,8 @@ export default function BackgroundCanvas() {
         aria-hidden="true"
       />
       <div className="pointer-events-none fixed inset-0 -z-10">
-        <div className="absolute inset-0 opacity-40 [background:linear-gradient(120deg,#0b1220_20%,#0a1a2b_60%,#03101f_85%)]" />
-        <div className="absolute inset-0 bg-[linear-gradient(rgba(255,255,255,0.05)_1px,transparent_1px)] bg-[length:100%_28px] mix-blend-overlay" />
+        <div className={`absolute inset-0 transition-opacity duration-700 ${isDark ? 'opacity-40' : 'opacity-10'} [background:linear-gradient(120deg,#0b1220_20%,#0a1a2b_60%,#03101f_85%)]`} />
+        {isDark && <div className="absolute inset-0 bg-[linear-gradient(rgba(255,255,255,0.05)_1px,transparent_1px)] bg-[length:100%_28px] mix-blend-overlay" />}
       </div>
     </>
   );

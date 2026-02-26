@@ -4,6 +4,7 @@ import Footer from './components/layout/Footer';
 import BackgroundCanvas from './components/ui/BackgroundCanvas';
 import BackToTop from './components/ui/BackToTop';
 import Hero from './components/sections/Hero';
+import DocAI from './components/sections/DocAI';
 import Problem from './components/sections/Problem';
 import Solution from './components/sections/Solution';
 import Modules from './components/sections/Modules';
@@ -23,8 +24,6 @@ export default function App() {
           }
         });
       },
-      // Root margin set to -30% on top and bottom creates a 40% tall "active zone" in the middle of the screen.
-      // This is generally more robust than a thin line for variable-height sections.
       { threshold: 0.1, rootMargin: "-30% 0px -30% 0px" }
     );
 
@@ -37,11 +36,12 @@ export default function App() {
   }, []);
 
   return (
-    <>
+    <div className="min-h-screen transition-colors duration-300 dark:bg-slate-950 bg-white">
       <BackgroundCanvas />
       <Header activeSection={activeSection} setActiveSection={setActiveSection} />
       <main className="relative z-0">
         <Hero />
+        <DocAI />
         <Problem />
         <Solution />
         <Modules />
@@ -51,6 +51,6 @@ export default function App() {
       </main>
       <BackToTop />
       <Footer />
-    </>
+    </div>
   );
 }
