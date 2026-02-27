@@ -1,4 +1,4 @@
-import { useEffect } from 'react';
+import { useEffect, useRef } from 'react';
 import {
     TrendingUp,
     Upload,
@@ -33,9 +33,24 @@ import {
 import Layout from '../components/Layout';
 
 const FinanceIntelligence = () => {
+    const videoRef = useRef(null);
+
     useEffect(() => {
         window.scrollTo(0, 0);
     }, []);
+
+    const handleWatchVideo = (e) => {
+        e.preventDefault();
+        const videoElement = videoRef.current;
+        if (videoElement) {
+            // Scorri fino al video
+            videoElement.scrollIntoView({ behavior: 'smooth', block: 'center' });
+            // Avvia il video
+            videoElement.play().catch(error => {
+                console.log("Autoplay prevented or video error:", error);
+            });
+        }
+    };
 
     const pricingPlans = [
         {
@@ -239,7 +254,11 @@ const FinanceIntelligence = () => {
                             <Upload className="w-5 h-5" />
                             Prova Gratis — Carica Excel
                         </button>
-                        <a href="#video" className="inline-flex items-center gap-2 bg-card border border-border text-foreground px-8 py-4 rounded-full font-bold hover:bg-muted transition-all">
+                        <a
+                            href="#video"
+                            onClick={handleWatchVideo}
+                            className="inline-flex items-center gap-2 bg-card border border-border text-foreground px-8 py-4 rounded-full font-bold hover:bg-muted transition-all"
+                        >
                             <Zap className="w-5 h-5 text-emerald-500" />
                             Guarda il Video
                         </a>
@@ -281,6 +300,7 @@ const FinanceIntelligence = () => {
                     <div className="max-w-5xl w-full">
                         <div className="relative aspect-video rounded-[32px] overflow-hidden shadow-2xl border border-border bg-black group cursor-pointer">
                             <video
+                                ref={videoRef}
                                 className="w-full h-full object-cover"
                                 controls
                                 poster=""
