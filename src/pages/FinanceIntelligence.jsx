@@ -234,6 +234,17 @@ const FinanceIntelligence = () => {
                         Carica il tuo Conto Economico in Excel. In 3 minuti hai un report OIC professionale, indici finanziari, trend — e un <em className="italic text-foreground not-italic font-semibold">assistente AI</em> che risponde alle tue domande sui numeri.
                     </p>
 
+                    <div className="flex flex-wrap justify-center gap-4 mb-16">
+                        <button className="inline-flex items-center gap-2 bg-emerald-600 text-white px-8 py-4 rounded-full font-bold hover:bg-emerald-500 transition-all shadow-lg shadow-emerald-500/20">
+                            <Upload className="w-5 h-5" />
+                            Prova Gratis — Carica Excel
+                        </button>
+                        <a href="#video" className="inline-flex items-center gap-2 bg-card border border-border text-foreground px-8 py-4 rounded-full font-bold hover:bg-muted transition-all">
+                            <Zap className="w-5 h-5 text-emerald-500" />
+                            Guarda il Video
+                        </a>
+                    </div>
+
                     <div className="flex flex-wrap justify-center gap-6 mb-12">
                         {[
                             { value: "3 min", label: "Dal caricamento Excel al report completo" },
@@ -262,6 +273,36 @@ const FinanceIntelligence = () => {
                                 {pill.text}
                             </div>
                         ))}
+                    </div>
+                </section>
+
+                {/* VIDEO SECTION */}
+                <section className="mb-32 flex justify-center" id="video">
+                    <div className="max-w-5xl w-full">
+                        <div className="relative aspect-video rounded-[32px] overflow-hidden shadow-2xl border border-border bg-black group cursor-pointer">
+                            <video
+                                className="w-full h-full object-cover"
+                                controls
+                                poster=""
+                                preload="metadata"
+                            >
+                                <source src="/Analista_Finanziario_Clip_01.mp4" type="video/mp4" />
+                                Il tuo browser non supporta il tag video.
+                            </video>
+
+                            {/* Overlay caption */}
+                            <div className="absolute bottom-6 left-6 right-6 flex items-center justify-between pointer-events-none">
+                                <div className="bg-black/40 backdrop-blur-md px-4 py-2 rounded-full border border-white/20">
+                                    <span className="text-white text-xs font-medium flex items-center gap-2">
+                                        <div className="w-2 h-2 bg-emerald-500 rounded-full animate-pulse" />
+                                        Demo Analista Finanziario AI
+                                    </span>
+                                </div>
+                            </div>
+                        </div>
+                        <p className="text-center mt-6 text-sm text-muted-foreground italic">
+                            Guarda come l'AI analizza un bilancio completo e risponde in linguaggio naturale.
+                        </p>
                     </div>
                 </section>
 
@@ -421,8 +462,8 @@ const FinanceIntelligence = () => {
                                         <th
                                             key={plan.tier}
                                             className={`px-4 py-5 text-center border-b border-border ${plan.popular
-                                                    ? 'bg-primary/10 border-l border-r border-primary/30'
-                                                    : 'bg-muted/30'
+                                                ? 'bg-primary/10 border-l border-r border-primary/30'
+                                                : 'bg-muted/30'
                                                 }`}
                                         >
                                             {plan.popular && (
@@ -474,8 +515,8 @@ const FinanceIntelligence = () => {
                                         >
                                             <button
                                                 className={`w-full py-2.5 px-4 rounded-xl text-xs font-bold transition-all ${plan.popular
-                                                        ? 'bg-primary text-primary-foreground hover:brightness-110 shadow-lg shadow-primary/20'
-                                                        : 'border border-border text-foreground hover:bg-muted/50'
+                                                    ? 'bg-primary text-primary-foreground hover:brightness-110 shadow-lg shadow-primary/20'
+                                                    : 'border border-border text-foreground hover:bg-muted/50'
                                                     }`}
                                             >
                                                 {plan.btnText}
@@ -526,8 +567,8 @@ const FinanceIntelligence = () => {
                                 </div>
                                 <button
                                     className={`w-full py-3 rounded-xl text-sm font-bold transition-all ${plan.popular
-                                            ? 'bg-primary text-primary-foreground hover:brightness-110'
-                                            : 'border border-border text-foreground hover:bg-muted/50'
+                                        ? 'bg-primary text-primary-foreground hover:brightness-110'
+                                        : 'border border-border text-foreground hover:bg-muted/50'
                                         }`}
                                 >
                                     {plan.btnText}
