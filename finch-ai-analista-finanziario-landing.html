@@ -1,0 +1,1247 @@
+<!DOCTYPE html>
+<html lang="it">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>FinCh-Ai — Analista Finanziario AI per PMI Italiane</title>
+<link href="https://fonts.googleapis.com/css2?family=DM+Serif+Display:ital@0;1&family=DM+Sans:ital,wght@0,400;0,500;0,600;0,700&family=JetBrains+Mono:wght@400;500&display=swap" rel="stylesheet">
+<style>
+  :root {
+    --bg: #FDFBF7;
+    --bg-warm: #F7F4EE;
+    --ink: #1A1A1A;
+    --ink-light: #5A5A5A;
+    --ink-muted: #8A8A8A;
+    --green: #2D7D46;
+    --green-light: #E8F5E9;
+    --green-dark: #1B5E30;
+    --green-glow: rgba(45, 125, 70, 0.12);
+    --orange: #E8752A;
+    --orange-light: #FFF3EB;
+    --border: #E0DCD4;
+    --card-shadow: 0 2px 24px rgba(0,0,0,0.06);
+    --card-shadow-hover: 0 8px 40px rgba(0,0,0,0.1);
+    --radius: 16px;
+    --radius-lg: 24px;
+  }
+
+  * { margin: 0; padding: 0; box-sizing: border-box; }
+
+  body {
+    font-family: 'DM Sans', sans-serif;
+    background: var(--bg);
+    color: var(--ink);
+    line-height: 1.6;
+    -webkit-font-smoothing: antialiased;
+  }
+
+  .container { max-width: 1140px; margin: 0 auto; padding: 0 24px; }
+
+  /* ─── NAV ─── */
+  nav {
+    padding: 20px 0;
+    position: sticky;
+    top: 0;
+    z-index: 100;
+    background: rgba(253, 251, 247, 0.92);
+    backdrop-filter: blur(16px);
+    border-bottom: 1px solid rgba(224, 220, 212, 0.5);
+  }
+
+  .nav-inner {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+  }
+
+  .logo {
+    font-family: 'DM Sans', sans-serif;
+    font-weight: 700;
+    font-size: 20px;
+    color: var(--green-dark);
+    text-decoration: none;
+    letter-spacing: -0.5px;
+  }
+
+  .logo span { color: var(--ink-muted); font-weight: 400; }
+
+  .nav-links { display: flex; gap: 32px; align-items: center; }
+
+  .nav-links a {
+    font-size: 14px;
+    font-weight: 500;
+    color: var(--ink-light);
+    text-decoration: none;
+    transition: color 0.2s;
+  }
+
+  .nav-links a:hover { color: var(--ink); }
+
+  .nav-cta {
+    background: var(--green) !important;
+    color: white !important;
+    padding: 10px 24px;
+    border-radius: 100px;
+    font-weight: 600 !important;
+    transition: background 0.2s, transform 0.2s !important;
+  }
+
+  .nav-cta:hover {
+    background: var(--green-dark) !important;
+    transform: translateY(-1px);
+  }
+
+  /* ─── HERO ─── */
+  .hero {
+    padding: 80px 0 60px;
+    text-align: center;
+    position: relative;
+  }
+
+  .hero::before {
+    content: '';
+    position: absolute;
+    top: -40px;
+    left: 50%;
+    transform: translateX(-50%);
+    width: 600px;
+    height: 600px;
+    background: radial-gradient(circle, var(--green-glow) 0%, transparent 70%);
+    pointer-events: none;
+    z-index: 0;
+  }
+
+  .hero-badge {
+    display: inline-flex;
+    align-items: center;
+    gap: 8px;
+    background: var(--green-light);
+    color: var(--green-dark);
+    padding: 7px 18px;
+    border-radius: 100px;
+    font-size: 12px;
+    font-weight: 700;
+    letter-spacing: 0.8px;
+    text-transform: uppercase;
+    margin-bottom: 24px;
+    position: relative;
+    z-index: 1;
+    animation: fadeDown 0.6s ease-out;
+  }
+
+  .hero h1 {
+    font-family: 'DM Serif Display', serif;
+    font-size: clamp(36px, 5.5vw, 58px);
+    line-height: 1.08;
+    margin-bottom: 24px;
+    position: relative;
+    z-index: 1;
+    animation: fadeDown 0.6s ease-out 0.1s both;
+  }
+
+  .hero h1 .highlight {
+    color: var(--green);
+    position: relative;
+    white-space: nowrap;
+  }
+
+  .hero h1 .highlight::after {
+    content: '';
+    position: absolute;
+    bottom: 4px;
+    left: -4px;
+    right: -4px;
+    height: 10px;
+    background: var(--green-light);
+    z-index: -1;
+    border-radius: 4px;
+  }
+
+  .hero-sub {
+    font-size: clamp(17px, 2vw, 20px);
+    color: var(--ink-light);
+    max-width: 640px;
+    margin: 0 auto 36px;
+    position: relative;
+    z-index: 1;
+    animation: fadeDown 0.6s ease-out 0.2s both;
+  }
+
+  .hero-sub em {
+    font-family: 'DM Serif Display', serif;
+    color: var(--ink);
+    font-style: italic;
+  }
+
+  .hero-actions {
+    display: flex;
+    gap: 16px;
+    justify-content: center;
+    flex-wrap: wrap;
+    margin-bottom: 20px;
+    position: relative;
+    z-index: 1;
+    animation: fadeDown 0.6s ease-out 0.3s both;
+  }
+
+  .btn-primary {
+    display: inline-flex;
+    align-items: center;
+    gap: 10px;
+    background: var(--green);
+    color: white;
+    padding: 16px 36px;
+    border-radius: 100px;
+    font-size: 16px;
+    font-weight: 700;
+    text-decoration: none;
+    transition: all 0.25s;
+    box-shadow: 0 4px 20px rgba(45,125,70,0.25);
+  }
+
+  .btn-primary:hover {
+    background: var(--green-dark);
+    transform: translateY(-2px);
+    box-shadow: 0 8px 32px rgba(45,125,70,0.35);
+  }
+
+  .btn-secondary {
+    display: inline-flex;
+    align-items: center;
+    gap: 10px;
+    background: white;
+    color: var(--ink);
+    padding: 16px 36px;
+    border-radius: 100px;
+    font-size: 16px;
+    font-weight: 600;
+    text-decoration: none;
+    border: 1.5px solid var(--border);
+    transition: all 0.25s;
+  }
+
+  .btn-secondary:hover {
+    border-color: var(--green);
+    color: var(--green-dark);
+    transform: translateY(-2px);
+    box-shadow: var(--card-shadow);
+  }
+
+  .hero-privacy {
+    font-size: 13px;
+    color: var(--ink-muted);
+    position: relative;
+    z-index: 1;
+    animation: fadeDown 0.6s ease-out 0.35s both;
+  }
+
+  .hero-privacy strong { color: var(--green-dark); font-weight: 600; }
+
+  /* ─── TRUST BAR ─── */
+  .trust-bar {
+    display: flex;
+    justify-content: center;
+    gap: 12px;
+    flex-wrap: wrap;
+    padding: 32px 0 0;
+    position: relative;
+    z-index: 1;
+    animation: fadeDown 0.6s ease-out 0.4s both;
+  }
+
+  .trust-pill {
+    display: inline-flex;
+    align-items: center;
+    gap: 8px;
+    background: white;
+    border: 1px solid var(--border);
+    padding: 10px 18px;
+    border-radius: 100px;
+    font-size: 13px;
+    font-weight: 500;
+    color: var(--ink-light);
+    box-shadow: var(--card-shadow);
+  }
+
+  .trust-pill .t-icon { font-size: 16px; }
+
+  /* ─── VIDEO SECTION ─── */
+  .video-section {
+    padding: 64px 0;
+  }
+
+  .video-wrapper {
+    max-width: 860px;
+    margin: 0 auto;
+    border-radius: var(--radius-lg);
+    overflow: hidden;
+    box-shadow: 0 12px 60px rgba(0,0,0,0.12);
+    position: relative;
+    background: var(--ink);
+    aspect-ratio: 16/9;
+    cursor: pointer;
+    transition: box-shadow 0.3s;
+  }
+
+  .video-wrapper:hover {
+    box-shadow: 0 16px 72px rgba(0,0,0,0.18);
+  }
+
+  /* Placeholder state before video loads */
+  .video-placeholder {
+    position: absolute;
+    inset: 0;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    gap: 16px;
+    background: linear-gradient(135deg, #1a2e1f 0%, #0d1a11 100%);
+    z-index: 2;
+    transition: opacity 0.4s;
+  }
+
+  .video-placeholder.hidden { opacity: 0; pointer-events: none; }
+
+  .play-btn {
+    width: 80px;
+    height: 80px;
+    border-radius: 50%;
+    background: var(--green);
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    box-shadow: 0 4px 32px rgba(45,125,70,0.4);
+    transition: transform 0.3s, box-shadow 0.3s;
+  }
+
+  .video-wrapper:hover .play-btn {
+    transform: scale(1.08);
+    box-shadow: 0 6px 40px rgba(45,125,70,0.5);
+  }
+
+  .play-btn svg { margin-left: 4px; }
+
+  .video-label {
+    font-size: 15px;
+    font-weight: 600;
+    color: rgba(255,255,255,0.8);
+    letter-spacing: 0.3px;
+  }
+
+  .video-duration {
+    font-size: 12px;
+    color: rgba(255,255,255,0.45);
+    font-weight: 500;
+  }
+
+  .video-embed {
+    width: 100%;
+    height: 100%;
+    border: none;
+  }
+
+  .video-caption {
+    text-align: center;
+    margin-top: 16px;
+    font-size: 14px;
+    color: var(--ink-muted);
+    font-style: italic;
+  }
+
+  /* ─── HOW IT WORKS ─── */
+  .how-section { padding: 64px 0 80px; }
+
+  .section-eyebrow {
+    text-align: center;
+    font-size: 12px;
+    font-weight: 700;
+    letter-spacing: 1.5px;
+    text-transform: uppercase;
+    color: var(--green);
+    margin-bottom: 12px;
+  }
+
+  .section-title {
+    text-align: center;
+    font-family: 'DM Serif Display', serif;
+    font-size: clamp(26px, 3.5vw, 40px);
+    margin-bottom: 12px;
+  }
+
+  .section-sub {
+    text-align: center;
+    font-size: 17px;
+    color: var(--ink-light);
+    max-width: 560px;
+    margin: 0 auto 48px;
+  }
+
+  .steps-grid {
+    display: grid;
+    grid-template-columns: repeat(3, 1fr);
+    gap: 24px;
+    position: relative;
+  }
+
+  .step-card {
+    background: white;
+    border: 1px solid var(--border);
+    border-radius: var(--radius);
+    padding: 32px 28px;
+    text-align: center;
+    position: relative;
+    box-shadow: var(--card-shadow);
+    transition: transform 0.3s, box-shadow 0.3s;
+  }
+
+  .step-card:hover {
+    transform: translateY(-4px);
+    box-shadow: var(--card-shadow-hover);
+  }
+
+  .step-number {
+    width: 44px;
+    height: 44px;
+    border-radius: 50%;
+    background: var(--green);
+    color: white;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    font-family: 'DM Serif Display', serif;
+    font-size: 20px;
+    margin: 0 auto 18px;
+  }
+
+  .step-card:nth-child(2) .step-number { background: var(--orange); }
+  .step-card:nth-child(3) .step-number { background: var(--green-dark); }
+
+  .step-icon { font-size: 36px; margin-bottom: 14px; }
+
+  .step-card h3 {
+    font-size: 17px;
+    font-weight: 700;
+    margin-bottom: 8px;
+  }
+
+  .step-card p {
+    font-size: 14px;
+    color: var(--ink-light);
+    line-height: 1.6;
+  }
+
+  .step-time {
+    display: inline-flex;
+    align-items: center;
+    gap: 4px;
+    margin-top: 14px;
+    padding: 4px 12px;
+    border-radius: 100px;
+    font-size: 12px;
+    font-weight: 600;
+  }
+
+  .step-card:nth-child(1) .step-time { background: var(--green-light); color: var(--green-dark); }
+  .step-card:nth-child(2) .step-time { background: var(--orange-light); color: var(--orange); }
+  .step-card:nth-child(3) .step-time { background: var(--green-light); color: var(--green-dark); }
+
+  /* ─── FEATURES ─── */
+  .features-section {
+    padding: 80px 0;
+    background: var(--bg-warm);
+    border-top: 1px solid var(--border);
+    border-bottom: 1px solid var(--border);
+  }
+
+  .features-grid {
+    display: grid;
+    grid-template-columns: repeat(2, 1fr);
+    gap: 20px;
+  }
+
+  .feat-card {
+    background: white;
+    border: 1px solid var(--border);
+    border-radius: var(--radius);
+    padding: 28px;
+    display: flex;
+    gap: 18px;
+    box-shadow: var(--card-shadow);
+    transition: transform 0.3s;
+  }
+
+  .feat-card:hover { transform: translateY(-3px); }
+
+  .feat-icon {
+    width: 48px;
+    height: 48px;
+    border-radius: 12px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    font-size: 24px;
+    flex-shrink: 0;
+  }
+
+  .feat-card:nth-child(1) .feat-icon { background: var(--green-light); }
+  .feat-card:nth-child(2) .feat-icon { background: var(--orange-light); }
+  .feat-card:nth-child(3) .feat-icon { background: #E3F2FD; }
+  .feat-card:nth-child(4) .feat-icon { background: #F3E5F5; }
+  .feat-card:nth-child(5) .feat-icon { background: #FFF8E1; }
+  .feat-card:nth-child(6) .feat-icon { background: var(--green-light); }
+
+  .feat-text h3 {
+    font-size: 16px;
+    font-weight: 700;
+    margin-bottom: 4px;
+  }
+
+  .feat-text p {
+    font-size: 14px;
+    color: var(--ink-light);
+    line-height: 1.5;
+  }
+
+  /* ─── PRIVACY SECTION ─── */
+  .privacy-section {
+    padding: 80px 0;
+  }
+
+  .privacy-card {
+    max-width: 860px;
+    margin: 0 auto;
+    background: white;
+    border: 2px solid var(--green);
+    border-radius: var(--radius-lg);
+    padding: 48px;
+    position: relative;
+    overflow: hidden;
+  }
+
+  .privacy-card::before {
+    content: '';
+    position: absolute;
+    top: 0;
+    left: 0;
+    right: 0;
+    height: 5px;
+    background: linear-gradient(90deg, var(--green), #4CAF50, var(--green-dark));
+  }
+
+  .privacy-card::after {
+    content: '';
+    position: absolute;
+    top: -80px;
+    right: -80px;
+    width: 240px;
+    height: 240px;
+    background: radial-gradient(circle, var(--green-glow) 0%, transparent 70%);
+    pointer-events: none;
+  }
+
+  .privacy-header {
+    display: flex;
+    align-items: center;
+    gap: 16px;
+    margin-bottom: 24px;
+  }
+
+  .privacy-shield {
+    width: 56px;
+    height: 56px;
+    border-radius: 14px;
+    background: var(--green-light);
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    font-size: 28px;
+  }
+
+  .privacy-header h2 {
+    font-family: 'DM Serif Display', serif;
+    font-size: 28px;
+  }
+
+  .privacy-header p {
+    font-size: 15px;
+    color: var(--ink-light);
+    margin-top: 2px;
+  }
+
+  .privacy-points {
+    display: grid;
+    grid-template-columns: repeat(2, 1fr);
+    gap: 16px;
+    margin-bottom: 28px;
+  }
+
+  .priv-point {
+    display: flex;
+    gap: 12px;
+    align-items: flex-start;
+    padding: 16px;
+    background: var(--bg);
+    border-radius: 12px;
+    border: 1px solid var(--border);
+  }
+
+  .priv-check {
+    width: 28px;
+    height: 28px;
+    border-radius: 50%;
+    background: var(--green);
+    color: white;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    font-size: 14px;
+    font-weight: 700;
+    flex-shrink: 0;
+    margin-top: 2px;
+  }
+
+  .priv-point h4 {
+    font-size: 14px;
+    font-weight: 700;
+    margin-bottom: 2px;
+  }
+
+  .priv-point p {
+    font-size: 13px;
+    color: var(--ink-light);
+    line-height: 1.5;
+  }
+
+  .privacy-summary {
+    background: var(--green-light);
+    border-radius: 12px;
+    padding: 18px 24px;
+    display: flex;
+    align-items: center;
+    gap: 12px;
+    font-size: 15px;
+    font-weight: 600;
+    color: var(--green-dark);
+  }
+
+  .privacy-summary span { font-size: 22px; }
+
+  /* ─── PRICING ─── */
+  .pricing-section { padding: 80px 0; background: var(--bg-warm); border-top: 1px solid var(--border); }
+
+  .pricing-grid {
+    display: grid;
+    grid-template-columns: repeat(3, 1fr);
+    gap: 20px;
+    max-width: 920px;
+    margin: 0 auto;
+  }
+
+  .price-card {
+    background: white;
+    border: 1.5px solid var(--border);
+    border-radius: var(--radius);
+    padding: 32px 28px;
+    text-align: center;
+    box-shadow: var(--card-shadow);
+    transition: transform 0.3s;
+    position: relative;
+  }
+
+  .price-card:hover { transform: translateY(-4px); }
+
+  .price-card.featured {
+    border-color: var(--green);
+    box-shadow: 0 8px 40px rgba(45,125,70,0.15);
+    transform: scale(1.03);
+  }
+
+  .price-card.featured:hover { transform: scale(1.03) translateY(-4px); }
+
+  .price-card.featured::before {
+    content: 'CONSIGLIATO';
+    position: absolute;
+    top: -12px;
+    left: 50%;
+    transform: translateX(-50%);
+    background: var(--green);
+    color: white;
+    font-size: 10px;
+    font-weight: 800;
+    letter-spacing: 1.2px;
+    padding: 4px 16px;
+    border-radius: 100px;
+  }
+
+  .price-tier {
+    font-size: 11px;
+    font-weight: 700;
+    letter-spacing: 1.2px;
+    text-transform: uppercase;
+    color: var(--ink-muted);
+    margin-bottom: 14px;
+  }
+
+  .price-amount {
+    font-family: 'DM Serif Display', serif;
+    font-size: 42px;
+    color: var(--ink);
+    line-height: 1;
+  }
+
+  .price-amount .currency { font-size: 22px; vertical-align: top; margin-right: 2px; }
+
+  .price-period {
+    font-size: 13px;
+    color: var(--ink-muted);
+    margin-bottom: 20px;
+  }
+
+  .price-desc {
+    font-size: 14px;
+    color: var(--ink-light);
+    margin-bottom: 20px;
+    padding-bottom: 20px;
+    border-bottom: 1px solid var(--border);
+    min-height: 44px;
+  }
+
+  .price-features {
+    list-style: none;
+    text-align: left;
+    margin-bottom: 24px;
+  }
+
+  .price-features li {
+    font-size: 13.5px;
+    padding: 7px 0;
+    display: flex;
+    align-items: center;
+    gap: 8px;
+    color: var(--ink-light);
+  }
+
+  .price-features .pf-check {
+    color: var(--green);
+    font-weight: 700;
+    font-size: 15px;
+    flex-shrink: 0;
+  }
+
+  .price-features .pf-x {
+    color: #CCC;
+    font-size: 13px;
+    flex-shrink: 0;
+  }
+
+  .price-btn {
+    display: block;
+    width: 100%;
+    padding: 12px;
+    border-radius: 100px;
+    font-size: 14px;
+    font-weight: 700;
+    text-decoration: none;
+    text-align: center;
+    transition: all 0.25s;
+  }
+
+  .price-btn.primary {
+    background: var(--green);
+    color: white;
+    box-shadow: 0 4px 16px rgba(45,125,70,0.2);
+  }
+
+  .price-btn.primary:hover {
+    background: var(--green-dark);
+    transform: translateY(-1px);
+  }
+
+  .price-btn.outline {
+    background: white;
+    color: var(--green-dark);
+    border: 1.5px solid var(--green);
+  }
+
+  .price-btn.outline:hover {
+    background: var(--green-light);
+  }
+
+  /* ─── CTA FINAL ─── */
+  .cta-section {
+    padding: 80px 0;
+  }
+
+  .cta-card {
+    background: var(--ink);
+    border-radius: var(--radius-lg);
+    padding: 64px 48px;
+    text-align: center;
+    position: relative;
+    overflow: hidden;
+  }
+
+  .cta-card::before {
+    content: '';
+    position: absolute;
+    top: -100px;
+    right: -100px;
+    width: 400px;
+    height: 400px;
+    background: radial-gradient(circle, rgba(45,125,70,0.15) 0%, transparent 70%);
+    border-radius: 50%;
+  }
+
+  .cta-card::after {
+    content: '';
+    position: absolute;
+    bottom: -60px;
+    left: -60px;
+    width: 300px;
+    height: 300px;
+    background: radial-gradient(circle, rgba(232,117,42,0.08) 0%, transparent 70%);
+    border-radius: 50%;
+  }
+
+  .cta-card h2 {
+    font-family: 'DM Serif Display', serif;
+    font-size: clamp(26px, 3.5vw, 38px);
+    color: white;
+    margin-bottom: 14px;
+    position: relative;
+  }
+
+  .cta-card p {
+    font-size: 17px;
+    color: rgba(255,255,255,0.6);
+    max-width: 520px;
+    margin: 0 auto 32px;
+    position: relative;
+  }
+
+  .cta-actions {
+    display: flex;
+    gap: 16px;
+    justify-content: center;
+    flex-wrap: wrap;
+    position: relative;
+    margin-bottom: 20px;
+  }
+
+  .cta-btn-light {
+    display: inline-flex;
+    align-items: center;
+    gap: 10px;
+    background: white;
+    color: var(--green-dark);
+    padding: 16px 36px;
+    border-radius: 100px;
+    font-size: 16px;
+    font-weight: 700;
+    text-decoration: none;
+    transition: all 0.25s;
+  }
+
+  .cta-btn-light:hover {
+    transform: translateY(-2px);
+    box-shadow: 0 8px 32px rgba(255,255,255,0.2);
+  }
+
+  .cta-btn-ghost {
+    display: inline-flex;
+    align-items: center;
+    gap: 10px;
+    background: transparent;
+    color: rgba(255,255,255,0.8);
+    padding: 16px 36px;
+    border-radius: 100px;
+    font-size: 16px;
+    font-weight: 600;
+    text-decoration: none;
+    border: 1.5px solid rgba(255,255,255,0.2);
+    transition: all 0.25s;
+  }
+
+  .cta-btn-ghost:hover {
+    border-color: rgba(255,255,255,0.5);
+    color: white;
+  }
+
+  .cta-privacy-note {
+    font-size: 13px;
+    color: rgba(255,255,255,0.4);
+    position: relative;
+  }
+
+  /* ─── FOOTER ─── */
+  footer {
+    padding: 40px 0;
+    text-align: center;
+    border-top: 1px solid var(--border);
+  }
+
+  .footer-brand {
+    font-weight: 700;
+    color: var(--green-dark);
+    margin-bottom: 8px;
+  }
+
+  .footer-links {
+    display: flex;
+    justify-content: center;
+    gap: 24px;
+    margin-bottom: 12px;
+  }
+
+  .footer-links a {
+    font-size: 13px;
+    color: var(--ink-muted);
+    text-decoration: none;
+    transition: color 0.2s;
+  }
+
+  .footer-links a:hover { color: var(--ink); }
+
+  .footer-copy {
+    font-size: 12px;
+    color: var(--ink-muted);
+  }
+
+  /* ─── ANIMATIONS ─── */
+  @keyframes fadeDown {
+    from { opacity: 0; transform: translateY(-16px); }
+    to { opacity: 1; transform: translateY(0); }
+  }
+
+  @keyframes fadeUp {
+    from { opacity: 0; transform: translateY(20px); }
+    to { opacity: 1; transform: translateY(0); }
+  }
+
+  /* ─── RESPONSIVE ─── */
+  @media (max-width: 768px) {
+    .nav-links a:not(.nav-cta) { display: none; }
+    .steps-grid { grid-template-columns: 1fr; max-width: 400px; margin: 0 auto; }
+    .features-grid { grid-template-columns: 1fr; }
+    .privacy-points { grid-template-columns: 1fr; }
+    .pricing-grid { grid-template-columns: 1fr; max-width: 380px; margin: 0 auto; }
+    .price-card.featured { transform: scale(1); }
+    .price-card.featured:hover { transform: translateY(-4px); }
+    .privacy-card { padding: 32px 24px; }
+    .cta-card { padding: 48px 24px; }
+    .hero { padding: 48px 0 40px; }
+  }
+</style>
+</head>
+<body>
+
+<!-- ═══ NAV ═══ -->
+<nav>
+  <div class="container nav-inner">
+    <a href="#" class="logo">FinCh<span>-Ai</span></a>
+    <div class="nav-links">
+      <a href="#come-funziona">Come Funziona</a>
+      <a href="#funzionalita">Funzionalit&agrave;</a>
+      <a href="#prezzi">Prezzi</a>
+      <a href="#privacy-dati">I Tuoi Dati</a>
+      <a href="#prova" class="nav-cta">Prova Gratis</a>
+    </div>
+  </div>
+</nav>
+
+<!-- ═══ HERO ═══ -->
+<section class="hero">
+  <div class="container">
+    <div class="hero-badge">Analista Finanziario AI &middot; Per PMI Italiane</div>
+    <h1>Il tuo bilancio parla.<br><span class="highlight">Ora puoi ascoltarlo.</span></h1>
+    <p class="hero-sub">
+      Carica il tuo Conto Economico in Excel. In 3 minuti hai un report OIC professionale, indici finanziari, trend &mdash; e un <em>assistente AI</em> che risponde alle tue domande sui numeri.
+    </p>
+    <div class="hero-actions">
+      <a href="#prova" class="btn-primary">
+        <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"><path d="M21 15v4a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2v-4"/><polyline points="17 8 12 3 7 8"/><line x1="12" y1="3" x2="12" y2="15"/></svg>
+        Prova Gratis &mdash; Carica il tuo Excel
+      </a>
+      <a href="#video" class="btn-secondary">
+        <svg width="18" height="18" viewBox="0 0 24 24" fill="currentColor"><polygon points="5 3 19 12 5 21 5 3"/></svg>
+        Guarda il Video
+      </a>
+    </div>
+    <p class="hero-privacy">
+      <strong>Zero rischi:</strong> nessuna carta di credito richiesta &middot; i tuoi dati vengono cancellati dopo il test &middot; conserviamo solo la tua email
+    </p>
+    <div class="trust-bar">
+      <div class="trust-pill">
+        <span class="t-icon">&#127470;&#127481;</span>
+        Conforme OIC &middot; Art. 2425 C.C.
+      </div>
+      <div class="trust-pill">
+        <span class="t-icon">&#128274;</span>
+        GDPR Compliant &middot; Dati in EU
+      </div>
+      <div class="trust-pill">
+        <span class="t-icon">&#128465;&#65039;</span>
+        Dati cancellati dopo il test
+      </div>
+      <div class="trust-pill">
+        <span class="t-icon">&#9889;</span>
+        Report in 3 minuti
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- ═══ VIDEO ═══ -->
+<section class="video-section" id="video">
+  <div class="container">
+    <div class="video-wrapper" onclick="this.querySelector('.video-placeholder').classList.add('hidden');">
+      <div class="video-placeholder">
+        <div class="play-btn">
+          <svg width="32" height="32" viewBox="0 0 24 24" fill="white"><polygon points="6 3 20 12 6 21 6 3"/></svg>
+        </div>
+        <div class="video-label">Guarda come funziona in 2 minuti</div>
+        <div class="video-duration">Dal caricamento Excel al report completo</div>
+      </div>
+      <!-- Replace the src below with your actual video embed URL -->
+      <!-- <iframe class="video-embed" src="https://www.youtube.com/embed/YOUR_VIDEO_ID" allowfullscreen></iframe> -->
+      <!-- Or for a self-hosted video: -->
+      <!-- <video class="video-embed" controls><source src="your-video.mp4" type="video/mp4"></video> -->
+    </div>
+    <p class="video-caption">Demo con dati di esempio &mdash; nessun dato reale di clienti</p>
+  </div>
+</section>
+
+<!-- ═══ HOW IT WORKS ═══ -->
+<section class="how-section" id="come-funziona">
+  <div class="container">
+    <div class="section-eyebrow">Come Funziona</div>
+    <h2 class="section-title">Dal tuo Excel al report. In tre passi.</h2>
+    <p class="section-sub">Nessuna configurazione, nessuna formazione. Funziona dal primo minuto.</p>
+    <div class="steps-grid">
+      <div class="step-card">
+        <div class="step-number">1</div>
+        <div class="step-icon">&#128196;</div>
+        <h3>Carica il tuo Excel</h3>
+        <p>Trascina il file del Conto Economico. Accettiamo qualsiasi formato Excel &mdash; il sistema riconosce automaticamente la struttura.</p>
+        <div class="step-time">&#9201; 30 secondi</div>
+      </div>
+      <div class="step-card">
+        <div class="step-number">2</div>
+        <div class="step-icon">&#129302;</div>
+        <h3>L&rsquo;AI analizza tutto</h3>
+        <p>Riclassificazione OIC, calcolo di tutti gli indici finanziari, analisi dei margini, trend anno su anno. Tutto automatico.</p>
+        <div class="step-time">&#9889; 2&ndash;3 minuti</div>
+      </div>
+      <div class="step-card">
+        <div class="step-number">3</div>
+        <div class="step-icon">&#128172;</div>
+        <h3>Parla con i tuoi numeri</h3>
+        <p>Scarica il report PDF professionale. Poi chiedi all&rsquo;AI: &ldquo;Qual &egrave; il mio margine operativo?&rdquo; &ldquo;Dove sto perdendo margine?&rdquo;</p>
+        <div class="step-time">&#8734; Domande illimitate</div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- ═══ FEATURES ═══ -->
+<section class="features-section" id="funzionalita">
+  <div class="container">
+    <div class="section-eyebrow">Funzionalit&agrave;</div>
+    <h2 class="section-title">Tutto quello che un CFO vorrebbe.<br>Al costo di un caff&egrave; al giorno.</h2>
+    <p class="section-sub">Pensato per chi gestisce un&rsquo;impresa, non per chi fa il commercialista.</p>
+    <div class="features-grid">
+      <div class="feat-card">
+        <div class="feat-icon">&#128202;</div>
+        <div class="feat-text">
+          <h3>Report OIC Professionale</h3>
+          <p>Riclassificazione conforme agli standard OIC e al Codice Civile Art. 2425. Pronto per la banca, l&rsquo;investitore o il CdA.</p>
+        </div>
+      </div>
+      <div class="feat-card">
+        <div class="feat-icon">&#128200;</div>
+        <div class="feat-text">
+          <h3>Indici Finanziari Completi</h3>
+          <p>ROE, ROI, ROS, EBITDA margin, indici di liquidit&agrave;, solidit&agrave; patrimoniale, Altman Z-Score &mdash; calcolati e spiegati in italiano.</p>
+        </div>
+      </div>
+      <div class="feat-card">
+        <div class="feat-icon">&#128172;</div>
+        <div class="feat-text">
+          <h3>Chat AI in Italiano</h3>
+          <p>Fai domande sui tuoi dati in linguaggio naturale. L&rsquo;AI capisce il contesto e risponde con numeri specifici della tua azienda.</p>
+        </div>
+      </div>
+      <div class="feat-card">
+        <div class="feat-icon">&#128197;</div>
+        <div class="feat-text">
+          <h3>Confronto Pluriennale</h3>
+          <p>Carica pi&ugrave; anni e visualizza i trend. L&rsquo;AI identifica variazioni significative e segnala criticit&agrave; prima che diventino problemi.</p>
+        </div>
+      </div>
+      <div class="feat-card">
+        <div class="feat-icon">&#128196;</div>
+        <div class="feat-text">
+          <h3>Export PDF Professionale</h3>
+          <p>Report formattato con grafici, tabelle e commenti dell&rsquo;AI. Pronto da condividere senza ulteriori modifiche.</p>
+        </div>
+      </div>
+      <div class="feat-card">
+        <div class="feat-icon">&#127470;&#127481;</div>
+        <div class="feat-text">
+          <h3>100% Italiano</h3>
+          <p>Terminologia contabile italiana, normativa OIC, standard del Codice Civile. Non una traduzione &mdash; costruito per il mercato italiano.</p>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- ═══ PRIVACY ═══ -->
+<section class="privacy-section" id="privacy-dati">
+  <div class="container">
+    <div class="section-eyebrow">I Tuoi Dati, Le Tue Regole</div>
+    <h2 class="section-title">Prova senza pensieri. Cancellazione totale.</h2>
+    <p class="section-sub">Sappiamo che i dati finanziari sono sensibili. Per questo abbiamo progettato il sistema con la privacy al centro.</p>
+    <div class="privacy-card">
+      <div class="privacy-header">
+        <div class="privacy-shield">&#128737;&#65039;</div>
+        <div>
+          <h2>La nostra promessa sui dati</h2>
+          <p>Trasparenza totale su cosa succede con le tue informazioni</p>
+        </div>
+      </div>
+      <div class="privacy-points">
+        <div class="priv-point">
+          <div class="priv-check">&check;</div>
+          <div>
+            <h4>Il tuo Excel non viene archiviato</h4>
+            <p>Il file viene elaborato in memoria per generare il report. Non viene salvato sui nostri server, n&eacute; in alcun database.</p>
+          </div>
+        </div>
+        <div class="priv-point">
+          <div class="priv-check">&check;</div>
+          <div>
+            <h4>Cancellazione automatica</h4>
+            <p>Dopo che hai scaricato il report e terminato la sessione, tutti i dati della tua analisi vengono eliminati. Automaticamente. Nessuna traccia.</p>
+          </div>
+        </div>
+        <div class="priv-point">
+          <div class="priv-check">&check;</div>
+          <div>
+            <h4>Conserviamo solo la tua email</h4>
+            <p>L&rsquo;unico dato che conserviamo &egrave; il tuo indirizzo email, per poterti ricontattare. Nessun dato finanziario, nessun bilancio, nessun numero.</p>
+          </div>
+        </div>
+        <div class="priv-point">
+          <div class="priv-check">&check;</div>
+          <div>
+            <h4>GDPR &middot; Server in EU</h4>
+            <p>Infrastruttura europea, conforme al GDPR. I tuoi dati non lasciano mai l&rsquo;Unione Europea durante l&rsquo;elaborazione.</p>
+          </div>
+        </div>
+      </div>
+      <div class="privacy-summary">
+        <span>&#128161;</span>
+        In sintesi: carica, analizza, scarica il report. Poi tutto sparisce. Rimane solo la tua email.
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- ═══ PRICING ═══ -->
+<section class="pricing-section" id="prezzi">
+  <div class="container">
+    <div class="section-eyebrow">Prezzi Semplici</div>
+    <h2 class="section-title">Meno di un caff&egrave; al giorno.</h2>
+    <p class="section-sub">Scegli il piano giusto per la tua impresa. Puoi cambiare o disdire in qualsiasi momento.</p>
+    <div class="pricing-grid">
+      <!-- STARTER -->
+      <div class="price-card">
+        <div class="price-tier">Starter</div>
+        <div class="price-amount"><span class="currency">&euro;</span>49</div>
+        <div class="price-period">al mese</div>
+        <div class="price-desc">Per micro-imprese e imprenditori che vogliono capire i propri numeri</div>
+        <ul class="price-features">
+          <li><span class="pf-check">&check;</span> 3 report OIC al mese</li>
+          <li><span class="pf-check">&check;</span> 30 domande chat AI</li>
+          <li><span class="pf-check">&check;</span> Storico 2 anni</li>
+          <li><span class="pf-check">&check;</span> Export PDF base</li>
+          <li><span class="pf-check">&check;</span> 1 utente</li>
+          <li><span class="pf-x">&mdash;</span> Benchmark settoriale</li>
+        </ul>
+        <a href="#prova" class="price-btn outline">Inizia con Starter</a>
+      </div>
+      <!-- PROFESSIONAL -->
+      <div class="price-card featured">
+        <div class="price-tier">Professional</div>
+        <div class="price-amount"><span class="currency">&euro;</span>99</div>
+        <div class="price-period">al mese</div>
+        <div class="price-desc">Per PMI che vogliono reporting finanziario continuo e professionale</div>
+        <ul class="price-features">
+          <li><span class="pf-check">&check;</span> 8 report OIC al mese</li>
+          <li><span class="pf-check">&check;</span> Chat AI illimitata</li>
+          <li><span class="pf-check">&check;</span> Storico 5 anni + trend</li>
+          <li><span class="pf-check">&check;</span> Export PDF professionale</li>
+          <li><span class="pf-check">&check;</span> 3 utenti</li>
+          <li><span class="pf-x">&mdash;</span> Benchmark settoriale</li>
+        </ul>
+        <a href="#prova" class="price-btn primary">Scegli Professional</a>
+      </div>
+      <!-- BUSINESS -->
+      <div class="price-card">
+        <div class="price-tier">Business</div>
+        <div class="price-amount"><span class="currency">&euro;</span>199</div>
+        <div class="price-period">al mese</div>
+        <div class="price-desc">Per PMI strutturate e studi professionali con pi&ugrave; clienti</div>
+        <ul class="price-features">
+          <li><span class="pf-check">&check;</span> Report illimitati</li>
+          <li><span class="pf-check">&check;</span> Chat AI illimitata</li>
+          <li><span class="pf-check">&check;</span> 5 anni + benchmark settore</li>
+          <li><span class="pf-check">&check;</span> PDF white-label</li>
+          <li><span class="pf-check">&check;</span> 10+ utenti</li>
+          <li><span class="pf-check">&check;</span> API &amp; Webhook</li>
+        </ul>
+        <a href="#prova" class="price-btn outline">Scegli Business</a>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- ═══ FINAL CTA ═══ -->
+<section class="cta-section" id="prova">
+  <div class="container">
+    <div class="cta-card">
+      <h2>Prova adesso. Gratis. Senza impegno.</h2>
+      <p>Carica il tuo Conto Economico e scopri cosa l&rsquo;AI vede nei tuoi numeri. Bastano 3 minuti e un file Excel.</p>
+      <div class="cta-actions">
+        <a href="#" class="cta-btn-light">
+          <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"><path d="M21 15v4a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2v-4"/><polyline points="17 8 12 3 7 8"/><line x1="12" y1="3" x2="12" y2="15"/></svg>
+          Carica il tuo Excel &rarr;
+        </a>
+        <a href="#video" class="cta-btn-ghost">
+          <svg width="18" height="18" viewBox="0 0 24 24" fill="currentColor"><polygon points="5 3 19 12 5 21 5 3"/></svg>
+          Rivedi il video
+        </a>
+      </div>
+      <p class="cta-privacy-note">&#128274; Nessuna carta di credito &middot; I tuoi dati finanziari vengono cancellati dopo il test &middot; Conserviamo solo la tua email</p>
+    </div>
+  </div>
+</section>
+
+<!-- ═══ FOOTER ═══ -->
+<footer>
+  <div class="container">
+    <div class="footer-brand">FinCh-Ai</div>
+    <div class="footer-links">
+      <a href="#">Privacy Policy</a>
+      <a href="#">Termini di Servizio</a>
+      <a href="#">Contattaci</a>
+      <a href="#">LinkedIn</a>
+    </div>
+    <div class="footer-copy">&copy; 2026 FinCh-Ai &middot; Analista Finanziario AI per PMI Italiane &middot; P.IVA XXXXXXXXXX</div>
+  </div>
+</footer>
+
+</body>
+</html>
