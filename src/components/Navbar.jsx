@@ -21,6 +21,13 @@ export default function Navbar() {
         { label: "Warehouse Intelligence", disabled: true },
       ]
     },
+    {
+      id: "articoli",
+      label: "Articoli",
+      dropdown: [
+        { label: "AI per Imprenditori e Commercialisti", href: "/blog/intelligenza-artificiale-imprenditori-commercialisti.html", external: true },
+      ]
+    },
     { id: "contatti", label: "Demo", href: "/#contatti" },
     {
       id: "area-clienti",
@@ -120,17 +127,33 @@ export default function Navbar() {
                               {sub.label}
                             </div>
                           ) : (
-                            <Link
-                              key={sub.label}
-                              to={sub.href}
-                              onClick={() => handleLinkClick(null)}
-                              className="flex items-center justify-between px-4 py-3 rounded-lg text-sm transition-colors hover:bg-primary/10 hover:text-primary group/sub"
-                            >
-                              <span>{sub.label}</span>
-                              <svg className="h-4 w-4 opacity-0 -translate-x-2 transition-all group-hover/sub:opacity-100 group-hover/sub:translate-x-0" viewBox="0 0 24 24" fill="none" stroke="currentColor">
-                                <path d="M5 12h14M13 5l7 7-7 7" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round" />
-                              </svg>
-                            </Link>
+                            sub.external ? (
+                              <a
+                                key={sub.label}
+                                href={sub.href}
+                                target="_blank"
+                                rel="noopener noreferrer"
+                                onClick={() => setActiveDropdown(null)}
+                                className="flex items-center justify-between px-4 py-3 rounded-lg text-sm transition-colors hover:bg-primary/10 hover:text-primary group/sub"
+                              >
+                                <span>{sub.label}</span>
+                                <svg className="h-4 w-4 opacity-0 -translate-x-2 transition-all group-hover/sub:opacity-100 group-hover/sub:translate-x-0" viewBox="0 0 24 24" fill="none" stroke="currentColor">
+                                  <path d="M5 12h14M13 5l7 7-7 7" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round" />
+                                </svg>
+                              </a>
+                            ) : (
+                              <Link
+                                key={sub.label}
+                                to={sub.href}
+                                onClick={() => handleLinkClick(null)}
+                                className="flex items-center justify-between px-4 py-3 rounded-lg text-sm transition-colors hover:bg-primary/10 hover:text-primary group/sub"
+                              >
+                                <span>{sub.label}</span>
+                                <svg className="h-4 w-4 opacity-0 -translate-x-2 transition-all group-hover/sub:opacity-100 group-hover/sub:translate-x-0" viewBox="0 0 24 24" fill="none" stroke="currentColor">
+                                  <path d="M5 12h14M13 5l7 7-7 7" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round" />
+                                </svg>
+                              </Link>
+                            )
                           )
                         )}
                       </div>
@@ -212,14 +235,27 @@ export default function Navbar() {
                           {sub.label}
                         </div>
                       ) : (
-                        <Link
-                          key={sub.label}
-                          to={sub.href}
-                          onClick={() => handleLinkClick(null)}
-                          className="block px-4 py-2 rounded-lg text-sm text-muted-foreground hover:text-primary hover:bg-primary/5 transition-colors"
-                        >
-                          {sub.label}
-                        </Link>
+                        sub.external ? (
+                          <a
+                            key={sub.label}
+                            href={sub.href}
+                            target="_blank"
+                            rel="noopener noreferrer"
+                            onClick={() => setMobileMenuOpen(false)}
+                            className="block px-4 py-2 rounded-lg text-sm text-muted-foreground hover:text-primary hover:bg-primary/5 transition-colors"
+                          >
+                            {sub.label}
+                          </a>
+                        ) : (
+                          <Link
+                            key={sub.label}
+                            to={sub.href}
+                            onClick={() => handleLinkClick(null)}
+                            className="block px-4 py-2 rounded-lg text-sm text-muted-foreground hover:text-primary hover:bg-primary/5 transition-colors"
+                          >
+                            {sub.label}
+                          </Link>
+                        )
                       )
                     )}
                   </div>
