@@ -61,8 +61,12 @@ export default function Navbar() {
 
   const handleLinkClick = (id) => {
     setMobileMenuOpen(false);
-    if (isHomePage && id) {
+    if (id) {
       setActiveSection(id);
+      setTimeout(() => {
+        const el = document.getElementById(id);
+        if (el) el.scrollIntoView({ behavior: "smooth" });
+      }, 50);
     }
   };
 
