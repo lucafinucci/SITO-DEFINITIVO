@@ -25,7 +25,7 @@ export default function Navbar() {
       id: "articoli",
       label: "Articoli",
       dropdown: [
-        { label: "AI per Imprenditori e Commercialisti", href: "/blog/intelligenza-artificiale-imprenditori-commercialisti.html", external: true },
+        { label: "AI per Imprenditori e Commercialisti", href: "/blog/intelligenza-artificiale-imprenditori-commercialisti" },
       ]
     },
     { id: "contatti", label: "Demo", href: "/#contatti" },
