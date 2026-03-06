@@ -26,6 +26,7 @@ export default function Navbar() {
       label: "Articoli",
       dropdown: [
         { label: "AI per Imprenditori e Commercialisti", href: "/blog/intelligenza-artificiale-imprenditori-commercialisti" },
+        { label: "Automazione Documentale con Document Intelligence", href: "/blog/document-intelligence-automazione-ddt-bolle-consegna" },
       ]
     },
     { id: "contatti", label: "Demo", href: "/#contatti" },
