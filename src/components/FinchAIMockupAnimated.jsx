@@ -54,7 +54,7 @@ export default function FinchAIMockupAnimated() {
       output: "Forecast e indicatori economici intelligenti",
       status: "Operativo",
       cta: "Esplora la finanza",
-      href: "#contatti",
+      href: "/soluzioni/finance-intelligence",
       icon: <WalletIcon className="h-6 w-6" strokeWidth={1.5} />,
     },
     {
