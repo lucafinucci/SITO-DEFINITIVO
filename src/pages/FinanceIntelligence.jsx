@@ -250,10 +250,10 @@ const FinanceIntelligence = () => {
                     </p>
 
                     <div className="flex flex-wrap justify-center gap-4 mb-16">
-                        <button className="inline-flex items-center gap-2 bg-emerald-600 text-white px-8 py-4 rounded-full font-bold hover:bg-emerald-500 transition-all shadow-lg shadow-emerald-500/20">
+                        <a href="https://bi.finch-ai.it" target="_blank" rel="noopener noreferrer" className="inline-flex items-center gap-2 bg-emerald-600 text-white px-8 py-4 rounded-full font-bold hover:bg-emerald-500 transition-all shadow-lg shadow-emerald-500/20">
                             <Upload className="w-5 h-5" />
                             Prova Gratis — Carica Excel
-                        </button>
+                        </a>
                         <a
                             href="#video"
                             onClick={handleWatchVideo}
@@ -620,10 +620,10 @@ const FinanceIntelligence = () => {
                                     </div>
                                 ))}
                             </div>
-                            <button className="inline-flex items-center gap-2 bg-emerald-600 text-white px-10 py-5 rounded-2xl font-bold text-lg hover:bg-emerald-500 transition-all shadow-xl shadow-emerald-500/20 hover:scale-105 active:scale-95">
+                            <a href="https://bi.finch-ai.it" target="_blank" rel="noopener noreferrer" className="inline-flex items-center gap-2 bg-emerald-600 text-white px-10 py-5 rounded-2xl font-bold text-lg hover:bg-emerald-500 transition-all shadow-xl shadow-emerald-500/20 hover:scale-105 active:scale-95">
                                 <Upload className="w-5 h-5" />
                                 Carica il tuo Excel → Prova Gratis
-                            </button>
+                            </a>
                         </div>
                     </div>
                 </section>
