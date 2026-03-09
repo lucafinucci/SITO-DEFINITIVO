@@ -1,4 +1,5 @@
 import React, { useEffect } from 'react';
+import SEO from '../components/SEO';
 import {
     Globe,
     ArrowRight,
@@ -31,8 +32,55 @@ const DocumentIntelligence = () => {
         window.scrollTo(0, 0);
     }, []);
 
+    const docJsonLd = [
+        {
+            "@context": "https://schema.org",
+            "@type": "SoftwareApplication",
+            "name": "Finch-AI Document Intelligence",
+            "applicationCategory": "BusinessApplication",
+            "applicationSubCategory": "DocumentManagement",
+            "operatingSystem": "Web",
+            "url": "https://finch-ai.it/soluzioni/document-intelligence",
+            "image": "https://finch-ai.it/assets/images/og-image.png",
+            "description": "Automazione AI per la gestione di DDT, fatture, ordini e contratti. Da 11 minuti a 8 secondi per documento. 97% accuratezza OCR, human-in-the-loop, integrazione ERP via API/Webhook.",
+            "featureList": [
+                "OCR AI per DDT, fatture, ordini, contratti",
+                "97% di accuratezza nel riconoscimento dati",
+                "Da 11 minuti a 8 secondi per documento",
+                "-75% tempo inserimento dati",
+                "Verifica human-in-the-loop",
+                "Integrazione ERP via API e Webhook",
+                "Elaborazione automatica 24/7",
+                "GDPR compliant"
+            ],
+            "offers": [
+                { "@type": "Offer", "name": "Demo", "price": "0", "priceCurrency": "EUR", "availability": "https://schema.org/InStock" },
+                { "@type": "Offer", "name": "Basic", "price": "49", "priceCurrency": "EUR", "priceSpecification": { "@type": "UnitPriceSpecification", "price": "49", "priceCurrency": "EUR", "unitText": "mese" }, "availability": "https://schema.org/InStock" },
+                { "@type": "Offer", "name": "Professional", "price": "129", "priceCurrency": "EUR", "priceSpecification": { "@type": "UnitPriceSpecification", "price": "129", "priceCurrency": "EUR", "unitText": "mese" }, "availability": "https://schema.org/InStock" },
+                { "@type": "Offer", "name": "Business", "price": "249", "priceCurrency": "EUR", "priceSpecification": { "@type": "UnitPriceSpecification", "price": "249", "priceCurrency": "EUR", "unitText": "mese" }, "availability": "https://schema.org/InStock" }
+            ],
+            "provider": { "@type": "Organization", "name": "Finch-AI S.r.l.", "url": "https://finch-ai.it" }
+        },
+        {
+            "@context": "https://schema.org",
+            "@type": "BreadcrumbList",
+            "itemListElement": [
+                { "@type": "ListItem", "position": 1, "name": "Home", "item": "https://finch-ai.it/" },
+                { "@type": "ListItem", "position": 2, "name": "Soluzioni", "item": "https://finch-ai.it/soluzioni/" },
+                { "@type": "ListItem", "position": 3, "name": "Document Intelligence", "item": "https://finch-ai.it/soluzioni/document-intelligence" }
+            ]
+        }
+    ];
+
     return (
         <Layout>
+            <SEO
+                title="Document Intelligence | Automazione DDT con AI — Finch-AI"
+                description="Da 11 minuti a 8 secondi per DDT. OCR AI con 97% accuratezza per DDT, fatture, ordini. -75% inserimento dati, integrazione ERP. Human-in-the-loop. Da €49/mese."
+                keywords="automazione DDT AI, software gestione DDT, OCR documenti trasporto, document intelligence PMI, elaborazione bolle consegna automatica, integrazione ERP DDT, OCR fatture ordini, riduzione inserimento dati, digitalizzazione logistica, supply chain automation, human-in-the-loop, API webhook ERP"
+                canonical="https://finch-ai.it/soluzioni/document-intelligence"
+                jsonLd={docJsonLd}
+            />
             <div className="max-w-7xl mx-auto px-6 py-12 md:py-24">
                 {/* HERO */}
                 <section className="text-center mb-24">
