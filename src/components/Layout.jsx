@@ -42,8 +42,8 @@ export default function Layout({ children }) {
                 ctx.beginPath();
                 ctx.arc(this.x, this.y, this.size, 0, Math.PI * 2);
                 ctx.fillStyle = theme === "dark"
-                    ? `rgba(34, 211, 238, ${this.opacity})`
-                    : `rgba(45, 125, 70, ${this.opacity * 0.5})`;
+                    ? `rgba(45, 212, 191, ${this.opacity})`
+                    : `rgba(20, 184, 166, ${this.opacity * 0.5})`;
                 ctx.fill();
             }
         }
@@ -59,8 +59,8 @@ export default function Layout({ children }) {
             // Draw grid
             ctx.beginPath();
             ctx.strokeStyle = theme === "dark"
-                ? "rgba(34, 211, 238, 0.03)"
-                : "rgba(45, 125, 70, 0.02)";
+                ? "rgba(45, 212, 191, 0.03)"
+                : "rgba(20, 184, 166, 0.02)";
             ctx.lineWidth = 1;
             const step = 60;
             for (let x = 0; x < width; x += step) {
@@ -104,7 +104,7 @@ export default function Layout({ children }) {
                 <div className="absolute inset-0 bg-[linear-gradient(rgba(255,255,255,0.05)_1px,transparent_1px)] bg-[length:100%_28px] mix-blend-overlay" />
             </div>
 
-            <main className="relative pt-28 sm:pt-32 lg:pt-36">
+            <main className="relative pt-20">
                 {children}
             </main>
 

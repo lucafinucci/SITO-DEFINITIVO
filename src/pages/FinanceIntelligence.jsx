@@ -275,16 +275,16 @@ const FinanceIntelligence = () => {
                 canonical="https://finch-ai.it/soluzioni/finance-intelligence"
                 jsonLd={financeJsonLd}
             />
-            <div className="max-w-7xl mx-auto px-6 py-12 md:py-24">
+            <div className="max-w-7xl mx-auto px-4 sm:px-6 py-8 md:py-24">
 
                 {/* HERO */}
-                <section className="text-center mb-24">
+                <section className="text-center mb-12 sm:mb-24">
                     <div className="inline-flex items-center gap-2 bg-emerald-500/10 text-emerald-600 dark:text-emerald-400 border border-emerald-500/20 px-4 py-2 rounded-full text-xs font-bold uppercase tracking-wider mb-8">
                         <TrendingUp className="w-4 h-4" />
                         Finance Intelligence · AI Finanziario per PMI Italiane
                     </div>
 
-                    <h1 className="text-4xl md:text-6xl font-extrabold leading-tight mb-8">
+                    <h1 className="text-3xl sm:text-4xl md:text-6xl font-extrabold leading-tight mb-8">
                         Il tuo bilancio parla.<br />
                         <span className="relative inline-block">
                             <span className="relative z-10 text-emerald-600 dark:text-emerald-400">Ora puoi ascoltarlo.</span>
@@ -297,27 +297,27 @@ const FinanceIntelligence = () => {
                     </p>
 
                     <div className="flex flex-wrap justify-center gap-4 mb-16">
-                        <a href="https://bi.finch-ai.it" target="_blank" rel="noopener noreferrer" className="inline-flex items-center gap-2 bg-emerald-600 text-white px-8 py-4 rounded-full font-bold hover:bg-emerald-500 transition-all shadow-lg shadow-emerald-500/20">
+                        <a href="https://bi.finch-ai.it" target="_blank" rel="noopener noreferrer" className="inline-flex items-center gap-2 bg-emerald-600 text-white px-5 py-3 sm:px-8 sm:py-4 rounded-full font-bold hover:bg-emerald-500 transition-all shadow-lg shadow-emerald-500/20">
                             <Upload className="w-5 h-5" />
                             Prova Gratis
                         </a>
                         <a
                             href="#video"
                             onClick={handleWatchVideo}
-                            className="inline-flex items-center gap-2 bg-card border border-border text-foreground px-8 py-4 rounded-full font-bold hover:bg-muted transition-all"
+                            className="inline-flex items-center gap-2 bg-card border border-border text-foreground px-5 py-3 sm:px-8 sm:py-4 rounded-full font-bold hover:bg-muted transition-all"
                         >
                             <Zap className="w-5 h-5 text-emerald-500" />
                             Guarda il Video
                         </a>
                     </div>
 
-                    <div className="flex flex-wrap justify-center gap-6 mb-12">
+                    <div className="flex flex-wrap justify-center gap-3 sm:gap-6 mb-8 sm:mb-12">
                         {[
                             { value: "3 min", label: "Dal caricamento Excel al report completo" },
                             { value: "15+", label: "Indici finanziari calcolati e spiegati" },
                             { value: "OIC", label: "Conforme Art. 2425 C.C. italiano" },
                         ].map((stat, i) => (
-                            <div key={i} className="bg-card border border-border rounded-2xl p-6 shadow-sm flex items-center gap-4 min-w-[240px]">
+                            <div key={i} className="bg-card border border-border rounded-2xl p-4 sm:p-6 shadow-sm flex items-center gap-4 min-w-[160px] sm:min-w-[240px]">
                                 <span className="text-3xl font-bold text-emerald-600 dark:text-emerald-400">{stat.value}</span>
                                 <span className="text-left text-xs text-muted-foreground leading-tight">
                                     {stat.label}
@@ -343,7 +343,7 @@ const FinanceIntelligence = () => {
                 </section>
 
                 {/* VIDEO SECTION */}
-                <section className="mb-32 flex justify-center" id="video">
+                <section className="mb-16 sm:mb-32 flex justify-center" id="video">
                     <div className="max-w-5xl w-full">
                         <div className="relative aspect-video rounded-[32px] overflow-hidden shadow-2xl border border-border bg-black group cursor-pointer">
                             <video
@@ -374,8 +374,8 @@ const FinanceIntelligence = () => {
                 </section>
 
                 {/* COME FUNZIONA */}
-                <section className="mb-32">
-                    <div className="text-center mb-16">
+                <section className="mb-16 sm:mb-32">
+                    <div className="text-center mb-8 sm:mb-16">
                         <div className="inline-flex items-center gap-2 rounded-full border border-primary/30 bg-primary/10 px-4 py-1.5 text-xs font-semibold uppercase tracking-wider text-primary mb-4">
                             Come Funziona
                         </div>
@@ -413,7 +413,7 @@ const FinanceIntelligence = () => {
                                 timeClass: "bg-emerald-500/10 text-emerald-600 dark:text-emerald-400",
                             },
                         ].map((step, i) => (
-                            <div key={i} className="bg-card border border-border rounded-3xl p-8 text-center shadow-sm transition-all hover:-translate-y-1 hover:shadow-md hover:border-primary/30">
+                            <div key={i} className="bg-card border border-border rounded-3xl p-5 sm:p-8 text-center shadow-sm transition-all hover:-translate-y-1 hover:shadow-md hover:border-primary/30">
                                 <div className={`w-10 h-10 rounded-full flex items-center justify-center text-white font-bold text-lg mx-auto mb-6 ${step.colorClass}`}>
                                     {step.num}
                                 </div>
@@ -429,8 +429,8 @@ const FinanceIntelligence = () => {
                 </section>
 
                 {/* FUNZIONALITÀ */}
-                <section className="mb-32">
-                    <div className="text-center mb-16">
+                <section className="mb-16 sm:mb-32">
+                    <div className="text-center mb-8 sm:mb-16">
                         <div className="inline-flex items-center gap-2 rounded-full border border-primary/30 bg-primary/10 px-4 py-1.5 text-xs font-semibold uppercase tracking-wider text-primary mb-4">
                             Funzionalità
                         </div>
@@ -447,7 +447,7 @@ const FinanceIntelligence = () => {
                             { icon: <FileText className="w-6 h-6" />, title: "Export PDF Professionale", desc: "Report formattato con grafici, tabelle e commenti dell'AI. Pronto da condividere senza ulteriori modifiche.", colorClass: "bg-emerald-500/10 text-emerald-600" },
                             { icon: <Globe className="w-6 h-6" />, title: "100% Italiano", desc: "Terminologia contabile italiana, normativa OIC, standard del Codice Civile. Non una traduzione — costruito per il mercato italiano.", colorClass: "bg-red-500/10 text-red-600" },
                         ].map((f, i) => (
-                            <div key={i} className="bg-card border border-border rounded-3xl p-8 text-left shadow-sm hover:border-primary/30 transition-colors">
+                            <div key={i} className="bg-card border border-border rounded-3xl p-5 sm:p-8 text-left shadow-sm hover:border-primary/30 transition-colors">
                                 <div className={`w-12 h-12 rounded-xl flex items-center justify-center mb-6 ${f.colorClass}`}>
                                     {f.icon}
                                 </div>
@@ -459,8 +459,8 @@ const FinanceIntelligence = () => {
                 </section>
 
                 {/* PRIVACY */}
-                <section className="mb-32">
-                    <div className="text-center mb-12">
+                <section className="mb-16 sm:mb-32">
+                    <div className="text-center mb-8 sm:mb-12">
                         <div className="inline-flex items-center gap-2 rounded-full border border-primary/30 bg-primary/10 px-4 py-1.5 text-xs font-semibold uppercase tracking-wider text-primary mb-4">
                             I Tuoi Dati, Le Tue Regole
                         </div>
@@ -468,7 +468,7 @@ const FinanceIntelligence = () => {
                         <p className="text-muted-foreground max-w-xl mx-auto">Sappiamo che i dati finanziari sono sensibili. Per questo abbiamo progettato il sistema con la privacy al centro.</p>
                     </div>
 
-                    <div className="max-w-4xl mx-auto bg-card border-2 border-emerald-500/40 rounded-3xl p-10 relative overflow-hidden shadow-xl shadow-emerald-500/5">
+                    <div className="max-w-4xl mx-auto bg-card border-2 border-emerald-500/40 rounded-3xl p-6 sm:p-10 relative overflow-hidden shadow-xl shadow-emerald-500/5">
                         <div className="absolute top-0 left-0 right-0 h-1 bg-gradient-to-r from-emerald-500 to-emerald-700 rounded-t-3xl" />
 
                         <div className="flex items-center gap-4 mb-8">
@@ -508,8 +508,8 @@ const FinanceIntelligence = () => {
                 </section>
 
                 {/* PRICING - TABELLA COMPLETA */}
-                <section className="mb-32">
-                    <div className="text-center mb-16">
+                <section className="mb-16 sm:mb-32">
+                    <div className="text-center mb-8 sm:mb-16">
                         <div className="inline-flex items-center gap-2 rounded-full border border-primary/30 bg-primary/10 px-4 py-1.5 text-xs font-semibold uppercase tracking-wider text-primary mb-4">
                             Prezzi
                         </div>
@@ -647,11 +647,11 @@ const FinanceIntelligence = () => {
 
                 {/* CTA FINALE */}
                 <section className="mb-12">
-                    <div className="bg-foreground rounded-[40px] p-12 md:p-20 text-center text-background relative overflow-hidden shadow-2xl shadow-foreground/20">
-                        <div className="absolute top-0 right-0 w-[400px] h-[400px] bg-[radial-gradient(circle,rgba(45,125,70,0.15)_0%,transparent_70%)] translate-x-1/4 -translate-y-1/4" />
+                    <div className="bg-foreground rounded-[40px] p-7 sm:p-12 md:p-20 text-center text-background relative overflow-hidden shadow-2xl shadow-foreground/20">
+                        <div className="absolute top-0 right-0 w-[200px] h-[200px] md:w-[400px] md:h-[400px] bg-[radial-gradient(circle,rgba(45,125,70,0.15)_0%,transparent_70%)] translate-x-1/4 -translate-y-1/4" />
                         <div className="relative z-10">
-                            <h2 className="text-3xl md:text-5xl font-bold mb-6">Prova adesso. Gratis. Senza impegno.</h2>
-                            <p className="text-background/70 text-lg mb-12 max-w-xl mx-auto">
+                            <h2 className="text-2xl sm:text-3xl md:text-5xl font-bold mb-6">Prova adesso. Gratis. Senza impegno.</h2>
+                            <p className="text-background/70 text-base sm:text-lg mb-8 sm:mb-12 max-w-xl mx-auto">
                                 Carica il tuo Conto Economico e scopri cosa l'AI vede nei tuoi numeri. Bastano 3 minuti e un file Excel.
                             </p>
                             <div className="flex flex-wrap justify-center gap-4 mb-8">
@@ -667,7 +667,7 @@ const FinanceIntelligence = () => {
                                     </div>
                                 ))}
                             </div>
-                            <a href="https://bi.finch-ai.it" target="_blank" rel="noopener noreferrer" className="inline-flex items-center gap-2 bg-emerald-600 text-white px-10 py-5 rounded-2xl font-bold text-lg hover:bg-emerald-500 transition-all shadow-xl shadow-emerald-500/20 hover:scale-105 active:scale-95">
+                            <a href="https://bi.finch-ai.it" target="_blank" rel="noopener noreferrer" className="inline-flex items-center gap-2 bg-emerald-600 text-white px-6 py-4 sm:px-10 sm:py-5 rounded-2xl font-bold text-base sm:text-lg hover:bg-emerald-500 transition-all shadow-xl shadow-emerald-500/20 hover:scale-105 active:scale-95">
                                 <Upload className="w-5 h-5" />
                                 Prova Gratis
                             </a>

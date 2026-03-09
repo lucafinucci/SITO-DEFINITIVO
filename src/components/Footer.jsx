@@ -9,17 +9,13 @@ export default function Footer() {
           {/* Company Info */}
           <div className="sm:col-span-2 lg:col-span-1">
             <div className="mb-4 flex items-center gap-3">
-              <div className="relative">
-                <div className="absolute inset-0 rounded-lg bg-gradient-to-br from-green-500 to-green-700 opacity-30 blur-lg" />
-                <div className="relative flex h-12 w-12 items-center justify-center rounded-lg bg-white shadow-lg">
-                  <img
-                    src="/assets/images/LOGO.png"
-                    alt="Finch-AI"
-                    className="h-10 w-auto object-contain"
-                  />
-                </div>
+              <div className="inline-flex items-center rounded-xl bg-white px-2.5 py-1.5 shadow-sm">
+                <img
+                  src="/assets/images/LOGO.png"
+                  alt="Finch-AI"
+                  className="h-8 w-auto object-contain"
+                />
               </div>
-              <span className="text-xl font-bold text-foreground">Finch-AI</span>
             </div>
             <p className="text-sm text-muted-foreground leading-relaxed">
               Intelligenza artificiale su misura per l'industria. Automatizziamo processi, estraiamo insights e potenziamo le decisioni.

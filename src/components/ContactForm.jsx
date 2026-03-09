@@ -215,7 +215,7 @@ export default function ContactForm({ defaultEmail = "info@finch-ai.it" }) {
             <button
               type="submit"
               disabled={status === "loading"}
-              className="inline-flex items-center justify-center gap-2 rounded-xl bg-gradient-to-r from-green-600 to-green-800 dark:from-cyan-500 dark:to-blue-600 px-5 py-3 text-sm font-semibold text-white shadow-lg shadow-green-500/20 dark:shadow-cyan-500/20 transition hover:brightness-110 disabled:cursor-not-allowed disabled:opacity-70"
+              className="inline-flex items-center justify-center gap-2 rounded-xl bg-teal-600 dark:bg-teal-400 px-5 py-3 text-sm font-semibold text-white dark:text-[#0B1220] shadow-lg shadow-teal-500/20 transition hover:brightness-110 disabled:cursor-not-allowed disabled:opacity-70"
             >
               {status === "loading" ? "Invio..." : "Invia il messaggio"}
             </button>
