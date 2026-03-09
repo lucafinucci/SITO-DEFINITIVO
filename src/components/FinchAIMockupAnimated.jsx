@@ -1,4 +1,5 @@
 import { useRef, useEffect, useState } from "react";
+import SEO from "./SEO";
 import {
   FileText as FileTextIcon,
   LineChart,
@@ -69,8 +70,37 @@ export default function FinchAIMockupAnimated() {
     },
   ];
 
+  const homepageJsonLd = {
+    "@context": "https://schema.org",
+    "@type": "SoftwareApplication",
+    "name": "Finch-AI Platform",
+    "applicationCategory": "BusinessApplication",
+    "operatingSystem": "Web",
+    "url": "https://finch-ai.it",
+    "image": "https://finch-ai.it/assets/images/og-image.png",
+    "description": "Piattaforma AI modulare per PMI con 7 moduli integrabili: Document Intelligence, Finance Intelligence, Production, Warehouse, Conversational Assistant, Strategic Planner, Assessment.",
+    "offers": { "@type": "Offer", "price": "0", "priceCurrency": "EUR", "description": "Assessment gratuito disponibile" },
+    "featureList": [
+      "Automazione DDT con OCR AI",
+      "Analisi finanziaria OIC-compliant",
+      "Dashboard KPI real-time",
+      "Integrazione ERP",
+      "Chatbot AI multicanale",
+      "Previsione cash flow",
+      "Ottimizzazione produzione e magazzino"
+    ],
+    "provider": { "@type": "Organization", "name": "Finch-AI S.r.l.", "url": "https://finch-ai.it" }
+  };
+
   return (
     <Layout>
+      <SEO
+        title="Finch-AI | Soluzioni AI per PMI — Automazione, Finanza e KPI Real-Time"
+        description="Piattaforma AI con 7 moduli integrabili per PMI italiane. Automazione DDT, analisi bilancio OIC, KPI real-time, integrazione ERP. Assessment gratuito. ROI in 3–6 mesi."
+        keywords="intelligenza artificiale per PMI, AI per aziende italiane, automazione processi aziendali, piattaforma AI integrata ERP, KPI real-time, digital transformation PMI, assessment AI gratuito, industria 4.0, AI manufacturing Italia, GDPR AI aziendale"
+        canonical="https://finch-ai.it/"
+        jsonLd={[homepageJsonLd]}
+      />
       {/* HERO */}
       <section id="hero" className="pb-12 pt-12 lg:pt-24">
         <div className="mx-auto max-w-3xl text-center">

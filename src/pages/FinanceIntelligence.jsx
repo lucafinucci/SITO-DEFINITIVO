@@ -1,4 +1,5 @@
 import { useEffect, useRef } from 'react';
+import SEO from '../components/SEO';
 import {
     TrendingUp,
     Upload,
@@ -226,8 +227,54 @@ const FinanceIntelligence = () => {
         return <span className="text-foreground font-medium text-xs">{val}</span>;
     };
 
+    const financeJsonLd = [
+        {
+            "@context": "https://schema.org",
+            "@type": "SoftwareApplication",
+            "name": "Finch-AI Finance Intelligence",
+            "applicationCategory": "BusinessApplication",
+            "applicationSubCategory": "FinancialApplication",
+            "operatingSystem": "Web",
+            "url": "https://finch-ai.it/soluzioni/finance-intelligence",
+            "image": "https://finch-ai.it/assets/images/og-image.png",
+            "description": "Analisi finanziaria automatica basata su AI per PMI e commercialisti. Dal file Excel al report OIC professionale in 3 minuti, con 15+ indici finanziari, riclassificazione OIC (Art. 2425 C.C.), analisi Z-Score Altman e chat AI in linguaggio naturale.",
+            "featureList": [
+                "Riclassificazione bilancio OIC Art. 2425 C.C.",
+                "15+ indici finanziari: ROE, ROI, ROS, EBITDA, liquidità, Z-Score Altman",
+                "Report professionale PDF in 3 minuti da Excel",
+                "Chat AI in linguaggio naturale sui dati finanziari",
+                "Analisi trend multi-anno",
+                "Scenario what-if e simulazioni",
+                "GDPR compliant, dati in Italia"
+            ],
+            "offers": [
+                { "@type": "Offer", "name": "Demo", "price": "0", "priceCurrency": "EUR", "description": "2 report/mese, 6 indici finanziari, 5 domande chat AI", "availability": "https://schema.org/InStock" },
+                { "@type": "Offer", "name": "Starter", "price": "49", "priceCurrency": "EUR", "priceSpecification": { "@type": "UnitPriceSpecification", "price": "49", "priceCurrency": "EUR", "unitText": "mese" }, "availability": "https://schema.org/InStock" },
+                { "@type": "Offer", "name": "Professional", "price": "99", "priceCurrency": "EUR", "priceSpecification": { "@type": "UnitPriceSpecification", "price": "99", "priceCurrency": "EUR", "unitText": "mese" }, "availability": "https://schema.org/InStock" },
+                { "@type": "Offer", "name": "Business", "price": "299", "priceCurrency": "EUR", "priceSpecification": { "@type": "UnitPriceSpecification", "price": "299", "priceCurrency": "EUR", "unitText": "mese" }, "availability": "https://schema.org/InStock" }
+            ],
+            "provider": { "@type": "Organization", "name": "Finch-AI S.r.l.", "url": "https://finch-ai.it" }
+        },
+        {
+            "@context": "https://schema.org",
+            "@type": "BreadcrumbList",
+            "itemListElement": [
+                { "@type": "ListItem", "position": 1, "name": "Home", "item": "https://finch-ai.it/" },
+                { "@type": "ListItem", "position": 2, "name": "Soluzioni", "item": "https://finch-ai.it/soluzioni/" },
+                { "@type": "ListItem", "position": 3, "name": "Finance Intelligence", "item": "https://finch-ai.it/soluzioni/finance-intelligence" }
+            ]
+        }
+    ];
+
     return (
         <Layout>
+            <SEO
+                title="Finance Intelligence | Analisi Bilancio AI per PMI — Finch-AI"
+                description="Dal bilancio Excel al report OIC professionale in 3 minuti. 15+ indici finanziari (ROE, ROI, EBITDA, Z-Score Altman), riclassificazione automatica, chat AI sui dati. Da €49/mese."
+                keywords="analisi finanziaria AI, report bilancio automatico, software analisi bilancio PMI, indici finanziari ROE ROI EBITDA, riclassificazione OIC automatica, Z-Score Altman, cash flow AI, software CFO PMI, Finance Intelligence, commercialisti AI, bilancio OIC art 2425, previsioni finanziarie AI"
+                canonical="https://finch-ai.it/soluzioni/finance-intelligence"
+                jsonLd={financeJsonLd}
+            />
             <div className="max-w-7xl mx-auto px-6 py-12 md:py-24">
 
                 {/* HERO */}

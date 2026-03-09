@@ -2,6 +2,7 @@ import { useState, useEffect } from 'react';
 import { Routes, Route, Navigate } from 'react-router-dom';
 import Login from './Login';
 import Dashboard from './Dashboard';
+import SEO from '../../components/SEO';
 
 export default function AreaClienti() {
   const [isAuthenticated, setIsAuthenticated] = useState(false);
@@ -68,7 +69,14 @@ export default function AreaClienti() {
   }
 
   return (
-    <Routes>
+    <>
+      <SEO
+        title="Area Clienti | Finch-AI"
+        description="Accedi alla tua area riservata Finch-AI."
+        canonical="https://finch-ai.it/area-clienti"
+        noIndex={true}
+      />
+      <Routes>
       <Route
         path="/"
         element={
@@ -90,5 +98,6 @@ export default function AreaClienti() {
         }
       />
     </Routes>
+    </>
   );
 }
