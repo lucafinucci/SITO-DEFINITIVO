@@ -95,8 +95,8 @@ export default function FinchAIMockupAnimated() {
   return (
     <Layout>
       <SEO
-        title="Finch-AI | Soluzioni AI per PMI — Automazione, Finanza e KPI Real-Time"
-        description="Piattaforma AI con 7 moduli integrabili per PMI italiane. Automazione DDT, analisi bilancio OIC, KPI real-time, integrazione ERP. Assessment gratuito. ROI in 3–6 mesi."
+        title="Finch-AI | Piattaforma AI per PMI Italiane"
+        description="AI verticale per PMI italiane, non software generico. Automazione processi, analisi finanziaria e KPI real-time integrati nel tuo flusso operativo."
         keywords="intelligenza artificiale per PMI, AI per aziende italiane, automazione processi aziendali, piattaforma AI integrata ERP, KPI real-time, digital transformation PMI, assessment AI gratuito, industria 4.0, AI manufacturing Italia, GDPR AI aziendale"
         canonical="https://finch-ai.it/"
         jsonLd={[homepageJsonLd]}
