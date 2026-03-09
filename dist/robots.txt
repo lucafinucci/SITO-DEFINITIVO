@@ -1,0 +1,23 @@
+# https://www.robotstxt.org/robotstxt.html
+User-agent: *
+Allow: /
+Disallow: /area-clienti/
+
+# Sitemap
+Sitemap: https://finch-ai.it/sitemap.xml
+
+# Crawl-delay for polite crawlers
+Crawl-delay: 1
+
+# Allow all major search engines
+User-agent: Googlebot
+Allow: /
+Disallow: /area-clienti/
+
+User-agent: Bingbot
+Allow: /
+Disallow: /area-clienti/
+
+User-agent: Slurp
+Allow: /
+Disallow: /area-clienti/
