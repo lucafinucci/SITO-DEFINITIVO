@@ -111,10 +111,10 @@ export default function FinchAIMockupAnimated() {
 
           <h1 className="mt-5 text-4xl font-extrabold leading-tight sm:text-5xl lg:text-6xl animate-[fadeUp_0.9s_ease_0.12s_both]">
             <span className="text-foreground dark:hidden">
-              Automazione <span className="text-emerald-500">Intelligente</span> per<br />
-              <span className="text-emerald-500">Decisioni di Valore</span>
+              Automazione <span className="text-teal-600">Intelligente</span> per<br />
+              <span className="text-teal-600">Decisioni di Valore</span>
             </span>
-            <span className="hidden dark:inline bg-clip-text text-transparent bg-gradient-to-r from-cyan-300 via-sky-400 to-blue-500">
+            <span className="hidden dark:inline text-teal-400">
               Automazione Intelligente per<br />
               Decisioni di Valore
             </span>
@@ -274,11 +274,11 @@ export default function FinchAIMockupAnimated() {
       <section id="come-funziona" className="py-20">
         <div className="mx-auto max-w-6xl">
           <div className="text-center mb-16">
-            <span className="inline-flex items-center gap-2 rounded-full border border-primary/30 bg-primary/10 px-4 py-1.5 text-xs font-semibold uppercase tracking-wider text-primary dark:text-purple-300 mb-6">
+            <span className="inline-flex items-center gap-2 rounded-full border border-primary/30 bg-primary/10 px-4 py-1.5 text-xs font-semibold uppercase tracking-wider text-primary dark:text-teal-300 mb-6">
               I Moduli
             </span>
             <h2 className="text-3xl sm:text-4xl lg:text-5xl font-extrabold text-foreground mb-6">
-              Un ecosistema intelligente, <span className="bg-clip-text text-transparent bg-gradient-to-r from-green-600 to-green-800 dark:from-purple-400 dark:to-pink-500">già operativo</span>
+              Un ecosistema intelligente, <span className="text-teal-600 dark:text-teal-400">già operativo</span>
             </h2>
             <p className="text-lg sm:text-xl text-muted-foreground max-w-3xl mx-auto leading-relaxed">
               Quattro applicazioni già operative, integrate in un unico ecosistema AI pensato per adattarsi all'identità di ogni azienda.
@@ -295,7 +295,7 @@ export default function FinchAIMockupAnimated() {
                   <div className="inline-flex h-12 w-12 items-center justify-center rounded-xl border border-primary/30 bg-primary/10 text-primary">
                     {app.icon}
                   </div>
-                  <span className="inline-flex items-center rounded-full border border-emerald-500/30 bg-emerald-500/10 px-3 py-1 text-xs font-semibold uppercase tracking-wider text-emerald-700 dark:text-emerald-200">
+                  <span className="inline-flex items-center rounded-full border border-teal-500/30 bg-teal-500/10 px-3 py-1 text-xs font-semibold uppercase tracking-wider text-teal-700 dark:text-teal-300">
                     {app.status}
                   </span>
                 </div>
@@ -334,7 +334,7 @@ export default function FinchAIMockupAnimated() {
               Per Chi
             </span>
             <h2 className="text-3xl sm:text-4xl lg:text-5xl font-extrabold text-foreground mb-6">
-              Settori che <span className="bg-clip-text text-transparent bg-gradient-to-r from-green-600 to-green-800 dark:from-blue-400 dark:to-cyan-500">Trasformiamo</span>
+              Settori che <span className="text-teal-600 dark:text-teal-400">Trasformiamo</span>
             </h2>
             <p className="text-lg sm:text-xl text-muted-foreground max-w-3xl mx-auto leading-relaxed">
               Soluzioni verticali ottimizzate per le esigenze specifiche del tuo settore
@@ -389,7 +389,7 @@ export default function FinchAIMockupAnimated() {
       <section className="py-20 bg-gradient-to-b from-card/50 to-transparent">
         <div className="mx-auto max-w-6xl">
           <div className="text-center mb-16">
-            <span className="inline-flex items-center gap-2 rounded-full border border-primary/30 bg-primary/10 px-4 py-1.5 text-xs font-semibold uppercase tracking-wider text-primary dark:text-cyan-300 mb-6">
+            <span className="inline-flex items-center gap-2 rounded-full border border-primary/30 bg-primary/10 px-4 py-1.5 text-xs font-semibold uppercase tracking-wider text-primary dark:text-teal-300 mb-6">
               Perché Finch-AI
             </span>
             <h2 className="text-3xl sm:text-4xl lg:text-5xl font-extrabold text-foreground mb-6">
@@ -440,7 +440,7 @@ export default function FinchAIMockupAnimated() {
       <section id="chi-siamo" className="py-20">
         <div className="mx-auto max-w-5xl">
           <div className="text-center mb-12">
-            <span className="inline-flex items-center gap-2 rounded-full border border-primary/30 bg-primary/10 px-4 py-1.5 text-xs font-semibold uppercase tracking-wider text-primary dark:text-cyan-300">
+            <span className="inline-flex items-center gap-2 rounded-full border border-primary/30 bg-primary/10 px-4 py-1.5 text-xs font-semibold uppercase tracking-wider text-primary dark:text-teal-300">
               Chi Siamo
             </span>
             <h2 className="text-3xl sm:text-4xl font-extrabold text-foreground mt-4">
@@ -478,7 +478,7 @@ export default function FinchAIMockupAnimated() {
       <section id="area-clienti" className="py-20">
         <div className="mx-auto max-w-6xl">
           <div className="text-center mb-12">
-            <span className="inline-flex items-center gap-2 rounded-full border border-primary/30 bg-primary/10 px-4 py-1.5 text-xs font-semibold uppercase tracking-wider text-primary dark:text-cyan-300">
+            <span className="inline-flex items-center gap-2 rounded-full border border-primary/30 bg-primary/10 px-4 py-1.5 text-xs font-semibold uppercase tracking-wider text-primary dark:text-teal-300">
               Area Clienti
             </span>
             <h2 className="text-3xl sm:text-4xl lg:text-5xl font-extrabold text-foreground mt-4">

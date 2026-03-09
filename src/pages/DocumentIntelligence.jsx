@@ -81,15 +81,15 @@ const DocumentIntelligence = () => {
                 canonical="https://finch-ai.it/soluzioni/document-intelligence"
                 jsonLd={docJsonLd}
             />
-            <div className="max-w-7xl mx-auto px-6 py-12 md:py-24">
+            <div className="max-w-7xl mx-auto px-4 sm:px-6 py-8 md:py-24">
                 {/* HERO */}
-                <section className="text-center mb-24">
+                <section className="text-center mb-12 sm:mb-24">
                     <div className="inline-flex items-center gap-2 bg-emerald-500/10 text-emerald-600 dark:text-emerald-400 border border-emerald-500/20 px-4 py-2 rounded-full text-xs font-bold uppercase tracking-wider mb-8 animate-in fade-in slide-in-from-top-4 duration-1000">
                         <Globe className="w-4 h-4" />
                         SaaS Multi-tenant · Document Intelligence
                     </div>
 
-                    <h1 className="text-4xl md:text-6xl font-extrabold leading-tight mb-8 animate-in fade-in slide-in-from-top-6 duration-1000 fill-mode-both">
+                    <h1 className="text-3xl sm:text-4xl md:text-6xl font-extrabold leading-tight mb-8 animate-in fade-in slide-in-from-top-6 duration-1000 fill-mode-both">
                         DDT da gestire ogni giorno.<br />
                         <span className="relative inline-block">
                             <span className="relative z-10 text-emerald-600 dark:text-emerald-400">FinCh-Ai li legge per te.</span>
@@ -102,13 +102,13 @@ const DocumentIntelligence = () => {
                         Document Intelligence riconosce, estrae e verifica i dati automaticamente.
                     </p>
 
-                    <div className="flex flex-wrap justify-center gap-6 animate-in fade-in slide-in-from-top-10 duration-1000 fill-mode-both">
+                    <div className="flex flex-wrap justify-center gap-3 sm:gap-6 animate-in fade-in slide-in-from-top-10 duration-1000 fill-mode-both">
                         {[
                             { label: "Tempo risparmiato sull'inserimento dati", value: "-75%" },
                             { label: "Velocità in più nella lavorazione DDT", value: "90%" },
                             { label: "Elaborazione automatica continua", value: "24/7" }
                         ].map((stat, i) => (
-                            <div key={i} className="bg-card border border-border rounded-2xl p-6 shadow-sm flex items-center gap-4 min-w-[240px]">
+                            <div key={i} className="bg-card border border-border rounded-2xl p-4 sm:p-6 shadow-sm flex items-center gap-4 min-w-[160px] sm:min-w-[240px]">
                                 <span className="text-3xl font-bold text-emerald-600 dark:text-emerald-400">{stat.value}</span>
                                 <span className="text-left text-xs text-muted-foreground leading-tight">
                                     <strong className="text-foreground">{stat.label.split(' ')[0] + ' ' + stat.label.split(' ')[1]}</strong><br />
@@ -120,8 +120,8 @@ const DocumentIntelligence = () => {
                 </section>
 
                 {/* BEFORE / AFTER */}
-                <section className="grid grid-cols-1 lg:grid-cols-[1fr,auto,1fr] gap-0 items-stretch mb-32">
-                    <div className="bg-card border border-border rounded-3xl p-8 shadow-sm relative overflow-hidden flex flex-col">
+                <section className="grid grid-cols-1 lg:grid-cols-[1fr,auto,1fr] gap-0 items-stretch mb-16 sm:mb-32">
+                    <div className="bg-card border border-border rounded-3xl p-5 sm:p-8 shadow-sm relative overflow-hidden flex flex-col">
                         <div className="absolute top-0 left-0 right-0 h-1 bg-muted" />
                         <div className="text-[11px] font-bold text-muted-foreground uppercase tracking-[1.5px] mb-4">❌ Prima</div>
                         <h3 className="text-2xl font-bold mb-4">Ore perse ogni giorno a copiare dati a mano</h3>
@@ -155,7 +155,7 @@ const DocumentIntelligence = () => {
                         </div>
                     </div>
 
-                    <div className="bg-card border border-emerald-500/50 rounded-3xl p-8 shadow-sm relative overflow-hidden flex flex-col">
+                    <div className="bg-card border border-emerald-500/50 rounded-3xl p-5 sm:p-8 shadow-sm relative overflow-hidden flex flex-col">
                         <div className="absolute top-0 left-0 right-0 h-1 bg-gradient-to-r from-emerald-500 to-emerald-700" />
                         <div className="text-[11px] font-bold text-emerald-600 dark:text-emerald-400 uppercase tracking-[1.5px] mb-4">✅ Dopo — con FinCh-Ai</div>
                         <h3 className="text-2xl font-bold mb-4">Dati estratti in automatico, pronti da verificare</h3>
@@ -202,8 +202,8 @@ const DocumentIntelligence = () => {
                 </section>
 
                 {/* FLOW */}
-                <section className="mb-32">
-                    <div className="text-center mb-16">
+                <section className="mb-16 sm:mb-32">
+                    <div className="text-center mb-8 sm:mb-16">
                         <h2 className="text-3xl md:text-4xl font-bold mb-4">Come Funziona</h2>
                         <p className="text-muted-foreground">Dal documento al gestionale in quattro passaggi automatici</p>
                     </div>
@@ -215,7 +215,7 @@ const DocumentIntelligence = () => {
                             { num: 3, icon: CheckSquare, title: "Verifica", desc: "L'operatore rivede i dati estratti e conferma.", tech: "Human-in-the-loop", colorClass: "bg-emerald-500", textClass: "text-emerald-600 dark:text-emerald-400" },
                             { num: 4, icon: Rocket, title: "Trasferimento", desc: "I dati vengono trasferiti al gestionale via API.", tech: "API + Webhook", colorClass: "bg-purple-500", textClass: "text-purple-600 dark:text-purple-400" }
                         ].map((step, i) => (
-                            <div key={i} className="bg-card border border-border rounded-3xl p-8 text-center shadow-sm transition-all hover:-translate-y-1 hover:shadow-md hover:border-primary/30">
+                            <div key={i} className="bg-card border border-border rounded-3xl p-5 sm:p-8 text-center shadow-sm transition-all hover:-translate-y-1 hover:shadow-md hover:border-primary/30">
                                 <div className={`w-10 h-10 rounded-full flex items-center justify-center text-white font-bold text-lg mx-auto mb-6 ${step.colorClass}`}>
                                     {step.num}
                                 </div>
@@ -231,13 +231,13 @@ const DocumentIntelligence = () => {
                 </section>
 
                 {/* FEATURES */}
-                <section className="mb-32 text-center">
-                    <div className="mb-16">
+                <section className="mb-16 sm:mb-32 text-center">
+                    <div className="mb-8 sm:mb-16">
                         <h2 className="text-3xl md:text-4xl font-bold mb-4">Funzionalità Chiave</h2>
                         <p className="text-muted-foreground">Tutto quello che serve per eliminare il data entry manuale</p>
                     </div>
 
-                    <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8">
+                    <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-5 sm:gap-8">
                         {[
                             { icon: CheckCircle, title: "Dati Precisi al 100%", desc: "Elimina gli errori di trascrizione manuale. L'AI garantisce un'estrazione dati accurata.", colorClass: "bg-emerald-500/10 text-emerald-600" },
                             { icon: Clock, title: "Efficienza Operativa", desc: "Riduci i tempi di lavorazione fino all'80%. Libera il tuo personale da compiti ripetitivi.", colorClass: "bg-emerald-500/10 text-emerald-600" },
@@ -246,7 +246,7 @@ const DocumentIntelligence = () => {
                             { icon: Gauge, title: "Tutto Sotto Controllo", desc: "Dashboard intuitiva per monitorare lo stato di ogni documento in tempo reale.", colorClass: "bg-emerald-500/10 text-emerald-600" },
                             { icon: ShieldCheck, title: "Privacy e Sicurezza Top", desc: "Dati protetti da crittografia enterprise e server ospitati esclusivamente in Europa.", colorClass: "bg-destructive/10 text-destructive" }
                         ].map((f, i) => (
-                            <div key={i} className="bg-card border border-border rounded-3xl p-8 text-left shadow-sm hover:border-primary/30 transition-colors">
+                            <div key={i} className="bg-card border border-border rounded-3xl p-5 sm:p-8 text-left shadow-sm hover:border-primary/30 transition-colors">
                                 <div className={`w-12 h-12 rounded-xl flex items-center justify-center mb-6 ${f.colorClass}`}>
                                     <f.icon className="w-6 h-6" />
                                 </div>
@@ -258,8 +258,8 @@ const DocumentIntelligence = () => {
                 </section>
 
                 {/* PRICING */}
-                <section className="mb-32">
-                    <div className="text-center mb-16">
+                <section className="mb-16 sm:mb-32">
+                    <div className="text-center mb-8 sm:mb-16">
                         <h2 className="text-3xl md:text-4xl font-bold mb-4">Piani di Abbonamento</h2>
                         <p className="text-muted-foreground">Fatturazione basata sulle pagine elaborate · Scala con il tuo business</p>
                     </div>
@@ -302,14 +302,14 @@ const DocumentIntelligence = () => {
                 </section>
 
                 {/* CTA */}
-                <section className="bg-foreground rounded-[40px] p-12 md:p-20 text-center text-background relative overflow-hidden shadow-2xl shadow-foreground/20">
-                    <div className="absolute top-0 right-0 w-[400px] h-[400px] bg-[radial-gradient(circle,rgba(45,125,70,0.2)_0%,transparent_70%)] translate-x-1/4 -translate-y-1/4" />
+                <section className="bg-foreground rounded-[40px] p-7 sm:p-12 md:p-20 text-center text-background relative overflow-hidden shadow-2xl shadow-foreground/20">
+                    <div className="absolute top-0 right-0 w-[200px] h-[200px] md:w-[400px] md:h-[400px] bg-[radial-gradient(circle,rgba(45,125,70,0.2)_0%,transparent_70%)] translate-x-1/4 -translate-y-1/4" />
 
                     <div className="relative z-10">
-                        <h2 className="text-3xl md:text-5xl font-bold mb-6">Smetti di ricopiare. Inizia ad automatizzare.</h2>
-                        <p className="text-background/70 text-lg mb-12">Prova Document Intelligence gratis — il primo mese è offerto da noi.</p>
+                        <h2 className="text-2xl sm:text-3xl md:text-5xl font-bold mb-6">Smetti di ricopiare. Inizia ad automatizzare.</h2>
+                        <p className="text-background/70 text-base sm:text-lg mb-8 sm:mb-12">Prova Document Intelligence gratis — il primo mese è offerto da noi.</p>
 
-                        <div className="flex flex-wrap justify-center gap-4 mb-12">
+                        <div className="flex flex-wrap justify-center gap-3 sm:gap-4 mb-8 sm:mb-12">
                             {[
                                 { icon: MapPin, text: "Pensato per DDT italiani" },
                                 { icon: LockKeyhole, text: "GDPR · Dati in EU" },
@@ -323,7 +323,7 @@ const DocumentIntelligence = () => {
                             ))}
                         </div>
 
-                        <button className="inline-flex items-center gap-2 bg-primary text-primary-foreground px-10 py-5 rounded-2xl font-bold text-lg hover:brightness-110 transition-all shadow-xl shadow-primary/20 hover:scale-105 active:scale-95">
+                        <button className="inline-flex items-center gap-2 bg-primary text-primary-foreground px-6 py-4 sm:px-10 sm:py-5 rounded-2xl font-bold text-base sm:text-lg hover:brightness-110 transition-all shadow-xl shadow-primary/20 hover:scale-105 active:scale-95">
                             Richiedi accesso gratuito
                             <ArrowRight className="w-5 h-5" />
                         </button>

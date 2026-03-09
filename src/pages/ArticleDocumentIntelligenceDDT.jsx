@@ -1,5 +1,5 @@
 import { useEffect, useState } from 'react';
-import Navbar from '../components/Navbar';
+import Layout from '../components/Layout';
 import SEO from '../components/SEO';
 
 export default function ArticleDocumentIntelligenceDDT() {
@@ -19,8 +19,10 @@ export default function ArticleDocumentIntelligenceDDT() {
         const parser = new DOMParser();
         const doc = parser.parseFromString(html, 'text/html');
 
-        const nav = doc.querySelector('nav.navbar');
-        if (nav) nav.remove();
+        // Remove elements replaced by the SPA layout
+        doc.querySelector('nav.navbar')?.remove();
+        doc.querySelector('header.hero')?.remove();
+        doc.querySelector('footer.site-footer')?.remove();
 
         const rawStyles = Array.from(doc.querySelectorAll('style'))
           .map(s => s.textContent)
@@ -36,9 +38,7 @@ export default function ArticleDocumentIntelligenceDDT() {
       });
 
     return () => {
-      if (document.head.contains(fontLink)) {
-        document.head.removeChild(fontLink);
-      }
+      if (document.head.contains(fontLink)) document.head.removeChild(fontLink);
     };
   }, []);
 
@@ -58,41 +58,54 @@ export default function ArticleDocumentIntelligenceDDT() {
     "keywords": "automazione DDT, document intelligence, OCR AI, gestione bolle consegna, inserimento manuale documenti, logistica PMI"
   };
 
-  if (loading) {
-    return (
-      <>
-        <SEO
-          title="Automazione DDT con Document Intelligence AI | Blog Finch-AI"
-          description="Come Document Intelligence elimina l'inserimento manuale di DDT e bolle: OCR AI al 97%, zero errori, integrazione ERP automatica. Guida completa per PMI."
-          keywords="automazione DDT, document intelligence logistica, gestione bolle consegna AI, OCR DDT automatico, eliminare inserimento manuale documenti, digitalizzazione documenti trasporto, integrazione ERP DDT"
-          canonical="https://finch-ai.it/blog/document-intelligence-automazione-ddt-bolle-consegna"
-          ogType="article"
-          article={{ publishedTime: "2026-03-04", author: "Finch-AI", section: "Automazione Documentale" }}
-          jsonLd={[articleJsonLd]}
-        />
-        <div className="min-h-screen flex items-center justify-center">
-          <div className="w-8 h-8 rounded-full border-2 border-primary border-t-transparent animate-spin" />
-        </div>
-      </>
-    );
-  }
+  const seoProps = {
+    title: "Automazione DDT con Document Intelligence AI | Blog Finch-AI",
+    description: "Come Document Intelligence elimina l'inserimento manuale di DDT e bolle: OCR AI al 97%, zero errori, integrazione ERP automatica. Guida completa per PMI.",
+    keywords: "automazione DDT, document intelligence logistica, gestione bolle consegna AI, OCR DDT automatico, eliminare inserimento manuale documenti, digitalizzazione documenti trasporto, integrazione ERP DDT",
+    canonical: "https://finch-ai.it/blog/document-intelligence-automazione-ddt-bolle-consegna",
+    ogType: "article",
+    article: { publishedTime: "2026-03-04", author: "Finch-AI", section: "Automazione Documentale" },
+    jsonLd: [articleJsonLd],
+  };
 
   return (
-    <>
-      <SEO
-        title="Automazione DDT con Document Intelligence AI | Blog Finch-AI"
-        description="Come Document Intelligence elimina l'inserimento manuale di DDT e bolle: OCR AI al 97%, zero errori, integrazione ERP automatica. Guida completa per PMI."
-        keywords="automazione DDT, document intelligence logistica, gestione bolle consegna AI, OCR DDT automatico, eliminare inserimento manuale documenti, digitalizzazione documenti trasporto, integrazione ERP DDT"
-        canonical="https://finch-ai.it/blog/document-intelligence-automazione-ddt-bolle-consegna"
-        ogType="article"
-        article={{ publishedTime: "2026-03-04", author: "Finch-AI", section: "Automazione Documentale" }}
-        jsonLd={[articleJsonLd]}
-      />
-      <Navbar />
-      <style>{articleStyles}</style>
-      <div className="pt-28 sm:pt-32 lg:pt-36">
-        <div dangerouslySetInnerHTML={{ __html: bodyHtml }} />
-      </div>
-    </>
+    <Layout>
+      <SEO {...seoProps} />
+
+      {loading ? (
+        <div className="min-h-[60vh] flex items-center justify-center">
+          <div className="w-8 h-8 rounded-full border-2 border-primary border-t-transparent animate-spin" />
+        </div>
+      ) : (
+        <>
+          {/* Article Hero */}
+          <div className="relative overflow-hidden border-b border-border/40">
+            <div className="pointer-events-none absolute inset-0 bg-gradient-to-br from-teal-500/10 via-transparent to-emerald-500/5" />
+            <div className="relative mx-auto max-w-3xl px-4 py-14 sm:py-20 text-center">
+              <span className="mb-5 inline-block rounded-full border border-teal-500/30 bg-teal-500/10 px-3 py-1 text-xs font-semibold uppercase tracking-widest text-teal-500 dark:text-teal-400">
+                Automazione Documentale · AI
+              </span>
+              <h1 className="mb-5 text-3xl font-bold leading-tight text-foreground sm:text-4xl lg:text-[2.6rem]">
+                Document Intelligence: addio all'inserimento manuale di DDT e bolle
+              </h1>
+              <p className="mx-auto mb-7 max-w-2xl text-lg text-muted-foreground">
+                Ogni anno le aziende perdono migliaia di ore a digitare, correggere e riconciliare documenti di trasporto. Esiste un modo migliore — ed è già disponibile.
+              </p>
+              <p className="text-sm text-muted-foreground/60">
+                4 Marzo 2026 &nbsp;·&nbsp; Finch-AI &nbsp;·&nbsp; ~8 min lettura
+              </p>
+            </div>
+          </div>
+
+          {/* Article Content */}
+          <style>{`
+            ${articleStyles}
+            /* neutralize the negative overlap margin designed for the old hero */
+            article { margin-top: 2rem !important; }
+          `}</style>
+          <div dangerouslySetInnerHTML={{ __html: bodyHtml }} />
+        </>
+      )}
+    </Layout>
   );
 }
