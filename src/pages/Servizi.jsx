@@ -1,6 +1,14 @@
+import SEO from '../components/SEO';
+
 function Servizi() {
   return (
     <div className="min-h-screen bg-gradient-to-b from-slate-950 to-slate-900 text-white">
+      <SEO
+        title="Soluzioni e Servizi AI per PMI | Finch-AI"
+        description="Scopri le soluzioni AI di Finch-AI: Document Intelligence, Production Analytics e Financial Control. Automazione su misura per aziende italiane."
+        keywords="servizi ai pmi, soluzioni intelligenza artificiale, document intelligence, production analytics, financial control ai, automazione aziendale"
+        canonical="https://finch-ai.it/servizi"
+      />
       <section className="pt-32 pb-20 px-4">
         <div className="mx-auto max-w-6xl">
           <div className="text-center mb-16">
@@ -26,8 +34,8 @@ function Servizi() {
                   <div className="inline-flex items-center gap-3 mb-6">
                     <div className="rounded-xl border border-cyan-500/30 bg-cyan-500/10 p-3 text-cyan-300">
                       <svg viewBox="0 0 24 24" className="h-10 w-10">
-                        <path d="M4 4h10l6 6v10a2 2 0 0 1-2 2H4V4z" fill="none" stroke="currentColor" strokeWidth="1.8"/>
-                        <path d="M14 4v6h6" fill="none" stroke="currentColor" strokeWidth="1.8"/>
+                        <path d="M4 4h10l6 6v10a2 2 0 0 1-2 2H4V4z" fill="none" stroke="currentColor" strokeWidth="1.8" />
+                        <path d="M14 4v6h6" fill="none" stroke="currentColor" strokeWidth="1.8" />
                       </svg>
                     </div>
                     <h2 className="text-3xl font-bold text-white">Document Intelligence</h2>
@@ -121,7 +129,7 @@ function Servizi() {
                   <div className="inline-flex items-center gap-3 mb-6">
                     <div className="rounded-xl border border-purple-500/30 bg-purple-500/10 p-3 text-purple-300">
                       <svg viewBox="0 0 24 24" className="h-10 w-10">
-                        <path d="M4 19h16M6 16V8m6 8V5m6 11v-7" fill="none" stroke="currentColor" strokeWidth="1.8"/>
+                        <path d="M4 19h16M6 16V8m6 8V5m6 11v-7" fill="none" stroke="currentColor" strokeWidth="1.8" />
                       </svg>
                     </div>
                     <h2 className="text-3xl font-bold text-white">Production Analytics</h2>
@@ -164,7 +172,7 @@ function Servizi() {
                   <div className="inline-flex items-center gap-3 mb-6">
                     <div className="rounded-xl border border-emerald-500/30 bg-emerald-500/10 p-3 text-emerald-300">
                       <svg viewBox="0 0 24 24" className="h-10 w-10">
-                        <path d="M7 8h10M4 12h16M7 16h10" fill="none" stroke="currentColor" strokeWidth="1.8"/>
+                        <path d="M7 8h10M4 12h16M7 16h10" fill="none" stroke="currentColor" strokeWidth="1.8" />
                       </svg>
                     </div>
                     <h2 className="text-3xl font-bold text-white">Financial Control</h2>
@@ -245,7 +253,7 @@ function Servizi() {
               >
                 Richiedi Consulenza Gratuita
                 <svg className="h-5 w-5" viewBox="0 0 24 24" fill="none" stroke="currentColor">
-                  <path d="M5 12h14M13 5l7 7-7 7" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round"/>
+                  <path d="M5 12h14M13 5l7 7-7 7" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round" />
                 </svg>
               </a>
             </div>

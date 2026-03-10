@@ -1,6 +1,14 @@
+import SEO from '../components/SEO';
+
 function Contatti() {
   return (
     <div className="min-h-screen bg-gradient-to-b from-slate-950 to-slate-900 text-white">
+      <SEO
+        title="Contatti e Demo Gratuita | Finch-AI"
+        description="Contatta il team di Finch-AI o prenota una demo gratuita di 30 minuti. Scopri come l'AI può trasformare i tuoi processi aziendali."
+        keywords="contatti finch-ai, prenota demo ai, consulenza ai pmi, supporto finch-ai"
+        canonical="https://finch-ai.it/contatti"
+      />
       <section className="pt-32 pb-20 px-4">
         <div className="mx-auto max-w-6xl">
           <div className="text-center mb-16">
@@ -41,7 +49,7 @@ function Contatti() {
                 >
                   Prenota Demo
                   <svg className="h-4 w-4" viewBox="0 0 24 24" fill="none" stroke="currentColor">
-                    <path d="M5 12h14M13 5l7 7-7 7" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round"/>
+                    <path d="M5 12h14M13 5l7 7-7 7" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round" />
                   </svg>
                 </a>
               </div>

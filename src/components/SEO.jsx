@@ -21,6 +21,7 @@ export default function SEO({
       <meta name="description" content={description} />
       {keywords && <meta name="keywords" content={keywords} />}
       {canonical && <link rel="canonical" href={canonical} />}
+      <link rel="alternate" hrefLang="it" href={canonical || 'https://finch-ai.it/'} />
       {noIndex && <meta name="robots" content="noindex, nofollow" />}
 
       {/* Open Graph */}

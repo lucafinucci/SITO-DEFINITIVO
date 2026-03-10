@@ -9,11 +9,12 @@ export default function Navbar() {
   const location = useLocation();
   const isHomePage = location.pathname === "/";
   const navRef = useRef(null);
+  const timeoutRef = useRef(null);
 
   const navItems = [
     { id: "hero", label: "Home", href: "/" },
     {
-      id: "come-funziona",
+      id: "moduli",
       label: "Soluzioni",
       dropdown: [
         { label: "Document Intelligence", href: "/soluzioni/document-intelligence" },
@@ -26,6 +27,7 @@ export default function Navbar() {
       id: "articoli",
       label: "Articoli",
       dropdown: [
+        { label: "AI per Studi Professionali", href: "/blog/intelligenza-artificiale-studi-professionali" },
         { label: "AI per Imprenditori e Commercialisti", href: "/blog/intelligenza-artificiale-imprenditori-commercialisti" },
         { label: "Automazione Documentale con Document Intelligence", href: "/blog/document-intelligence-automazione-ddt-bolle-consegna" },
       ]
@@ -69,6 +71,17 @@ export default function Navbar() {
     setActiveDropdown((prev) => (prev === id ? null : id));
   };
 
+  const handleMouseEnter = (id) => {
+    if (timeoutRef.current) clearTimeout(timeoutRef.current);
+    setActiveDropdown(id);
+  };
+
+  const handleMouseLeave = () => {
+    timeoutRef.current = setTimeout(() => {
+      setActiveDropdown(null);
+    }, 200); // 200ms delay to move mouse
+  };
+
   const handleLinkClick = (id) => {
     setMobileMenuOpen(false);
     setActiveDropdown(null);
@@ -100,10 +113,17 @@ export default function Navbar() {
                 <div key={item.id} className="relative">
                   {item.dropdown ? (
                     <button
-                      onClick={() => toggleDropdown(item.id)}
-                      className={`relative px-4 py-2 text-sm font-medium transition-colors flex items-center gap-1 ${
-                        activeDropdown === item.id ? "text-primary" : "text-muted-foreground hover:text-foreground"
-                      }`}
+                      onMouseEnter={() => handleMouseEnter(item.id)}
+                      onMouseLeave={handleMouseLeave}
+                      onClick={() => {
+                        if (isHomePage && item.id === "moduli") {
+                          handleLinkClick(item.id);
+                        } else {
+                          toggleDropdown(item.id);
+                        }
+                      }}
+                      className={`relative px-4 py-2 text-sm font-medium transition-colors flex items-center gap-1 ${activeDropdown === item.id ? "text-primary" : "text-muted-foreground hover:text-foreground"
+                        }`}
                     >
                       {item.label}
                       <svg
@@ -117,9 +137,8 @@ export default function Navbar() {
                     <Link
                       to={item.href}
                       onClick={() => handleLinkClick(item.id)}
-                      className={`relative px-4 py-2 text-sm font-medium transition-colors flex items-center ${
-                        isHomePage && activeSection === item.id ? "text-primary" : "text-muted-foreground hover:text-foreground"
-                      }`}
+                      className={`relative px-4 py-2 text-sm font-medium transition-colors flex items-center ${isHomePage && activeSection === item.id ? "text-primary" : "text-muted-foreground hover:text-foreground"
+                        }`}
                     >
                       {item.label}
                       {isHomePage && activeSection === item.id && (
@@ -129,7 +148,11 @@ export default function Navbar() {
                   )}
 
                   {item.dropdown && activeDropdown === item.id && (
-                    <div className="absolute top-full left-0 mt-1 w-64 overflow-hidden rounded-xl border border-border bg-background/95 shadow-xl backdrop-blur-xl animate-in fade-in slide-in-from-top-2 duration-200">
+                    <div
+                      onMouseEnter={() => handleMouseEnter(item.id)}
+                      onMouseLeave={handleMouseLeave}
+                      className="absolute top-full left-0 mt-1 w-64 overflow-hidden rounded-xl border border-border bg-background/95 shadow-xl backdrop-blur-xl animate-in fade-in slide-in-from-top-2 duration-200"
+                    >
                       <div className="p-2">
                         {item.dropdown.map((sub) =>
                           sub.disabled ? (
@@ -214,12 +237,16 @@ export default function Navbar() {
               <div key={item.id} className="space-y-1">
                 {item.dropdown ? (
                   <button
-                    onClick={() => toggleDropdown(item.id)}
-                    className={`w-full flex items-center justify-between px-4 py-3 rounded-lg text-base font-medium transition-all ${
-                      activeDropdown === item.id
-                        ? "bg-primary/10 text-primary border border-primary/30"
-                        : "text-muted-foreground hover:text-foreground hover:bg-muted/50"
-                    }`}
+                    onClick={() => {
+                      toggleDropdown(item.id);
+                      if (isHomePage && item.id === "moduli") {
+                        handleLinkClick(item.id);
+                      }
+                    }}
+                    className={`w-full flex items-center justify-between px-4 py-3 rounded-lg text-base font-medium transition-all ${activeDropdown === item.id
+                      ? "bg-primary/10 text-primary border border-primary/30"
+                      : "text-muted-foreground hover:text-foreground hover:bg-muted/50"
+                      }`}
                   >
                     {item.label}
                     <svg className={`h-5 w-5 transition-transform ${activeDropdown === item.id ? "rotate-180" : ""}`} viewBox="0 0 20 20" fill="currentColor">
@@ -230,11 +257,10 @@ export default function Navbar() {
                   <Link
                     to={item.href}
                     onClick={() => handleLinkClick(item.id)}
-                    className={`flex items-center px-4 py-3 rounded-lg text-base font-medium transition-all ${
-                      isHomePage && activeSection === item.id
-                        ? "bg-primary/10 text-primary border border-primary/30"
-                        : "text-muted-foreground hover:text-foreground hover:bg-muted/50"
-                    }`}
+                    className={`flex items-center px-4 py-3 rounded-lg text-base font-medium transition-all ${isHomePage && activeSection === item.id
+                      ? "bg-primary/10 text-primary border border-primary/30"
+                      : "text-muted-foreground hover:text-foreground hover:bg-muted/50"
+                      }`}
                   >
                     {item.label}
                   </Link>
