@@ -6,6 +6,7 @@ import FinanceIntelligence from "@/pages/FinanceIntelligence";
 import ArticleAIImprenditori from "@/pages/ArticleAIImprenditori";
 import ArticleDocumentIntelligenceDDT from "@/pages/ArticleDocumentIntelligenceDDT";
 import ArticleStudiProfessionali from "@/pages/ArticleStudiProfessionali";
+import ArticleAIFatturePassive from "@/pages/ArticleAIFatturePassive";
 
 export default function App() {
   return (
@@ -17,6 +18,7 @@ export default function App() {
       <Route path="/blog/intelligenza-artificiale-imprenditori-commercialisti" element={<ArticleAIImprenditori />} />
       <Route path="/blog/document-intelligence-automazione-ddt-bolle-consegna" element={<ArticleDocumentIntelligenceDDT />} />
       <Route path="/blog/intelligenza-artificiale-studi-professionali" element={<ArticleStudiProfessionali />} />
+      <Route path="/blog/ai-fatture-passive-document-intelligence-pmi" element={<ArticleAIFatturePassive />} />
     </Routes>
   );
 }
