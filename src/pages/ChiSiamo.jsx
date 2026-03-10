@@ -1,8 +1,15 @@
 import { Target, Rocket, Wrench, Handshake, BarChart3, GraduationCap } from 'lucide-react';
+import SEO from '../components/SEO';
 
 function ChiSiamo() {
   return (
     <div className="min-h-screen bg-gradient-to-b from-slate-950 to-slate-900 text-white">
+      <SEO
+        title="Chi Siamo | Finch-AI — Partner AI per le PMI"
+        description="Finch-AI è il partner tecnologico delle PMI italiane per la trasformazione digitale guidata dall'intelligenza artificiale. Scopri la nostra missione e i nostri valori."
+        keywords="finch-ai chi siamo, azienda AI italia, partner tecnologico pmi, trasformazione digitale ai, startup ai manufacturing"
+        canonical="https://finch-ai.it/chi-siamo"
+      />
       <section className="pt-32 pb-20 px-4">
         <div className="mx-auto max-w-6xl">
           <div className="text-center mb-16">
@@ -72,13 +79,13 @@ function ChiSiamo() {
               ].map((value, i) => {
                 const IconComponent = value.icon;
                 return (
-                <div key={i} className="rounded-2xl border border-slate-700/60 bg-slate-900/60 backdrop-blur p-6 text-center">
-                  <div className="mb-3 text-cyan-400 flex justify-center">
-                    <IconComponent className="h-10 w-10" strokeWidth={1.5} />
+                  <div key={i} className="rounded-2xl border border-slate-700/60 bg-slate-900/60 backdrop-blur p-6 text-center">
+                    <div className="mb-3 text-cyan-400 flex justify-center">
+                      <IconComponent className="h-10 w-10" strokeWidth={1.5} />
+                    </div>
+                    <h3 className="text-lg font-bold text-white mb-2">{value.title}</h3>
+                    <p className="text-sm text-slate-300/90 leading-relaxed">{value.desc}</p>
                   </div>
-                  <h3 className="text-lg font-bold text-white mb-2">{value.title}</h3>
-                  <p className="text-sm text-slate-300/90 leading-relaxed">{value.desc}</p>
-                </div>
                 );
               })}
             </div>

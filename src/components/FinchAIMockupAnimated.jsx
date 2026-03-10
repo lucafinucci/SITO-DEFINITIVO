@@ -126,7 +126,7 @@ export default function FinchAIMockupAnimated() {
 
           <div className="mt-10 flex flex-wrap items-center justify-center gap-4 animate-[fadeUp_1.1s_ease_0.36s_both]">
             <a
-              href="#come-funziona"
+              href="#moduli"
               className="group flex items-center gap-2 rounded-xl bg-primary px-8 py-4 text-sm font-bold text-primary-foreground shadow-xl shadow-primary/20 transition hover:brightness-110 active:scale-95"
             >
               Scopri le soluzioni
@@ -271,7 +271,7 @@ export default function FinchAIMockupAnimated() {
       </section>
 
       {/* I MODULI */}
-      <section id="come-funziona" className="py-20">
+      <section id="moduli" className="py-20">
         <div className="mx-auto max-w-6xl">
           <div className="text-center mb-16">
             <span className="inline-flex items-center gap-2 rounded-full border border-primary/30 bg-primary/10 px-4 py-1.5 text-xs font-semibold uppercase tracking-wider text-primary dark:text-teal-300 mb-6">
