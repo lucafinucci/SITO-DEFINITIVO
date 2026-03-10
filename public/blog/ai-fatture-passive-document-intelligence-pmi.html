@@ -1,0 +1,1185 @@
+<!DOCTYPE html>
+<html lang="it">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>AI per Fatture Passive: Come la Document Intelligence Automatizza il Ciclo Passivo delle PMI | FinCh-Ai Blog</title>
+  <meta name="description" content="Scopri come l'intelligenza artificiale e la Document Intelligence trasformano la gestione delle fatture passive nelle PMI italiane: dall'estrazione automatica dei dati alla registrazione contabile.">
+  <meta name="keywords" content="AI fatture passive, document intelligence, automazione fatture, ciclo passivo, PMI italiane, estrazione dati fatture, intelligenza artificiale contabilità, accounts payable automation">
+  <meta name="author" content="FinCh-Ai">
+  <meta name="robots" content="index, follow">
+  <link rel="canonical" href="https://www.finch-ai.it/blog/ai-fatture-passive-document-intelligence-pmi">
+
+  <!-- Open Graph -->
+  <meta property="og:type" content="article">
+  <meta property="og:title" content="AI per Fatture Passive: Come la Document Intelligence Automatizza il Ciclo Passivo delle PMI">
+  <meta property="og:description" content="Scopri come l'intelligenza artificiale e la Document Intelligence trasformano la gestione delle fatture passive nelle PMI italiane: dall'estrazione automatica dei dati alla registrazione contabile.">
+  <meta property="og:url" content="https://www.finch-ai.it/blog/ai-fatture-passive-document-intelligence-pmi">
+  <meta property="og:site_name" content="FinCh-Ai">
+  <meta property="og:image" content="https://www.finch-ai.it/images/blog/ai-fatture-passive-document-intelligence-pmi-og.jpg">
+  <meta property="og:locale" content="it_IT">
+
+  <!-- Twitter Card -->
+  <meta name="twitter:card" content="summary_large_image">
+  <meta name="twitter:title" content="AI per Fatture Passive: Come la Document Intelligence Automatizza il Ciclo Passivo delle PMI">
+  <meta name="twitter:description" content="Scopri come l'intelligenza artificiale e la Document Intelligence trasformano la gestione delle fatture passive nelle PMI italiane.">
+
+  <!-- Article metadata -->
+  <meta property="article:published_time" content="2026-03-10">
+  <meta property="article:author" content="FinCh-Ai">
+  <meta property="article:section" content="Thought Leadership">
+
+  <!-- Fonts -->
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Plus+Jakarta+Sans:wght@500;600;700;800&family=Inter:wght@400;500;600&family=JetBrains+Mono:wght@400;500&display=swap" rel="stylesheet">
+
+  <!-- Structured Data (JSON-LD) -->
+  <script type="application/ld+json">
+  {
+    "@context": "https://schema.org",
+    "@type": "BlogPosting",
+    "headline": "AI per Fatture Passive: Come la Document Intelligence Automatizza il Ciclo Passivo delle PMI",
+    "description": "Scopri come l'intelligenza artificiale e la Document Intelligence trasformano la gestione delle fatture passive nelle PMI italiane: dall'estrazione automatica dei dati alla registrazione contabile.",
+    "author": {
+      "@type": "Organization",
+      "name": "FinCh-Ai",
+      "url": "https://www.finch-ai.it"
+    },
+    "publisher": {
+      "@type": "Organization",
+      "name": "FinCh-Ai",
+      "logo": {
+        "@type": "ImageObject",
+        "url": "https://www.finch-ai.it/images/logo-finch-ai.png"
+      }
+    },
+    "datePublished": "2026-03-10",
+    "dateModified": "2026-03-10",
+    "mainEntityOfPage": {
+      "@type": "WebPage",
+      "@id": "https://www.finch-ai.it/blog/ai-fatture-passive-document-intelligence-pmi"
+    },
+    "keywords": "AI fatture passive, document intelligence, automazione fatture, ciclo passivo, PMI italiane, estrazione dati fatture, intelligenza artificiale contabilità"
+  }
+  </script>
+
+  <style>
+    :root {
+      --primary-dark: #1B2A4A;
+      --primary-blue: #2D4A7A;
+      --accent-teal: #0EA5E9;
+      --accent-orange: #F59E0B;
+      --accent-orange-hover: #D97706;
+      --text-primary: #1E293B;
+      --text-secondary: #64748B;
+      --text-light: #94A3B8;
+      --bg-white: #FFFFFF;
+      --bg-alt: #F8FAFC;
+      --bg-code: #F1F5F9;
+      --border-light: #E2E8F0;
+      --border-medium: #CBD5E1;
+      --shadow-sm: 0 1px 2px rgba(0,0,0,0.05);
+      --shadow-md: 0 4px 12px rgba(0,0,0,0.08);
+      --shadow-lg: 0 12px 32px rgba(0,0,0,0.12);
+      --radius-sm: 6px;
+      --radius-md: 8px;
+      --radius-lg: 12px;
+      --radius-xl: 16px;
+      --font-heading: 'Plus Jakarta Sans', sans-serif;
+      --font-body: 'Inter', sans-serif;
+      --font-mono: 'JetBrains Mono', monospace;
+      --max-content: 780px;
+      --max-page: 1200px;
+    }
+
+    *, *::before, *::after {
+      margin: 0;
+      padding: 0;
+      box-sizing: border-box;
+    }
+
+    html {
+      font-size: 16px;
+      scroll-behavior: smooth;
+      -webkit-font-smoothing: antialiased;
+      -moz-osx-font-smoothing: grayscale;
+    }
+
+    body {
+      font-family: var(--font-body);
+      color: var(--text-primary);
+      background: var(--bg-white);
+      line-height: 1.8;
+    }
+
+    .site-header {
+      background: var(--primary-dark);
+      position: sticky;
+      top: 0;
+      z-index: 100;
+      box-shadow: var(--shadow-md);
+    }
+
+    .header-inner {
+      max-width: var(--max-page);
+      margin: 0 auto;
+      padding: 0 2rem;
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      height: 72px;
+    }
+
+    .logo {
+      display: flex;
+      align-items: center;
+      gap: 0.625rem;
+      text-decoration: none;
+      color: #FFFFFF;
+      font-family: var(--font-heading);
+      font-weight: 800;
+      font-size: 1.375rem;
+      letter-spacing: -0.02em;
+    }
+
+    .logo-icon {
+      width: 36px;
+      height: 36px;
+      background: linear-gradient(135deg, var(--accent-teal), var(--accent-orange));
+      border-radius: var(--radius-md);
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      font-size: 1.125rem;
+    }
+
+    .logo span {
+      color: var(--accent-teal);
+    }
+
+    .nav-links {
+      display: flex;
+      align-items: center;
+      gap: 2rem;
+      list-style: none;
+    }
+
+    .nav-links a {
+      color: #CBD5E1;
+      text-decoration: none;
+      font-size: 0.9375rem;
+      font-weight: 500;
+      transition: color 0.2s;
+    }
+
+    .nav-links a:hover,
+    .nav-links a.active {
+      color: #FFFFFF;
+    }
+
+    .nav-cta {
+      background: var(--accent-orange) !important;
+      color: #FFFFFF !important;
+      padding: 0.5rem 1.25rem;
+      border-radius: var(--radius-md);
+      font-weight: 600 !important;
+      transition: background 0.2s !important;
+    }
+
+    .nav-cta:hover {
+      background: var(--accent-orange-hover) !important;
+    }
+
+    .nav-toggle {
+      display: none;
+      background: none;
+      border: none;
+      cursor: pointer;
+      padding: 0.5rem;
+    }
+
+    .nav-toggle span {
+      display: block;
+      width: 24px;
+      height: 2px;
+      background: #FFFFFF;
+      margin: 5px 0;
+      transition: 0.3s;
+    }
+
+    .article-hero {
+      background: linear-gradient(160deg, var(--primary-dark) 0%, var(--primary-blue) 100%);
+      padding: 4rem 2rem 3rem;
+      color: #FFFFFF;
+    }
+
+    .article-hero-inner {
+      max-width: var(--max-content);
+      margin: 0 auto;
+    }
+
+    .article-breadcrumb {
+      font-size: 0.875rem;
+      color: var(--text-light);
+      margin-bottom: 1.5rem;
+    }
+
+    .article-breadcrumb a {
+      color: var(--accent-teal);
+      text-decoration: none;
+    }
+
+    .article-breadcrumb a:hover {
+      text-decoration: underline;
+    }
+
+    .article-meta-top {
+      display: flex;
+      align-items: center;
+      gap: 1rem;
+      margin-bottom: 1.25rem;
+      flex-wrap: wrap;
+    }
+
+    .article-category {
+      background: rgba(14, 165, 233, 0.15);
+      color: var(--accent-teal);
+      padding: 0.25rem 0.75rem;
+      border-radius: 999px;
+      font-size: 0.8125rem;
+      font-weight: 600;
+      text-transform: uppercase;
+      letter-spacing: 0.05em;
+    }
+
+    .article-date {
+      color: var(--text-light);
+      font-size: 0.875rem;
+    }
+
+    .article-reading-time {
+      color: var(--text-light);
+      font-size: 0.875rem;
+    }
+
+    .article-hero h1 {
+      font-family: var(--font-heading);
+      font-size: clamp(2rem, 4vw, 2.75rem);
+      font-weight: 800;
+      line-height: 1.2;
+      letter-spacing: -0.02em;
+      margin-bottom: 1.25rem;
+    }
+
+    .article-subtitle {
+      font-size: 1.1875rem;
+      color: #CBD5E1;
+      line-height: 1.6;
+      max-width: 640px;
+    }
+
+    .article-body {
+      max-width: var(--max-content);
+      margin: 0 auto;
+      padding: 3rem 2rem 4rem;
+    }
+
+    .toc {
+      background: var(--bg-alt);
+      border: 1px solid var(--border-light);
+      border-radius: var(--radius-lg);
+      padding: 1.75rem 2rem;
+      margin-bottom: 3rem;
+    }
+
+    .toc-title {
+      font-family: var(--font-heading);
+      font-size: 1rem;
+      font-weight: 700;
+      color: var(--primary-dark);
+      margin-bottom: 1rem;
+      display: flex;
+      align-items: center;
+      gap: 0.5rem;
+    }
+
+    .toc ol {
+      list-style: none;
+      counter-reset: toc-counter;
+      padding: 0;
+    }
+
+    .toc ol li {
+      counter-increment: toc-counter;
+      margin-bottom: 0.5rem;
+    }
+
+    .toc ol li::before {
+      content: counter(toc-counter) ".";
+      color: var(--accent-teal);
+      font-weight: 600;
+      margin-right: 0.5rem;
+    }
+
+    .toc ol li a {
+      color: var(--text-primary);
+      text-decoration: none;
+      font-size: 0.9375rem;
+      transition: color 0.2s;
+    }
+
+    .toc ol li a:hover {
+      color: var(--accent-teal);
+    }
+
+    .article-body h2 {
+      font-family: var(--font-heading);
+      font-size: 1.75rem;
+      font-weight: 700;
+      color: var(--primary-dark);
+      margin-top: 3rem;
+      margin-bottom: 1rem;
+      line-height: 1.3;
+      letter-spacing: -0.01em;
+    }
+
+    .article-body h3 {
+      font-family: var(--font-heading);
+      font-size: 1.3125rem;
+      font-weight: 600;
+      color: var(--primary-blue);
+      margin-top: 2rem;
+      margin-bottom: 0.75rem;
+      line-height: 1.4;
+    }
+
+    .article-body p {
+      margin-bottom: 1.5em;
+      font-size: 1.0625rem;
+      line-height: 1.8;
+    }
+
+    .article-body a {
+      color: var(--accent-teal);
+      text-decoration: underline;
+      text-decoration-thickness: 1px;
+      text-underline-offset: 2px;
+      transition: color 0.2s;
+    }
+
+    .article-body a:hover {
+      color: var(--primary-blue);
+    }
+
+    .article-body strong {
+      font-weight: 600;
+      color: var(--primary-dark);
+    }
+
+    .article-body blockquote {
+      border-left: 4px solid var(--accent-teal);
+      background: var(--bg-alt);
+      padding: 1.25rem 1.5rem;
+      margin: 2rem 0;
+      border-radius: 0 var(--radius-md) var(--radius-md) 0;
+      font-style: italic;
+      color: var(--text-secondary);
+    }
+
+    .article-body blockquote p {
+      margin-bottom: 0;
+    }
+
+    .article-body ul,
+    .article-body ol {
+      margin-bottom: 1.5em;
+      padding-left: 1.5rem;
+    }
+
+    .article-body li {
+      margin-bottom: 0.5em;
+      font-size: 1.0625rem;
+      line-height: 1.7;
+    }
+
+    .article-body ul li::marker {
+      color: var(--accent-teal);
+    }
+
+    .article-body ol li::marker {
+      color: var(--accent-teal);
+      font-weight: 600;
+    }
+
+    .article-body code {
+      font-family: var(--font-mono);
+      background: var(--bg-code);
+      padding: 0.15em 0.4em;
+      border-radius: 4px;
+      font-size: 0.9em;
+      color: var(--primary-blue);
+    }
+
+    .article-body pre {
+      background: var(--primary-dark);
+      color: #E2E8F0;
+      padding: 1.5rem;
+      border-radius: var(--radius-lg);
+      overflow-x: auto;
+      margin: 2rem 0;
+      font-size: 0.9rem;
+      line-height: 1.6;
+    }
+
+    .article-body pre code {
+      background: none;
+      padding: 0;
+      color: inherit;
+      font-size: inherit;
+    }
+
+    .article-body img {
+      max-width: 100%;
+      height: auto;
+      border-radius: var(--radius-md);
+      margin: 2rem 0;
+      box-shadow: var(--shadow-sm);
+    }
+
+    .article-body figure {
+      margin: 2rem 0;
+    }
+
+    .article-body figcaption {
+      text-align: center;
+      font-size: 0.8125rem;
+      color: var(--text-secondary);
+      margin-top: 0.5rem;
+      font-style: italic;
+    }
+
+    .info-box {
+      background: linear-gradient(135deg, rgba(14,165,233,0.06), rgba(14,165,233,0.02));
+      border: 1px solid rgba(14,165,233,0.2);
+      border-radius: var(--radius-lg);
+      padding: 1.5rem;
+      margin: 2rem 0;
+    }
+
+    .info-box-title {
+      font-family: var(--font-heading);
+      font-weight: 700;
+      color: var(--primary-blue);
+      margin-bottom: 0.5rem;
+      display: flex;
+      align-items: center;
+      gap: 0.5rem;
+    }
+
+    .warning-box {
+      background: linear-gradient(135deg, rgba(245,158,11,0.06), rgba(245,158,11,0.02));
+      border: 1px solid rgba(245,158,11,0.25);
+      border-radius: var(--radius-lg);
+      padding: 1.5rem;
+      margin: 2rem 0;
+    }
+
+    .cite-ref {
+      display: inline;
+      font-size: 0.75em;
+      vertical-align: super;
+      line-height: 0;
+      margin-left: 1px;
+    }
+
+    .cite-ref a {
+      color: var(--accent-teal) !important;
+      text-decoration: none !important;
+      font-weight: 600;
+      padding: 0 2px;
+      border-radius: 2px;
+      transition: background 0.15s, color 0.15s;
+    }
+
+    .cite-ref a:hover {
+      background: var(--accent-teal);
+      color: #FFFFFF !important;
+    }
+
+    .references-section {
+      margin-top: 3rem;
+      padding-top: 2rem;
+      border-top: 2px solid var(--border-light);
+    }
+
+    .references-section h2 {
+      font-family: var(--font-heading);
+      font-size: 1.5rem;
+      font-weight: 700;
+      color: var(--primary-dark);
+      margin-bottom: 1.25rem;
+      display: flex;
+      align-items: center;
+      gap: 0.5rem;
+    }
+
+    .references-list {
+      list-style: none;
+      padding: 0;
+      counter-reset: ref-counter;
+    }
+
+    .references-list li {
+      counter-increment: ref-counter;
+      position: relative;
+      padding: 0.75rem 0 0.75rem 2.5rem;
+      border-bottom: 1px solid var(--bg-alt);
+      font-size: 0.9375rem;
+      line-height: 1.6;
+      color: var(--text-secondary);
+    }
+
+    .references-list li:last-child {
+      border-bottom: none;
+    }
+
+    .references-list li::before {
+      content: "[" counter(ref-counter) "]";
+      position: absolute;
+      left: 0;
+      color: var(--accent-teal);
+      font-weight: 700;
+      font-size: 0.875rem;
+      font-family: var(--font-mono);
+    }
+
+    .references-list li .ref-title {
+      color: var(--text-primary);
+      font-weight: 500;
+    }
+
+    .references-list li .ref-source {
+      font-style: italic;
+    }
+
+    .references-list li .ref-date {
+      color: var(--text-light);
+    }
+
+    .references-list li a {
+      color: var(--accent-teal);
+      text-decoration: none;
+      word-break: break-all;
+      font-size: 0.8125rem;
+    }
+
+    .references-list li a:hover {
+      text-decoration: underline;
+    }
+
+    .ref-backlink {
+      color: var(--accent-teal) !important;
+      text-decoration: none !important;
+      font-size: 0.8125rem;
+      margin-left: 0.375rem;
+    }
+
+    .ref-backlink:hover {
+      text-decoration: underline !important;
+    }
+
+    .references-list li:target {
+      background: rgba(14, 165, 233, 0.06);
+      border-radius: var(--radius-sm);
+      padding-left: 2.5rem;
+      margin-left: -0.5rem;
+      padding-right: 0.5rem;
+    }
+
+    .article-body table {
+      width: 100%;
+      border-collapse: collapse;
+      margin: 2rem 0;
+      font-size: 0.9375rem;
+    }
+
+    .article-body thead {
+      background: var(--primary-dark);
+      color: #FFFFFF;
+    }
+
+    .article-body th {
+      padding: 0.875rem 1rem;
+      text-align: left;
+      font-weight: 600;
+      font-family: var(--font-heading);
+    }
+
+    .article-body td {
+      padding: 0.75rem 1rem;
+      border-bottom: 1px solid var(--border-light);
+    }
+
+    .article-body tbody tr:hover {
+      background: var(--bg-alt);
+    }
+
+    .article-body hr {
+      border: none;
+      border-top: 1px solid var(--border-light);
+      margin: 3rem 0;
+    }
+
+    .article-cta {
+      background: linear-gradient(135deg, var(--primary-dark), var(--primary-blue));
+      border-radius: var(--radius-xl);
+      padding: 2.5rem;
+      margin-top: 3rem;
+      text-align: center;
+      color: #FFFFFF;
+    }
+
+    .article-cta h3 {
+      font-family: var(--font-heading);
+      font-size: 1.5rem;
+      font-weight: 700;
+      margin-bottom: 0.75rem;
+      color: #FFFFFF;
+    }
+
+    .article-cta p {
+      color: #CBD5E1;
+      font-size: 1.0625rem;
+      margin-bottom: 1.5rem;
+      max-width: 520px;
+      margin-left: auto;
+      margin-right: auto;
+      line-height: 1.6;
+    }
+
+    .cta-button {
+      display: inline-block;
+      background: var(--accent-orange);
+      color: #FFFFFF;
+      padding: 0.875rem 2rem;
+      border-radius: var(--radius-md);
+      font-weight: 700;
+      font-size: 1rem;
+      text-decoration: none;
+      transition: background 0.2s, transform 0.2s;
+    }
+
+    .cta-button:hover {
+      background: var(--accent-orange-hover);
+      transform: translateY(-2px);
+    }
+
+    .article-footer-meta {
+      margin-top: 3rem;
+      padding-top: 2rem;
+      border-top: 1px solid var(--border-light);
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      flex-wrap: wrap;
+      gap: 1.5rem;
+    }
+
+    .author-info {
+      display: flex;
+      align-items: center;
+      gap: 1rem;
+    }
+
+    .author-avatar {
+      width: 48px;
+      height: 48px;
+      border-radius: 50%;
+      background: linear-gradient(135deg, var(--accent-teal), var(--accent-orange));
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      color: #FFFFFF;
+      font-weight: 700;
+      font-size: 1.125rem;
+    }
+
+    .author-name {
+      font-weight: 600;
+      color: var(--primary-dark);
+    }
+
+    .author-role {
+      font-size: 0.8125rem;
+      color: var(--text-secondary);
+    }
+
+    .share-links {
+      display: flex;
+      align-items: center;
+      gap: 0.75rem;
+    }
+
+    .share-label {
+      font-size: 0.875rem;
+      color: var(--text-secondary);
+      font-weight: 500;
+    }
+
+    .share-btn {
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      width: 40px;
+      height: 40px;
+      border-radius: 50%;
+      background: var(--bg-alt);
+      border: 1px solid var(--border-light);
+      color: var(--text-secondary);
+      text-decoration: none;
+      font-size: 1.125rem;
+      transition: all 0.2s;
+    }
+
+    .share-btn:hover {
+      background: var(--accent-teal);
+      color: #FFFFFF;
+      border-color: var(--accent-teal);
+    }
+
+    .related-articles {
+      max-width: var(--max-page);
+      margin: 0 auto;
+      padding: 4rem 2rem;
+      border-top: 1px solid var(--border-light);
+    }
+
+    .related-articles h2 {
+      font-family: var(--font-heading);
+      font-size: 1.5rem;
+      font-weight: 700;
+      color: var(--primary-dark);
+      margin-bottom: 2rem;
+      text-align: center;
+    }
+
+    .related-grid {
+      display: grid;
+      grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
+      gap: 1.5rem;
+    }
+
+    .related-card {
+      border: 1px solid var(--border-light);
+      border-radius: var(--radius-lg);
+      overflow: hidden;
+      transition: transform 0.2s, box-shadow 0.2s;
+      text-decoration: none;
+      color: inherit;
+      display: block;
+    }
+
+    .related-card:hover {
+      transform: translateY(-4px);
+      box-shadow: var(--shadow-md);
+    }
+
+    .related-card-body {
+      padding: 1.25rem;
+    }
+
+    .related-card-category {
+      font-size: 0.75rem;
+      font-weight: 600;
+      text-transform: uppercase;
+      color: var(--accent-teal);
+      letter-spacing: 0.05em;
+    }
+
+    .related-card-title {
+      font-family: var(--font-heading);
+      font-size: 1.0625rem;
+      font-weight: 600;
+      color: var(--primary-dark);
+      margin-top: 0.5rem;
+      line-height: 1.4;
+    }
+
+    .site-footer {
+      background: var(--primary-dark);
+      color: #94A3B8;
+      padding: 3rem 2rem 2rem;
+    }
+
+    .footer-inner {
+      max-width: var(--max-page);
+      margin: 0 auto;
+      display: grid;
+      grid-template-columns: 2fr 1fr 1fr;
+      gap: 3rem;
+    }
+
+    .footer-brand p {
+      font-size: 0.9rem;
+      line-height: 1.7;
+      margin-top: 0.75rem;
+      max-width: 320px;
+    }
+
+    .footer-column h4 {
+      color: #FFFFFF;
+      font-family: var(--font-heading);
+      font-size: 0.9375rem;
+      font-weight: 600;
+      margin-bottom: 1rem;
+    }
+
+    .footer-column ul {
+      list-style: none;
+    }
+
+    .footer-column li {
+      margin-bottom: 0.5rem;
+    }
+
+    .footer-column a {
+      color: #94A3B8;
+      text-decoration: none;
+      font-size: 0.875rem;
+      transition: color 0.2s;
+    }
+
+    .footer-column a:hover {
+      color: var(--accent-teal);
+    }
+
+    .footer-bottom {
+      max-width: var(--max-page);
+      margin: 0 auto;
+      padding-top: 2rem;
+      margin-top: 2rem;
+      border-top: 1px solid rgba(255,255,255,0.1);
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      font-size: 0.8125rem;
+      flex-wrap: wrap;
+      gap: 1rem;
+    }
+
+    .footer-bottom a {
+      color: #94A3B8;
+      text-decoration: none;
+    }
+
+    .footer-bottom a:hover {
+      color: var(--accent-teal);
+    }
+
+    @media (max-width: 768px) {
+      .header-inner { padding: 0 1rem; }
+      .nav-links { display: none; }
+      .nav-toggle { display: block; }
+      .nav-links.open {
+        display: flex;
+        flex-direction: column;
+        position: absolute;
+        top: 72px;
+        left: 0;
+        right: 0;
+        background: var(--primary-dark);
+        padding: 1.5rem;
+        gap: 1rem;
+        box-shadow: var(--shadow-lg);
+      }
+      .article-hero { padding: 2.5rem 1rem 2rem; }
+      .article-hero h1 { font-size: 1.75rem; }
+      .article-body { padding: 2rem 1rem 3rem; }
+      .article-body h2 { font-size: 1.5rem; }
+      .footer-inner { grid-template-columns: 1fr; gap: 2rem; }
+      .article-footer-meta { flex-direction: column; align-items: flex-start; }
+      .related-grid { grid-template-columns: 1fr; }
+    }
+
+    @media print {
+      .site-header, .site-footer, .article-cta, .related-articles, .share-links { display: none; }
+      .article-hero { background: none; color: var(--text-primary); padding: 1rem 0; }
+      .article-body { max-width: 100%; padding: 0; }
+    }
+  </style>
+</head>
+<body>
+
+  <!-- ===== HEADER ===== -->
+  <header class="site-header">
+    <div class="header-inner">
+      <a href="https://www.finch-ai.it" class="logo">
+        <div class="logo-icon">&#x1F426;</div>
+        Finch<span>-Ai</span>
+      </a>
+      <button class="nav-toggle" onclick="document.querySelector('.nav-links').classList.toggle('open')" aria-label="Menu">
+        <span></span><span></span><span></span>
+      </button>
+      <ul class="nav-links">
+        <li><a href="https://www.finch-ai.it/#soluzioni">Soluzioni</a></li>
+        <li><a href="https://www.finch-ai.it/#come-funziona">Come Funziona</a></li>
+        <li><a href="https://www.finch-ai.it/blog" class="active">Blog</a></li>
+        <li><a href="https://www.finch-ai.it/#contatti">Contatti</a></li>
+        <li><a href="https://www.finch-ai.it/#contatti" class="nav-cta">Richiedi Demo</a></li>
+      </ul>
+    </div>
+  </header>
+
+  <!-- ===== ARTICLE HERO ===== -->
+  <section class="article-hero">
+    <div class="article-hero-inner">
+      <div class="article-breadcrumb">
+        <a href="https://www.finch-ai.it">Home</a> / <a href="https://www.finch-ai.it/blog">Blog</a> / AI per Fatture Passive
+      </div>
+      <div class="article-meta-top">
+        <span class="article-category">Thought Leadership</span>
+        <span class="article-date">10 Marzo 2026</span>
+        <span class="article-reading-time">8 min di lettura</span>
+      </div>
+      <h1>AI per Fatture Passive: Come la Document Intelligence Automatizza il Ciclo Passivo delle PMI</h1>
+      <p class="article-subtitle">Dalla ricezione alla registrazione contabile: come l'intelligenza artificiale sta eliminando ore di lavoro manuale nella gestione delle fatture fornitori.</p>
+    </div>
+  </section>
+
+  <!-- ===== ARTICLE BODY ===== -->
+  <article class="article-body">
+
+    <!-- TABLE OF CONTENTS -->
+    <nav class="toc">
+      <div class="toc-title">&#x1F4CB; Indice dei Contenuti</div>
+      <ol>
+        <li><a href="#section-1">Il problema nascosto delle fatture passive</a></li>
+        <li><a href="#section-2">Cos'è la Document Intelligence applicata alle fatture</a></li>
+        <li><a href="#section-3">Il ciclo automatizzato end-to-end</a></li>
+        <li><a href="#section-4">Vantaggi concreti per le PMI italiane</a></li>
+        <li><a href="#section-5">Il futuro: dall'automazione all'intelligenza predittiva</a></li>
+        <li><a href="#references">Fonti e Riferimenti</a></li>
+      </ol>
+    </nav>
+
+    <!-- SECTION 1 -->
+    <h2 id="section-1">Il problema nascosto delle fatture passive</h2>
+
+    <p>Ogni PMI italiana lo sa, anche se raramente lo quantifica: la gestione delle fatture passive è un'attività che consuma risorse in modo silenzioso ma costante. Ricezione via email, verifica manuale dei dati, confronto con gli ordini, inserimento nel gestionale, archiviazione. Un ciclo che si ripete centinaia o migliaia di volte al mese, e che per ogni singola fattura può costare tra i 14 e i 20 euro in termini di tempo e risorse umane<sup class="cite-ref"><a href="#ref-1" id="cite-1">[1]</a></sup>.</p>
+
+    <p>Il dato più preoccupante non è solo il costo unitario, ma il tasso di errore. Senza automazione, circa il 39% delle fatture contiene errori quali importi errati, dati mancanti o corrispondenze errate con gli ordini di acquisto<sup class="cite-ref"><a href="#ref-2" id="cite-2">[2]</a></sup>. Ogni errore significa ritardi nei pagamenti, contestazioni con i fornitori, e un rischio concreto di non conformità fiscale.</p>
+
+    <p>L'Italia, paradossalmente, è già un modello europeo nella fatturazione elettronica: il 97,5% delle imprese con almeno 10 addetti la utilizza, contro una media UE del 38,6%<sup class="cite-ref"><a href="#ref-3" id="cite-3">[3]</a></sup>. Eppure, ricevere una fattura in formato elettronico non significa elaborarla automaticamente. La maggior parte delle PMI si limita a ricevere il file XML e poi lo gestisce manualmente, vanificando gran parte del potenziale di efficienza.</p>
+
+    <blockquote><p>La fatturazione elettronica è il primo passo. La Document Intelligence è il salto di qualità che trasforma un obbligo normativo in un vantaggio competitivo.</p></blockquote>
+
+    <!-- SECTION 2 -->
+    <h2 id="section-2">Cos'è la Document Intelligence applicata alle fatture</h2>
+
+    <p>La Document Intelligence — o Intelligent Document Processing (IDP) — è una disciplina dell'intelligenza artificiale che combina OCR avanzato, machine learning e comprensione del linguaggio naturale per estrarre, classificare e validare automaticamente le informazioni contenute nei documenti. Un mercato in crescita esplosiva, valutato 3,22 miliardi di dollari nel 2025 con proiezioni che superano i 43 miliardi entro il 2034<sup class="cite-ref"><a href="#ref-4" id="cite-4">[4]</a></sup>.</p>
+
+    <p>Applicata alle fatture passive, questa tecnologia è in grado di leggere qualsiasi formato — PDF, immagini scannerizzate, XML della fatturazione elettronica, documenti ricevuti via email — ed estrarne i campi rilevanti con un'accuratezza che supera il 99% sui modelli pre-addestrati<sup class="cite-ref"><a href="#ref-5" id="cite-5">[5]</a></sup>. Non si tratta più di semplice OCR: il sistema comprende la struttura logica del documento, identifica fornitore, importi, date, righe d'ordine, codici IVA e li restituisce come dati strutturati pronti per la contabilità.</p>
+
+    <h3>Come funziona nella pratica</h3>
+
+    <p>La piattaforma FinCh-Ai integra Document Intelligence con modelli composti, configurabili per ogni tipologia documentale. Questo significa che il sistema non applica un modello generico a tutti i documenti, ma utilizza modelli specializzati e personalizzabili per tenant: ogni azienda può avere regole di estrazione calibrate sui propri fornitori, formati e flussi operativi.</p>
+
+    <div class="info-box">
+      <div class="info-box-title">&#x1F4A1; Modelli composti vs modelli generici</div>
+      <p>Un modello composto combina più modelli specializzati in un unico endpoint. Quando riceve un documento, il sistema identifica automaticamente la tipologia (fattura, nota di credito, DDT) e applica il modello più adatto, aumentando precisione e copertura senza intervento umano.</p>
+    </div>
+
+    <!-- SECTION 3 -->
+    <h2 id="section-3">Il ciclo automatizzato end-to-end</h2>
+
+    <p>La vera potenza della Document Intelligence emerge quando l'automazione copre l'intero ciclo passivo, non solo un singolo passaggio. FinCh-Ai implementa una <strong>state machine a sei stati</strong> che guida ogni documento dalla ricezione al trasferimento nel gestionale, con controlli e validazioni ad ogni passaggio.</p>
+
+    <h3>Le sei fasi del ciclo</h3>
+
+    <ol>
+      <li><strong>Ricezione e caricamento</strong> — La fattura arriva via email, upload manuale o integrazione API. Il sistema la accetta in qualsiasi formato: PDF, immagine, XML. Lo stato iniziale è <code>IN_ELABORAZIONE</code>.</li>
+      <li><strong>Estrazione AI</strong> — Document Intelligence analizza il documento in modo asincrono tramite Celery. Vengono estratti tutti i campi configurati: ragione sociale fornitore, partita IVA, numero fattura, data, importi, righe dettaglio, codici IVA. I dati vengono mappati sui campi configurati per quel tenant.</li>
+      <li><strong>Classificazione automatica</strong> — Il sistema determina la tipologia documentale (fattura, nota di credito, autofattura) e applica le regole di validazione corrispondenti. Se mancano campi obbligatori, lo stato passa a <code>INCOMPLETO</code>.</li>
+      <li><strong>Verifica e completamento</strong> — I documenti con tutti i dati estratti correttamente passano allo stato <code>DA_VERIFICARE</code>. Un operatore può controllare i risultati, correggere eventuali imprecisioni e confermare. I documenti incompleti possono essere completati manualmente.</li>
+      <li><strong>Validazione finale</strong> — Una volta confermati, i documenti passano a <code>VERIFICATO</code>. Il sistema controlla che tutti i campi obbligatori siano presenti e coerenti prima di consentire la transizione.</li>
+      <li><strong>Trasferimento al gestionale</strong> — Lo stato finale <code>TRASFERITO</code> indica che i dati sono stati inviati al sistema contabile tramite webhook o API. Ogni passaggio viene registrato in un audit trail completo.</li>
+    </ol>
+
+    <table>
+      <thead>
+        <tr><th>Aspetto</th><th>Processo manuale</th><th>Con FinCh-Ai</th></tr>
+      </thead>
+      <tbody>
+        <tr><td>Tempo per fattura</td><td>15-30 minuti</td><td>30-60 secondi</td></tr>
+        <tr><td>Tasso di errore</td><td>1-3% data entry<sup class="cite-ref"><a href="#ref-2" id="cite-2b">[2]</a></sup></td><td>&lt;0,5%</td></tr>
+        <tr><td>Tracciabilità</td><td>Limitata</td><td>Audit trail completo</td></tr>
+        <tr><td>Scalabilità</td><td>Lineare (più persone)</td><td>Elastica (stessa infrastruttura)</td></tr>
+      </tbody>
+    </table>
+
+    <!-- SECTION 4 -->
+    <h2 id="section-4">Vantaggi concreti per le PMI italiane</h2>
+
+    <p>Per le PMI italiane, dove il 70,2% ha raggiunto almeno un livello base di digitalizzazione nel 2024<sup class="cite-ref"><a href="#ref-3" id="cite-3b">[3]</a></sup> ma l'adozione dell'AI resta ancora limitata — solo il 21,9% delle imprese la utilizza nel 2025<sup class="cite-ref"><a href="#ref-6" id="cite-6">[6]</a></sup> — la Document Intelligence rappresenta un punto d'ingresso concreto e ad alto impatto nell'intelligenza artificiale.</p>
+
+    <h3>Riduzione dei costi operativi</h3>
+
+    <p>L'automazione dell'elaborazione fatture può ridurre i costi di processing fino all'80-90%, passando da 14-20 euro per fattura a pochi centesimi<sup class="cite-ref"><a href="#ref-1" id="cite-1b">[1]</a></sup>. Per un'azienda che gestisce 500 fatture passive al mese, il risparmio annuale può superare i 100.000 euro solo in termini di tempo-persona.</p>
+
+    <h3>Eliminazione degli errori di data entry</h3>
+
+    <p>I sistemi automatizzati raggiungono tassi di errore tra lo 0,1% e lo 0,5%, contro l'1-3% del data entry manuale<sup class="cite-ref"><a href="#ref-2" id="cite-2c">[2]</a></sup>. Meno errori significa meno contestazioni con i fornitori, meno ritardi nei pagamenti e un ciclo passivo più fluido.</p>
+
+    <h3>Multi-tenancy e isolamento dati</h3>
+
+    <p>FinCh-Ai è progettata come piattaforma SaaS multi-tenant con isolamento dei dati a livello di schema PostgreSQL. Ogni azienda opera nel proprio spazio isolato, con configurazioni, modelli AI e regole di business personalizzate. Questo approccio garantisce sicurezza, privacy e la possibilità di adattare il sistema alle specifiche esigenze di ogni organizzazione.</p>
+
+    <h3>Compliance e tracciabilità</h3>
+
+    <p>Ogni transizione di stato viene registrata nella <code>DocumentHistory</code>, creando un audit trail completo che soddisfa i requisiti di tracciabilità richiesti dalla normativa italiana. I webhook notificano in tempo reale i sistemi esterni ad ogni cambio di stato, mantenendo sincronizzata l'intera catena contabile.</p>
+
+    <div class="info-box">
+      <div class="info-box-title">&#x1F4A1; Piani flessibili per ogni dimensione</div>
+      <p>FinCh-Ai offre piani a consumo basati sul numero di pagine elaborate mensilmente, dal piano Demo gratuito per testare la piattaforma, fino al piano Enterprise per volumi elevati. I template aggiuntivi per nuove tipologie documentali possono essere acquistati come addon, senza vincoli di piano.</p>
+    </div>
+
+    <!-- SECTION 5 -->
+    <h2 id="section-5">Il futuro: dall'automazione all'intelligenza predittiva</h2>
+
+    <p>L'automazione delle fatture passive è solo l'inizio. La direzione è chiara: dal processing reattivo all'intelligenza predittiva. I sistemi di Document Intelligence stanno evolvendo verso la capacità di anticipare anomalie, identificare pattern di spesa, segnalare variazioni nei prezzi dei fornitori prima ancora che l'operatore apra il documento.</p>
+
+    <p>A livello europeo, l'iniziativa ViDA (VAT in the Digital Age) della Commissione Europea punta ad estendere la fatturazione elettronica obbligatoria alle transazioni intracomunitarie<sup class="cite-ref"><a href="#ref-7" id="cite-7">[7]</a></sup>. Questo significa che il volume di documenti digitali da elaborare crescerà in modo significativo, rendendo l'automazione non più un'opzione ma una necessità operativa.</p>
+
+    <p>Il mercato ICT italiano, che nel 2025 ha raggiunto i 44,3 miliardi di euro con una crescita del 4,5%<sup class="cite-ref"><a href="#ref-8" id="cite-8">[8]</a></sup>, segnala un ecosistema pronto per questa evoluzione. Le PMI che adottano oggi la Document Intelligence non stanno solo risolvendo un problema operativo: stanno costruendo le fondamenta per una gestione finanziaria data-driven, dove ogni fattura diventa un dato strutturato che alimenta analisi, previsioni e decisioni strategiche.</p>
+
+    <blockquote><p>Il futuro della contabilità passiva non è fare le stesse cose più velocemente. È trasformare documenti in intelligence aziendale.</p></blockquote>
+
+    <hr>
+
+    <p>La gestione delle fatture passive è stata per troppo tempo un'attività a basso valore percepito e alto costo reale. La Document Intelligence cambia radicalmente questa equazione, liberando tempo, riducendo errori e trasformando un processo burocratico in un flusso automatizzato e intelligente. Per le PMI italiane, che già operano in un contesto normativo favorevole alla digitalizzazione, il momento di fare questo salto è adesso.</p>
+
+    <!-- ===== REFERENCES SECTION ===== -->
+    <section class="references-section" id="references">
+      <h2>&#x1F4DA; Fonti e Riferimenti</h2>
+      <ol class="references-list">
+        <li id="ref-1">
+          <span class="ref-title">"Controllare i costi: perché automatizzare la gestione documentale e precontabile"</span>,
+          <span class="ref-source">Azopio Blog</span>,
+          <span class="ref-date">2025</span>.
+          <a href="https://blog.azopio.com/it/controllare-i-costi-in-un-periodo-di-inflazione-perche-automatizzare-la-gestione-documentale-e-precontabile/" target="_blank" rel="noopener">Link &#x2197;</a>
+          <a href="#cite-1" class="ref-backlink" title="Torna al testo">&#x21A9;</a>
+        </li>
+        <li id="ref-2">
+          <span class="ref-title">"AP Automation Statistics for 2025"</span>,
+          <span class="ref-source">Quadient</span>,
+          <span class="ref-date">2025</span>.
+          <a href="https://www.quadient.com/en/blog/20-accounts-payable-statistics-highlighting-power-ap-automation-2025" target="_blank" rel="noopener">Link &#x2197;</a>
+          <a href="#cite-2" class="ref-backlink" title="Torna al testo">&#x21A9;</a>
+        </li>
+        <li id="ref-3">
+          <span class="ref-title">"Imprese e ICT — Anno 2024"</span>,
+          <span class="ref-source">ISTAT</span>,
+          <span class="ref-date">Dicembre 2025</span>.
+          <a href="https://www.istat.it/wp-content/uploads/2025/12/Statreport_ICT2025.pdf" target="_blank" rel="noopener">Link &#x2197;</a>
+          <a href="#cite-3" class="ref-backlink" title="Torna al testo">&#x21A9;</a>
+        </li>
+        <li id="ref-4">
+          <span class="ref-title">"Intelligent Document Processing (IDP) Market Size to Hit USD 43.92 Billion by 2034"</span>,
+          <span class="ref-source">Precedence Research</span>,
+          <span class="ref-date">2025</span>.
+          <a href="https://www.precedenceresearch.com/intelligent-document-processing-market" target="_blank" rel="noopener">Link &#x2197;</a>
+          <a href="#cite-4" class="ref-backlink" title="Torna al testo">&#x21A9;</a>
+        </li>
+        <li id="ref-5">
+          <span class="ref-title">"Invoice data extraction — Document Intelligence"</span>,
+          <span class="ref-source">Microsoft Learn</span>,
+          <span class="ref-date">2025</span>.
+          <a href="https://learn.microsoft.com/en-us/azure/ai-services/document-intelligence/prebuilt/invoice?view=doc-intel-4.0.0" target="_blank" rel="noopener">Link &#x2197;</a>
+          <a href="#cite-5" class="ref-backlink" title="Torna al testo">&#x21A9;</a>
+        </li>
+        <li id="ref-6">
+          <span class="ref-title">"ISTAT Imprese: boom di digitalizzazione e IA"</span>,
+          <span class="ref-source">Namirial Focus</span>,
+          <span class="ref-date">2025</span>.
+          <a href="https://focus.namirial.com/it/istat-imprese/" target="_blank" rel="noopener">Link &#x2197;</a>
+          <a href="#cite-6" class="ref-backlink" title="Torna al testo">&#x21A9;</a>
+        </li>
+        <li id="ref-7">
+          <span class="ref-title">"VAT Gap Report 2025: la riscossa del fisco digitale e il successo del sistema IOSS"</span>,
+          <span class="ref-source">Linea eCommerce</span>,
+          <span class="ref-date">2025</span>.
+          <a href="https://www.lineaecommerce.it/vat-gap-report-ecommerce-ue-2025-risultati-ioss-6765.html" target="_blank" rel="noopener">Link &#x2197;</a>
+          <a href="#cite-7" class="ref-backlink" title="Torna al testo">&#x21A9;</a>
+        </li>
+        <li id="ref-8">
+          <span class="ref-title">"Il mercato del digitale continua a crescere nel 2025: servizi e AI trainano la spesa"</span>,
+          <span class="ref-source">Innovation Post</span>,
+          <span class="ref-date">2025</span>.
+          <a href="https://www.innovationpost.it/attualita/mercati/il-mercato-del-digitale-continua-a-crescere-nel-2025-servizi-e-ai-trainano-la-spesa/" target="_blank" rel="noopener">Link &#x2197;</a>
+          <a href="#cite-8" class="ref-backlink" title="Torna al testo">&#x21A9;</a>
+        </li>
+      </ol>
+    </section>
+
+    <!-- ===== CTA SECTION ===== -->
+    <div class="article-cta">
+      <h3>Vuoi automatizzare le tue fatture passive?</h3>
+      <p>Scopri come FinCh-Ai può trasformare il ciclo passivo della tua azienda con l'intelligenza artificiale. Richiedi una demo gratuita e vedi i risultati sui tuoi documenti reali.</p>
+      <a href="https://www.finch-ai.it/#contatti" class="cta-button">Richiedi Demo Gratuita</a>
+    </div>
+
+    <!-- ===== AUTHOR & SHARE ===== -->
+    <div class="article-footer-meta">
+      <div class="author-info">
+        <div class="author-avatar">FA</div>
+        <div>
+          <div class="author-name">FinCh-Ai</div>
+          <div class="author-role">AI Enterprise per PMI Italiane</div>
+        </div>
+      </div>
+      <div class="share-links">
+        <span class="share-label">Condividi:</span>
+        <a href="https://www.linkedin.com/sharing/share-offsite/?url=https://www.finch-ai.it/blog/ai-fatture-passive-document-intelligence-pmi" class="share-btn" target="_blank" rel="noopener" title="Condividi su LinkedIn">in</a>
+        <a href="https://twitter.com/intent/tweet?url=https://www.finch-ai.it/blog/ai-fatture-passive-document-intelligence-pmi&text=AI%20per%20Fatture%20Passive%3A%20Come%20la%20Document%20Intelligence%20Automatizza%20il%20Ciclo%20Passivo%20delle%20PMI" class="share-btn" target="_blank" rel="noopener" title="Condividi su X">&#x1D54F;</a>
+        <a href="mailto:?subject=AI%20per%20Fatture%20Passive%3A%20Come%20la%20Document%20Intelligence%20Automatizza%20il%20Ciclo%20Passivo%20delle%20PMI&body=https://www.finch-ai.it/blog/ai-fatture-passive-document-intelligence-pmi" class="share-btn" title="Invia via email">&#x2709;</a>
+      </div>
+    </div>
+
+  </article>
+
+  <!-- ===== FOOTER ===== -->
+  <footer class="site-footer">
+    <div class="footer-inner">
+      <div class="footer-brand">
+        <a href="https://www.finch-ai.it" class="logo">
+          <div class="logo-icon">&#x1F426;</div>
+          Finch<span>-Ai</span>
+        </a>
+        <p>Soluzioni AI su misura per le PMI italiane. Automatizza i processi, riduci i costi, accelera la crescita.</p>
+      </div>
+      <div class="footer-column">
+        <h4>Soluzioni</h4>
+        <ul>
+          <li><a href="https://www.finch-ai.it/#soluzioni">Automazione DDT</a></li>
+          <li><a href="https://www.finch-ai.it/#soluzioni">Analisi Finanziaria AI</a></li>
+          <li><a href="https://www.finch-ai.it/#soluzioni">Document Intelligence</a></li>
+        </ul>
+      </div>
+      <div class="footer-column">
+        <h4>Azienda</h4>
+        <ul>
+          <li><a href="https://www.finch-ai.it/blog">Blog</a></li>
+          <li><a href="https://www.finch-ai.it/#contatti">Contatti</a></li>
+          <li><a href="https://www.finch-ai.it/privacy">Privacy Policy</a></li>
+        </ul>
+      </div>
+    </div>
+    <div class="footer-bottom">
+      <span>&copy; 2026 FinCh-Ai. Tutti i diritti riservati.</span>
+      <span><a href="https://www.finch-ai.it/privacy">Privacy</a> &middot; <a href="https://www.finch-ai.it/cookie">Cookie Policy</a></span>
+    </div>
+  </footer>
+
+</body>
+</html>

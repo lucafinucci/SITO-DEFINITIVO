@@ -30,6 +30,7 @@ export default function Navbar() {
         { label: "AI per Studi Professionali", href: "/blog/intelligenza-artificiale-studi-professionali" },
         { label: "AI per Imprenditori e Commercialisti", href: "/blog/intelligenza-artificiale-imprenditori-commercialisti" },
         { label: "Automazione Documentale con Document Intelligence", href: "/blog/document-intelligence-automazione-ddt-bolle-consegna" },
+        { label: "AI per Fatture Passive", href: "/blog/ai-fatture-passive-document-intelligence-pmi" },
       ]
     },
     { id: "contatti", label: "Demo", href: "/#contatti" },
@@ -67,6 +68,12 @@ export default function Navbar() {
     return () => document.removeEventListener("mousedown", handleClickOutside);
   }, []);
 
+  // Automatically close mobile menu and dropdowns on route change
+  useEffect(() => {
+    setMobileMenuOpen(false);
+    setActiveDropdown(null);
+  }, [location.pathname]);
+
   const toggleDropdown = (id) => {
     setActiveDropdown((prev) => (prev === id ? null : id));
   };
@@ -83,9 +90,10 @@ export default function Navbar() {
   };
 
   const handleLinkClick = (id) => {
-    setMobileMenuOpen(false);
-    setActiveDropdown(null);
+    // If it's a section on the same page
     if (id) {
+      setMobileMenuOpen(false);
+      setActiveDropdown(null);
       setActiveSection(id);
       setTimeout(() => {
         const el = document.getElementById(id);
@@ -236,27 +244,26 @@ export default function Navbar() {
             {navItems.map((item) => (
               <div key={item.id} className="space-y-1">
                 {item.dropdown ? (
-                  <button
-                    onClick={() => {
-                      toggleDropdown(item.id);
-                      if (isHomePage && item.id === "moduli") {
-                        handleLinkClick(item.id);
-                      }
-                    }}
-                    className={`w-full flex items-center justify-between px-4 py-3 rounded-lg text-base font-medium transition-all ${activeDropdown === item.id
+                  <div
+                    onClick={() => toggleDropdown(item.id)}
+                    className={`w-full flex items-center justify-between px-4 py-3 rounded-lg text-base font-medium transition-all cursor-pointer ${activeDropdown === item.id
                       ? "bg-primary/10 text-primary border border-primary/30"
                       : "text-muted-foreground hover:text-foreground hover:bg-muted/50"
                       }`}
                   >
-                    {item.label}
+                    <span>{item.label}</span>
                     <svg className={`h-5 w-5 transition-transform ${activeDropdown === item.id ? "rotate-180" : ""}`} viewBox="0 0 20 20" fill="currentColor">
                       <path fillRule="evenodd" d="M5.293 7.293a1 1 0 011.414 0L10 10.586l3.293-3.293a1 1 0 111.414 1.414l-4 4a1 1 0 01-1.414 0l-4-4a1 1 0 010-1.414z" clipRule="evenodd" />
                     </svg>
-                  </button>
+                  </div>
                 ) : (
                   <Link
                     to={item.href}
-                    onClick={() => handleLinkClick(item.id)}
+                    onClick={() => {
+                      if (isHomePage) {
+                        handleLinkClick(item.id);
+                      }
+                    }}
                     className={`flex items-center px-4 py-3 rounded-lg text-base font-medium transition-all ${isHomePage && activeSection === item.id
                       ? "bg-primary/10 text-primary border border-primary/30"
                       : "text-muted-foreground hover:text-foreground hover:bg-muted/50"
@@ -288,7 +295,6 @@ export default function Navbar() {
                         <Link
                           key={sub.label}
                           to={sub.href}
-                          onClick={() => handleLinkClick(null)}
                           className="block px-4 py-2 rounded-lg text-sm text-muted-foreground hover:text-primary hover:bg-primary/5 transition-colors"
                         >
                           {sub.label}
