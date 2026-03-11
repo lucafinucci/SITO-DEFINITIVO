@@ -9,6 +9,7 @@ export default function Navbar() {
   const location = useLocation();
   const isHomePage = location.pathname === "/";
   const navRef = useRef(null);
+  const mobileMenuRef = useRef(null);
   const timeoutRef = useRef(null);
 
   const navItems = [
@@ -60,7 +61,9 @@ export default function Navbar() {
   // Close dropdown on click outside
   useEffect(() => {
     const handleClickOutside = (e) => {
-      if (navRef.current && !navRef.current.contains(e.target)) {
+      const inNav = navRef.current && navRef.current.contains(e.target);
+      const inMobileMenu = mobileMenuRef.current && mobileMenuRef.current.contains(e.target);
+      if (!inNav && !inMobileMenu) {
         setActiveDropdown(null);
       }
     };
@@ -90,15 +93,16 @@ export default function Navbar() {
   };
 
   const handleLinkClick = (id) => {
-    // If it's a section on the same page
+    setMobileMenuOpen(false);
+    setActiveDropdown(null);
     if (id) {
-      setMobileMenuOpen(false);
-      setActiveDropdown(null);
       setActiveSection(id);
       setTimeout(() => {
         const el = document.getElementById(id);
         if (el) el.scrollIntoView({ behavior: "smooth" });
       }, 50);
+    } else {
+      window.scrollTo(0, 0);
     }
   };
 
@@ -239,7 +243,7 @@ export default function Navbar() {
 
       {/* Mobile Menu */}
       {mobileMenuOpen && (
-        <div className="md:hidden fixed inset-x-0 top-[80px] z-40 border-b border-border/50 bg-background/95 backdrop-blur-xl">
+        <div ref={mobileMenuRef} className="md:hidden fixed inset-x-0 top-[80px] z-40 border-b border-border/50 bg-background/95 backdrop-blur-xl">
           <div className="mx-auto max-w-7xl px-4 py-4 space-y-2">
             {navItems.map((item) => (
               <div key={item.id} className="space-y-1">
@@ -259,11 +263,7 @@ export default function Navbar() {
                 ) : (
                   <Link
                     to={item.href}
-                    onClick={() => {
-                      if (isHomePage) {
-                        handleLinkClick(item.id);
-                      }
-                    }}
+                    onClick={() => handleLinkClick(item.id)}
                     className={`flex items-center px-4 py-3 rounded-lg text-base font-medium transition-all ${isHomePage && activeSection === item.id
                       ? "bg-primary/10 text-primary border border-primary/30"
                       : "text-muted-foreground hover:text-foreground hover:bg-muted/50"
@@ -295,6 +295,7 @@ export default function Navbar() {
                         <Link
                           key={sub.label}
                           to={sub.href}
+                          onClick={() => handleLinkClick(null)}
                           className="block px-4 py-2 rounded-lg text-sm text-muted-foreground hover:text-primary hover:bg-primary/5 transition-colors"
                         >
                           {sub.label}
