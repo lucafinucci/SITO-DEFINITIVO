@@ -32,6 +32,7 @@ export default function Navbar() {
         { label: "AI per Imprenditori e Commercialisti", href: "/blog/intelligenza-artificiale-imprenditori-commercialisti" },
         { label: "Automazione Documentale con Document Intelligence", href: "/blog/document-intelligence-automazione-ddt-bolle-consegna" },
         { label: "AI per Fatture Passive", href: "/blog/ai-fatture-passive-document-intelligence-pmi" },
+        { label: "AI e Analisi Dati per PMI", href: "/blog/ai-analisi-dati-pmi-excel-access" },
       ]
     },
     { id: "contatti", label: "Demo", href: "/#contatti" },
