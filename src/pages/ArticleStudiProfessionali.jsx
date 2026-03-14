@@ -79,8 +79,8 @@ export default function ArticleStudiProfessionali() {
                 </div>
             ) : (
                 <>
-                    {/* Article Hero - Identical to reference article */}
-                    <div className="relative overflow-hidden border-b border-border/40 bg-[#F4F8FA] dark:bg-[#0b1220]">
+                    {/* Article Hero */}
+                    <div className="relative overflow-hidden border-b border-border/40">
                         <div className="pointer-events-none absolute inset-0 bg-gradient-to-br from-teal-500/10 via-transparent to-emerald-500/5" />
                         <div className="relative mx-auto max-w-3xl px-4 py-14 sm:py-20 text-center">
                             <span className="mb-5 inline-block rounded-full border border-teal-500/30 bg-teal-500/10 px-3 py-1 text-xs font-semibold uppercase tracking-widest text-teal-500 dark:text-teal-400">
@@ -99,14 +99,29 @@ export default function ArticleStudiProfessionali() {
                     </div>
 
                     {/* Article Content */}
-                    <div className="bg-[#F4F8FA] dark:bg-[#0b1220] pb-12">
-                        <style>{`
-              ${articleStyles}
-              /* neutralize the negative overlap margin designed for the old hero */
-              article { margin-top: 2rem !important; }
-            `}</style>
-                        <div dangerouslySetInnerHTML={{ __html: bodyHtml }} />
-                    </div>
+                    <style>{`
+                      ${articleStyles}
+                      article { max-width: 780px !important; margin: 2rem auto 3rem !important; padding: 2.8rem 2.8rem 3.2rem !important; background: #FFFFFF !important; border-radius: 12px !important; box-shadow: 0 4px 30px rgba(4,142,227,0.08) !important; position: relative !important; z-index: 1 !important; }
+                      @media (max-width: 640px) { article { padding: 1.5rem 1.2rem 2rem !important; margin: 1rem 0.8rem 2rem !important; } }
+                      html.dark article { background: #111f30 !important; box-shadow: 0 4px 30px rgba(0,0,0,0.3) !important; color: #e2e8f0 !important; }
+                      html.dark p { color: #cbd5e1 !important; }
+                      html.dark h2 { color: #e2e8f0 !important; }
+                      html.dark h3 { color: #67e8f9 !important; }
+                      html.dark .toc { background: linear-gradient(135deg, #0f1d2e 0%, #0a1a1a 100%) !important; }
+                      html.dark .toc a, html.dark .toc ol li a { color: #cbd5e1 !important; }
+                      html.dark .toc a:hover, html.dark .toc ol li a:hover { color: #67e8f9 !important; }
+                      html.dark .highlight-box, html.dark blockquote { background: linear-gradient(135deg, #0f1d2e 0%, #0a1a1a 100%) !important; color: #e2e8f0 !important; }
+                      html.dark .highlight-box p, html.dark blockquote p { color: #cbd5e1 !important; }
+                      html.dark .cta, html.dark .article-cta { background: linear-gradient(135deg, #0f1d2e 0%, #0a1a1a 100%) !important; color: #e2e8f0 !important; }
+                      html.dark .cta p, html.dark .article-cta p { color: #cbd5e1 !important; }
+                      html.dark .references, html.dark .references-section { border-top-color: #1e3a5f !important; }
+                      html.dark .references ol li, html.dark .references-section ol li { border-bottom-color: #1e3a5f !important; color: #94a3b8 !important; }
+                      html.dark .references .ref-title, html.dark .references-section .ref-title { color: #cbd5e1 !important; }
+                      html.dark ul li::before { background: linear-gradient(135deg, #0284c7 0%, #22d3ee 100%) !important; }
+                      html.dark ul li strong, html.dark ol.steps li strong { color: #67e8f9 !important; }
+                      html.dark strong { color: #67e8f9 !important; }
+                    `}</style>
+                    <div dangerouslySetInnerHTML={{ __html: bodyHtml }} />
                 </>
             )}
         </Layout>

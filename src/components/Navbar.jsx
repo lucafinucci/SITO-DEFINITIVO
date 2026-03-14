@@ -33,6 +33,8 @@ export default function Navbar() {
         { label: "Automazione Documentale con Document Intelligence", href: "/blog/document-intelligence-automazione-ddt-bolle-consegna" },
         { label: "AI per Fatture Passive", href: "/blog/ai-fatture-passive-document-intelligence-pmi" },
         { label: "AI e Analisi Dati per PMI", href: "/blog/ai-analisi-dati-pmi-excel-access" },
+        { label: "Analisi Finanziaria in 5 Minuti con AI", href: "/blog/analisi-finanziaria-5-minuti-pmi-finch-ai" },
+        { label: "PMI Italiane e il Gap Europeo sull'AI", href: "/blog/pmi-italiane-intelligenza-artificiale-gap-europeo" },
       ]
     },
     { id: "contatti", label: "Demo", href: "/#contatti" },

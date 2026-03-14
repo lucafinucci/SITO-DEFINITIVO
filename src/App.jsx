@@ -8,6 +8,8 @@ import ArticleDocumentIntelligenceDDT from "@/pages/ArticleDocumentIntelligenceD
 import ArticleStudiProfessionali from "@/pages/ArticleStudiProfessionali";
 import ArticleAIFatturePassive from "@/pages/ArticleAIFatturePassive";
 import ArticleAIAnalisiDati from "@/pages/ArticleAIAnalisiDati";
+import ArticleAnalisiFinanziaria5Min from "@/pages/ArticleAnalisiFinanziaria5Min";
+import ArticlePMIGapEuropeo from "@/pages/ArticlePMIGapEuropeo";
 
 export default function App() {
   return (
@@ -21,6 +23,8 @@ export default function App() {
       <Route path="/blog/intelligenza-artificiale-studi-professionali" element={<ArticleStudiProfessionali />} />
       <Route path="/blog/ai-fatture-passive-document-intelligence-pmi" element={<ArticleAIFatturePassive />} />
       <Route path="/blog/ai-analisi-dati-pmi-excel-access" element={<ArticleAIAnalisiDati />} />
+      <Route path="/blog/analisi-finanziaria-5-minuti-pmi-finch-ai" element={<ArticleAnalisiFinanziaria5Min />} />
+      <Route path="/blog/pmi-italiane-intelligenza-artificiale-gap-europeo" element={<ArticlePMIGapEuropeo />} />
     </Routes>
   );
 }
