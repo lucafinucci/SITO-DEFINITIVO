@@ -64,4 +64,18 @@
     <priority>0.7</priority>
   </url>
 
+  <url>
+    <loc>https://finch-ai.it/blog/ai-fatture-passive-document-intelligence-pmi</loc>
+    <lastmod>2026-03-10</lastmod>
+    <changefreq>monthly</changefreq>
+    <priority>0.7</priority>
+  </url>
+
+  <url>
+    <loc>https://finch-ai.it/blog/ai-analisi-dati-pmi-excel-access</loc>
+    <lastmod>2026-03-12</lastmod>
+    <changefreq>monthly</changefreq>
+    <priority>0.7</priority>
+  </url>
+
 </urlset>
