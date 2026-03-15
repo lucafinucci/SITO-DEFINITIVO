@@ -25,6 +25,7 @@ import {
   MapPin,
   Linkedin,
   Instagram,
+  Youtube,
   BarChart3,
   Target,
   Globe,
@@ -768,7 +769,7 @@ export default function FinchAIMockupV2() {
                 {[["Privacy Policy","/privacy-policy.html"],["Cookie Policy","/cookie-policy.html"],["Note Legali","/note-legali.html"]].map(([l,h])=>(
                   <a key={l} href={h} className={`text-xs transition hover:opacity-100 ${txtMute}`}>{l}</a>
                 ))}
-                {[{Icon:Linkedin,href:"https://www.linkedin.com/company/finch-ai"},{Icon:Instagram,href:"https://www.instagram.com/finch_ai_it"}].map(({Icon,href})=>(
+                {[{Icon:Linkedin,href:"https://www.linkedin.com/company/finch-ai"},{Icon:Instagram,href:"https://www.instagram.com/finch_ai_it"},{Icon:Youtube,href:"https://www.youtube.com/@Finch-AI"}].map(({Icon,href})=>(
                   <a key={href} href={href} target="_blank" rel="noopener noreferrer"
                     className={`flex h-8 w-8 items-center justify-center rounded-lg border transition ${
                       D?"border-white/[0.08] text-slate-500 hover:border-white/20 hover:text-slate-300"
