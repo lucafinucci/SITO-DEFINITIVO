@@ -10,6 +10,7 @@ import ArticleAIFatturePassive from "@/pages/ArticleAIFatturePassive";
 import ArticleAIAnalisiDati from "@/pages/ArticleAIAnalisiDati";
 import ArticleAnalisiFinanziaria5Min from "@/pages/ArticleAnalisiFinanziaria5Min";
 import ArticlePMIGapEuropeo from "@/pages/ArticlePMIGapEuropeo";
+import ArticleAIHumanCentered from "@/pages/ArticleAIHumanCentered";
 
 export default function App() {
   return (
@@ -25,6 +26,7 @@ export default function App() {
       <Route path="/blog/ai-analisi-dati-pmi-excel-access" element={<ArticleAIAnalisiDati />} />
       <Route path="/blog/analisi-finanziaria-5-minuti-pmi-finch-ai" element={<ArticleAnalisiFinanziaria5Min />} />
       <Route path="/blog/pmi-italiane-intelligenza-artificiale-gap-europeo" element={<ArticlePMIGapEuropeo />} />
+      <Route path="/blog/ai-human-centered-potenziare-persone-non-sostituirle" element={<ArticleAIHumanCentered />} />
     </Routes>
   );
 }
