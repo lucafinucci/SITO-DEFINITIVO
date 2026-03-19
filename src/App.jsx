@@ -11,6 +11,7 @@ import ArticleAIAnalisiDati from "@/pages/ArticleAIAnalisiDati";
 import ArticleAnalisiFinanziaria5Min from "@/pages/ArticleAnalisiFinanziaria5Min";
 import ArticlePMIGapEuropeo from "@/pages/ArticlePMIGapEuropeo";
 import ArticleAIHumanCentered from "@/pages/ArticleAIHumanCentered";
+import Blog from "@/pages/Blog";
 
 export default function App() {
   return (
@@ -19,6 +20,7 @@ export default function App() {
       <Route path="/area-clienti/*" element={<AreaClienti />} />
       <Route path="/soluzioni/document-intelligence" element={<DocumentIntelligence />} />
       <Route path="/soluzioni/finance-intelligence" element={<FinanceIntelligence />} />
+      <Route path="/blog" element={<Blog />} />
       <Route path="/blog/intelligenza-artificiale-imprenditori-commercialisti" element={<ArticleAIImprenditori />} />
       <Route path="/blog/document-intelligence-automazione-ddt-bolle-consegna" element={<ArticleDocumentIntelligenceDDT />} />
       <Route path="/blog/intelligenza-artificiale-studi-professionali" element={<ArticleStudiProfessionali />} />

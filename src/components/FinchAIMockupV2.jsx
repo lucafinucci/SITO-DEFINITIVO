@@ -1,6 +1,7 @@
 import { useState } from "react";
 import SEO from "./SEO";
 import Navbar from "./Navbar";
+import NewsFeed from "./NewsFeed";
 import { useTheme } from "../context/ThemeContext";
 import {
   FileText,
@@ -351,6 +352,8 @@ export default function FinchAIMockupV2() {
             </div>
           </div>
         </section>
+
+        <NewsFeed />
 
         {/* ══════════════════════════════════════════════════════════════════
             TRUST BAR

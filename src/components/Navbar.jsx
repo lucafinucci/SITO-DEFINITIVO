@@ -24,20 +24,7 @@ export default function Navbar() {
         { label: "Warehouse Intelligence", disabled: true },
       ]
     },
-    {
-      id: "articoli",
-      label: "Articoli",
-      dropdown: [
-        { label: "AI per Studi Professionali", href: "/blog/intelligenza-artificiale-studi-professionali" },
-        { label: "AI per Imprenditori e Commercialisti", href: "/blog/intelligenza-artificiale-imprenditori-commercialisti" },
-        { label: "Automazione Documentale con Document Intelligence", href: "/blog/document-intelligence-automazione-ddt-bolle-consegna" },
-        { label: "AI per Fatture Passive", href: "/blog/ai-fatture-passive-document-intelligence-pmi" },
-        { label: "AI e Analisi Dati per PMI", href: "/blog/ai-analisi-dati-pmi-excel-access" },
-        { label: "Analisi Finanziaria in 5 Minuti con AI", href: "/blog/analisi-finanziaria-5-minuti-pmi-finch-ai" },
-        { label: "PMI Italiane e il Gap Europeo sull'AI", href: "/blog/pmi-italiane-intelligenza-artificiale-gap-europeo" },
-        { label: "AI Human-Centered: Potenziare le Persone", href: "/blog/ai-human-centered-potenziare-persone-non-sostituirle" },
-      ]
-    },
+    { id: "blog", label: "Blog", href: "/blog" },
     { id: "contatti", label: "Demo", href: "/#contatti" },
     { id: "area-clienti", label: "Area Clienti", href: "/area-clienti" },
   ];

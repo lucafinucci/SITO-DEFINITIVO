@@ -1,5 +1,6 @@
 import { motion } from 'framer-motion';
 import { Link } from 'react-router-dom';
+import NewsFeed from './NewsFeed';
 
 // Definiamo le varianti per le animazioni per riutilizzarle
 const containerVariants = {
@@ -40,6 +41,8 @@ function Home() {
                     </div>
                 </motion.div>
             </motion.section>
+
+            <NewsFeed />
 
             <motion.section className="ai-solutions" initial="hidden" whileInView="visible" viewport={{ once: true, amount: 0.3 }} variants={containerVariants}>
                 <motion.h2 className="section-title" variants={itemVariants}>Le Nostre Soluzioni AI</motion.h2>
