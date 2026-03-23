@@ -70,5 +70,14 @@ export const blogArticles = [
     date: "17 Marzo 2026",
     readTime: "10 min",
     category: "Tecnologia ed Etica"
+  },
+  {
+    id: "pmi-dati-silos",
+    title: "Perché molte PMI hanno già un problema di dati, anche se non se ne accorgono",
+    description: "Excel, email, PDF, ERP: i dati ci sono, ma nessuno li vede davvero. Come i silos informativi frenano le decisioni e quanto costa ignorarli.",
+    path: "/blog/pmi-problema-dati-silos-frammentati",
+    date: "21 Marzo 2026",
+    readTime: "8 min",
+    category: "Business Insight"
   }
 ];
