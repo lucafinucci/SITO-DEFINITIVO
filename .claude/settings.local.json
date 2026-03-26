@@ -13,7 +13,8 @@
       "Bash(\"C:\\\\xampp\\\\mysql\\\\bin\\\\mysql.exe\" -u root -h 127.0.0.1 --protocol=TCP finch_ai_clienti -e \"DESCRIBE servizi_quota_uso;\")",
       "Bash(npm install react-helmet-async)",
       "Bash(npm run build)",
-      "Bash(npx skills find \"web site professional\")"
+      "Bash(npx skills find \"web site professional\")",
+      "Bash(npm run:*)"
     ],
     "deny": [],
     "ask": []

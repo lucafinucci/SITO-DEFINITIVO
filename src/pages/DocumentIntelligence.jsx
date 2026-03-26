@@ -1,4 +1,4 @@
-import React, { useEffect } from 'react';
+import React, { useEffect, useState } from 'react';
 import SEO from '../components/SEO';
 import {
     Globe,
@@ -23,14 +23,41 @@ import {
     MapPin,
     LockKeyhole,
     Zap,
-    Link as LinkIcon
+    MessageSquare,
+    Link as LinkIcon,
+    ReceiptText,
+    UserCheck,
+    Truck,
+    Landmark,
+    Package,
+    BadgeMinus,
+    HeartPulse,
+    Users,
+    Smartphone
 } from 'lucide-react';
 import Layout from '../components/Layout';
 
 const DocumentIntelligence = () => {
+    const [plans, setPlans] = useState([]);
+    const [isAnnual, setIsAnnual] = useState(true);
+    const [loading, setLoading] = useState(true);
+
     useEffect(() => {
         window.scrollTo(0, 0);
+        fetchPlans();
     }, []);
+
+    const fetchPlans = async () => {
+        try {
+            const res = await fetch('https://documentintelligence.finch-ai.it/api/subscription-plans/public');
+            const data = await res.json();
+            setPlans(data);
+        } catch (error) {
+            console.error('Errore caricamento piani:', error);
+        } finally {
+            setLoading(false);
+        }
+    };
 
     const docJsonLd = [
         {
@@ -42,9 +69,9 @@ const DocumentIntelligence = () => {
             "operatingSystem": "Web",
             "url": "https://finch-ai.it/soluzioni/document-intelligence",
             "image": "https://finch-ai.it/assets/images/og-image.png",
-            "description": "Automazione AI per la gestione di DDT, fatture, ordini e contratti. Da 11 minuti a 8 secondi per documento. 97% accuratezza OCR, human-in-the-loop, integrazione ERP via API/Webhook.",
+            "description": "Automazione AI per l'estrazione dati da ogni tipo di documento. Pronto in 5 minuti, configurazione automatica. Supporta fatture, ricevute, documenti d'identità e altro. 97% accuratezza, human-in-the-loop, integrazione ERP.",
             "featureList": [
-                "OCR AI per DDT, fatture, ordini, contratti",
+                "OCR AI per fatture, ricevute, documenti d'identità, DDT",
                 "97% di accuratezza nel riconoscimento dati",
                 "Da 11 minuti a 8 secondi per documento",
                 "-75% tempo inserimento dati",
@@ -75,9 +102,9 @@ const DocumentIntelligence = () => {
     return (
         <Layout>
             <SEO
-                title="Document Intelligence | Automazione DDT con AI — Finch-AI"
-                description="Da 11 minuti a 8 secondi per DDT. OCR AI con 97% accuratezza per DDT, fatture, ordini. -75% inserimento dati, integrazione ERP. Human-in-the-loop. Da €49/mese."
-                keywords="automazione DDT AI, software gestione DDT, OCR documenti trasporto, document intelligence PMI, elaborazione bolle consegna automatica, integrazione ERP DDT, OCR fatture ordini, riduzione inserimento dati, digitalizzazione logistica, supply chain automation, human-in-the-loop, API webhook ERP"
+                title="Document Intelligence | Estrazione Dati Automatica con AI — Finch-AI"
+                description="Leggi ogni documento in 8 secondi. AI pronta all'uso in 3 minuti con configurazione automatica. Estrazione dati da fatture, ricevute, ID e DDT con 97% accuratezza. Da €49/mese."
+                keywords="automazione documenti AI, estrazione dati documenti, OCR fatture intelligente, document intelligence PMI, configurazione automatica OCR, riconoscimento documenti identità AI, estrazione dati ricevute, digitalizzazione processi aziendali, human-in-the-loop, API integrazione ERP"
                 canonical="https://finch-ai.it/soluzioni/document-intelligence"
                 jsonLd={docJsonLd}
             />
@@ -90,7 +117,7 @@ const DocumentIntelligence = () => {
                     </div>
 
                     <h1 className="text-3xl sm:text-4xl md:text-6xl font-extrabold leading-tight mb-8 animate-in fade-in slide-in-from-top-6 duration-1000 fill-mode-both">
-                        DDT da gestire ogni giorno.<br />
+                        Documenti da gestire ogni giorno.<br />
                         <span className="relative inline-block">
                             <span className="relative z-10 text-emerald-600 dark:text-emerald-400">FinCh-Ai li legge per te.</span>
                             <span className="absolute bottom-1 left-0 right-0 h-3 bg-emerald-500/10 -z-0 rounded-sm"></span>
@@ -98,21 +125,21 @@ const DocumentIntelligence = () => {
                     </h1>
 
                     <p className="text-lg md:text-xl text-muted-foreground max-w-3xl mx-auto mb-12 animate-in fade-in slide-in-from-top-8 duration-1000 fill-mode-both">
-                        Scannerizzati, caricati, ricevuti via email — ogni DDT va aperto, letto, trascritto. <em className="italic text-foreground">A mano.</em><br />
-                        Document Intelligence riconosce, estrae e verifica i dati automaticamente.
+                        Pronto all'uso in <strong className="text-emerald-600 dark:text-emerald-400">3 minuti</strong>. Configurazione quasi interamente automatica, immediata anche per i non esperti.<br />
+                        Document Intelligence riconosce, estrae e verifica i dati da ogni tipo di documento automaticamente.
                     </p>
 
                     <div className="flex flex-wrap justify-center gap-3 sm:gap-6 animate-in fade-in slide-in-from-top-10 duration-1000 fill-mode-both">
                         {[
                             { label: "Tempo risparmiato sull'inserimento dati", value: "-75%" },
-                            { label: "Velocità in più nella lavorazione DDT", value: "90%" },
+                            { label: "Velocità in più nella lavorazione Documenti", value: "90%" },
                             { label: "Elaborazione automatica continua", value: "24/7" }
                         ].map((stat, i) => (
                             <div key={i} className="bg-card border border-border rounded-2xl p-4 sm:p-6 shadow-sm flex items-center gap-4 min-w-[160px] sm:min-w-[240px]">
                                 <span className="text-3xl font-bold text-emerald-600 dark:text-emerald-400">{stat.value}</span>
                                 <span className="text-left text-xs text-muted-foreground leading-tight">
-                                    <strong className="text-foreground">{stat.label.split(' ')[0] + ' ' + stat.label.split(' ')[1]}</strong><br />
-                                    {stat.label.split(' ').slice(2).join(' ')}
+                                    <strong className="text-foreground">{stat.label.split(' ')[0] + ' ' + (stat.label.includes('DDT') ? 'Lavorazione' : stat.label.split(' ')[1])}</strong><br />
+                                    {stat.label.includes('DDT') ? 'Documenti' : stat.label.split(' ').slice(2).join(' ')}
                                 </span>
                             </div>
                         ))}
@@ -125,16 +152,16 @@ const DocumentIntelligence = () => {
                         <div className="absolute top-0 left-0 right-0 h-1 bg-muted" />
                         <div className="text-[11px] font-bold text-muted-foreground uppercase tracking-[1.5px] mb-4">❌ Prima</div>
                         <h3 className="text-2xl font-bold mb-4">Ore perse ogni giorno a copiare dati a mano</h3>
-                        <p className="text-sm text-muted-foreground mb-8">Ogni DDT va aperto, letto, trascritto campo per campo nel gestionale. Errori frequenti, colli di bottiglia.</p>
+                        <p className="text-sm text-muted-foreground mb-8">Ogni fattura, DDT o scontrino va aperto, letto, trascritto campo per campo nel gestionale. Errori frequenti, colli di bottiglia.</p>
 
                         <div className="bg-muted/30 border border-border rounded-xl p-4 space-y-3 mt-auto">
                             {[
-                                { icon: Printer, label: "Scannerizza il DDT cartaceo", time: "2 min" },
-                                { icon: FileText, label: "Apri il PDF, cerca i dati rilevanti", time: "2 min" },
+                                { icon: Printer, label: "Scannerizza o scarica il file", time: "2 min" },
+                                { icon: FileText, label: "Apri il documento, cerca i dati", time: "2 min" },
                                 { icon: Keyboard, label: "Trascrivi nel gestionale", time: "4 min" },
                                 { icon: Search, label: "Ricontrolla per errori", time: "2 min" },
                                 { icon: Folder, label: "Archivia il documento", time: "1 min" },
-                                { icon: Clock, label: "Totale per DDT", time: "~11 min", bold: true }
+                                { icon: Clock, label: "Totale per Documento", time: "~11 min", bold: true }
                             ].map((step, i) => (
                                 <div key={i} className="flex items-center justify-between py-2 border-b border-border/50 last:border-0">
                                     <div className="flex items-center gap-3">
@@ -159,7 +186,7 @@ const DocumentIntelligence = () => {
                         <div className="absolute top-0 left-0 right-0 h-1 bg-gradient-to-r from-emerald-500 to-emerald-700" />
                         <div className="text-[11px] font-bold text-emerald-600 dark:text-emerald-400 uppercase tracking-[1.5px] mb-4">✅ Dopo — con FinCh-Ai</div>
                         <h3 className="text-2xl font-bold mb-4">Dati estratti in automatico, pronti da verificare</h3>
-                        <p className="text-sm text-muted-foreground mb-8">Scannerizzi, carichi o invii via email — il DDT viene elaborato automaticamente. Tu verifichi solo il risultato.</p>
+                        <p className="text-sm text-muted-foreground mb-8">Scannerizzi, carichi o invii via email — ogni documento viene elaborato automaticamente. Tu verifichi solo il risultato.</p>
 
                         <div className="bg-muted/20 border border-emerald-500/20 rounded-xl p-6 mt-auto">
                             <div className="flex flex-wrap gap-2 mb-6">
@@ -183,7 +210,7 @@ const DocumentIntelligence = () => {
                             <div className="grid grid-cols-2 gap-3 mb-6">
                                 {[
                                     { label: "Fornitore", value: "Rossi S.r.l." },
-                                    { label: "Nr. DDT", value: "2024/00847" },
+                                    { label: "Nr. Documento", value: "2024/00847" },
                                     { label: "Data", value: "15/01/2025" },
                                     { label: "Articoli", value: "12 righe" }
                                 ].map((field, i) => (
@@ -230,6 +257,55 @@ const DocumentIntelligence = () => {
                     </div>
                 </section>
 
+                {/* SUPPORTED DOCUMENT TYPES */}
+                <section className="mb-16 sm:mb-32">
+                    <div className="text-center mb-8 sm:mb-16">
+                        <div className="inline-flex items-center gap-2 bg-emerald-500/10 text-emerald-600 dark:text-emerald-400 border border-emerald-500/20 px-4 py-1.5 rounded-full text-xs font-bold uppercase tracking-wider mb-6">
+                            <CheckCircle className="w-4 h-4" />
+                            Pronto all'Uso · Zero Configurazione
+                        </div>
+                        <h2 className="text-3xl md:text-4xl font-bold mb-4">Tipologie di Documento Supportate</h2>
+                        <p className="text-muted-foreground max-w-3xl mx-auto">Decine di tipologie di documento pronte all'uso, senza alcuna configurazione. Per layout complessi o moduli proprietari, il nostro team crea modelli dedicati in pochi giorni.</p>
+                    </div>
+
+                    <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-5 sm:gap-8 mb-8">
+                        {[
+                            { icon: ReceiptText, title: "Fatture", useCase: "Contabilità Fornitori", desc: "Fornitore, importo, IVA, scadenza, date e righe dettaglio." },
+                            { icon: FileText, title: "Ricevute e Scontrini", useCase: "Note Spese", desc: "Rimborsi aziendali e riconciliazione automatica delle spese." },
+                            { icon: UserCheck, title: "Documenti d'Identità", useCase: "Onboarding & KYC", desc: "CdI, passaporto, patente — verifiche di identità in pochi secondi." },
+                            { icon: Truck, title: "DDT e Bolle di Consegna", useCase: "Logistica & Magazzino", desc: "Ricezione merci, articoli e aggiornamento automatico scorte." },
+                            { icon: Landmark, title: "Estratti Conto", useCase: "Riconciliazione Bancaria", desc: "Movimenti bancari con classificazione automatica e partite." },
+                            { icon: Package, title: "Ordini d'Acquisto", useCase: "Ufficio Acquisti", desc: "Registrazione ordini fornitori direttamente nel gestionale." },
+                            { icon: BadgeMinus, title: "Note di Credito", useCase: "Gestione Resi", desc: "Storno fatture e riconciliazione automatica delle partite aperte." },
+                            { icon: HeartPulse, title: "Tessera Sanitaria", useCase: "Strutture Sanitarie", desc: "Codice fiscale e dati paziente per accettazione rapida." },
+                            { icon: Users, title: "Cedolini Paga", useCase: "Risorse Umane", desc: "Stipendi, trattenute, contributi e dati per elaborazione HR." }
+                        ].map((doc, i) => (
+                            <div key={i} className="bg-card border border-border rounded-3xl p-5 sm:p-8 text-left shadow-sm hover:border-primary/30 transition-colors">
+                                <div className="w-12 h-12 rounded-xl flex items-center justify-center mb-6 bg-emerald-500/10 text-emerald-600 dark:text-emerald-400">
+                                    <doc.icon className="w-6 h-6" />
+                                </div>
+                                <h3 className="font-bold mb-1 text-lg">{doc.title}</h3>
+                                <div className="text-[11px] font-bold text-emerald-600 dark:text-emerald-400 uppercase tracking-wider mb-3">{doc.useCase}</div>
+                                <p className="text-sm text-muted-foreground">{doc.desc}</p>
+                            </div>
+                        ))}
+                    </div>
+
+                    <div className="bg-card border border-border rounded-3xl p-6 sm:p-8 flex flex-col md:flex-row items-start md:items-center gap-6">
+                        <div className="w-12 h-12 rounded-xl flex items-center justify-center bg-orange-500/10 text-orange-600 dark:text-orange-400 flex-shrink-0">
+                            <Cpu className="w-6 h-6" />
+                        </div>
+                        <div className="flex-grow">
+                            <h3 className="font-bold text-lg mb-2">Documenti Complessi? Ci Pensiamo Noi</h3>
+                            <p className="text-sm text-muted-foreground mb-4 md:mb-0">Per moduli aziendali, contratti strutturati o formati personalizzati forniamo modelli dedicati. Il nostro team gestisce completamente il setup — nessuna competenza tecnica richiesta da te.</p>
+                        </div>
+                        <a href="https://documentintelligence.finch-ai.it/" className="inline-flex items-center gap-2 text-orange-600 dark:text-orange-400 font-bold hover:text-orange-700 dark:hover:text-orange-300 transition-colors flex-shrink-0">
+                            Richiedi un modello custom
+                            <ArrowRight className="w-4 h-4" />
+                        </a>
+                    </div>
+                </section>
+
                 {/* FEATURES */}
                 <section className="mb-16 sm:mb-32 text-center">
                     <div className="mb-8 sm:mb-16">
@@ -239,12 +315,13 @@ const DocumentIntelligence = () => {
 
                     <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-5 sm:gap-8">
                         {[
-                            { icon: CheckCircle, title: "Dati Precisi al 100%", desc: "Elimina gli errori di trascrizione manuale. L'AI garantisce un'estrazione dati accurata.", colorClass: "bg-emerald-500/10 text-emerald-600" },
-                            { icon: Clock, title: "Efficienza Operativa", desc: "Riduci i tempi di lavorazione fino all'80%. Libera il tuo personale da compiti ripetitivi.", colorClass: "bg-emerald-500/10 text-emerald-600" },
-                            { icon: Sliders, title: "Flessibilità Totale", desc: "Il sistema impara e si adatta a qualsiasi documento o modello specifico necessario.", colorClass: "bg-orange-500/10 text-orange-600" },
-                            { icon: PlugZap, title: "Integrazione Invisibile", desc: "Collegamento rapido con il tuo gestionale (ERP) per un flusso di dati fluido.", colorClass: "bg-purple-500/10 text-purple-600" },
-                            { icon: Gauge, title: "Tutto Sotto Controllo", desc: "Dashboard intuitiva per monitorare lo stato di ogni documento in tempo reale.", colorClass: "bg-emerald-500/10 text-emerald-600" },
-                            { icon: ShieldCheck, title: "Privacy e Sicurezza Top", desc: "Dati protetti da crittografia enterprise e server ospitati esclusivamente in Europa.", colorClass: "bg-destructive/10 text-destructive" }
+                            { icon: CheckCircle, title: "Pronto All'Uso", desc: "Fatture, ricevute, identità, DDT, estratti conto e molti altri — zero configurazione. Per documenti complessi, il nostro team crea modelli dedicati.", colorClass: "bg-emerald-500/10 text-emerald-600" },
+                            { icon: Cpu, title: "Addestramento Custom", desc: "Hai documenti particolari? Finch-AI crea modelli personalizzati per ogni tua esigenza specifica.", colorClass: "bg-orange-500/10 text-orange-600" },
+                            { icon: MessageSquare, title: "Regole Naturali", desc: "Definisci le regole di estrazione scrivendo in linguaggio naturale. L'AI capisce ed esegue.", colorClass: "bg-blue-500/10 text-blue-600" },
+                            { icon: Zap, title: "Pronto in 3 Minuti", desc: "Configurazione automatica e immediata. Non serve essere esperti per iniziare ad automatizzare.", colorClass: "bg-purple-500/10 text-purple-600" },
+                            { icon: PlugZap, title: "Integrazione ERP", desc: "Collegamento rapido con il tuo gestionale via API per un flusso di dati fluido e senza intoppi.", colorClass: "bg-emerald-500/10 text-emerald-600" },
+                            { icon: Smartphone, title: "App Mobile", desc: "Acquisitori documenti direttamente da fotocamera. Ideale per operativi su campo — logistica, ricezione merci, vendite.", colorClass: "bg-blue-500/10 text-blue-600" },
+                            { icon: ShieldCheck, title: "Sicurezza Enterprise", desc: "Dati protetti da crittografia e ospitati in Europa, in piena conformità con le normative GDPR.", colorClass: "bg-destructive/10 text-destructive" }
                         ].map((f, i) => (
                             <div key={i} className="bg-card border border-border rounded-3xl p-5 sm:p-8 text-left shadow-sm hover:border-primary/30 transition-colors">
                                 <div className={`w-12 h-12 rounded-xl flex items-center justify-center mb-6 ${f.colorClass}`}>
@@ -261,41 +338,80 @@ const DocumentIntelligence = () => {
                 <section className="mb-16 sm:mb-32">
                     <div className="text-center mb-8 sm:mb-16">
                         <h2 className="text-3xl md:text-4xl font-bold mb-4">Piani di Abbonamento</h2>
-                        <p className="text-muted-foreground">Fatturazione basata sulle pagine elaborate · Scala con il tuo business</p>
+                        <p className="text-muted-foreground mb-8">Fatturazione basata sulle pagine elaborate · Scala con il tuo business</p>
+                        
+                        <div className="flex items-center justify-center gap-4 mb-8">
+                            <span className={`text-sm ${!isAnnual ? 'text-foreground font-bold' : 'text-muted-foreground'}`}>Mensile</span>
+                            <button 
+                                onClick={() => setIsAnnual(!isAnnual)}
+                                className="relative w-12 h-6 rounded-full bg-muted border border-border p-1 transition-colors"
+                            >
+                                <div className={`absolute top-1 w-4 h-4 rounded-full bg-primary transition-all ${isAnnual ? 'left-7' : 'left-1'}`} />
+                            </button>
+                            <span className={`text-sm ${isAnnual ? 'text-foreground font-bold' : 'text-muted-foreground'}`}>
+                                Annuale <span className="text-emerald-500 text-xs font-bold ml-1">Risparmia il 17%</span>
+                            </span>
+                        </div>
                     </div>
 
-                    <div className="grid grid-cols-1 md:grid-cols-3 lg:grid-cols-5 gap-4">
-                        {[
-                            { tier: "Demo", price: "€0", period: "Prova limitata", features: ["20 pagine incluse", "€0,15/pagina extra", "1 layout", "No pooling Email"] },
-                            { tier: "Basic", price: "€49", period: "€490/anno (-17%)", features: ["400 pagine incluse", "€0,15/pagina extra", "2 layout", "No pooling Email"] },
-                            { tier: "Professional", price: "€129", period: "€1.290/anno (-17%)", features: ["1.500 pagine incluse", "€0,12/pagina extra", "5 layout", "No pooling Email"], popular: true },
-                            { tier: "Business", price: "€249", period: "€2.490/anno (-17%)", features: ["4.000 pagine incluse", "€0,09/pagina extra", "10 layout", "Si pooling Email"] },
-                            { tier: "Enterprise", price: "Contattaci", period: "Su misura", features: ["12.000 pagine incluse", "€0,07/pagina extra", "Illimitati layout", "Si pooling Email"] }
-                        ].map((plan, i) => (
-                            <div key={i} className={`bg-card border rounded-3xl p-6 text-center flex flex-col transition-all hover:-translate-y-1 ${plan.popular ? 'border-primary shadow-xl shadow-primary/10 relative' : 'border-border shadow-sm'}`}>
-                                {plan.popular && (
+                    <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 xl:grid-cols-5 gap-4">
+                        {loading ? (
+                            <div className="col-span-full py-20 text-center text-muted-foreground">Caricamento piani...</div>
+                        ) : plans.map((plan, i) => (
+                            <div key={i} className={`bg-card border rounded-3xl p-6 text-center flex flex-col transition-all hover:-translate-y-1 ${plan.sort_order === 40 ? 'border-primary shadow-xl shadow-primary/10 relative' : 'border-border shadow-sm'}`}>
+                                {plan.sort_order === 40 && (
                                     <div className="absolute -top-3 left-1/2 -translate-x-1/2 bg-primary text-primary-foreground text-[10px] font-bold px-3 py-1 rounded-full uppercase tracking-widest">
                                         POPOLARE
                                     </div>
                                 )}
-                                <div className="text-[11px] font-bold text-muted-foreground uppercase tracking-wider mb-4">{plan.tier}</div>
-                                <div className="text-3xl font-bold text-primary mb-2">{plan.price}</div>
-                                <div className="text-[12px] text-muted-foreground mb-6">{plan.period}</div>
+                                <div className="text-[11px] font-bold text-muted-foreground uppercase tracking-wider mb-4">{plan.display_name}</div>
+                                <div className="text-3xl font-bold text-primary mb-2">
+                                    {plan.contact_us_pricing ? 'Contattaci' : `€${isAnnual ? plan.annual_monthly_equivalent : plan.base_monthly_cost}`}
+                                </div>
+                                <div className="text-[12px] text-muted-foreground mb-6">
+                                    {plan.contact_us_pricing ? 'Su misura' : (isAnnual ? `/mese (pagato annualmente)` : `/mese`)}
+                                </div>
                                 <ul className="text-left space-y-3 mb-8 flex-grow">
-                                    {plan.features.map((feat, j) => (
+                                    <li className="text-[12px] flex items-start gap-2 border-b border-border/50 pb-2">
+                                        <span className="text-emerald-500 mt-0.5 font-bold">✓</span>
+                                        <span className="text-foreground"><strong className="text-foreground">{plan.pages_per_month.toLocaleString()}</strong> pagine / mese</span>
+                                    </li>
+                                    {!plan.contact_us_pricing && (
+                                        <li className="text-[12px] flex items-start gap-2 border-b border-border/50 pb-2">
+                                            <span className="text-emerald-500 mt-0.5 font-bold">✓</span>
+                                            <span className="text-foreground">€<strong className="text-foreground">{plan.extra_page_cost.toFixed(3)}</strong> / pagina extra</span>
+                                        </li>
+                                    )}
+                                    <li className="text-[12px] flex items-start gap-2 border-b border-border/50 pb-2">
+                                        <span className="text-emerald-500 mt-0.5 font-bold">✓</span>
+                                        <span className="text-foreground"><strong className="text-foreground">{plan.max_document_types || 'Illimitati'}</strong> tipi documento</span>
+                                    </li>
+                                    <li className="text-[12px] flex items-start gap-2 border-b border-border/50 pb-2">
+                                        <span className="text-emerald-500 mt-0.5 font-bold">✓</span>
+                                        <span className="text-foreground"><strong className="text-foreground">{plan.max_users || 'Illimitati'}</strong> utenti inclusi</span>
+                                    </li>
+                                    {[
+                                        { key: 'email_polling_enabled', label: 'Email Polling' },
+                                        { key: 'api_transfer_enabled', label: 'API Transfer' },
+                                        { key: 'ftp_transfer_enabled', label: 'FTP Transfer' },
+                                        { key: 'includes_custom_models', label: 'Modelli Custom' }
+                                    ].map((feat, j) => (
                                         <li key={j} className="text-[12px] flex items-start gap-2 border-b border-border/50 pb-2 last:border-0 last:pb-0">
-                                            {feat.startsWith('No') ? (
-                                                <span className="text-muted-foreground/30 mt-0.5 font-bold">✕</span>
-                                            ) : (
+                                            {plan[feat.key] ? (
                                                 <span className="text-emerald-500 mt-0.5 font-bold">✓</span>
+                                            ) : (
+                                                <span className="text-muted-foreground/30 mt-0.5 font-bold">✕</span>
                                             )}
-                                            <span className="text-foreground" dangerouslySetInnerHTML={{ __html: feat.replace(/(\d+(\.\d+)?)/g, '<strong class="text-foreground">$1</strong>') }} />
+                                            <span className={plan[feat.key] ? 'text-foreground' : 'text-muted-foreground'}>{feat.label}</span>
                                         </li>
                                     ))}
                                 </ul>
-                                <button className={`block w-full py-3 rounded-xl font-bold transition-all ${plan.popular ? 'bg-primary text-primary-foreground hover:brightness-110 shadow-lg shadow-primary/20' : 'border border-primary text-primary hover:bg-primary/5'}`}>
-                                    {plan.tier === "Enterprise" ? "Contattaci" : "Inizia ora"}
-                                </button>
+                                <a 
+                                    href="https://documentintelligence.finch-ai.it/"
+                                    className={`block w-full py-3 rounded-xl font-bold transition-all ${plan.sort_order === 40 ? 'bg-primary text-primary-foreground hover:brightness-110 shadow-lg shadow-primary/20' : 'border border-primary text-primary hover:bg-primary/5'}`}
+                                >
+                                    {plan.contact_us_pricing ? "Contattaci" : "Inizia ora"}
+                                </a>
                             </div>
                         ))}
                     </div>
@@ -311,9 +427,9 @@ const DocumentIntelligence = () => {
 
                         <div className="flex flex-wrap justify-center gap-3 sm:gap-4 mb-8 sm:mb-12">
                             {[
-                                { icon: MapPin, text: "Pensato per DDT italiani" },
-                                { icon: LockKeyhole, text: "GDPR · Dati in EU" },
-                                { icon: Zap, text: "Attivo in 24 ore" },
+                                { icon: MapPin, text: "Configurazione Automatica" },
+                                { icon: ShieldCheck, text: "GDPR · Dati in EU" },
+                                { icon: Zap, text: "Pronto in 3 minuti" },
                                 { icon: LinkIcon, text: "API per ogni gestionale" }
                             ].map((badge, i) => (
                                 <div key={i} className="flex items-center gap-2 bg-background/10 border border-background/20 px-5 py-3 rounded-full text-sm font-medium">
@@ -323,10 +439,13 @@ const DocumentIntelligence = () => {
                             ))}
                         </div>
 
-                        <button className="inline-flex items-center gap-2 bg-primary text-primary-foreground px-6 py-4 sm:px-10 sm:py-5 rounded-2xl font-bold text-base sm:text-lg hover:brightness-110 transition-all shadow-xl shadow-primary/20 hover:scale-105 active:scale-95">
+                        <a 
+                            href="https://documentintelligence.finch-ai.it/"
+                            className="inline-flex items-center gap-2 bg-primary text-primary-foreground px-6 py-4 sm:px-10 sm:py-5 rounded-2xl font-bold text-base sm:text-lg hover:brightness-110 transition-all shadow-xl shadow-primary/20 hover:scale-105 active:scale-95"
+                        >
                             Richiedi accesso gratuito
                             <ArrowRight className="w-5 h-5" />
-                        </button>
+                        </a>
                     </div>
                 </section>
             </div>
