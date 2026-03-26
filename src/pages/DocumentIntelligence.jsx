@@ -38,26 +38,19 @@ import {
 import Layout from '../components/Layout';
 
 const DocumentIntelligence = () => {
-    const [plans, setPlans] = useState([]);
     const [isAnnual, setIsAnnual] = useState(true);
-    const [loading, setLoading] = useState(true);
+
+    const plans = [
+        { display_name: 'Demo', annual_monthly_equivalent: 'Gratis', base_monthly_cost: 'Gratis', contact_us_pricing: false, is_free: true, pages_per_month: 20, extra_page_cost: 0.150, max_document_types: 1, max_users: 2, email_polling_enabled: false, api_transfer_enabled: false, ftp_transfer_enabled: false, includes_custom_models: false, sort_order: 10 },
+        { display_name: 'Basic', annual_monthly_equivalent: '40.67', base_monthly_cost: '49', contact_us_pricing: false, is_free: false, pages_per_month: 400, extra_page_cost: 0.150, max_document_types: 2, max_users: 5, email_polling_enabled: false, api_transfer_enabled: false, ftp_transfer_enabled: false, includes_custom_models: false, sort_order: 20 },
+        { display_name: 'Business', annual_monthly_equivalent: '107.07', base_monthly_cost: '129', contact_us_pricing: false, is_free: false, pages_per_month: 1500, extra_page_cost: 0.120, max_document_types: 5, max_users: 10, email_polling_enabled: false, api_transfer_enabled: false, ftp_transfer_enabled: false, includes_custom_models: false, sort_order: 40 },
+        { display_name: 'Professional', annual_monthly_equivalent: '206.67', base_monthly_cost: '249', contact_us_pricing: false, is_free: false, pages_per_month: 4000, extra_page_cost: 0.090, max_document_types: 10, max_users: 20, email_polling_enabled: true, api_transfer_enabled: true, ftp_transfer_enabled: true, includes_custom_models: true, sort_order: 50 },
+        { display_name: 'Enterprise', annual_monthly_equivalent: null, base_monthly_cost: null, contact_us_pricing: true, is_free: false, pages_per_month: 12000, extra_page_cost: null, max_document_types: null, max_users: null, email_polling_enabled: true, api_transfer_enabled: true, ftp_transfer_enabled: true, includes_custom_models: true, sort_order: 60 },
+    ];
 
     useEffect(() => {
         window.scrollTo(0, 0);
-        fetchPlans();
     }, []);
-
-    const fetchPlans = async () => {
-        try {
-            const res = await fetch('https://documentintelligence.finch-ai.it/api/subscription-plans/public');
-            const data = await res.json();
-            setPlans(data);
-        } catch (error) {
-            console.error('Errore caricamento piani:', error);
-        } finally {
-            setLoading(false);
-        }
-    };
 
     const docJsonLd = [
         {
@@ -257,6 +250,22 @@ const DocumentIntelligence = () => {
                     </div>
                 </section>
 
+                {/* INFOGRAFICA */}
+                <section className="mb-16 sm:mb-32">
+                    <div className="text-center mb-8">
+                        <h2 className="text-3xl md:text-4xl font-bold mb-4">Il Flusso Completo</h2>
+                        <p className="text-muted-foreground">Dalla ricezione del documento all'integrazione nel gestionale</p>
+                    </div>
+                    <div className="bg-card border border-border rounded-3xl p-4 sm:p-8 shadow-sm overflow-hidden">
+                        <img
+                            src="/assets/images/infografica_document_intelligence.png"
+                            alt="Infografica flusso Document Intelligence — dalla ricezione all'integrazione ERP"
+                            className="w-full h-auto rounded-xl"
+                            loading="lazy"
+                        />
+                    </div>
+                </section>
+
                 {/* SUPPORTED DOCUMENT TYPES */}
                 <section className="mb-16 sm:mb-32">
                     <div className="text-center mb-8 sm:mb-16">
@@ -355,9 +364,7 @@ const DocumentIntelligence = () => {
                     </div>
 
                     <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 xl:grid-cols-5 gap-4">
-                        {loading ? (
-                            <div className="col-span-full py-20 text-center text-muted-foreground">Caricamento piani...</div>
-                        ) : plans.map((plan, i) => (
+                        {plans.map((plan, i) => (
                             <div key={i} className={`bg-card border rounded-3xl p-6 text-center flex flex-col transition-all hover:-translate-y-1 ${plan.sort_order === 40 ? 'border-primary shadow-xl shadow-primary/10 relative' : 'border-border shadow-sm'}`}>
                                 {plan.sort_order === 40 && (
                                     <div className="absolute -top-3 left-1/2 -translate-x-1/2 bg-primary text-primary-foreground text-[10px] font-bold px-3 py-1 rounded-full uppercase tracking-widest">
@@ -366,7 +373,7 @@ const DocumentIntelligence = () => {
                                 )}
                                 <div className="text-[11px] font-bold text-muted-foreground uppercase tracking-wider mb-4">{plan.display_name}</div>
                                 <div className="text-3xl font-bold text-primary mb-2">
-                                    {plan.contact_us_pricing ? 'Contattaci' : `€${isAnnual ? plan.annual_monthly_equivalent : plan.base_monthly_cost}`}
+                                    {plan.contact_us_pricing ? 'Contattaci' : plan.is_free ? 'Gratis' : `€${isAnnual ? plan.annual_monthly_equivalent : plan.base_monthly_cost}`}
                                 </div>
                                 <div className="text-[12px] text-muted-foreground mb-6">
                                     {plan.contact_us_pricing ? 'Su misura' : (isAnnual ? `/mese (pagato annualmente)` : `/mese`)}
