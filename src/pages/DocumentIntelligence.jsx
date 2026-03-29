@@ -45,11 +45,13 @@ import {
     Banknote,
     Contact,
     FileSignature,
+    ChevronDown,
 } from 'lucide-react';
 import Layout from '../components/Layout';
 
 const DocumentIntelligence = () => {
     const [isAnnual, setIsAnnual] = useState(true);
+    const [openFaq, setOpenFaq] = useState(null);
 
     const plans = [
         {
@@ -187,15 +189,63 @@ const DocumentIntelligence = () => {
                 { "@type": "ListItem", "position": 2, "name": "Soluzioni", "item": "https://finch-ai.it/soluzioni/" },
                 { "@type": "ListItem", "position": 3, "name": "Document Intelligence", "item": "https://finch-ai.it/soluzioni/document-intelligence" }
             ]
+        },
+        {
+            "@context": "https://schema.org",
+            "@type": "HowTo",
+            "name": "Come automatizzare l'elaborazione dei documenti aziendali con Document Intelligence",
+            "description": "Guida in 4 passaggi per estrarre automaticamente i dati dai documenti e trasferirli al gestionale ERP.",
+            "step": [
+                { "@type": "HowToStep", "position": 1, "name": "Ricezione del documento", "text": "Il documento viene ricevuto tramite scansione, upload manuale o ricezione automatica via email." },
+                { "@type": "HowToStep", "position": 2, "name": "Riconoscimento AI", "text": "L'intelligenza artificiale estrae automaticamente tutti i campi e le tabelle dal documento, applicando le regole configurate." },
+                { "@type": "HowToStep", "position": 3, "name": "Verifica human-in-the-loop", "text": "L'operatore rivede i dati estratti e conferma prima del trasferimento. Nessun errore raggiunge il gestionale senza approvazione." },
+                { "@type": "HowToStep", "position": 4, "name": "Trasferimento al gestionale", "text": "I dati verificati vengono inviati automaticamente al gestionale tramite API REST o webhook, nei campi esatti richiesti dal sistema." }
+            ]
+        },
+        {
+            "@context": "https://schema.org",
+            "@type": "FAQPage",
+            "mainEntity": [
+                {
+                    "@type": "Question",
+                    "name": "Quali tipi di documenti supporta Document Intelligence?",
+                    "acceptedAnswer": { "@type": "Answer", "text": "Document Intelligence supporta fatture italiane e internazionali, ricevute e scontrini, documenti d'identità (carta d'identità, passaporto, patente), DDT e bolle di consegna, estratti conto bancari, ordini d'acquisto, note di credito, tessera sanitaria, cedolini paga, biglietti da visita e contratti." }
+                },
+                {
+                    "@type": "Question",
+                    "name": "Quanto tempo ci vuole per configurare Document Intelligence su un nuovo tipo di documento?",
+                    "acceptedAnswer": { "@type": "Answer", "text": "La configurazione è guidata e veloce: si scelgono i campi da estrarre, si definiscono eventuali regole in linguaggio naturale e si configura la struttura dati da inviare al gestionale. Non è richiesta nessuna competenza tecnica o scrittura di codice." }
+                },
+                {
+                    "@type": "Question",
+                    "name": "Document Intelligence si integra con il mio gestionale ERP?",
+                    "acceptedAnswer": { "@type": "Answer", "text": "Sì. Document Intelligence si integra con qualsiasi gestionale tramite API REST o webhook. È possibile configurare la struttura esatta dei dati da inviare, inclusi campi personalizzati e derivati, per piena compatibilità con SAP, Zucchetti, TeamSystem, Sage e altri." }
+                },
+                {
+                    "@type": "Question",
+                    "name": "È possibile definire campi personalizzati non presenti nel documento originale?",
+                    "acceptedAnswer": { "@type": "Answer", "text": "Sì. Document Intelligence permette di definire campi personalizzati, derivati e di arricchimento usando il linguaggio naturale. Ad esempio: 'Classifica il fornitore come strategico se l'importo supera €5.000' oppure 'Calcola l'imponibile netto sottraendo lo sconto dall'importo totale'." }
+                },
+                {
+                    "@type": "Question",
+                    "name": "Esiste un'app mobile per acquisire documenti in campo?",
+                    "acceptedAnswer": { "@type": "Answer", "text": "Sì, è disponibile un'app Android che permette di acquisire documenti direttamente dalla fotocamera del telefono. È ideale per operatori di magazzino e logistica che devono registrare DDT e bolle di consegna direttamente sul campo, senza tornare in ufficio." }
+                },
+                {
+                    "@type": "Question",
+                    "name": "Quanto costa Document Intelligence?",
+                    "acceptedAnswer": { "@type": "Answer", "text": "Document Intelligence parte da €49/mese per il piano Basic (400 pagine/mese). È disponibile un piano Demo gratuito con 20 pagine/mese per testare il servizio. I piani Business (€129/mese) e Professional (€249/mese) includono volumi maggiori e modelli AI personalizzati. Per grandi volumi è disponibile un piano Enterprise su misura." }
+                }
+            ]
         }
     ];
 
     return (
         <Layout>
             <SEO
-                title="Document Intelligence | Estrazione Dati Automatica con AI — Finch-AI"
-                description="Leggi ogni documento in 8 secondi. Pronto all'uso per fatture, ricevute, DDT, ID e molto altro. Regole in linguaggio naturale per campi custom. App Android inclusa. Da €49/mese."
-                keywords="automazione documenti AI, estrazione dati documenti, OCR fatture intelligente, document intelligence PMI, configurazione automatica OCR, riconoscimento documenti identità AI, estrazione dati ricevute, digitalizzazione processi aziendali, human-in-the-loop, API integrazione ERP, app android documenti"
+                title="Document Intelligence AI | Automazione Documenti per PMI Italiane — Finch-AI"
+                description="Automatizza fatture, DDT, ricevute e 11+ tipi di documento con AI. Configurazione guidata senza codice, campi personalizzati in linguaggio naturale, integrazione ERP, app Android per operatori in campo. Da €49/mese."
+                keywords="document intelligence, automazione documenti AI, estrazione dati fatture automatica, OCR intelligente PMI, software gestione documenti AI, digitalizzazione fatture passive, automazione DDT bolle consegna, integrazione ERP documenti, human-in-the-loop OCR, estrazione dati ricevute, riconoscimento documenti identità AI, app acquisizione documenti android, campi personalizzati estrazione dati, automazione data entry ufficio, gestione documentale cloud PMI italiana"
                 canonical="https://finch-ai.it/soluzioni/document-intelligence"
                 jsonLd={docJsonLd}
             />
@@ -929,6 +979,62 @@ const DocumentIntelligence = () => {
                                 >
                                     {plan.button_text}
                                 </a>
+                            </div>
+                        ))}
+                    </div>
+                </section>
+
+                {/* ─── FAQ ──────────────────────────────────────────────────── */}
+                <section className="mb-16 sm:mb-32">
+                    <div className="text-center mb-8 sm:mb-16">
+                        <div className="inline-flex items-center gap-2 rounded-full border border-primary/30 bg-primary/10 px-4 py-1.5 text-xs font-semibold uppercase tracking-wider text-primary mb-4">
+                            Domande Frequenti
+                        </div>
+                        <h2 className="text-3xl md:text-4xl font-bold mb-4">Hai domande su Document Intelligence?</h2>
+                        <p className="text-muted-foreground">Le risposte alle domande più comuni sul nostro sistema di automazione documentale.</p>
+                    </div>
+
+                    <div className="max-w-3xl mx-auto space-y-3">
+                        {[
+                            {
+                                q: "Quali tipi di documenti supporta Document Intelligence?",
+                                a: "Document Intelligence supporta fatture italiane e internazionali, ricevute e scontrini, documenti d'identità (carta d'identità, passaporto, patente), DDT e bolle di consegna, estratti conto bancari, ordini d'acquisto, note di credito, tessera sanitaria, cedolini paga, biglietti da visita e contratti. Per documenti proprietari o layout aziendali specifici, Finch-AI sviluppa modelli personalizzati."
+                            },
+                            {
+                                q: "Quanto tempo ci vuole per configurare un nuovo tipo di documento?",
+                                a: "La configurazione è guidata e veloce: si scelgono i campi da estrarre, si definiscono eventuali regole in linguaggio naturale e si configura la struttura dati da inviare al gestionale. Non è richiesta nessuna competenza tecnica né scrittura di codice."
+                            },
+                            {
+                                q: "È possibile definire campi che non sono presenti nel documento originale?",
+                                a: "Sì. Document Intelligence permette di definire campi personalizzati, derivati e di arricchimento scrivendo in linguaggio naturale. Ad esempio: \"Classifica il fornitore come strategico se l'importo supera €5.000\" oppure \"Calcola l'imponibile netto sottraendo lo sconto dall'importo totale\"."
+                            },
+                            {
+                                q: "Come avviene l'integrazione con il gestionale ERP?",
+                                a: "Document Intelligence si integra con qualsiasi gestionale tramite API REST o webhook. Puoi configurare la struttura esatta dei dati da inviare — inclusi campi personalizzati e derivati — per piena compatibilità con SAP, Zucchetti, TeamSystem, Sage e altri sistemi gestionali."
+                            },
+                            {
+                                q: "C'è un'app mobile per chi lavora in campo o in magazzino?",
+                                a: "Sì, è disponibile un'app Android che permette di acquisire documenti direttamente dalla fotocamera del telefono. È ideale per operatori di magazzino e logistica che devono registrare DDT e bolle di consegna sul campo, senza tornare in ufficio o usare uno scanner."
+                            },
+                            {
+                                q: "Quanto costa Document Intelligence?",
+                                a: "Document Intelligence parte da €49/mese per il piano Basic (400 pagine/mese). È disponibile un piano Demo gratuito con 20 pagine/mese. I piani Business (€129/mese) e Professional (€249/mese) includono volumi maggiori e modelli AI personalizzati. Per grandi volumi è disponibile un piano Enterprise su misura."
+                            },
+                        ].map((item, i) => (
+                            <div key={i} className="bg-card border border-border rounded-2xl overflow-hidden transition-all hover:border-primary/30">
+                                <button
+                                    className="w-full flex items-center justify-between gap-4 px-6 py-5 text-left"
+                                    onClick={() => setOpenFaq(openFaq === i ? null : i)}
+                                    aria-expanded={openFaq === i}
+                                >
+                                    <span className="font-semibold text-sm sm:text-base leading-snug">{item.q}</span>
+                                    <ChevronDown className={`w-5 h-5 text-muted-foreground flex-shrink-0 transition-transform duration-300 ${openFaq === i ? 'rotate-180' : ''}`} />
+                                </button>
+                                {openFaq === i && (
+                                    <div className="px-6 pb-5 text-sm text-muted-foreground leading-relaxed border-t border-border pt-4">
+                                        {item.a}
+                                    </div>
+                                )}
                             </div>
                         ))}
                     </div>
