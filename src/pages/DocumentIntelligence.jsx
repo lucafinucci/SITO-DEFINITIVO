@@ -41,11 +41,96 @@ const DocumentIntelligence = () => {
     const [isAnnual, setIsAnnual] = useState(true);
 
     const plans = [
-        { display_name: 'Demo', annual_monthly_equivalent: 'Gratis', base_monthly_cost: 'Gratis', contact_us_pricing: false, is_free: true, pages_per_month: 20, extra_page_cost: 0.150, max_document_types: 1, max_users: 2, email_polling_enabled: false, api_transfer_enabled: false, ftp_transfer_enabled: false, includes_custom_models: false, sort_order: 10 },
-        { display_name: 'Basic', annual_monthly_equivalent: '40.67', base_monthly_cost: '49', contact_us_pricing: false, is_free: false, pages_per_month: 400, extra_page_cost: 0.150, max_document_types: 2, max_users: 5, email_polling_enabled: false, api_transfer_enabled: false, ftp_transfer_enabled: false, includes_custom_models: false, sort_order: 20 },
-        { display_name: 'Business', annual_monthly_equivalent: '107.07', base_monthly_cost: '129', contact_us_pricing: false, is_free: false, pages_per_month: 1500, extra_page_cost: 0.120, max_document_types: 5, max_users: 10, email_polling_enabled: false, api_transfer_enabled: false, ftp_transfer_enabled: false, includes_custom_models: false, sort_order: 40 },
-        { display_name: 'Professional', annual_monthly_equivalent: '206.67', base_monthly_cost: '249', contact_us_pricing: false, is_free: false, pages_per_month: 4000, extra_page_cost: 0.090, max_document_types: 10, max_users: 20, email_polling_enabled: true, api_transfer_enabled: true, ftp_transfer_enabled: true, includes_custom_models: true, sort_order: 50 },
-        { display_name: 'Enterprise', annual_monthly_equivalent: null, base_monthly_cost: null, contact_us_pricing: true, is_free: false, pages_per_month: 12000, extra_page_cost: null, max_document_types: null, max_users: null, email_polling_enabled: true, api_transfer_enabled: true, ftp_transfer_enabled: true, includes_custom_models: true, sort_order: 60 },
+        { 
+            display_name: 'Demo', 
+            description: 'Piano demo gratuito con limiti ridotti. Solo modelli AI generici disponibili.',
+            annual_monthly_equivalent: 'Gratis', 
+            base_monthly_cost: 'Gratis', 
+            contact_us_pricing: false, 
+            is_free: true, 
+            pages_per_month: 20, 
+            extra_page_cost: 0.150, 
+            max_document_types: 1, 
+            max_users: 2, 
+            email_polling_enabled: false, 
+            api_transfer_enabled: true, 
+            ftp_transfer_enabled: true, 
+            includes_custom_models: false, 
+            sort_order: 10,
+            button_text: 'Inizia gratis'
+        },
+        { 
+            display_name: 'Basic', 
+            description: 'Piano base per piccole aziende. Solo modelli AI generici disponibili.',
+            annual_monthly_equivalent: '41', 
+            base_monthly_cost: '49', 
+            contact_us_pricing: false, 
+            is_free: false, 
+            pages_per_month: 400, 
+            extra_page_cost: 0.150, 
+            max_document_types: 2, 
+            max_users: 5, 
+            email_polling_enabled: false, 
+            api_transfer_enabled: true, 
+            ftp_transfer_enabled: true, 
+            includes_custom_models: false, 
+            sort_order: 20,
+            button_text: 'Inizia ora'
+        },
+        { 
+            display_name: 'Business', 
+            description: 'Piano business per aziende in crescita. Modelli AI personalizzati disponibili su richiesta: maggiore precisione, accuratezza superiore e riduzione degli errori.',
+            annual_monthly_equivalent: '107', 
+            base_monthly_cost: '129', 
+            contact_us_pricing: false, 
+            is_free: false, 
+            pages_per_month: 1500, 
+            extra_page_cost: 0.120, 
+            max_document_types: 5, 
+            max_users: 10, 
+            email_polling_enabled: false, 
+            api_transfer_enabled: true, 
+            ftp_transfer_enabled: true, 
+            includes_custom_models: true, 
+            sort_order: 40,
+            button_text: 'Inizia ora'
+        },
+        { 
+            display_name: 'Professional', 
+            description: 'Piano professionale con email polling. Modelli AI personalizzati inclusi: precisione superiore, accuratezza elevata e riduzione significativa degli errori.',
+            annual_monthly_equivalent: '207', 
+            base_monthly_cost: '249', 
+            contact_us_pricing: false, 
+            is_free: false, 
+            pages_per_month: 4000, 
+            extra_page_cost: 0.090, 
+            max_document_types: 10, 
+            max_users: 20, 
+            email_polling_enabled: true, 
+            api_transfer_enabled: true, 
+            ftp_transfer_enabled: true, 
+            includes_custom_models: true, 
+            sort_order: 50,
+            button_text: 'Inizia ora'
+        },
+        { 
+            display_name: 'Enterprise', 
+            description: 'Piano enterprise per grandi organizzazioni. Modelli AI personalizzati inclusi: massima precisione, accuratezza e riduzione degli errori. Contattaci per un preventivo personalizzato.',
+            annual_monthly_equivalent: null, 
+            base_monthly_cost: null, 
+            contact_us_pricing: true, 
+            is_free: false, 
+            pages_per_month: 'Illimitate', 
+            extra_page_cost: null, 
+            max_document_types: 'Illimitati', 
+            max_users: 'Illimitati', 
+            email_polling_enabled: true, 
+            api_transfer_enabled: true, 
+            ftp_transfer_enabled: true, 
+            includes_custom_models: true, 
+            sort_order: 60,
+            button_text: 'Contattaci'
+        },
     ];
 
     useEffect(() => {
@@ -345,79 +430,77 @@ const DocumentIntelligence = () => {
 
                 {/* PRICING */}
                 <section className="mb-16 sm:mb-32">
-                    <div className="text-center mb-8 sm:mb-16">
-                        <h2 className="text-3xl md:text-4xl font-bold mb-4">Piani di Abbonamento</h2>
-                        <p className="text-muted-foreground mb-8">Fatturazione basata sulle pagine elaborate · Scala con il tuo business</p>
-                        
-                        <div className="flex items-center justify-center gap-4 mb-8">
-                            <span className={`text-sm ${!isAnnual ? 'text-foreground font-bold' : 'text-muted-foreground'}`}>Mensile</span>
-                            <button 
-                                onClick={() => setIsAnnual(!isAnnual)}
-                                className="relative w-12 h-6 rounded-full bg-muted border border-border p-1 transition-colors"
-                            >
-                                <div className={`absolute top-1 w-4 h-4 rounded-full bg-primary transition-all ${isAnnual ? 'left-7' : 'left-1'}`} />
-                            </button>
-                            <span className={`text-sm ${isAnnual ? 'text-foreground font-bold' : 'text-muted-foreground'}`}>
-                                Annuale <span className="text-emerald-500 text-xs font-bold ml-1">Risparmia il 17%</span>
-                            </span>
-                        </div>
+                    <div className="text-center mb-12 sm:mb-16">
+                        <h2 className="text-3xl md:text-5xl font-bold mb-4" style={{ fontFamily: "'DM Serif Display', serif" }}>Piani di Abbonamento</h2>
+                        <p className="text-muted-foreground text-lg">Fatturazione basata sulle pagine elaborate · Scala con il tuo business</p>
                     </div>
 
-                    <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 xl:grid-cols-5 gap-4">
+                    <div className="flex flex-nowrap overflow-x-auto pb-8 gap-4 snap-x xl:grid xl:grid-cols-5 xl:overflow-x-visible xl:pb-0">
                         {plans.map((plan, i) => (
-                            <div key={i} className={`bg-card border rounded-3xl p-6 text-center flex flex-col transition-all hover:-translate-y-1 ${plan.sort_order === 40 ? 'border-primary shadow-xl shadow-primary/10 relative' : 'border-border shadow-sm'}`}>
+                            <div 
+                                key={i} 
+                                className={`flex-shrink-0 w-[280px] sm:w-[300px] xl:w-full snap-center bg-white dark:bg-card border rounded-[20px] p-8 text-center flex flex-col transition-all hover:-translate-y-1 ${plan.sort_order === 40 ? 'border-emerald-600 shadow-xl shadow-emerald-600/10 relative' : 'border-[#E0DCD4] shadow-sm'}`}
+                                style={{ fontFamily: "'DM Sans', sans-serif" }}
+                            >
                                 {plan.sort_order === 40 && (
-                                    <div className="absolute -top-3 left-1/2 -translate-x-1/2 bg-primary text-primary-foreground text-[10px] font-bold px-3 py-1 rounded-full uppercase tracking-widest">
-                                        POPOLARE
+                                    <div className="absolute -top-3 left-1/2 -translate-x-1/2 bg-emerald-600 text-white text-[10px] font-bold px-4 py-1 rounded-full uppercase tracking-widest whitespace-nowrap">
+                                        Più popolare
                                     </div>
                                 )}
-                                <div className="text-[11px] font-bold text-muted-foreground uppercase tracking-wider mb-4">{plan.display_name}</div>
-                                <div className="text-3xl font-bold text-primary mb-2">
-                                    {plan.contact_us_pricing ? 'Contattaci' : plan.is_free ? 'Gratis' : `€${isAnnual ? plan.annual_monthly_equivalent : plan.base_monthly_cost}`}
+                                <div className="text-[11px] font-bold text-muted-foreground uppercase tracking-[1.5px] mb-4">{plan.display_name}</div>
+                                <div className="text-3xl font-bold text-emerald-600 mb-1" style={{ fontFamily: "'DM Serif Display', serif" }}>
+                                    {plan.contact_us_pricing ? 'Contattaci' : plan.is_free ? 'Gratis' : `€${plan.base_monthly_cost}/mese + IVA`}
                                 </div>
-                                <div className="text-[12px] text-muted-foreground mb-6">
-                                    {plan.contact_us_pricing ? 'Su misura' : (isAnnual ? `/mese (pagato annualmente)` : `/mese`)}
-                                </div>
-                                <ul className="text-left space-y-3 mb-8 flex-grow">
-                                    <li className="text-[12px] flex items-start gap-2 border-b border-border/50 pb-2">
-                                        <span className="text-emerald-500 mt-0.5 font-bold">✓</span>
-                                        <span className="text-foreground"><strong className="text-foreground">{plan.pages_per_month.toLocaleString()}</strong> pagine / mese</span>
-                                    </li>
-                                    {!plan.contact_us_pricing && (
-                                        <li className="text-[12px] flex items-start gap-2 border-b border-border/50 pb-2">
-                                            <span className="text-emerald-500 mt-0.5 font-bold">✓</span>
-                                            <span className="text-foreground">€<strong className="text-foreground">{plan.extra_page_cost.toFixed(3)}</strong> / pagina extra</span>
-                                        </li>
+                                <div className="text-[13px] text-emerald-600 font-medium mb-4 min-h-[20px]">
+                                    {!plan.contact_us_pricing && !plan.is_free && (
+                                        `Annuale: €${plan.annual_monthly_equivalent}/mese (risparmi 17%)`
                                     )}
-                                    <li className="text-[12px] flex items-start gap-2 border-b border-border/50 pb-2">
-                                        <span className="text-emerald-500 mt-0.5 font-bold">✓</span>
-                                        <span className="text-foreground"><strong className="text-foreground">{plan.max_document_types || 'Illimitati'}</strong> tipi documento</span>
+                                    {plan.is_free && 'Sempre gratuito'}
+                                    {plan.contact_us_pricing && 'Soluzione su misura'}
+                                </div>
+                                <p className="text-[12px] text-muted-foreground leading-relaxed mb-6 text-left min-h-[60px]">
+                                    {plan.description}
+                                </p>
+                                <ul className="text-left space-y-4 mb-8 flex-grow border-t border-[#F0EDE6] pt-6">
+                                    <li className="text-[14px] flex items-center justify-between gap-3 border-b border-[#F0EDE6] pb-3">
+                                        <span className="text-muted-foreground">Pagine/mese</span>
+                                        <span className="text-foreground font-bold">{typeof plan.pages_per_month === 'number' ? plan.pages_per_month.toLocaleString() : plan.pages_per_month}</span>
                                     </li>
-                                    <li className="text-[12px] flex items-start gap-2 border-b border-border/50 pb-2">
-                                        <span className="text-emerald-500 mt-0.5 font-bold">✓</span>
-                                        <span className="text-foreground"><strong className="text-foreground">{plan.max_users || 'Illimitati'}</strong> utenti inclusi</span>
+                                    <li className="text-[14px] flex items-center justify-between gap-3 border-b border-[#F0EDE6] pb-3">
+                                        <span className="text-muted-foreground">Tipi documento</span>
+                                        <span className="text-foreground font-bold">{plan.max_document_types}</span>
+                                    </li>
+                                    <li className="text-[14px] flex items-center justify-between gap-3 border-b border-[#F0EDE6] pb-3">
+                                        <span className="text-muted-foreground">Utenti</span>
+                                        <span className="text-foreground font-bold">{plan.max_users}</span>
                                     </li>
                                     {[
-                                        { key: 'email_polling_enabled', label: 'Email Polling' },
-                                        { key: 'api_transfer_enabled', label: 'API Transfer' },
-                                        { key: 'ftp_transfer_enabled', label: 'FTP Transfer' },
-                                        { key: 'includes_custom_models', label: 'Modelli Custom' }
+                                        { key: 'email_polling_enabled', label: 'Email polling' },
+                                        { key: 'api_transfer_enabled', label: 'Trasferimento via API' },
+                                        { key: 'ftp_transfer_enabled', label: 'Trasferimento via FTP' },
+                                        { key: 'includes_custom_models', label: 'Modelli custom' }
                                     ].map((feat, j) => (
-                                        <li key={j} className="text-[12px] flex items-start gap-2 border-b border-border/50 pb-2 last:border-0 last:pb-0">
+                                        <li key={j} className="text-[14px] flex items-center justify-between gap-3 border-b border-[#F0EDE6] pb-3 last:border-0 last:pb-0">
+                                            <span className={plan[feat.key] ? 'text-foreground font-medium' : 'text-muted-foreground'}>{feat.label}</span>
                                             {plan[feat.key] ? (
-                                                <span className="text-emerald-500 mt-0.5 font-bold">✓</span>
+                                                <CheckCircle className="w-5 h-5 text-emerald-500 flex-shrink-0" />
                                             ) : (
-                                                <span className="text-muted-foreground/30 mt-0.5 font-bold">✕</span>
+                                                <div className="w-5 h-5 flex items-center justify-center text-[#BBB] font-bold flex-shrink-0">✕</div>
                                             )}
-                                            <span className={plan[feat.key] ? 'text-foreground' : 'text-muted-foreground'}>{feat.label}</span>
                                         </li>
                                     ))}
+                                    {!plan.contact_us_pricing && (
+                                        <li className="text-[14px] flex items-center justify-between gap-3 border-t border-[#F0EDE6] pt-3">
+                                            <span className="text-muted-foreground">Pagina extra</span>
+                                            <span className="text-foreground font-bold">€{plan.extra_page_cost.toFixed(3).replace('.', ',')}</span>
+                                        </li>
+                                    )}
                                 </ul>
                                 <a 
                                     href="https://documentintelligence.finch-ai.it/"
-                                    className={`block w-full py-3 rounded-xl font-bold transition-all ${plan.sort_order === 40 ? 'bg-primary text-primary-foreground hover:brightness-110 shadow-lg shadow-primary/20' : 'border border-primary text-primary hover:bg-primary/5'}`}
+                                    className={`block w-full py-4 rounded-[12px] font-bold text-[16px] transition-all ${plan.sort_order === 40 ? 'bg-emerald-600 text-white hover:brightness-110 shadow-lg shadow-emerald-600/20' : 'bg-emerald-600 outline outline-2 outline-emerald-600 text-white hover:brightness-110'}`}
                                 >
-                                    {plan.contact_us_pricing ? "Contattaci" : "Inizia ora"}
+                                    {plan.button_text}
                                 </a>
                             </div>
                         ))}
