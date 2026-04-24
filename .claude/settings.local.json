@@ -14,7 +14,8 @@
       "Bash(npm install react-helmet-async)",
       "Bash(npm run build)",
       "Bash(npx skills find \"web site professional\")",
-      "Bash(npm run:*)"
+      "Bash(npm run:*)",
+      "Bash(cat \"c:\\\\Users\\\\fdani\\\\Documents\\\\Progetti AI\\\\SITO-DEFINITIVO/.github/workflows/\"*.yml)"
     ],
     "deny": [],
     "ask": []

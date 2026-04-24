@@ -48,10 +48,12 @@ import {
     ChevronDown,
 } from 'lucide-react';
 import Layout from '../components/Layout';
+import VideoModal from '../components/VideoModal';
 
 const DocumentIntelligence = () => {
     const [isAnnual, setIsAnnual] = useState(true);
     const [openFaq, setOpenFaq] = useState(null);
+    const [isVideoModalOpen, setIsVideoModalOpen] = useState(false);
 
     const plans = [
         {
@@ -278,11 +280,11 @@ const DocumentIntelligence = () => {
                             <Rocket className="w-5 h-5" />
                             Inizia Gratis
                         </a>
-                        <a href="#come-funziona"
+                        <button onClick={() => setIsVideoModalOpen(true)}
                             className="inline-flex items-center gap-2 bg-card border border-border text-foreground px-5 py-3 sm:px-8 sm:py-4 rounded-full font-bold hover:bg-muted transition-all">
                             <PlayCircle className="w-5 h-5 text-emerald-500" />
-                            Come Funziona
-                        </a>
+                            Scopri come funziona
+                        </button>
                     </div>
 
                     {/* Stats */}
@@ -312,6 +314,22 @@ const DocumentIntelligence = () => {
                                 {pill.text}
                             </div>
                         ))}
+                    </div>
+                </section>
+
+                {/* ─── VIDEO DEMO ───────────────────────────────────────────── */}
+                <section className="mb-16 sm:mb-32">
+                    <div className="bg-card border border-border rounded-3xl overflow-hidden shadow-2xl relative group">
+                        <div className="absolute inset-0 bg-emerald-600/5 pointer-events-none group-hover:bg-transparent transition-colors" />
+                        <div className="aspect-video w-full">
+                            <iframe
+                                src="/assets/videos/document-intelligence-demo.html"
+                                title="Document Intelligence Marketing Video"
+                                className="w-full h-full border-0"
+                                allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture"
+                                allowFullScreen
+                            />
+                        </div>
                     </div>
                 </section>
 
@@ -1075,6 +1093,13 @@ const DocumentIntelligence = () => {
                 </section>
 
             </div>
+            
+            <VideoModal 
+                isOpen={isVideoModalOpen} 
+                onClose={() => setIsVideoModalOpen(false)} 
+                videoUrl="/assets/videos/document-intelligence-demo.html"
+                title="Document Intelligence Demo"
+            />
         </Layout>
     );
 };

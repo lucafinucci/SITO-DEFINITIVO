@@ -33,7 +33,9 @@ import {
   Clock,
   Layers,
   AlertTriangle,
+  PlayCircle,
 } from "lucide-react";
+import VideoModal from "./VideoModal";
 
 /* ─── Palette ─────────────────────────────────────────────────────────────────
    Dark  bg  : #07090F   (ultra-dark, matching bi.finch-ai)
@@ -56,7 +58,7 @@ const platformApps = [
     features: ["OCR intelligente", "Validazione automatica"],
     status: "Operativo",
     href: "/soluzioni/document-intelligence",
-    cta: "Scopri come funziona",
+    cta: "Scopri di più",
     icon: FileText,
     color: "teal",
     featured: true,
@@ -134,6 +136,7 @@ export default function FinchAIMockupV2() {
   const [formErrors, setFormErrors] = useState({});
   const [formStatus, setFormStatus] = useState("idle");
   const [formErrMsg, setFormErrMsg] = useState("");
+  const [isVideoModalOpen, setIsVideoModalOpen] = useState(false);
 
   const onField = (f) => (e) => setFormValues((p) => ({ ...p, [f]: f==="privacy" ? e.target.checked : e.target.value }));
 
@@ -459,9 +462,19 @@ export default function FinchAIMockupV2() {
                         </span>
                       ))}
                     </div>
-                    <a href={app.href} className={`inline-flex items-center gap-1.5 text-sm font-semibold transition-all group-hover:gap-3 ${c.accent}`}>
-                      {app.cta} <ArrowRight className="h-4 w-4 transition-transform group-hover:translate-x-1"/>
-                    </a>
+                    <div className="flex items-center gap-4">
+                      <a href={app.href} className={`inline-flex items-center gap-1.5 text-sm font-semibold transition-all group-hover:gap-3 ${c.accent}`}>
+                        {app.cta} <ArrowRight className="h-4 w-4 transition-transform group-hover:translate-x-1"/>
+                      </a>
+                      {app.title === "Document Intelligence" && (
+                        <button 
+                          onClick={() => setIsVideoModalOpen(true)}
+                          className={`inline-flex items-center gap-1.5 text-sm font-semibold transition-all hover:opacity-80 ${c.accent}`}
+                        >
+                          <PlayCircle className="h-4 w-4" /> Scopri come funziona
+                        </button>
+                      )}
+                    </div>
                   </div>
                 );
                 return app.featured ? (
@@ -784,6 +797,13 @@ export default function FinchAIMockupV2() {
             </div>
           </div>
         </footer>
+
+        <VideoModal 
+          isOpen={isVideoModalOpen} 
+          onClose={() => setIsVideoModalOpen(false)} 
+          videoUrl="/assets/videos/document-intelligence-demo.html"
+          title="Document Intelligence Demo"
+        />
 
       </div>
     </div>
