@@ -13,12 +13,12 @@ const newsData = [
   },
   {
     id: 2,
-    badge: 'Coming Soon',
-    title: 'Lancio di Document Intelligence previsto per il 23/03/2026',
-    date: '23 Mar 2026',
+    badge: 'Novità',
+    title: 'Document Intelligence è ora online!',
+    date: 'Oggi',
     link: '/soluzioni/document-intelligence',
-    badgeColor: 'bg-blue-500',
-    ariaLabel: 'Scopri in anteprima il nuovo Document Intelligence'
+    badgeColor: 'bg-green-500',
+    ariaLabel: 'Scopri il nuovo Document Intelligence'
   }
 ];
 
@@ -88,9 +88,6 @@ function NewsFeed() {
                 <span className={`px-3 py-1 text-xs font-semibold text-white rounded-full ${news.badgeColor}`}>
                   {news.badge}
                 </span>
-                <time className="text-sm text-gray-500 dark:text-gray-400 font-medium">
-                  {news.date}
-                </time>
               </div>
               <h3 className="text-lg font-semibold text-gray-900 dark:text-white mb-2 group-hover:text-primary transition-colors">
                 <Link to={news.link} aria-label={news.ariaLabel} className="focus:outline-none">
@@ -100,12 +97,12 @@ function NewsFeed() {
               </h3>
             </div>
             
-            <div className="relative z-10 mt-4 flex items-center text-primary font-medium text-sm group-hover:translate-x-1 transition-transform">
-              Scopri di più 
+            <Link to={news.link} className="relative z-10 mt-4 flex items-center text-primary font-medium text-sm group-hover:translate-x-1 transition-transform focus:outline-none">
+              Scopri di più
               <svg className="w-4 h-4 ml-1" fill="none" viewBox="0 0 24 24" stroke="currentColor">
                 <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M9 5l7 7-7 7" />
               </svg>
-            </div>
+            </Link>
           </motion.article>
         ))}
       </motion.div>
