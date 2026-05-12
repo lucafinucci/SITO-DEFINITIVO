@@ -43,7 +43,13 @@
       "Bash(python scripts/generate_favicons.py)",
       "Bash(node -e \"const fs=require\\('fs'\\);const buf=fs.readFileSync\\('c:/Users/fdani/Documents/Progetti AI/SITO-DEFINITIVO/public/assets/images/warehouse/dashboard.png'\\);const w=buf.readUInt32BE\\(16\\);const h=buf.readUInt32BE\\(20\\);console.log\\('dashboard.png',w,'x',h\\);\")",
       "Bash(git add *)",
-      "Bash(git commit *)"
+      "Bash(git commit *)",
+      "Bash(git -C \"c:/Users/fdani/Documents/Progetti AI/SITO-DEFINITIVO\" status)",
+      "Bash(git -C \"c:/Users/fdani/Documents/Progetti AI/SITO-DEFINITIVO\" diff public/.htaccess)",
+      "Bash(git -C \"c:/Users/fdani/Documents/Progetti AI/SITO-DEFINITIVO\" log -5 --oneline)",
+      "Bash(git -C \"c:/Users/fdani/Documents/Progetti AI/SITO-DEFINITIVO\" add public/.htaccess)",
+      "Bash(git -C 'c:/Users/fdani/Documents/Progetti AI/SITO-DEFINITIVO' commit -m ' *)",
+      "Bash(git -C \"c:/Users/fdani/Documents/Progetti AI/SITO-DEFINITIVO\" push origin main)"
     ],
     "deny": [],
     "ask": [],
