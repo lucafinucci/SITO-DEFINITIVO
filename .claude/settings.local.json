@@ -41,7 +41,9 @@
       "Bash(curl -s \"http://localhost:5173/src/pages/WarehouseIntelligence.jsx\" -o /dev/null -w \"JSX module HTTP %{http_code} \\(after edits\\)\\\\n\")",
       "Bash(identify \"c:/Users/fdani/Documents/Progetti AI/SITO-DEFINITIVO/public/assets/images/LOGO.png\")",
       "Bash(python scripts/generate_favicons.py)",
-      "Bash(node -e \"const fs=require\\('fs'\\);const buf=fs.readFileSync\\('c:/Users/fdani/Documents/Progetti AI/SITO-DEFINITIVO/public/assets/images/warehouse/dashboard.png'\\);const w=buf.readUInt32BE\\(16\\);const h=buf.readUInt32BE\\(20\\);console.log\\('dashboard.png',w,'x',h\\);\")"
+      "Bash(node -e \"const fs=require\\('fs'\\);const buf=fs.readFileSync\\('c:/Users/fdani/Documents/Progetti AI/SITO-DEFINITIVO/public/assets/images/warehouse/dashboard.png'\\);const w=buf.readUInt32BE\\(16\\);const h=buf.readUInt32BE\\(20\\);console.log\\('dashboard.png',w,'x',h\\);\")",
+      "Bash(git add *)",
+      "Bash(git commit *)"
     ],
     "deny": [],
     "ask": [],
