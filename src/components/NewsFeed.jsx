@@ -4,21 +4,23 @@ import { Link } from 'react-router-dom';
 const newsData = [
   {
     id: 1,
-    badge: 'Novità',
-    title: 'L\'Analista Finanziario è ora online!',
+    badge: 'Nuovo',
+    title: 'OmniFlow: il gestionale AI che evolve con la tua azienda',
+    description: 'Pipeline completa con AI integrata in ogni flusso: si adatta all\'utente e cresce con il business.',
     date: 'Oggi',
-    link: '/soluzioni/finance-intelligence',
-    badgeColor: 'bg-green-500',
-    ariaLabel: 'Scopri il nuovo Analista Finanziario'
+    link: '/soluzioni/warehouse-intelligence',
+    badgeColor: 'bg-teal-500',
+    ariaLabel: 'Scopri OmniFlow, il nuovo gestionale AI'
   },
   {
     id: 2,
-    badge: 'Coming Soon',
-    title: 'Lancio di Document Intelligence previsto per il 23/03/2026',
-    date: '23 Mar 2026',
+    badge: 'Online',
+    title: 'Document Intelligence è ora disponibile',
+    description: 'Automazione documentale AI: DDT, fatture e bolle elaborati in pochi secondi.',
+    date: 'Mar 2026',
     link: '/soluzioni/document-intelligence',
-    badgeColor: 'bg-blue-500',
-    ariaLabel: 'Scopri in anteprima il nuovo Document Intelligence'
+    badgeColor: 'bg-green-500',
+    ariaLabel: 'Scopri Document Intelligence'
   }
 ];
 
@@ -50,8 +52,9 @@ function NewsFeed() {
       "item": {
         "@type": "NewsArticle",
         "headline": news.title,
-        "datePublished": "2026-03-19",
-        "url": `https://finc-ai.com${news.link}`
+        "description": news.description,
+        "datePublished": "2026-05-12",
+        "url": `https://finch-ai.it${news.link}`
       }
     }))
   };
@@ -98,6 +101,11 @@ function NewsFeed() {
                   {news.title}
                 </Link>
               </h3>
+              {news.description && (
+                <p className="text-sm text-gray-600 dark:text-gray-400 leading-relaxed">
+                  {news.description}
+                </p>
+              )}
             </div>
             
             <div className="relative z-10 mt-4 flex items-center text-primary font-medium text-sm group-hover:translate-x-1 transition-transform">

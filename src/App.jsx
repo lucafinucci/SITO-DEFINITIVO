@@ -3,6 +3,7 @@ import FinchAIMockupV2 from "@/components/FinchAIMockupV2";
 import AreaClienti from "@/pages/AreaClienti";
 import DocumentIntelligence from "@/pages/DocumentIntelligence";
 import FinanceIntelligence from "@/pages/FinanceIntelligence";
+import WarehouseIntelligence from "@/pages/WarehouseIntelligence";
 import ArticleAIImprenditori from "@/pages/ArticleAIImprenditori";
 import ArticleDocumentIntelligenceDDT from "@/pages/ArticleDocumentIntelligenceDDT";
 import ArticleStudiProfessionali from "@/pages/ArticleStudiProfessionali";
@@ -21,6 +22,7 @@ export default function App() {
       <Route path="/area-clienti/*" element={<AreaClienti />} />
       <Route path="/soluzioni/document-intelligence" element={<DocumentIntelligence />} />
       <Route path="/soluzioni/finance-intelligence" element={<FinanceIntelligence />} />
+      <Route path="/soluzioni/warehouse-intelligence" element={<WarehouseIntelligence />} />
       <Route path="/blog" element={<Blog />} />
       <Route path="/blog/intelligenza-artificiale-imprenditori-commercialisti" element={<ArticleAIImprenditori />} />
       <Route path="/blog/document-intelligence-automazione-ddt-bolle-consegna" element={<ArticleDocumentIntelligenceDDT />} />

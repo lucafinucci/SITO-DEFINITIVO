@@ -20,8 +20,8 @@ export default function Navbar() {
       dropdown: [
         { label: "Document Intelligence", href: "/soluzioni/document-intelligence" },
         { label: "Finance Intelligence", href: "/soluzioni/finance-intelligence" },
+        { label: "Warehouse Intelligence", href: "/soluzioni/warehouse-intelligence" },
         { label: "Production Intelligence", disabled: true },
-        { label: "Warehouse Intelligence", disabled: true },
       ]
     },
     { id: "blog", label: "Blog", href: "/blog" },

@@ -54,88 +54,106 @@ const DocumentIntelligence = () => {
     const [isAnnual, setIsAnnual] = useState(true);
     const [openFaq, setOpenFaq] = useState(null);
     const [isVideoModalOpen, setIsVideoModalOpen] = useState(false);
+    
+    const handleDownload = (filename) => {
+        const link = document.createElement('a');
+        link.href = filename;
+        link.download = filename.split('/').pop();
+        document.body.appendChild(link);
+        link.click();
+        document.body.removeChild(link);
+    };
 
     const plans = [
         {
             display_name: 'Demo',
-            description: 'Piano demo gratuito con limiti ridotti. Solo modelli AI generici disponibili.',
+            description: 'Perfetta come funnel per testare le potenzialità del sistema senza alcun impegno.',
             annual_monthly_equivalent: 'Gratis',
             base_monthly_cost: 'Gratis',
             contact_us_pricing: false,
             is_free: true,
             pages_per_month: 20,
-            extra_page_cost: 0.150,
+            extra_page_cost: 0,
             max_document_types: 1,
             max_users: 2,
             email_polling_enabled: false,
-            api_transfer_enabled: true,
-            ftp_transfer_enabled: true,
+            api_transfer_enabled: false,
+            ftp_transfer_enabled: false,
             includes_custom_models: false,
             sort_order: 10,
-            button_text: 'Inizia gratis'
+            button_text: 'Inizia gratis',
+            color: 'text-emerald-600',
+            dot_color: 'bg-emerald-500'
         },
         {
             display_name: 'Basic',
-            description: 'Piano base per piccole aziende. Solo modelli AI generici disponibili.',
+            description: 'Piano base per piccole aziende che iniziano ad automatizzare i processi.',
             annual_monthly_equivalent: '41',
             base_monthly_cost: '49',
             contact_us_pricing: false,
             is_free: false,
-            pages_per_month: 400,
-            extra_page_cost: 0.150,
+            pages_per_month: 200,
+            extra_page_cost: 0.20,
             max_document_types: 2,
             max_users: 5,
             email_polling_enabled: false,
-            api_transfer_enabled: true,
-            ftp_transfer_enabled: true,
+            api_transfer_enabled: false,
+            ftp_transfer_enabled: false,
             includes_custom_models: false,
             sort_order: 20,
-            button_text: 'Inizia ora'
+            button_text: 'Inizia ora',
+            color: 'text-emerald-600',
+            dot_color: 'bg-emerald-500'
         },
         {
             display_name: 'Business',
-            description: 'Piano business per aziende in crescita. Modelli AI personalizzati disponibili su richiesta: maggiore precisione, accuratezza superiore e riduzione degli errori.',
+            description: 'Ideale per aziende in crescita che richiedono maggiore automazione via email.',
             annual_monthly_equivalent: '107',
             base_monthly_cost: '129',
             contact_us_pricing: false,
             is_free: false,
-            pages_per_month: 1500,
-            extra_page_cost: 0.120,
+            pages_per_month: 800,
+            extra_page_cost: 0.17,
             max_document_types: 5,
             max_users: 10,
-            email_polling_enabled: false,
-            api_transfer_enabled: true,
-            ftp_transfer_enabled: true,
-            includes_custom_models: true,
+            email_polling_enabled: true,
+            api_transfer_enabled: false,
+            ftp_transfer_enabled: false,
+            includes_custom_models: false,
             sort_order: 40,
-            button_text: 'Inizia ora'
+            button_text: 'Inizia ora',
+            color: 'text-blue-600',
+            dot_color: 'bg-blue-500'
         },
         {
             display_name: 'Professional',
-            description: 'Piano professionale con email polling. Modelli AI personalizzati inclusi: precisione superiore, accuratezza elevata e riduzione significativa degli errori.',
+            description: 'Integrazione completa con FTP per flussi di lavoro professionali.',
             annual_monthly_equivalent: '207',
             base_monthly_cost: '249',
             contact_us_pricing: false,
             is_free: false,
-            pages_per_month: 4000,
-            extra_page_cost: 0.090,
+            pages_per_month: 2000,
+            extra_page_cost: 0.14,
             max_document_types: 10,
             max_users: 20,
             email_polling_enabled: true,
-            api_transfer_enabled: true,
+            api_transfer_enabled: false,
             ftp_transfer_enabled: true,
-            includes_custom_models: true,
+            includes_custom_models: false,
             sort_order: 50,
-            button_text: 'Inizia ora'
+            button_text: 'Inizia ora',
+            is_popular: true,
+            color: 'text-purple-600',
+            dot_color: 'bg-purple-500'
         },
         {
             display_name: 'Enterprise',
-            description: 'Piano enterprise per grandi organizzazioni. Modelli AI personalizzati inclusi: massima precisione, accuratezza e riduzione degli errori. Contattaci per un preventivo personalizzato.',
+            description: 'Soluzione su misura con modelli custom e supporto dedicato per grandi volumi.',
             annual_monthly_equivalent: null,
             base_monthly_cost: null,
             contact_us_pricing: true,
             is_free: false,
-            pages_per_month: 'Illimitate',
+            pages_per_month: 'fair use',
             extra_page_cost: null,
             max_document_types: 'Illimitati',
             max_users: 'Illimitati',
@@ -144,7 +162,9 @@ const DocumentIntelligence = () => {
             ftp_transfer_enabled: true,
             includes_custom_models: true,
             sort_order: 60,
-            button_text: 'Contattaci'
+            button_text: 'Contattaci',
+            color: 'text-slate-900',
+            dot_color: 'bg-slate-900'
         },
     ];
 
@@ -236,7 +256,7 @@ const DocumentIntelligence = () => {
                 {
                     "@type": "Question",
                     "name": "Quanto costa Document Intelligence?",
-                    "acceptedAnswer": { "@type": "Answer", "text": "Document Intelligence parte da €49/mese per il piano Basic (400 pagine/mese). È disponibile un piano Demo gratuito con 20 pagine/mese per testare il servizio. I piani Business (€129/mese) e Professional (€249/mese) includono volumi maggiori e modelli AI personalizzati. Per grandi volumi è disponibile un piano Enterprise su misura." }
+                    "acceptedAnswer": { "@type": "Answer", "text": "Document Intelligence parte da €49/mese + IVA per il piano Basic (200 pagine/mese). È disponibile un piano Demo gratuito con 20 pagine/mese per testare il servizio. I piani Business (€129/mese + IVA) e Professional (€249/mese + IVA) includono volumi maggiori. Per grandi volumi è disponibile un piano Enterprise su misura." }
                 }
             ]
         }
@@ -314,6 +334,35 @@ const DocumentIntelligence = () => {
                                 {pill.text}
                             </div>
                         ))}
+                    </div>
+                </section>
+
+                {/* ─── BROCHURE DOWNLOAD ─────────────────────────────────────── */}
+                <section className="mb-16 sm:mb-32">
+                    <div className="bg-emerald-600/5 border border-emerald-500/20 rounded-3xl p-6 sm:p-10 flex flex-col md:flex-row items-center justify-between gap-6">
+                        <div className="flex items-center gap-4">
+                            <div className="w-12 h-12 rounded-2xl bg-emerald-600/10 text-emerald-600 dark:text-emerald-400 flex items-center justify-center flex-shrink-0">
+                                <FileText className="w-6 h-6" />
+                            </div>
+                            <div>
+                                <h3 className="font-bold text-xl mb-1">Brochure Informativa</h3>
+                                <p className="text-sm text-muted-foreground">Scarica i dettagli tecnici e i casi d'uso completi di Document Intelligence.</p>
+                            </div>
+                        </div>
+                        <div className="flex flex-wrap gap-3">
+                            <a
+                                href="/it.pdf"
+                                download="Brochure-Document-Intelligence-IT.pdf"
+                                className="inline-flex items-center gap-2 bg-emerald-600 text-white px-5 py-2.5 rounded-full text-sm font-bold hover:bg-emerald-500 transition-all shadow-lg shadow-emerald-600/20">
+                                <Download className="w-4 h-4" /> IT · Scarica PDF
+                            </a>
+                            <a
+                                href="/en.pdf"
+                                download="Brochure-Document-Intelligence-EN.pdf"
+                                className="inline-flex items-center gap-2 bg-card border border-border text-foreground px-5 py-2.5 rounded-full text-sm font-bold hover:bg-muted transition-all">
+                                <Download className="w-4 h-4 text-emerald-500" /> EN · Download PDF
+                            </a>
+                        </div>
                     </div>
                 </section>
 
@@ -934,24 +983,25 @@ const DocumentIntelligence = () => {
                         {plans.map((plan, i) => (
                             <div
                                 key={i}
-                                className={`flex-shrink-0 w-[280px] sm:w-[300px] xl:w-full snap-center bg-white dark:bg-card border rounded-[20px] p-8 text-center flex flex-col transition-all hover:-translate-y-1 ${plan.sort_order === 40 ? 'border-emerald-600 shadow-xl shadow-emerald-600/10 relative' : 'border-[#E0DCD4] dark:border-border shadow-sm'}`}
+                                className={`flex-shrink-0 w-[280px] sm:w-[300px] xl:w-full snap-center bg-white dark:bg-card border rounded-[20px] p-8 text-center flex flex-col transition-all hover:-translate-y-1 ${plan.is_popular ? 'border-emerald-600 shadow-xl shadow-emerald-600/10 relative' : 'border-[#E0DCD4] dark:border-border shadow-sm'}`}
                                 style={{ fontFamily: "'DM Sans', sans-serif" }}
                             >
-                                {plan.sort_order === 40 && (
+                                {plan.is_popular && (
                                     <div className="absolute -top-3 left-1/2 -translate-x-1/2 bg-emerald-600 text-white text-[10px] font-bold px-4 py-1 rounded-full uppercase tracking-widest whitespace-nowrap">
                                         Più popolare
                                     </div>
                                 )}
-                                <div className="text-[11px] font-bold text-muted-foreground uppercase tracking-[1.5px] mb-4">{plan.display_name}</div>
-                                <div className="text-3xl font-bold text-emerald-600 mb-1" style={{ fontFamily: "'DM Serif Display', serif" }}>
-                                    {plan.contact_us_pricing ? 'Contattaci' : plan.is_free ? 'Gratis' : `€${plan.base_monthly_cost}/mese + IVA`}
+                                <div className="flex items-center justify-center gap-2 mb-2">
+                                    <div className={`w-2 h-2 rounded-full ${plan.dot_color}`} />
+                                    <div className={`text-xs font-bold uppercase tracking-widest ${plan.color}`}>{plan.display_name}</div>
                                 </div>
-                                <div className="text-[13px] text-emerald-600 font-medium mb-4 min-h-[20px]">
-                                    {!plan.contact_us_pricing && !plan.is_free && (
-                                        `Annuale: €${plan.annual_monthly_equivalent}/mese (risparmi 17%)`
-                                    )}
+                                <div className={`text-4xl font-extrabold mb-1 ${plan.color}`}>
+                                    {plan.contact_us_pricing ? 'Custom' : plan.is_free ? 'Gratis' : `€${plan.base_monthly_cost}`}
+                                </div>
+                                <div className={`text-sm font-medium mb-6 ${plan.color}`}>
+                                    {!plan.contact_us_pricing && !plan.is_free && '/ mese + IVA'}
                                     {plan.is_free && 'Sempre gratuito'}
-                                    {plan.contact_us_pricing && 'Soluzione su misura'}
+                                    {plan.contact_us_pricing && 'Offerta su misura'}
                                 </div>
                                 <p className="text-[12px] text-muted-foreground leading-relaxed mb-6 text-left min-h-[60px]">
                                     {plan.description}
@@ -971,34 +1021,45 @@ const DocumentIntelligence = () => {
                                     </li>
                                     {[
                                         { key: 'email_polling_enabled', label: 'Email polling' },
-                                        { key: 'api_transfer_enabled', label: 'Trasferimento via API' },
-                                        { key: 'ftp_transfer_enabled', label: 'Trasferimento via FTP' },
-                                        { key: 'includes_custom_models', label: 'Modelli custom' }
+                                        { key: 'api_transfer_enabled', label: 'API' },
+                                        { key: 'ftp_transfer_enabled', label: 'FTP' },
+                                        { key: 'includes_custom_models', label: 'Custom models' }
                                     ].map((feat, j) => (
                                         <li key={j} className="text-[14px] flex items-center justify-between gap-3 border-b border-border pb-3 last:border-0 last:pb-0">
                                             <span className={plan[feat.key] ? 'text-foreground font-medium' : 'text-muted-foreground'}>{feat.label}</span>
                                             {plan[feat.key] ? (
-                                                <CheckCircle className="w-5 h-5 text-emerald-500 flex-shrink-0" />
+                                                <div className="w-5 h-5 flex items-center justify-center text-emerald-500 font-bold flex-shrink-0">🟢</div>
                                             ) : (
-                                                <div className="w-5 h-5 flex items-center justify-center text-muted-foreground/40 font-bold flex-shrink-0">✕</div>
+                                                <div className="w-5 h-5 flex items-center justify-center text-muted-foreground/40 font-bold flex-shrink-0">❌</div>
                                             )}
                                         </li>
                                     ))}
-                                    {!plan.contact_us_pricing && (
+                                    {!plan.contact_us_pricing && plan.extra_page_cost > 0 && (
                                         <li className="text-[14px] flex items-center justify-between gap-3 border-t border-border pt-3">
-                                            <span className="text-muted-foreground">Pagina extra</span>
-                                            <span className="text-foreground font-bold">€{plan.extra_page_cost.toFixed(3).replace('.', ',')}</span>
+                                            <span className="text-muted-foreground">Extra pagine</span>
+                                            <span className="text-foreground font-bold">€{plan.extra_page_cost.toFixed(2).replace('.', ',')} + IVA / pag</span>
                                         </li>
                                     )}
                                 </ul>
                                 <a
                                     href="https://documentintelligence.finch-ai.it/"
-                                    className={`block w-full py-4 rounded-[12px] font-bold text-[16px] transition-all ${plan.sort_order === 40 ? 'bg-emerald-600 text-white hover:brightness-110 shadow-lg shadow-emerald-600/20' : 'bg-emerald-600 text-white hover:brightness-110'}`}
+                                    className={`block w-full py-4 rounded-[12px] font-bold text-[16px] transition-all ${plan.is_popular ? 'bg-emerald-600 text-white hover:brightness-110 shadow-lg shadow-emerald-600/20' : 'bg-emerald-600 text-white hover:brightness-110'}`}
                                 >
                                     {plan.button_text}
                                 </a>
                             </div>
                         ))}
+                    </div>
+
+                    {/* Micro-copy for conversion */}
+                    <div className="mt-12 max-w-4xl mx-auto text-center space-y-3">
+                        <p className="text-sm text-muted-foreground flex items-center justify-center gap-2">
+                            <Sparkles className="w-4 h-4 text-emerald-500" />
+                            “Le pagine extra hanno un costo maggiore rispetto ai piani superiori. Per volumi elevati consigliamo l’upgrade.”
+                        </p>
+                        <p className="text-sm text-muted-foreground">
+                            “I limiti sono mensili e si resettano automaticamente.”
+                        </p>
                     </div>
                 </section>
 

@@ -1,51 +1,61 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<urlset xmlns="http://www.sitemaps.org/schemas/sitemap/0.9">
+<urlset xmlns="http://www.sitemaps.org/schemas/sitemap/0.9"
+        xmlns:image="http://www.google.com/schemas/sitemap-image/0.9">
 
+  <!-- ============ CORE PAGES ============ -->
   <url>
     <loc>https://finch-ai.it/</loc>
-    <lastmod>2026-03-10</lastmod>
+    <lastmod>2026-05-12</lastmod>
     <changefreq>weekly</changefreq>
     <priority>1.0</priority>
+    <image:image>
+      <image:loc>https://finch-ai.it/assets/images/LOGO.png</image:loc>
+      <image:title>Finch-AI — Piattaforma AI per PMI italiane</image:title>
+    </image:image>
   </url>
 
+  <!-- ============ SOLUZIONI / PRODOTTI ============ -->
   <url>
-    <loc>https://finch-ai.it/servizi</loc>
-    <lastmod>2026-03-10</lastmod>
+    <loc>https://finch-ai.it/soluzioni/warehouse-intelligence</loc>
+    <lastmod>2026-05-12</lastmod>
     <changefreq>monthly</changefreq>
-    <priority>0.8</priority>
-  </url>
-
-  <url>
-    <loc>https://finch-ai.it/chi-siamo</loc>
-    <lastmod>2026-03-10</lastmod>
-    <changefreq>monthly</changefreq>
-    <priority>0.7</priority>
-  </url>
-
-  <url>
-    <loc>https://finch-ai.it/contatti</loc>
-    <lastmod>2026-03-10</lastmod>
-    <changefreq>monthly</changefreq>
-    <priority>0.7</priority>
+    <priority>0.95</priority>
+    <image:image>
+      <image:loc>https://finch-ai.it/assets/images/warehouse/dashboard.png</image:loc>
+      <image:title>OmniFlow — Dashboard del gestionale AI Warehouse Intelligence</image:title>
+      <image:caption>Dashboard principale di OmniFlow con AI Assistant integrata, 8 moduli e KPI in tempo reale</image:caption>
+    </image:image>
   </url>
 
   <url>
     <loc>https://finch-ai.it/soluzioni/finance-intelligence</loc>
-    <lastmod>2026-03-10</lastmod>
+    <lastmod>2026-05-12</lastmod>
     <changefreq>monthly</changefreq>
     <priority>0.9</priority>
   </url>
 
   <url>
     <loc>https://finch-ai.it/soluzioni/document-intelligence</loc>
-    <lastmod>2026-03-29</lastmod>
+    <lastmod>2026-05-12</lastmod>
     <changefreq>monthly</changefreq>
     <priority>0.9</priority>
+    <image:image>
+      <image:loc>https://finch-ai.it/assets/images/infografica_document_intelligence.png</image:loc>
+      <image:title>Document Intelligence — Automazione DDT e fatture con AI</image:title>
+    </image:image>
+  </url>
+
+  <!-- ============ BLOG ============ -->
+  <url>
+    <loc>https://finch-ai.it/blog</loc>
+    <lastmod>2026-05-12</lastmod>
+    <changefreq>weekly</changefreq>
+    <priority>0.8</priority>
   </url>
 
   <url>
     <loc>https://finch-ai.it/blog/intelligenza-artificiale-imprenditori-commercialisti</loc>
-    <lastmod>2026-03-10</lastmod>
+    <lastmod>2026-02-28</lastmod>
     <changefreq>monthly</changefreq>
     <priority>0.7</priority>
   </url>
@@ -74,6 +84,34 @@
   <url>
     <loc>https://finch-ai.it/blog/ai-analisi-dati-pmi-excel-access</loc>
     <lastmod>2026-03-12</lastmod>
+    <changefreq>monthly</changefreq>
+    <priority>0.7</priority>
+  </url>
+
+  <url>
+    <loc>https://finch-ai.it/blog/analisi-finanziaria-5-minuti-pmi-finch-ai</loc>
+    <lastmod>2026-03-15</lastmod>
+    <changefreq>monthly</changefreq>
+    <priority>0.7</priority>
+  </url>
+
+  <url>
+    <loc>https://finch-ai.it/blog/pmi-italiane-intelligenza-artificiale-gap-europeo</loc>
+    <lastmod>2026-03-20</lastmod>
+    <changefreq>monthly</changefreq>
+    <priority>0.7</priority>
+  </url>
+
+  <url>
+    <loc>https://finch-ai.it/blog/ai-human-centered-potenziare-persone-non-sostituirle</loc>
+    <lastmod>2026-04-02</lastmod>
+    <changefreq>monthly</changefreq>
+    <priority>0.7</priority>
+  </url>
+
+  <url>
+    <loc>https://finch-ai.it/blog/pmi-problema-dati-silos-frammentati</loc>
+    <lastmod>2026-04-15</lastmod>
     <changefreq>monthly</changefreq>
     <priority>0.7</priority>
   </url>

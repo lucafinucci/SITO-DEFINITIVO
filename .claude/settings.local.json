@@ -15,9 +15,39 @@
       "Bash(npm run build)",
       "Bash(npx skills find \"web site professional\")",
       "Bash(npm run:*)",
-      "Bash(cat \"c:\\\\Users\\\\fdani\\\\Documents\\\\Progetti AI\\\\SITO-DEFINITIVO/.github/workflows/\"*.yml)"
+      "Bash(cat \"c:\\\\Users\\\\fdani\\\\Documents\\\\Progetti AI\\\\SITO-DEFINITIVO/.github/workflows/\"*.yml)",
+      "Bash(curl -s -I http://127.0.0.1:5173/it.pdf)",
+      "Bash(awk '/type=\"__bundler\\\\/template\"/{flag=1; next} /<\\\\/script>/{flag=0} flag' \"c:/Users/fdani/Documents/Progetti AI/SITO-DEFINITIVO/OmniFlow Landing Page - Standalone.html\")",
+      "Read(//tmp/**)",
+      "Bash(awk 'NR==184' \"c:/Users/fdani/Documents/Progetti AI/SITO-DEFINITIVO/OmniFlow Landing Page - Standalone.html\" > /tmp/of_template_raw.txt; wc -c /tmp/of_template_raw.txt)",
+      "Bash(node -e \"const fs=require\\('fs'\\);const raw=fs.readFileSync\\('/tmp/of_template_raw.txt','utf8'\\);const t=JSON.parse\\(raw\\);fs.writeFileSync\\('/tmp/of_template.html',t\\);console.log\\('size:',t.length\\);\")",
+      "Bash(python3 -c \"import json; t=open\\('/tmp/of_template_raw.txt'\\).read\\(\\); h=json.loads\\(t\\); open\\('/tmp/of_template.html','w'\\).write\\(h\\); print\\('size:',len\\(h\\)\\)\")",
+      "Bash(node -e \"const fs=require\\('fs'\\);const raw=fs.readFileSync\\('C:/temp/of_template_raw.txt','utf8'\\);const t=JSON.parse\\(raw\\);fs.writeFileSync\\('C:/temp/of_template.html',t\\);console.log\\('size:',t.length\\);\")",
+      "Bash(awk 'NR==185' \"c:/Users/fdani/Documents/Progetti AI/SITO-DEFINITIVO/OmniFlow Video - Standalone \\(2\\).html\")",
+      "Bash(node -e \"const fs=require\\('fs'\\);const raw=fs.readFileSync\\('C:/temp/of_video_raw.txt','utf8'\\);const t=JSON.parse\\(raw\\);fs.writeFileSync\\('C:/temp/of_video.html',t\\);console.log\\('size:',t.length\\);\")",
+      "Bash(mkdir -p \"c:/Users/fdani/Documents/Progetti AI/SITO-DEFINITIVO/public/assets/images/warehouse\"; awk 'NR==176' \"c:/Users/fdani/Documents/Progetti AI/SITO-DEFINITIVO/OmniFlow Landing Page - Standalone.html\" > /c/temp/of_manifest_raw.txt; wc -c /c/temp/of_manifest_raw.txt)",
+      "Bash(node C:/temp/extract_warehouse_images.js)",
+      "Bash(node -e \"const fs=require\\('fs'\\);const raw=fs.readFileSync\\('C:/temp/of_video_raw.txt','utf8'\\);console.log\\('contains \\\\\\\\\\\\\\\\/body:',raw.includes\\('<\\\\\\\\\\\\\\\\/body>'\\)\\);console.log\\('contains /body literal:',raw.includes\\('</body>'\\)\\);\")",
+      "Bash(node -e \"const fs=require\\('fs'\\);const raw=fs.readFileSync\\('C:/temp/of_video_raw.txt','utf8'\\);const i=raw.indexOf\\('body'\\);console.log\\('first body at:',i,raw.slice\\(Math.max\\(0,i-30\\),i+30\\)\\);const j=raw.lastIndexOf\\('body'\\);console.log\\('last body at:',j,raw.slice\\(Math.max\\(0,j-30\\),j+30\\)\\);\")",
+      "Bash(node C:/temp/inject_video_logo.js)",
+      "Bash(curl -s -o /dev/null -w \"HTTP %{http_code} \\(%{size_download} bytes\\)\\\\n\" \"http://localhost:5173/soluzioni/warehouse-intelligence\")",
+      "Bash(curl -s -o /dev/null -w \"HTTP %{http_code} \\(%{size_download} bytes\\)\\\\n\" \"http://localhost:5173/assets/videos/warehouse-intelligence-demo.html\")",
+      "Bash(curl -s -o /dev/null -w \"HTTP %{http_code} \\(%{size_download} bytes\\)\\\\n\" \"http://localhost:5173/assets/images/warehouse/dashboard.png\")",
+      "Bash(curl -s -o /dev/null -w \"HTTP %{http_code} \\(%{size_download} bytes\\)\\\\n\" \"http://localhost:5173/sitemap.xml\")",
+      "Bash(curl -s \"http://localhost:5173/soluzioni/warehouse-intelligence\")",
+      "Bash(curl -s \"http://localhost:5173/src/pages/WarehouseIntelligence.jsx\" -o /dev/null -w \"JSX module HTTP %{http_code}\\\\n\")",
+      "Bash(curl -s \"http://localhost:5173/sitemap.xml\")",
+      "Bash(curl -s -o /dev/null -w \"Page HTTP %{http_code}\\\\n\" \"http://localhost:5173/soluzioni/warehouse-intelligence\")",
+      "Bash(curl -s \"http://localhost:5173/src/pages/WarehouseIntelligence.jsx\" -o /dev/null -w \"JSX module HTTP %{http_code} \\(after edits\\)\\\\n\")",
+      "Bash(identify \"c:/Users/fdani/Documents/Progetti AI/SITO-DEFINITIVO/public/assets/images/LOGO.png\")",
+      "Bash(python scripts/generate_favicons.py)",
+      "Bash(node -e \"const fs=require\\('fs'\\);const buf=fs.readFileSync\\('c:/Users/fdani/Documents/Progetti AI/SITO-DEFINITIVO/public/assets/images/warehouse/dashboard.png'\\);const w=buf.readUInt32BE\\(16\\);const h=buf.readUInt32BE\\(20\\);console.log\\('dashboard.png',w,'x',h\\);\")"
     ],
     "deny": [],
-    "ask": []
+    "ask": [],
+    "additionalDirectories": [
+      "\\tmp",
+      "C:\\temp"
+    ]
   }
 }

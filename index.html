@@ -5,42 +5,56 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
 
     <!-- Global Meta Tags -->
-    <meta name="description" content="Finch-AI: Piattaforma AI per PMI italiane. Automazione Documentale, Business Intelligence e KPI real-time per trasformare i dati in decisioni.">
+    <meta name="description" content="Finch-AI: piattaforma AI modulare per PMI italiane. OmniFlow gestionale AI, Document Intelligence, Finance Intelligence. Automazione documentale, analisi finanziaria e KPI real-time.">
     <meta name="author" content="Finch-AI">
     <meta name="robots" content="index, follow, max-snippet:-1, max-image-preview:large, max-video-preview:-1">
+    <meta name="googlebot" content="index, follow, max-snippet:-1, max-image-preview:large, max-video-preview:-1">
+    <meta name="bingbot" content="index, follow">
     <meta name="language" content="it">
     <meta http-equiv="content-language" content="it">
     <meta name="geo.region" content="IT">
     <meta name="geo.placename" content="Italia">
-    <link rel="canonical" href="https://finch-ai.it/">
+    <meta name="format-detection" content="telephone=no">
 
-    <!-- Open Graph / Facebook -->
+    <!-- Open Graph fallback (sovrascritto da SEO.jsx per ogni route) -->
     <meta property="og:type" content="website">
     <meta property="og:url" content="https://finch-ai.it/">
     <meta property="og:title" content="Finch-AI | AI Enterprise per PMI Italiane">
-    <meta property="og:description" content="Automazione intelligente e decisioni di valore per le PMI italiane. Operativi in 24 ore con Document Intelligence e Analisi Finanziaria AI.">
-    <meta property="og:image" content="https://finch-ai.it/assets/images/og-image.png">
+    <meta property="og:description" content="Piattaforma AI modulare per PMI italiane: OmniFlow gestionale, Document Intelligence, Finance Intelligence. Operativi in 24 ore.">
+    <meta property="og:image" content="https://finch-ai.it/assets/images/LOGO.png">
+    <meta property="og:image:width" content="512">
+    <meta property="og:image:height" content="512">
+    <meta property="og:site_name" content="Finch-AI">
+    <meta property="og:locale" content="it_IT">
 
-    <!-- Twitter -->
-    <meta property="twitter:card" content="summary_large_image">
-    <meta property="twitter:url" content="https://finch-ai.it/">
-    <meta property="twitter:title" content="Finch-AI | AI Enterprise per PMI Italiane">
-    <meta property="twitter:description" content="Automazione intelligente e decisioni di valore per le PMI italiane.">
-    <meta property="twitter:image" content="https://finch-ai.it/assets/images/og-image.png">
+    <!-- Twitter Card fallback -->
+    <meta name="twitter:card" content="summary_large_image">
+    <meta name="twitter:url" content="https://finch-ai.it/">
+    <meta name="twitter:title" content="Finch-AI | AI Enterprise per PMI Italiane">
+    <meta name="twitter:description" content="Piattaforma AI modulare per PMI italiane: OmniFlow, Document Intelligence, Finance Intelligence.">
+    <meta name="twitter:image" content="https://finch-ai.it/assets/images/LOGO.png">
 
     <!-- Default title -->
     <title>Finch-AI | AI Enterprise per PMI Italiane</title>
 
-    <!-- Google Fonts -->
+    <!-- DNS prefetch / Preconnect for performance -->
     <link rel="preconnect" href="https://fonts.googleapis.com">
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800;900&family=Poppins:wght@600;700;800&family=DM+Serif+Display:ital@0;1&family=DM+Sans:ital,wght@0,400;0,500;0,600;0,700&display=swap" rel="stylesheet">
+    <link rel="dns-prefetch" href="https://fonts.googleapis.com">
+    <link rel="dns-prefetch" href="https://fonts.gstatic.com">
+
+    <!-- Google Fonts (set ridotto, weight essenziali; display=swap per ridurre CLS/LCP) -->
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800&family=Poppins:wght@600;700;800&family=DM+Sans:wght@400;500;600;700&display=swap" rel="stylesheet">
 
     <!-- Favicon -->
-    <link rel="icon" type="image/png" href="/assets/images/LOGO.png">
-    <link rel="apple-touch-icon" href="/assets/images/LOGO.png">
+    <link rel="icon" href="/favicon.ico" sizes="any">
+    <link rel="icon" type="image/png" sizes="32x32" href="/favicon-32.png">
+    <link rel="icon" type="image/png" sizes="192x192" href="/favicon-192.png">
+    <link rel="icon" type="image/png" sizes="512x512" href="/favicon-512.png">
+    <link rel="apple-touch-icon" sizes="180x180" href="/apple-touch-icon.png">
     <link rel="manifest" href="/site.webmanifest">
-    <meta name="theme-color" content="#667eea">
+    <meta name="theme-color" content="#07090F" media="(prefers-color-scheme: dark)">
+    <meta name="theme-color" content="#FFFFFF" media="(prefers-color-scheme: light)">
 
     <!-- Organization schema — globale, descrive l'azienda su ogni pagina -->
     <script type="application/ld+json">
@@ -50,8 +64,9 @@
       "name": "Finch-AI",
       "legalName": "Finch-AI S.r.l.",
       "url": "https://finch-ai.it",
-      "logo": "https://finch-ai.it/assets/images/LOGO.png",
+      "logo": "https://finch-ai.it/favicon-512.png",
       "foundingDate": "2024",
+      "description": "Finch-AI è la piattaforma AI modulare per PMI italiane: gestionale OmniFlow, Document Intelligence, Finance Intelligence e analytics in un unico ecosistema.",
       "address": {
         "@type": "PostalAddress",
         "addressLocality": "Milano",
@@ -69,13 +84,20 @@
     }
     </script>
 
-    <!-- WebSite schema -->
+    <!-- WebSite schema + SearchAction -->
     <script type="application/ld+json">
     {
       "@context": "https://schema.org",
       "@type": "WebSite",
       "name": "Finch-AI",
-      "url": "https://finch-ai.it"
+      "alternateName": "Finch AI",
+      "url": "https://finch-ai.it",
+      "inLanguage": "it-IT",
+      "publisher": {
+        "@type": "Organization",
+        "name": "Finch-AI",
+        "logo": "https://finch-ai.it/favicon-512.png"
+      }
     }
     </script>
 </head>

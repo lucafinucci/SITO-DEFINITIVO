@@ -190,13 +190,81 @@ export default function FinchAIMockupV2() {
   /* Logo container style: rounded-2xl, white bg in both modes, subtle shadow */
   const logoCont = (size) => `inline-flex items-center justify-center rounded-2xl bg-white shadow-sm ${size}`;
 
+  const homeJsonLd = [
+    {
+      "@context": "https://schema.org",
+      "@type": "SoftwareApplication",
+      "name": "Finch-AI Platform",
+      "alternateName": ["Finch AI", "Piattaforma Finch-AI"],
+      "applicationCategory": "BusinessApplication",
+      "operatingSystem": "Web, Cloud, On-premise",
+      "url": "https://finch-ai.it/",
+      "image": "https://finch-ai.it/assets/images/LOGO.png",
+      "description": "Piattaforma AI modulare per PMI italiane: OmniFlow gestionale, Document Intelligence, Finance Intelligence, Production e Warehouse Intelligence. Integrazione ERP, deploy in 24h, GDPR compliant.",
+      "inLanguage": "it-IT",
+      "offers": { "@type": "Offer", "price": "0", "priceCurrency": "EUR", "description": "Assessment AI gratuito e demo personalizzata" },
+      "featureList": [
+        "OmniFlow — gestionale AI completo per PMI",
+        "Document Intelligence — automazione DDT e fatture",
+        "Finance Intelligence — analisi finanziaria e cash flow",
+        "Production Intelligence — pianificazione AI",
+        "Warehouse Intelligence — magazzino e ordini",
+        "Integrazione ERP/CRM/MES via API",
+        "GDPR compliant, dati crittografati"
+      ],
+      "provider": { "@type": "Organization", "name": "Finch-AI S.r.l.", "url": "https://finch-ai.it", "logo": "https://finch-ai.it/favicon-512.png" }
+    },
+    {
+      "@context": "https://schema.org",
+      "@type": "ItemList",
+      "name": "Soluzioni Finch-AI",
+      "itemListElement": [
+        { "@type": "ListItem", "position": 1, "name": "OmniFlow — Warehouse Intelligence", "url": "https://finch-ai.it/soluzioni/warehouse-intelligence" },
+        { "@type": "ListItem", "position": 2, "name": "Document Intelligence", "url": "https://finch-ai.it/soluzioni/document-intelligence" },
+        { "@type": "ListItem", "position": 3, "name": "Finance Intelligence", "url": "https://finch-ai.it/soluzioni/finance-intelligence" }
+      ]
+    },
+    {
+      "@context": "https://schema.org",
+      "@type": "FAQPage",
+      "mainEntity": [
+        {
+          "@type": "Question",
+          "name": "Cos'è Finch-AI?",
+          "acceptedAnswer": { "@type": "Answer", "text": "Finch-AI è una piattaforma AI modulare per PMI italiane che integra gestionale (OmniFlow), automazione documentale, analisi finanziaria e business intelligence in un unico ecosistema, con integrazione nativa su ERP, CRM e MES." }
+        },
+        {
+          "@type": "Question",
+          "name": "Quanto tempo serve per attivare Finch-AI?",
+          "acceptedAnswer": { "@type": "Answer", "text": "I moduli Finch-AI sono pronti all'uso e si integrano nei flussi esistenti in meno di 24 ore, senza interrompere l'operatività." }
+        },
+        {
+          "@type": "Question",
+          "name": "Finch-AI è GDPR compliant?",
+          "acceptedAnswer": { "@type": "Answer", "text": "Sì. Tutti i dati sono crittografati a riposo e in transito, ospitati su datacenter in UE, con processi conformi al GDPR e alle normative italiane." }
+        },
+        {
+          "@type": "Question",
+          "name": "Cos'è OmniFlow?",
+          "acceptedAnswer": { "@type": "Answer", "text": "OmniFlow è il gestionale AI di Finch-AI: un sistema modulare che chiude il ciclo Compra → Stocca → Vendi → Consegna → Incassa con 8 moduli integrati e AI attiva su tutta la pipeline, adattandosi all'utente ed evolvendo con l'azienda." }
+        },
+        {
+          "@type": "Question",
+          "name": "Finch-AI si integra con il mio ERP?",
+          "acceptedAnswer": { "@type": "Answer", "text": "Sì. Finch-AI è API-first e zero lock-in: si integra con qualsiasi ERP, CRM, MES o gestionale esistente tramite API REST, webhook e connettori dedicati." }
+        }
+      ]
+    }
+  ];
+
   return (
     <div className={D ? "dark" : ""}>
       <SEO
-        title="Finch-AI | AI Enterprise di Prossima Generazione per PMI"
-        description="Piattaforma AI per PMI italiane: Business Intelligence, analisi finanziaria, conto economico automatizzato, Document Intelligence e KPI real-time. Integrazione ERP, deploy rapido, Made in Italy."
-        keywords="business intelligence PMI, analisi finanziaria AI, conto economico automatizzato, document intelligence, finance intelligence, KPI real-time, intelligenza artificiale imprese, automazione documentale, integrazione ERP, AI Italia"
+        title="Finch-AI | Piattaforma AI per PMI Italiane — OmniFlow, Document & Finance Intelligence"
+        description="Piattaforma AI modulare per PMI italiane: OmniFlow gestionale, Document Intelligence, Finance Intelligence e KPI real-time. Integrazione ERP, deploy in 24h, GDPR compliant."
+        keywords="piattaforma AI PMI, OmniFlow gestionale AI, intelligenza artificiale imprese italiane, document intelligence, finance intelligence, automazione documentale, analisi finanziaria AI, KPI real-time, integrazione ERP, gestionale AI"
         canonical="https://finch-ai.it/"
+        jsonLd={homeJsonLd}
       />
       <style>{`
         @keyframes fadeUp { from{opacity:0;transform:translateY(20px)} to{opacity:1;transform:translateY(0)} }

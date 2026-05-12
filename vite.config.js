@@ -4,7 +4,22 @@ import path from 'path'
 
 // https://vitejs.dev/config/
 export default defineConfig({
-  plugins: [react()],
+  plugins: [
+    react(),
+    {
+      name: 'pdf-download-headers',
+      configureServer(server) {
+        server.middlewares.use((req, res, next) => {
+          if (req.url === '/it.pdf') {
+            res.setHeader('Content-Disposition', 'attachment; filename="Brochure-Document-Intelligence-IT.pdf"');
+          } else if (req.url === '/en.pdf') {
+            res.setHeader('Content-Disposition', 'attachment; filename="Brochure-Document-Intelligence-EN.pdf"');
+          }
+          next();
+        });
+      }
+    }
+  ],
   root: '.',
   resolve: {
     alias: {
