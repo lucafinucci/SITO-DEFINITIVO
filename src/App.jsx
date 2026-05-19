@@ -13,6 +13,7 @@ import ArticleAnalisiFinanziaria5Min from "@/pages/ArticleAnalisiFinanziaria5Min
 import ArticlePMIGapEuropeo from "@/pages/ArticlePMIGapEuropeo";
 import ArticleAIHumanCentered from "@/pages/ArticleAIHumanCentered";
 import ArticlePMIDatiSilos from "@/pages/ArticlePMIDatiSilos";
+import ArticleSupportoDecisionaleSynapse from "@/pages/ArticleSupportoDecisionaleSynapse";
 import Blog from "@/pages/Blog";
 
 export default function App() {
@@ -33,6 +34,7 @@ export default function App() {
       <Route path="/blog/pmi-italiane-intelligenza-artificiale-gap-europeo" element={<ArticlePMIGapEuropeo />} />
       <Route path="/blog/ai-human-centered-potenziare-persone-non-sostituirle" element={<ArticleAIHumanCentered />} />
       <Route path="/blog/pmi-problema-dati-silos-frammentati" element={<ArticlePMIDatiSilos />} />
+      <Route path="/blog/sistema-supporto-decisionale-ai-pmi-synapse" element={<ArticleSupportoDecisionaleSynapse />} />
     </Routes>
   );
 }

@@ -79,5 +79,14 @@ export const blogArticles = [
     date: "21 Marzo 2026",
     readTime: "8 min",
     category: "Business Insight"
+  },
+  {
+    id: "sistema-supporto-decisionale-ai-pmi-synapse",
+    title: "Il Sistema di Supporto Decisionale che costruisce la tua memoria aziendale",
+    description: "Come un DSS evoluto basato su AI trasforma documenti sparsi, email e contratti in un database vivo della tua PMI, con risposte verificabili e human-in-the-loop.",
+    path: "/blog/sistema-supporto-decisionale-ai-pmi-synapse",
+    date: "18 Maggio 2026",
+    readTime: "12 min",
+    category: "Decision Intelligence"
   }
 ];
