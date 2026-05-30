@@ -47,37 +47,37 @@ body[data-theme="night"] {
    Il markup originale prevedeva un hero a tutta larghezza con cui
    l'articolo si sovrapponeva (margin-top negativo). L'hero ora è
    reso da <ArticleHero/>, quindi annulliamo l'overlap e i toni blu. */
-article {
+.article-body article {
   margin: 1.5rem auto 3rem !important;
   background: var(--fcard) !important;
   box-shadow: 0 24px 60px -34px rgba(11, 30, 22, 0.35) !important;
   border: 1px solid var(--line) !important;
 }
 @media (max-width: 640px) {
-  article {
+  .article-body article {
     margin: 1rem 0.8rem 2rem !important;
     padding: 1.6rem 1.3rem 2rem !important;
   }
 }
 
 /* font su titoli/corpo (anche dove l'articolo non usa le var) */
-article h1,
-article h2,
-article h3,
-article h4,
-article .toc__title,
-article .info-box-title {
+.article-body article h1,
+.article-body article h2,
+.article-body article h3,
+.article-body article h4,
+.article-body article .toc__title,
+.article-body article .info-box-title {
   font-family: var(--serif) !important;
 }
-article,
-article p,
-article li,
-article a {
+.article-body article,
+.article-body article p,
+.article-body article li,
+.article-body article a {
   font-family: var(--sans) !important;
 }
 
 /* dettagli che usano colori hardcoded fuori dai token */
-article a { color: var(--green-deep); }
-article a:hover { color: var(--green); }
-article .references-list li { border-bottom-color: var(--line) !important; }
-article .references-section { border-top-color: var(--line) !important; }
+.article-body article a { color: var(--green-deep); }
+.article-body article a:hover { color: var(--green); }
+.article-body article .references-list li { border-bottom-color: var(--line) !important; }
+.article-body article .references-section { border-top-color: var(--line) !important; }

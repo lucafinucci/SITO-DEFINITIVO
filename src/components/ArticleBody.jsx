@@ -54,7 +54,7 @@ export default function ArticleBody({ slug }) {
   return (
     <>
       <style>{articleStyles}</style>
-      <div dangerouslySetInnerHTML={{ __html: bodyHtml }} />
+      <div className="article-body" dangerouslySetInnerHTML={{ __html: bodyHtml }} />
     </>
   );
 }
