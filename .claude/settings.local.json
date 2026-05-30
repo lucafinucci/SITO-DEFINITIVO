@@ -56,7 +56,9 @@
       "Bash(curl -s \"http://127.0.0.1:5173/src/pages/Home.jsx\" -o /dev/null -w \"Home.jsx compile: %{http_code}\\\\n\")",
       "Bash(curl -s -A \"Mozilla/5.0\" -o /dev/null -w \"fonts css: %{http_code}\\\\n\" \"https://fonts.googleapis.com/css2?family=Newsreader:ital,wght@0,300;0,400;0,500;1,300;1,400;1,500&family=Hanken+Grotesk:wght@400;500;600;700;800&family=Sora:wght@400;600;700;800&family=JetBrains+Mono:wght@400;500&display=swap\")",
       "Bash(npm install *)",
-      "Bash(node -e \"const sharp=require\\('sharp'\\);const i='public/assets/images/infografica_document_intelligence.png';const o='public/assets/images/infografica_document_intelligence.webp';sharp\\(i\\).resize\\({width:1600,withoutEnlargement:true}\\).webp\\({quality:82}\\).toFile\\(o\\).then\\(r=>{const fs=require\\('fs'\\);const a=fs.statSync\\(i\\).size,b=fs.statSync\\(o\\).size;console.log\\('PNG',\\(a/1024/1024\\).toFixed\\(2\\)+'MB','-> WebP',\\(b/1024\\).toFixed\\(0\\)+'KB \\('+r.width+'x'+r.height+'\\)'\\);}\\).catch\\(e=>{console.error\\(e\\);process.exit\\(1\\);}\\);\")"
+      "Bash(node -e \"const sharp=require\\('sharp'\\);const i='public/assets/images/infografica_document_intelligence.png';const o='public/assets/images/infografica_document_intelligence.webp';sharp\\(i\\).resize\\({width:1600,withoutEnlargement:true}\\).webp\\({quality:82}\\).toFile\\(o\\).then\\(r=>{const fs=require\\('fs'\\);const a=fs.statSync\\(i\\).size,b=fs.statSync\\(o\\).size;console.log\\('PNG',\\(a/1024/1024\\).toFixed\\(2\\)+'MB','-> WebP',\\(b/1024\\).toFixed\\(0\\)+'KB \\('+r.width+'x'+r.height+'\\)'\\);}\\).catch\\(e=>{console.error\\(e\\);process.exit\\(1\\);}\\);\")",
+      "PowerShell(npm run build 2>&1)",
+      "PowerShell(npm run dev)"
     ],
     "deny": [],
     "ask": [],
