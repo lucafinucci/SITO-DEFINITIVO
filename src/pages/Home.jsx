@@ -326,12 +326,12 @@ export default function Home() {
                 <p>Da dati sparsi a un wiki vivo che si auto-mantiene: il nuovo modulo di Knowledge Intelligence, con risposte sempre citate alla fonte.</p>
                 <span className="news-go">Scopri Synapse <ArrowUpRight size={14} /></span>
               </Link>
-              <div className="news-card reveal d2">
+              <a href="https://www.confindustria.aq.it/imprese-associate" target="_blank" rel="noopener noreferrer" className="news-card reveal d2">
                 <div className="news-meta"><span className="nc">Ecosistema</span><span className="nd">2026</span></div>
                 <h3>Insieme a Confindustria L'Aquila per l'AI nelle imprese</h3>
                 <p>Portiamo l'intelligenza artificiale su misura nel tessuto delle PMI del territorio, accanto a Confindustria L'Aquila.</p>
-                <span className="news-go muted">Presto online</span>
-              </div>
+                <span className="news-go">Scopri <ArrowUpRight size={14} /></span>
+              </a>
             </div>
           </div>
         </section>
