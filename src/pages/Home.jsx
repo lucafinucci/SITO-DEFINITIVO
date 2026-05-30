@@ -49,6 +49,11 @@ const MODULES = [
     desc: "Il cervello documentale dell'azienda. Trasforma documenti, email, contratti e conversazioni sparse in un wiki vivo che si auto-mantiene — con ogni risposta citata fino alla fonte.",
     feats: ["Wiki vivo & knowledge graph aziendale", "Risposte con citazioni verificabili", "Dati on-premise, nel tuo perimetro"],
   },
+  {
+    n: "05", tag: "Pianificazione produzione", name: "APS", href: "/soluzioni/aps",
+    desc: "Advanced Planning System: pianifica e ottimizza la produzione manifatturiera con algoritmi avanzati e un'interfaccia conversazionale in linguaggio naturale, senza complessità.",
+    feats: ["Ottimizzazione multi-algoritmo della schedulazione", "Interfaccia conversazionale per la produzione", "Integrazione con ERP e MES esistenti"],
+  },
 ];
 
 export default function Home() {
@@ -144,6 +149,7 @@ export default function Home() {
                     <span className="chip sol"><span className="ci" />Document Intelligence</span>
                     <span className="chip sol"><span className="ci" />Finance Intelligence</span>
                     <span className="chip sol"><span className="ci" />Synapse</span>
+                    <span className="chip sol"><span className="ci" />APS</span>
                     <span className="chip tailor">+ Su misura</span>
                   </div>
                 </div>
@@ -175,10 +181,10 @@ export default function Home() {
             <div className="value-head">
               <div>
                 <div className="eyebrow reveal" style={{ marginBottom: 22 }}>Il nostro approccio</div>
-                <h2 className="h2 reveal d1">Un'unica intelligenza,<br />fatta per la <em>tua impresa</em>.</h2>
+                <h2 className="h2 reveal d1">Il ponte tra la tua impresa<br />e l'<em>intelligenza artificiale</em>.</h2>
               </div>
               <p className="lead reveal d2">
-                Le PMI italiane non hanno bisogno dell'ennesimo software. Hanno bisogno di un'AI che capisca i loro documenti, i loro numeri e i loro processi — e li mandi avanti da sola.
+                I motori di AI più avanzati cambiano ogni mese. La tua impresa no. Finch-AI sta nel mezzo: collega processi, documenti e numeri all'intelligenza artificiale giusta — ovunque viva, anche dentro le tue mura — e la fa lavorare per te.
               </p>
             </div>
             <div className="value-grid reveal d1">
@@ -189,8 +195,8 @@ export default function Home() {
               </div>
               <div className="value-cell">
                 <span className="num">02</span>
-                <h3 className="h3">Costruita sui tuoi dati</h3>
-                <p>Si addestra sul linguaggio, sui documenti e sulle regole della tua azienda. I dati restano in Italia, sotto il tuo controllo.</p>
+                <h3 className="h3">Il meglio dell'AI, al tuo servizio</h3>
+                <p>Scegliamo e colleghiamo i motori di intelligenza artificiale più adatti a te — nel cloud o on-premise. Per te non cambia nulla: cambia solo il risultato. E i dati restano in Italia.</p>
               </div>
               <div className="value-cell">
                 <span className="num">03</span>
@@ -205,7 +211,7 @@ export default function Home() {
         <section className="section modules" id="moduli">
           <div className="wrap">
             <div className="modules-head">
-              <h2 className="h2 reveal">Quattro moduli pronti.<br />E il resto, <em>su misura</em>.</h2>
+              <h2 className="h2 reveal">Cinque moduli pronti.<br />E il resto, <em>su misura</em>.</h2>
               <div className="eyebrow on-dark reveal d1" style={{ paddingBottom: 10 }}>La suite Finch</div>
             </div>
 

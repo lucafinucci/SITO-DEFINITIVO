@@ -5,6 +5,7 @@ import DocumentIntelligence from "@/pages/DocumentIntelligence";
 import FinanceIntelligence from "@/pages/FinanceIntelligence";
 import WarehouseIntelligence from "@/pages/WarehouseIntelligence";
 import Synapse from "@/pages/Synapse";
+import APS from "@/pages/APS";
 import ArticleAIImprenditori from "@/pages/ArticleAIImprenditori";
 import ArticleDocumentIntelligenceDDT from "@/pages/ArticleDocumentIntelligenceDDT";
 import ArticleStudiProfessionali from "@/pages/ArticleStudiProfessionali";
@@ -26,6 +27,7 @@ export default function App() {
       <Route path="/soluzioni/finance-intelligence" element={<FinanceIntelligence />} />
       <Route path="/soluzioni/warehouse-intelligence" element={<WarehouseIntelligence />} />
       <Route path="/soluzioni/synapse" element={<Synapse />} />
+      <Route path="/soluzioni/aps" element={<APS />} />
       <Route path="/blog" element={<Blog />} />
       <Route path="/blog/intelligenza-artificiale-imprenditori-commercialisti" element={<ArticleAIImprenditori />} />
       <Route path="/blog/document-intelligence-automazione-ddt-bolle-consegna" element={<ArticleDocumentIntelligenceDDT />} />

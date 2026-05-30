@@ -15,6 +15,7 @@ const SOLUTIONS = [
   { label: "Document Intelligence", href: "/soluzioni/document-intelligence" },
   { label: "Finance Intelligence", href: "/soluzioni/finance-intelligence" },
   { label: "Synapse", href: "/soluzioni/synapse" },
+  { label: "Pianificatore APS", href: "/soluzioni/aps" },
 ];
 
 export default function Navbar() {

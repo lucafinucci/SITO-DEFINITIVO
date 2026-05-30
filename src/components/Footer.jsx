@@ -41,6 +41,7 @@ export default function Footer() {
             <RouteLink to="/soluzioni/document-intelligence">Document Intelligence</RouteLink>
             <RouteLink to="/soluzioni/finance-intelligence">Finance Intelligence</RouteLink>
             <RouteLink to="/soluzioni/synapse">Synapse</RouteLink>
+            <RouteLink to="/soluzioni/aps">Pianificatore APS</RouteLink>
             <SectionLink id="sumisura">Soluzioni su misura</SectionLink>
           </div>
 
