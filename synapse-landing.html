@@ -1,0 +1,617 @@
+<!DOCTYPE html>
+<html lang="it">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Synapse — Finch-AI | Il cervello documentale della tua azienda</title>
+<meta name="description" content="Synapse di Finch-AI trasforma documenti, email, contratti e conversazioni sparse in un wiki vivo che si auto-mantiene. Conoscenza, supporto alle decisioni, valutazione e scrittura documenti. Soluzione enterprise per banche e aziende strutturate.">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Sora:wght@400;500;600;700;800&family=Manrope:wght@400;500;600;700&display=swap" rel="stylesheet">
+<style>
+:root{
+  --ciano:#0FA3C4;
+  --teal:#13B58E;
+  --lime:#52C53A;
+  --ink:#1B2530;
+  --ink-soft:#2A353B;
+  --slate:#5A6B78;
+  --mist:#8A99A6;
+  --line:#E4EBEF;
+  --paper:#FFFFFF;
+  --paper-2:#F6FAFB;
+  --paper-3:#EEF5F6;
+  --grad:linear-gradient(120deg,var(--ciano) 0%,var(--teal) 52%,var(--lime) 100%);
+  --grad-soft:linear-gradient(120deg,rgba(15,163,196,.10),rgba(82,197,58,.10));
+  --shadow-sm:0 2px 12px rgba(27,37,48,.06);
+  --shadow:0 18px 50px -22px rgba(20,90,90,.30);
+  --shadow-lg:0 30px 80px -30px rgba(20,90,90,.35);
+}
+*{margin:0;padding:0;box-sizing:border-box}
+html{scroll-behavior:smooth}
+body{
+  font-family:'Manrope',sans-serif;
+  background:var(--paper);
+  color:var(--ink);
+  line-height:1.65;
+  -webkit-font-smoothing:antialiased;
+  overflow-x:hidden;
+}
+h1,h2,h3,h4{font-family:'Sora',sans-serif;line-height:1.12;letter-spacing:-.02em;font-weight:700}
+.wrap{max-width:1200px;margin:0 auto;padding:0 28px}
+.grad-text{background:var(--grad);-webkit-background-clip:text;background-clip:text;-webkit-text-fill-color:transparent}
+.eyebrow{
+  display:inline-flex;align-items:center;gap:9px;
+  font-family:'Sora',sans-serif;font-weight:600;font-size:12.5px;letter-spacing:.14em;text-transform:uppercase;
+  color:var(--teal);
+}
+.eyebrow::before{content:"";width:26px;height:2px;background:var(--grad);border-radius:2px}
+
+/* ---- NAV ---- */
+nav{
+  position:fixed;top:0;left:0;right:0;z-index:100;
+  background:rgba(255,255,255,.82);backdrop-filter:blur(16px);
+  border-bottom:1px solid transparent;transition:border-color .3s,box-shadow .3s;
+}
+nav.scrolled{border-color:var(--line);box-shadow:var(--shadow-sm)}
+.nav-in{display:flex;align-items:center;justify-content:space-between;height:74px}
+.brand{display:flex;align-items:center;gap:12px;font-family:'Sora',sans-serif;font-weight:700;font-size:19px;color:var(--ink);text-decoration:none}
+.brand .mark{width:34px;height:34px;flex:none}
+.brand .sub{font-weight:500;color:var(--mist);font-size:13px;margin-left:2px}
+.nav-links{display:flex;align-items:center;gap:34px}
+.nav-links a{color:var(--slate);text-decoration:none;font-size:14.5px;font-weight:500;transition:color .2s}
+.nav-links a:hover{color:var(--teal)}
+.btn{
+  font-family:'Sora',sans-serif;font-weight:600;font-size:14.5px;
+  padding:12px 22px;border-radius:11px;text-decoration:none;display:inline-flex;align-items:center;gap:9px;
+  transition:transform .22s cubic-bezier(.2,.7,.3,1),box-shadow .22s;border:none;cursor:pointer;
+}
+.btn-primary{background:var(--grad);color:#fff;box-shadow:0 10px 26px -10px rgba(19,181,142,.6)}
+.btn-primary:hover{transform:translateY(-2px);box-shadow:0 16px 34px -10px rgba(19,181,142,.7)}
+.btn-ghost{background:var(--paper);color:var(--ink);border:1px solid var(--line)}
+.btn-ghost:hover{border-color:var(--teal);color:var(--teal);transform:translateY(-2px)}
+.nav-cta{display:flex;align-items:center;gap:14px}
+.menu-tog{display:none;background:none;border:none;cursor:pointer;color:var(--ink)}
+
+/* ---- HERO ---- */
+.hero{position:relative;padding:160px 0 90px;overflow:hidden}
+.hero-bg{position:absolute;inset:0;z-index:0;pointer-events:none}
+.hero-bg .blob{position:absolute;border-radius:50%;filter:blur(80px);opacity:.5}
+.b1{width:520px;height:520px;background:radial-gradient(circle,rgba(15,163,196,.30),transparent 70%);top:-160px;right:-120px}
+.b2{width:480px;height:480px;background:radial-gradient(circle,rgba(82,197,58,.22),transparent 70%);bottom:-200px;left:-140px}
+.grid-bg{position:absolute;inset:0;background-image:linear-gradient(var(--line) 1px,transparent 1px),linear-gradient(90deg,var(--line) 1px,transparent 1px);background-size:54px 54px;opacity:.4;mask-image:radial-gradient(ellipse 80% 60% at 50% 35%,#000 30%,transparent 75%)}
+.hero-in{position:relative;z-index:1;display:grid;grid-template-columns:1.05fr .95fr;gap:56px;align-items:center}
+.hero h1{font-size:clamp(38px,5.2vw,62px);font-weight:800;margin:22px 0 22px}
+.hero p.lead{font-size:19px;color:var(--slate);max-width:540px;margin-bottom:34px}
+.hero-cta{display:flex;gap:14px;flex-wrap:wrap;margin-bottom:30px}
+.trust{display:flex;align-items:center;gap:22px;flex-wrap:wrap;color:var(--mist);font-size:13.5px;font-weight:500}
+.trust .dot{display:flex;align-items:center;gap:8px}
+.trust .dot svg{color:var(--teal)}
+.pill{
+  display:inline-flex;align-items:center;gap:8px;padding:7px 15px;border-radius:100px;
+  background:var(--grad-soft);border:1px solid rgba(19,181,142,.22);
+  font-family:'Sora',sans-serif;font-weight:600;font-size:12.5px;color:var(--teal);letter-spacing:.02em;
+}
+.pill .ping{width:7px;height:7px;border-radius:50%;background:var(--lime);box-shadow:0 0 0 0 rgba(82,197,58,.6);animation:ping 2s infinite}
+@keyframes ping{0%{box-shadow:0 0 0 0 rgba(82,197,58,.5)}70%{box-shadow:0 0 0 9px rgba(82,197,58,0)}100%{box-shadow:0 0 0 0 rgba(82,197,58,0)}}
+
+/* hero visual card */
+.hero-card{
+  position:relative;background:var(--paper);border:1px solid var(--line);border-radius:22px;
+  box-shadow:var(--shadow-lg);padding:24px;
+}
+.hero-card .topbar{display:flex;align-items:center;gap:7px;margin-bottom:18px}
+.hero-card .topbar i{width:11px;height:11px;border-radius:50%;background:var(--paper-3)}
+.hero-card .topbar .lbl{margin-left:auto;font-size:12px;color:var(--mist);font-family:'Sora',sans-serif;font-weight:500}
+.chatline{display:flex;gap:11px;margin-bottom:15px;align-items:flex-start}
+.chatline .av{width:30px;height:30px;border-radius:9px;flex:none;display:grid;place-items:center;font-family:'Sora';font-weight:700;font-size:12px}
+.av-user{background:var(--paper-3);color:var(--slate)}
+.av-ai{background:var(--grad);color:#fff}
+.bub{background:var(--paper-2);border:1px solid var(--line);border-radius:13px;padding:11px 14px;font-size:13.5px;color:var(--ink-soft)}
+.bub.q{background:var(--paper-3);border:none}
+.cite{display:inline-block;font-size:10.5px;font-weight:600;font-family:'Sora';padding:1px 7px;border-radius:6px;background:var(--grad-soft);color:var(--teal);margin:0 2px;vertical-align:middle;border:1px solid rgba(19,181,142,.2)}
+.warn{display:flex;gap:8px;align-items:flex-start;background:rgba(245,170,30,.10);border-left:3px solid #E0941A;border-radius:0 8px 8px 0;padding:8px 11px;font-size:12.5px;color:#8A5A0B;margin-bottom:10px}
+
+/* ---- LOGOS / STRIP ---- */
+.strip{border-top:1px solid var(--line);border-bottom:1px solid var(--line);background:var(--paper-2);padding:26px 0}
+.strip-in{display:flex;align-items:center;justify-content:center;gap:46px;flex-wrap:wrap;color:var(--mist);font-size:13px;font-weight:600;font-family:'Sora'}
+.strip-in .item{display:flex;align-items:center;gap:9px}
+.strip-in .item svg{color:var(--teal)}
+
+/* ---- SECTION SHELL ---- */
+section.block{padding:96px 0}
+.sec-head{max-width:720px;margin:0 auto 60px;text-align:center}
+.sec-head h2{font-size:clamp(28px,3.6vw,42px);margin:16px 0 16px}
+.sec-head p{font-size:17.5px;color:var(--slate)}
+
+/* ---- PROBLEM ---- */
+.prob-grid{display:grid;grid-template-columns:repeat(3,1fr);gap:24px}
+.prob{background:var(--paper);border:1px solid var(--line);border-radius:16px;padding:28px;transition:transform .25s,box-shadow .25s,border-color .25s}
+.prob:hover{transform:translateY(-4px);box-shadow:var(--shadow);border-color:rgba(19,181,142,.3)}
+.prob .ic{width:46px;height:46px;border-radius:12px;background:var(--grad-soft);display:grid;place-items:center;color:var(--teal);margin-bottom:16px}
+.prob h3{font-size:18px;margin-bottom:8px}
+.prob p{font-size:14.5px;color:var(--slate)}
+
+/* ---- INFOGRAPHIC ---- */
+.info-wrap{background:linear-gradient(180deg,var(--paper-2),var(--paper));border-top:1px solid var(--line);border-bottom:1px solid var(--line)}
+.flowgrid{display:grid;grid-template-columns:1fr auto 1fr auto 1fr;gap:0;align-items:stretch;margin-top:20px}
+.flowcol{display:flex;flex-direction:column;gap:14px}
+.flowcol .colhead{text-align:center;margin-bottom:6px}
+.flowcol .colhead .n{font-family:'Sora';font-weight:700;font-size:12px;letter-spacing:.12em;text-transform:uppercase;color:var(--mist)}
+.flowcol .colhead h3{font-size:19px;margin-top:5px}
+.node{background:var(--paper);border:1px solid var(--line);border-radius:13px;padding:14px 16px;display:flex;gap:12px;align-items:center;box-shadow:var(--shadow-sm);transition:transform .2s,border-color .2s}
+.node:hover{transform:translateX(3px);border-color:rgba(19,181,142,.35)}
+.node .ni{width:34px;height:34px;border-radius:9px;flex:none;display:grid;place-items:center;color:#fff}
+.node .nt{font-size:13.5px;font-weight:600;color:var(--ink)}
+.node .nd{font-size:11.5px;color:var(--mist);margin-top:1px}
+.bg-in{background:linear-gradient(135deg,#0FA3C4,#13B58E)}
+.bg-core{background:linear-gradient(135deg,#13B58E,#2FB86A)}
+.bg-out{background:linear-gradient(135deg,#2FB86A,#52C53A)}
+.flowarrow{display:flex;align-items:center;justify-content:center;padding:0 14px;color:var(--teal)}
+.corebox{background:var(--grad);border-radius:16px;padding:2px;box-shadow:var(--shadow);align-self:center}
+.corebox .inner{background:var(--paper);border-radius:14px;padding:20px 16px;text-align:center}
+.corebox .inner .big{font-family:'Sora';font-weight:700;font-size:15px;color:var(--ink);margin-bottom:3px}
+.corebox .inner .sm{font-size:11.5px;color:var(--slate)}
+.corebox .brain{width:46px;height:46px;border-radius:12px;background:var(--grad);display:grid;place-items:center;color:#fff;margin:0 auto 12px}
+
+/* ---- CAPABILITIES ---- */
+.cap-grid{display:grid;grid-template-columns:repeat(2,1fr);gap:24px}
+.cap{position:relative;background:var(--paper);border:1px solid var(--line);border-radius:18px;padding:30px;overflow:hidden;transition:transform .25s,box-shadow .25s}
+.cap:hover{transform:translateY(-4px);box-shadow:var(--shadow)}
+.cap::after{content:"";position:absolute;top:0;left:0;right:0;height:3px;background:var(--grad);transform:scaleX(0);transform-origin:left;transition:transform .35s}
+.cap:hover::after{transform:scaleX(1)}
+.cap .num{font-family:'Sora';font-weight:800;font-size:13px;color:var(--mist)}
+.cap .ic{width:52px;height:52px;border-radius:14px;background:var(--grad-soft);display:grid;place-items:center;color:var(--teal);margin:14px 0 18px}
+.cap h3{font-size:21px;margin-bottom:10px}
+.cap p{font-size:15px;color:var(--slate);margin-bottom:16px}
+.cap ul{list-style:none;display:flex;flex-direction:column;gap:8px}
+.cap li{display:flex;gap:10px;align-items:flex-start;font-size:14px;color:var(--ink-soft)}
+.cap li svg{color:var(--lime);flex:none;margin-top:3px}
+
+/* ---- SOURCES grid ---- */
+.src-grid{display:grid;grid-template-columns:repeat(4,1fr);gap:16px;margin-top:14px}
+.src{background:var(--paper);border:1px solid var(--line);border-radius:13px;padding:18px;text-align:center;transition:transform .2s,border-color .2s}
+.src:hover{transform:translateY(-3px);border-color:rgba(19,181,142,.35)}
+.src .ic{width:40px;height:40px;border-radius:10px;background:var(--paper-3);display:grid;place-items:center;color:var(--teal);margin:0 auto 12px}
+.src .nm{font-size:13.5px;font-weight:600;color:var(--ink)}
+.src .ds{font-size:11.5px;color:var(--mist);margin-top:3px}
+
+/* ---- ENTERPRISE / SECURITY ---- */
+.ent{background:var(--ink);color:#fff;border-radius:24px;padding:56px;position:relative;overflow:hidden}
+.ent::before{content:"";position:absolute;top:-100px;right:-100px;width:360px;height:360px;background:radial-gradient(circle,rgba(82,197,58,.25),transparent 70%);filter:blur(40px)}
+.ent-in{position:relative;z-index:1;display:grid;grid-template-columns:1fr 1fr;gap:44px;align-items:center}
+.ent h2{font-size:34px;color:#fff;margin-bottom:16px}
+.ent p{color:#AEBCC6;font-size:16px;margin-bottom:24px}
+.ent-feats{display:grid;grid-template-columns:1fr 1fr;gap:18px}
+.ent-feat{display:flex;gap:12px;align-items:flex-start}
+.ent-feat .ic{width:40px;height:40px;border-radius:11px;background:rgba(255,255,255,.07);border:1px solid rgba(255,255,255,.12);display:grid;place-items:center;color:var(--lime);flex:none}
+.ent-feat .ft{font-family:'Sora';font-weight:600;font-size:14.5px;color:#fff}
+.ent-feat .fd{font-size:12.5px;color:#8A99A6;margin-top:2px}
+
+/* ---- DEPLOY ---- */
+.dep-grid{display:grid;grid-template-columns:repeat(3,1fr);gap:24px}
+.dep{background:var(--paper);border:1px solid var(--line);border-radius:16px;padding:30px;position:relative;transition:transform .25s,box-shadow .25s}
+.dep:hover{transform:translateY(-4px);box-shadow:var(--shadow)}
+.dep.feat{border-color:transparent;background:var(--paper);box-shadow:var(--shadow)}
+.dep.feat::before{content:"";position:absolute;inset:0;border-radius:16px;padding:1.5px;background:var(--grad);-webkit-mask:linear-gradient(#fff 0 0) content-box,linear-gradient(#fff 0 0);-webkit-mask-composite:xor;mask-composite:exclude;pointer-events:none}
+.dep .tag{display:inline-block;font-family:'Sora';font-weight:600;font-size:11px;letter-spacing:.1em;text-transform:uppercase;color:var(--teal);margin-bottom:14px}
+.dep h3{font-size:20px;margin-bottom:8px}
+.dep .pr{font-size:13px;color:var(--mist);margin-bottom:16px}
+.dep ul{list-style:none;display:flex;flex-direction:column;gap:9px}
+.dep li{display:flex;gap:9px;align-items:flex-start;font-size:13.5px;color:var(--ink-soft)}
+.dep li svg{color:var(--lime);flex:none;margin-top:3px}
+
+/* ---- CTA ---- */
+.cta-final{text-align:center;padding:96px 0}
+.cta-box{background:var(--grad);border-radius:26px;padding:64px 40px;position:relative;overflow:hidden;box-shadow:var(--shadow-lg)}
+.cta-box::before{content:"";position:absolute;inset:0;background-image:linear-gradient(rgba(255,255,255,.08) 1px,transparent 1px),linear-gradient(90deg,rgba(255,255,255,.08) 1px,transparent 1px);background-size:40px 40px;mask-image:radial-gradient(ellipse 70% 80% at 50% 0%,#000,transparent 70%)}
+.cta-box *{position:relative;z-index:1}
+.cta-box h2{font-size:clamp(28px,4vw,40px);color:#fff;margin-bottom:16px}
+.cta-box p{color:rgba(255,255,255,.9);font-size:18px;max-width:560px;margin:0 auto 32px}
+.cta-box .btn-white{background:#fff;color:var(--teal)}
+.cta-box .btn-white:hover{transform:translateY(-2px);box-shadow:0 16px 34px -10px rgba(0,0,0,.3)}
+.cta-box .btn-line{background:rgba(255,255,255,.12);color:#fff;border:1px solid rgba(255,255,255,.3)}
+.cta-row{display:flex;gap:14px;justify-content:center;flex-wrap:wrap}
+
+/* ---- FOOTER ---- */
+footer{background:var(--paper-2);border-top:1px solid var(--line);padding:54px 0 30px}
+.foot-in{display:grid;grid-template-columns:2fr 1fr 1fr 1fr;gap:34px;margin-bottom:36px}
+.foot-brand p{font-size:14px;color:var(--slate);margin-top:14px;max-width:300px}
+.foot-col h4{font-family:'Sora';font-size:13px;font-weight:600;letter-spacing:.08em;text-transform:uppercase;color:var(--ink);margin-bottom:14px}
+.foot-col a{display:block;color:var(--slate);text-decoration:none;font-size:14px;margin-bottom:9px;transition:color .2s}
+.foot-col a:hover{color:var(--teal)}
+.foot-bot{border-top:1px solid var(--line);padding-top:22px;display:flex;justify-content:space-between;align-items:center;flex-wrap:wrap;gap:12px;color:var(--mist);font-size:13px}
+
+/* reveal */
+.reveal{opacity:0;transform:translateY(24px);transition:opacity .7s cubic-bezier(.2,.7,.3,1),transform .7s cubic-bezier(.2,.7,.3,1)}
+.reveal.in{opacity:1;transform:none}
+
+@media(max-width:900px){
+  .hero-in{grid-template-columns:1fr;gap:40px}
+  .prob-grid,.dep-grid{grid-template-columns:1fr}
+  .cap-grid,.ent-in,.foot-in{grid-template-columns:1fr}
+  .src-grid{grid-template-columns:repeat(2,1fr)}
+  .flowgrid{grid-template-columns:1fr}
+  .flowarrow{transform:rotate(90deg);padding:6px 0}
+  .nav-links{display:none}
+  .ent{padding:36px 28px}
+  .ent-feats,.foot-in{grid-template-columns:1fr 1fr}
+}
+@media(max-width:560px){
+  .src-grid,.ent-feats,.foot-in{grid-template-columns:1fr}
+  .hero{padding:120px 0 60px}
+}
+</style>
+</head>
+<body>
+
+<nav id="nav">
+  <div class="wrap nav-in">
+    <a href="#" class="brand">
+      <svg class="mark" viewBox="0 0 100 100" fill="none" xmlns="http://www.w3.org/2000/svg">
+        <defs><linearGradient id="bg" x1="0" y1="0" x2="1" y2="1">
+          <stop offset="0" stop-color="#0FA3C4"/><stop offset=".5" stop-color="#13B58E"/><stop offset="1" stop-color="#52C53A"/>
+        </linearGradient></defs>
+        <path d="M38 20c-9 0-16 7-16 16 0 3 1 6 2 8L20 70h12l8-14c8 2 16-4 16-13" stroke="url(#bg)" stroke-width="3.5" fill="none" stroke-linecap="round" stroke-linejoin="round"/>
+        <circle cx="42" cy="30" r="2.6" fill="url(#bg)"/>
+        <path d="M30 52l14-9M44 43l8 1" stroke="url(#bg)" stroke-width="2.4" fill="none" stroke-linecap="round"/>
+        <circle cx="30" cy="52" r="2.4" fill="url(#bg)"/><circle cx="52" cy="44" r="2.4" fill="url(#bg)"/>
+        <path d="M28 70l-6 12h8l6-12" stroke="url(#bg)" stroke-width="3.5" fill="none" stroke-linecap="round" stroke-linejoin="round"/>
+      </svg>
+      Synapse <span class="sub">by Finch-AI</span>
+    </a>
+    <div class="nav-links">
+      <a href="#come-funziona">Come funziona</a>
+      <a href="#capacita">Cosa produce</a>
+      <a href="#fonti">Fonti dati</a>
+      <a href="#sicurezza">Sicurezza</a>
+      <a href="#deploy">Distribuzione</a>
+    </div>
+    <div class="nav-cta">
+      <a href="#contatti" class="btn btn-ghost">Accedi</a>
+      <a href="#demo" class="btn btn-primary">Richiedi demo</a>
+    </div>
+  </div>
+</nav>
+
+<!-- HERO -->
+<header class="hero">
+  <div class="hero-bg"><div class="blob b1"></div><div class="blob b2"></div><div class="grid-bg"></div></div>
+  <div class="wrap hero-in">
+    <div class="reveal in">
+      <span class="pill"><span class="ping"></span> Knowledge Intelligence · Enterprise</span>
+      <h1>Il <span class="grad-text">cervello documentale</span> della tua azienda</h1>
+      <p class="lead">Synapse trasforma documenti, contratti, email e conversazioni sparse in un wiki vivo che si auto-mantiene. La conoscenza aziendale smette di disperdersi: si accumula, si collega, e risponde — con ogni affermazione citata fino alla fonte originale.</p>
+      <div class="hero-cta">
+        <a href="#demo" class="btn btn-primary">Richiedi una demo
+          <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round"><path d="M5 12h14M13 6l6 6-6 6"/></svg>
+        </a>
+        <a href="#come-funziona" class="btn btn-ghost">Scopri come funziona</a>
+      </div>
+      <div class="trust">
+        <span class="dot"><svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2"><path d="M12 2l8 4v6c0 5-3.5 8-8 10-4.5-2-8-5-8-10V6z"/></svg> Dati on-premise</span>
+        <span class="dot"><svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2"><path d="M20 6L9 17l-5-5"/></svg> Citazioni verificabili</span>
+        <span class="dot"><svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2"><path d="M12 6v6l4 2"/><circle cx="12" cy="12" r="9"/></svg> Sempre aggiornato</span>
+      </div>
+    </div>
+    <div class="reveal in" style="transition-delay:.12s">
+      <div class="hero-card">
+        <div class="topbar"><i></i><i></i><i></i><span class="lbl">Chiedi a Synapse</span></div>
+        <div class="chatline"><div class="av av-user">MR</div><div class="bub q">Qual è l'SLA che stiamo offrendo a Beta SpA per il prodotto Plus?</div></div>
+        <div class="chatline"><div class="av av-ai">S</div><div class="bub">
+          <div class="warn"><svg width="15" height="15" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M12 9v4M12 17h.01M10.3 3.9 1.8 18a2 2 0 0 0 1.7 3h17a2 2 0 0 0 1.7-3L13.7 3.9a2 2 0 0 0-3.4 0z"/></svg> Ho trovato una discrepanza tra i documenti.</div>
+          La proposta commerciale indica <strong>99,9%</strong><span class="cite">prop-Beta.pdf p.7</span>, ma la MSA nel data room riporta <strong>99,5%</strong><span class="cite">MSA-rev3 art.9.2</span>. Suggerisco di allineare prima della firma.
+        </div></div>
+      </div>
+    </div>
+  </div>
+</header>
+
+<!-- STRIP -->
+<div class="strip">
+  <div class="wrap strip-in">
+    <span class="item"><svg width="17" height="17" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><rect x="3" y="3" width="18" height="18" rx="2"/><path d="M9 9h6v6H9z"/></svg> Banche &amp; Assicurazioni</span>
+    <span class="item"><svg width="17" height="17" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M3 21h18M5 21V7l8-4v18M19 21V11l-6-4"/></svg> Studi legali</span>
+    <span class="item"><svg width="17" height="17" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M2 3h6l2 4-3 2a14 14 0 0 0 6 6l2-3 4 2v6a2 2 0 0 1-2 2A18 18 0 0 1 2 5a2 2 0 0 1 0-2z"/></svg> Sanità</span>
+    <span class="item"><svg width="17" height="17" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><circle cx="12" cy="12" r="3"/><path d="M12 2v4M12 18v4M2 12h4M18 12h4"/></svg> Manifatturiero</span>
+    <span class="item"><svg width="17" height="17" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M3 9l9-7 9 7v11a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2z"/></svg> PA &amp; Enti</span>
+  </div>
+</div>
+
+<!-- PROBLEM -->
+<section class="block">
+  <div class="wrap">
+    <div class="sec-head reveal">
+      <span class="eyebrow">Il problema</span>
+      <h2>La tua azienda sa più di quanto riesca a ricordare</h2>
+      <p>Ogni giorno produci conoscenza preziosa. Ma si disperde in mille sistemi, e quando serve nessuno la ritrova.</p>
+    </div>
+    <div class="prob-grid">
+      <div class="prob reveal">
+        <div class="ic"><svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M3 7h18M3 12h18M3 17h12"/></svg></div>
+        <h3>Documenti sparsi</h3>
+        <p>Contratti su SharePoint, decisioni in email, know-how in conversazioni. Niente è collegato e tutto invecchia in silenzio.</p>
+      </div>
+      <div class="prob reveal" style="transition-delay:.1s">
+        <div class="ic"><svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><circle cx="11" cy="11" r="7"/><path d="M21 21l-4.3-4.3"/></svg></div>
+        <h3>Ricerche che ripartono da zero</h3>
+        <p>Ogni domanda costa ore: leggere gli stessi documenti, ricostruire lo stesso contesto, sperando di non perdere un dettaglio.</p>
+      </div>
+      <div class="prob reveal" style="transition-delay:.2s">
+        <div class="ic"><svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M16 21v-2a4 4 0 0 0-4-4H6a4 4 0 0 0-4 4v2M9 11a4 4 0 1 0 0-8 4 4 0 0 0 0 8zM22 21v-2a4 4 0 0 0-3-3.9"/></svg></div>
+        <h3>Il know-how se ne va</h3>
+        <p>Quando una persona chiave lascia l'azienda, porta con sé anni di esperienza che non è mai stata scritta da nessuna parte.</p>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- INFOGRAPHIC / HOW IT WORKS -->
+<div class="info-wrap" id="come-funziona">
+  <section class="block">
+    <div class="wrap">
+      <div class="sec-head reveal">
+        <span class="eyebrow">Come funziona</span>
+        <h2>Da dati sparsi a conoscenza che lavora per te</h2>
+        <p>Synapse legge le tue fonti, le compila in un cervello documentale vivo, e produce valore concreto — non semplici risposte.</p>
+      </div>
+      <div class="flowgrid reveal">
+        <!-- INPUT -->
+        <div class="flowcol">
+          <div class="colhead"><div class="n">01 · Da dove prende i dati</div><h3>Le tue fonti</h3></div>
+          <div class="node"><div class="ni bg-in"><svg width="17" height="17" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M14 2H6a2 2 0 0 0-2 2v16a2 2 0 0 0 2 2h12a2 2 0 0 0 2-2V8z"/><path d="M14 2v6h6"/></svg></div><div><div class="nt">Documenti &amp; contratti</div><div class="nd">PDF, Word, scansioni, OCR</div></div></div>
+          <div class="node"><div class="ni bg-in"><svg width="17" height="17" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M4 4h16v16H4z"/><path d="M4 8h16M8 4v16"/></svg></div><div><div class="nt">Email &amp; Office 365</div><div class="nd">Outlook, SharePoint, Drive</div></div></div>
+          <div class="node"><div class="ni bg-in"><svg width="17" height="17" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M21 15a2 2 0 0 1-2 2H7l-4 4V5a2 2 0 0 1 2-2h14a2 2 0 0 1 2 2z"/></svg></div><div><div class="nt">Chat &amp; call</div><div class="nd">Teams, Slack, trascrizioni</div></div></div>
+          <div class="node"><div class="ni bg-in"><svg width="17" height="17" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><ellipse cx="12" cy="5" rx="9" ry="3"/><path d="M3 5v14a9 3 0 0 0 18 0V5"/></svg></div><div><div class="nt">Gestionali &amp; CRM</div><div class="nd">ERP, Salesforce, database</div></div></div>
+        </div>
+        <div class="flowarrow"><svg width="28" height="28" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round"><path d="M5 12h14M13 6l6 6-6 6"/></svg></div>
+        <!-- CORE -->
+        <div class="flowcol" style="justify-content:center">
+          <div class="colhead"><div class="n">02 · Cosa è</div><h3>Il cervello Synapse</h3></div>
+          <div class="corebox">
+            <div class="inner">
+              <div class="brain"><svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M12 5a3 3 0 0 0-3 3 3 3 0 0 0-3 3 3 3 0 0 0 1 5 3 3 0 0 0 5 1 3 3 0 0 0 5-1 3 3 0 0 0 1-5 3 3 0 0 0-3-3 3 3 0 0 0-3-3z"/><path d="M12 5v14"/></svg></div>
+              <div class="big">Wiki vivo &amp; knowledge graph</div>
+              <div class="sm">Agenti AI estraggono entità, collegano concetti, rilevano contraddizioni e mantengono tutto aggiornato — con citazioni verificabili su ogni affermazione.</div>
+            </div>
+          </div>
+          <div class="node" style="margin-top:14px"><div class="ni bg-core"><svg width="17" height="17" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M20 6L9 17l-5-5"/></svg></div><div><div class="nt">Auto-manutenzione</div><div class="nd">Si aggiorna ad ogni nuova fonte</div></div></div>
+        </div>
+        <div class="flowarrow"><svg width="28" height="28" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round"><path d="M5 12h14M13 6l6 6-6 6"/></svg></div>
+        <!-- OUTPUT -->
+        <div class="flowcol">
+          <div class="colhead"><div class="n">03 · Cosa produce</div><h3>Valore concreto</h3></div>
+          <div class="node"><div class="ni bg-out"><svg width="17" height="17" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M12 5a3 3 0 0 0-3 3 3 3 0 0 0-3 3 3 3 0 0 0 1 5 3 3 0 0 0 5 1 3 3 0 0 0 5-1 3 3 0 0 0 1-5 3 3 0 0 0-3-3 3 3 0 0 0-3-3z"/></svg></div><div><div class="nt">Conoscenza</div><div class="nd">Risposte istantanee citate</div></div></div>
+          <div class="node"><div class="ni bg-out"><svg width="17" height="17" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M3 3v18h18"/><path d="M7 14l4-4 3 3 5-6"/></svg></div><div><div class="nt">Supporto alle decisioni</div><div class="nd">Confronti, rischi, alert</div></div></div>
+          <div class="node"><div class="ni bg-out"><svg width="17" height="17" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M9 11l3 3L22 4"/><path d="M21 12v7a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2V5a2 2 0 0 1 2-2h11"/></svg></div><div><div class="nt">Valutazione documenti</div><div class="nd">Due diligence, conformità</div></div></div>
+          <div class="node"><div class="ni bg-out"><svg width="17" height="17" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M12 19l7-7 3 3-7 7-3-3z"/><path d="M18 13l-1.5-7.5L2 2l3.5 14.5L13 18z"/><path d="M2 2l7.6 7.6"/></svg></div><div><div class="nt">Scrittura documenti</div><div class="nd">Bozze, report, sintesi</div></div></div>
+        </div>
+      </div>
+      <div style="text-align:center;margin-top:36px" class="reveal">
+        <a href="#" id="dl-info" class="btn btn-ghost">
+          <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round"><path d="M21 15v4a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2v-4M7 10l5 5 5-5M12 15V3"/></svg>
+          Scarica l'infografica (PNG)
+        </a>
+      </div>
+    </div>
+  </section>
+</div>
+
+<!-- CAPABILITIES -->
+<section class="block" id="capacita">
+  <div class="wrap">
+    <div class="sec-head reveal">
+      <span class="eyebrow">Cosa produce</span>
+      <h2>Quattro modi in cui Synapse lavora per te</h2>
+      <p>Non un chatbot che risponde e dimentica. Un sistema che accumula valore ogni giorno.</p>
+    </div>
+    <div class="cap-grid">
+      <div class="cap reveal">
+        <div class="num">01</div>
+        <div class="ic"><svg width="26" height="26" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M12 5a3 3 0 0 0-3 3 3 3 0 0 0-3 3 3 3 0 0 0 1 5 3 3 0 0 0 5 1 3 3 0 0 0 5-1 3 3 0 0 0 1-5 3 3 0 0 0-3-3 3 3 0 0 0-3-3z"/><path d="M12 5v14"/></svg></div>
+        <h3>Conoscenza</h3>
+        <p>Chiedi in linguaggio naturale e ottieni risposte precise, con ogni affermazione citata fino alla riga esatta della fonte originale.</p>
+        <ul>
+          <li><svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"><path d="M20 6L9 17l-5-5"/></svg> Ricerca semantica su tutto l'archivio</li>
+          <li><svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"><path d="M20 6L9 17l-5-5"/></svg> Citazioni verificabili, niente allucinazioni</li>
+          <li><svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"><path d="M20 6L9 17l-5-5"/></svg> Onboarding più rapido dei nuovi assunti</li>
+        </ul>
+      </div>
+      <div class="cap reveal" style="transition-delay:.08s">
+        <div class="num">02</div>
+        <div class="ic"><svg width="26" height="26" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M3 3v18h18"/><path d="M7 14l4-4 3 3 5-6"/></svg></div>
+        <h3>Supporto alle decisioni</h3>
+        <p>Synapse confronta documenti, rileva contraddizioni e incoerenze, segnala rischi e ti dà il quadro completo prima che tu decida.</p>
+        <ul>
+          <li><svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"><path d="M20 6L9 17l-5-5"/></svg> Rilevamento automatico di contraddizioni</li>
+          <li><svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"><path d="M20 6L9 17l-5-5"/></svg> Alert proattivi su scadenze e rischi</li>
+          <li><svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"><path d="M20 6L9 17l-5-5"/></svg> Confronti cross-documento istantanei</li>
+        </ul>
+      </div>
+      <div class="cap reveal" style="transition-delay:.16s">
+        <div class="num">03</div>
+        <div class="ic"><svg width="26" height="26" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M9 11l3 3L22 4"/><path d="M21 12v7a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2V5a2 2 0 0 1 2-2h11"/></svg></div>
+        <h3>Valutazione documenti</h3>
+        <p>Carica un contratto, una proposta, un dossier di due diligence: Synapse lo analizza contro le tue policy e i tuoi standard, ed evidenzia ciò che conta.</p>
+        <ul>
+          <li><svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"><path d="M20 6L9 17l-5-5"/></svg> Gap analysis su normative e policy</li>
+          <li><svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"><path d="M20 6L9 17l-5-5"/></svg> Estrazione di clausole e obblighi</li>
+          <li><svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"><path d="M20 6L9 17l-5-5"/></svg> Red flag tracker per due diligence</li>
+        </ul>
+      </div>
+      <div class="cap reveal" style="transition-delay:.24s">
+        <div class="num">04</div>
+        <div class="ic"><svg width="26" height="26" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M12 19l7-7 3 3-7 7-3-3z"/><path d="M18 13l-1.5-7.5L2 2l3.5 14.5L13 18z"/><path d="M2 2l7.6 7.6"/></svg></div>
+        <h3>Scrittura documenti</h3>
+        <p>Genera bozze di report, sintesi, risposte e proposte già fondate sulla tua conoscenza aziendale — pronte da rivedere, non da scrivere da zero.</p>
+        <ul>
+          <li><svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"><path d="M20 6L9 17l-5-5"/></svg> Report e sintesi con fonti integrate</li>
+          <li><svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"><path d="M20 6L9 17l-5-5"/></svg> Bozze coerenti con il tuo stile aziendale</li>
+          <li><svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"><path d="M20 6L9 17l-5-5"/></svg> Playbook ricorrenti automatizzati</li>
+        </ul>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- SOURCES -->
+<section class="block" id="fonti" style="padding-top:0">
+  <div class="wrap">
+    <div class="sec-head reveal">
+      <span class="eyebrow">Fonti dati</span>
+      <h2>Si connette dove vive già la tua conoscenza</h2>
+      <p>Nessuna migrazione. Synapse legge le tue fonti dove sono — anche dietro il firewall aziendale.</p>
+    </div>
+    <div class="src-grid reveal">
+      <div class="src"><div class="ic"><svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M14 2H6a2 2 0 0 0-2 2v16a2 2 0 0 0 2 2h12a2 2 0 0 0 2-2V8z"/><path d="M14 2v6h6"/></svg></div><div class="nm">SharePoint &amp; Drive</div><div class="ds">File server, cloud storage</div></div>
+      <div class="src"><div class="ic"><svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M4 4h16v16H4z"/><path d="M22 6l-10 7L2 6"/></svg></div><div class="nm">Email &amp; Exchange</div><div class="ds">Outlook on-prem e cloud</div></div>
+      <div class="src"><div class="ic"><svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M21 15a2 2 0 0 1-2 2H7l-4 4V5a2 2 0 0 1 2-2h14a2 2 0 0 1 2 2z"/></svg></div><div class="nm">Teams &amp; Slack</div><div class="ds">Conversazioni, trascrizioni</div></div>
+      <div class="src"><div class="ic"><svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><ellipse cx="12" cy="5" rx="9" ry="3"/><path d="M3 5v14a9 3 0 0 0 18 0V5"/></svg></div><div class="nm">ERP &amp; CRM</div><div class="ds">Salesforce, gestionali, DB</div></div>
+      <div class="src"><div class="ic"><svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M9 11l3 3L22 4"/><path d="M21 12v7a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2V5a2 2 0 0 1 2-2h11"/></svg></div><div class="nm">Ticketing</div><div class="ds">Zendesk, Jira, ServiceNow</div></div>
+      <div class="src"><div class="ic"><svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><rect x="3" y="3" width="18" height="18" rx="2"/><path d="M3 9h18M9 21V9"/></svg></div><div class="nm">Data room</div><div class="ds">Due diligence, contratti</div></div>
+      <div class="src"><div class="ic"><svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M23 7l-7 5 7 5V7z"/><rect x="1" y="5" width="15" height="14" rx="2"/></svg></div><div class="nm">Audio &amp; video</div><div class="ds">Call, registrazioni, ASR</div></div>
+      <div class="src"><div class="ic"><svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><circle cx="12" cy="12" r="3"/><path d="M3.5 12a8.5 8.5 0 0 1 17 0M12 3.5v17"/></svg></div><div class="nm">Web &amp; normativa</div><div class="ds">Gazzetta, siti, fonti pubbliche</div></div>
+    </div>
+  </div>
+</section>
+
+<!-- ENTERPRISE / SECURITY -->
+<section class="block" id="sicurezza" style="padding-top:0">
+  <div class="wrap reveal">
+    <div class="ent">
+      <div class="ent-in">
+        <div>
+          <span class="eyebrow" style="color:var(--lime)">Sicurezza enterprise</span>
+          <h2>I tuoi dati non escono mai dal tuo perimetro</h2>
+          <p>Synapse è progettato per banche, assicurazioni, sanità e PA. Funziona dietro il tuo firewall, con i tuoi modelli, sotto il tuo controllo. Conformità non come opzione, ma come fondamenta.</p>
+          <a href="#deploy" class="btn btn-primary">Scopri le opzioni di deploy
+            <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round"><path d="M5 12h14M13 6l6 6-6 6"/></svg>
+          </a>
+        </div>
+        <div class="ent-feats">
+          <div class="ent-feat"><div class="ic"><svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M12 2l8 4v6c0 5-3.5 8-8 10-4.5-2-8-5-8-10V6z"/></svg></div><div><div class="ft">On-premise</div><div class="fd">Deploy nel tuo cloud o data center</div></div></div>
+          <div class="ent-feat"><div class="ic"><svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><rect x="3" y="11" width="18" height="11" rx="2"/><path d="M7 11V7a5 5 0 0 1 10 0v4"/></svg></div><div><div class="ft">RBAC granulare</div><div class="fd">Permessi fino alla singola pagina</div></div></div>
+          <div class="ent-feat"><div class="ic"><svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M14 2H6a2 2 0 0 0-2 2v16a2 2 0 0 0 2 2h12a2 2 0 0 0 2-2V8z"/><path d="M9 15l2 2 4-4"/></svg></div><div><div class="ft">Audit log immutabile</div><div class="fd">Tracciabilità per SOC2 / ISO 27001</div></div></div>
+          <div class="ent-feat"><div class="ic"><svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M12 22s8-4 8-10V5l-8-3-8 3v7c0 6 8 10 8 10z"/><path d="M9 12l2 2 4-4"/></svg></div><div><div class="ft">GDPR by design</div><div class="fd">Right-to-be-forgotten nativo</div></div></div>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- DEPLOY -->
+<section class="block" id="deploy" style="padding-top:0">
+  <div class="wrap">
+    <div class="sec-head reveal">
+      <span class="eyebrow">Distribuzione</span>
+      <h2>Dal cloud all'air-gapped, una sola piattaforma</h2>
+      <p>Scegli il modello che rispetta i tuoi vincoli di compliance, senza compromessi sulle funzionalità.</p>
+    </div>
+    <div class="dep-grid">
+      <div class="dep reveal">
+        <span class="tag">Cloud</span>
+        <h3>SaaS gestito</h3>
+        <p class="pr">Operativo in pochi giorni</p>
+        <ul>
+          <li><svg width="15" height="15" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"><path d="M20 6L9 17l-5-5"/></svg> Zero installazione</li>
+          <li><svg width="15" height="15" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"><path d="M20 6L9 17l-5-5"/></svg> Connettori OAuth pronti</li>
+          <li><svg width="15" height="15" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"><path d="M20 6L9 17l-5-5"/></svg> Aggiornamenti automatici</li>
+        </ul>
+      </div>
+      <div class="dep feat reveal" style="transition-delay:.1s">
+        <span class="tag">Più scelto · Enterprise</span>
+        <h3>Ibrido federato</h3>
+        <p class="pr">Dati on-prem, gestione cloud</p>
+        <ul>
+          <li><svg width="15" height="15" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"><path d="M20 6L9 17l-5-5"/></svg> I dati restano dentro l'azienda</li>
+          <li><svg width="15" height="15" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"><path d="M20 6L9 17l-5-5"/></svg> Connettore sicuro dietro firewall</li>
+          <li><svg width="15" height="15" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"><path d="M20 6L9 17l-5-5"/></svg> Modelli LLM a tua scelta</li>
+        </ul>
+      </div>
+      <div class="dep reveal" style="transition-delay:.2s">
+        <span class="tag">On-premise</span>
+        <h3>Totalmente in casa</h3>
+        <p class="pr">Per i vincoli più stringenti</p>
+        <ul>
+          <li><svg width="15" height="15" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"><path d="M20 6L9 17l-5-5"/></svg> Deploy sul tuo Kubernetes</li>
+          <li><svg width="15" height="15" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"><path d="M20 6L9 17l-5-5"/></svg> Modelli AI on-premise</li>
+          <li><svg width="15" height="15" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"><path d="M20 6L9 17l-5-5"/></svg> Anche ambienti air-gapped</li>
+        </ul>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- FINAL CTA -->
+<section class="cta-final" id="demo">
+  <div class="wrap reveal">
+    <div class="cta-box">
+      <h2>Trasforma la tua conoscenza in vantaggio competitivo</h2>
+      <p>Scopri in una demo personalizzata come Synapse può dare voce ai documenti della tua azienda. Parliamo del tuo caso d'uso specifico.</p>
+      <div class="cta-row">
+        <a href="#contatti" class="btn btn-white">Richiedi una demo
+          <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round"><path d="M5 12h14M13 6l6 6-6 6"/></svg>
+        </a>
+        <a href="#contatti" class="btn btn-line">Parla con un esperto</a>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- FOOTER -->
+<footer id="contatti">
+  <div class="wrap">
+    <div class="foot-in">
+      <div class="foot-brand">
+        <a href="#" class="brand">
+          <svg class="mark" viewBox="0 0 100 100" fill="none" xmlns="http://www.w3.org/2000/svg">
+            <path d="M38 20c-9 0-16 7-16 16 0 3 1 6 2 8L20 70h12l8-14c8 2 16-4 16-13" stroke="url(#bg)" stroke-width="3.5" fill="none" stroke-linecap="round" stroke-linejoin="round"/>
+            <circle cx="42" cy="30" r="2.6" fill="url(#bg)"/>
+            <path d="M30 52l14-9M44 43l8 1" stroke="url(#bg)" stroke-width="2.4" fill="none" stroke-linecap="round"/>
+            <circle cx="30" cy="52" r="2.4" fill="url(#bg)"/><circle cx="52" cy="44" r="2.4" fill="url(#bg)"/>
+            <path d="M28 70l-6 12h8l6-12" stroke="url(#bg)" stroke-width="3.5" fill="none" stroke-linecap="round" stroke-linejoin="round"/>
+          </svg>
+          Synapse <span class="sub">by Finch-AI</span>
+        </a>
+        <p>Il cervello documentale per le aziende italiane strutturate. Conoscenza che si accumula, decisioni più sicure, documenti che si scrivono da soli.</p>
+      </div>
+      <div class="foot-col">
+        <h4>Prodotto</h4>
+        <a href="#come-funziona">Come funziona</a>
+        <a href="#capacita">Cosa produce</a>
+        <a href="#fonti">Fonti dati</a>
+        <a href="#deploy">Distribuzione</a>
+      </div>
+      <div class="foot-col">
+        <h4>Finch-AI</h4>
+        <a href="https://www.finch-ai.it">OmniFlow</a>
+        <a href="https://www.finch-ai.it">Document Intelligence</a>
+        <a href="https://www.finch-ai.it">Finance Intelligence</a>
+        <a href="https://www.finch-ai.it">Tutti i prodotti</a>
+      </div>
+      <div class="foot-col">
+        <h4>Contatti</h4>
+        <a href="mailto:info@finch-ai.it">info@finch-ai.it</a>
+        <a href="https://www.finch-ai.it">www.finch-ai.it</a>
+        <a href="#demo">Richiedi demo</a>
+      </div>
+    </div>
+    <div class="foot-bot">
+      <span>© 2026 Finch-AI · Synapse è un prodotto Finch-AI</span>
+      <span>Made in Italy · Enterprise AI</span>
+    </div>
+  </div>
+</footer>
+
+<script>
+const nav=document.getElementById('nav');
+addEventListener('scroll',()=>nav.classList.toggle('scrolled',scrollY>20));
+const io=new IntersectionObserver((es)=>es.forEach(e=>{if(e.isIntersecting){e.target.classList.add('in');io.unobserve(e.target)}}),{threshold:.12});
+document.querySelectorAll('.reveal').forEach(el=>io.observe(el));
+document.getElementById('dl-info').addEventListener('click',function(e){
+  e.preventDefault();
+  alert('In produzione questo bottone scaricherà il file synapse-infografica.png (fornito separatamente).');
+});
+</script>
+</body>
+</html>

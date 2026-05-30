@@ -49,7 +49,12 @@
       "Bash(git -C \"c:/Users/fdani/Documents/Progetti AI/SITO-DEFINITIVO\" log -5 --oneline)",
       "Bash(git -C \"c:/Users/fdani/Documents/Progetti AI/SITO-DEFINITIVO\" add public/.htaccess)",
       "Bash(git -C 'c:/Users/fdani/Documents/Progetti AI/SITO-DEFINITIVO' commit -m ' *)",
-      "Bash(git -C \"c:/Users/fdani/Documents/Progetti AI/SITO-DEFINITIVO\" push origin main)"
+      "Bash(git -C \"c:/Users/fdani/Documents/Progetti AI/SITO-DEFINITIVO\" push origin main)",
+      "Bash(node -e ' *)",
+      "Bash(curl -s -o /dev/null -w '%{http_code}' http://127.0.0.1:5173__TRACKED_VAR__)",
+      "Bash(curl -s \"http://127.0.0.1:5173/src/pages/Synapse.jsx\" -o /dev/null -w \"Synapse.jsx compile: %{http_code}\\\\n\")",
+      "Bash(curl -s \"http://127.0.0.1:5173/src/pages/Home.jsx\" -o /dev/null -w \"Home.jsx compile: %{http_code}\\\\n\")",
+      "Bash(curl -s -A \"Mozilla/5.0\" -o /dev/null -w \"fonts css: %{http_code}\\\\n\" \"https://fonts.googleapis.com/css2?family=Newsreader:ital,wght@0,300;0,400;0,500;1,300;1,400;1,500&family=Hanken+Grotesk:wght@400;500;600;700;800&family=Sora:wght@400;600;700;800&family=JetBrains+Mono:wght@400;500&display=swap\")"
     ],
     "deny": [],
     "ask": [],

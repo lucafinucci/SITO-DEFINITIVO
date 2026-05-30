@@ -45,6 +45,13 @@
     </image:image>
   </url>
 
+  <url>
+    <loc>https://finch-ai.it/soluzioni/synapse</loc>
+    <lastmod>2026-05-30</lastmod>
+    <changefreq>monthly</changefreq>
+    <priority>0.9</priority>
+  </url>
+
   <!-- ============ BLOG ============ -->
   <url>
     <loc>https://finch-ai.it/blog</loc>

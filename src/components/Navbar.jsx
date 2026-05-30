@@ -1,312 +1,159 @@
 import { useState, useEffect, useRef } from "react";
-import { Link, useLocation } from "react-router-dom";
+import { Link, useLocation, useNavigate } from "react-router-dom";
+import { ArrowUpRight, ChevronDown } from "lucide-react";
 import ThemeToggle from "./ThemeToggle";
+import { useContactModal } from "@/context/ContactModalContext";
+
+const SECTIONS = [
+  { id: "piattaforma", label: "Approccio" },
+  { id: "news", label: "News" },
+  { id: "stampa", label: "Dicono di noi" },
+];
+
+const SOLUTIONS = [
+  { label: "OmniFlow", href: "/soluzioni/warehouse-intelligence" },
+  { label: "Document Intelligence", href: "/soluzioni/document-intelligence" },
+  { label: "Finance Intelligence", href: "/soluzioni/finance-intelligence" },
+  { label: "Synapse", href: "/soluzioni/synapse" },
+];
 
 export default function Navbar() {
-  const [mobileMenuOpen, setMobileMenuOpen] = useState(false);
-  const [activeDropdown, setActiveDropdown] = useState(null);
-  const [activeSection, setActiveSection] = useState("hero");
+  const [scrolled, setScrolled] = useState(false);
+  const [mobileOpen, setMobileOpen] = useState(false);
+  const [solOpen, setSolOpen] = useState(false);
   const location = useLocation();
-  const isHomePage = location.pathname === "/";
-  const navRef = useRef(null);
-  const mobileMenuRef = useRef(null);
-  const timeoutRef = useRef(null);
+  const navigate = useNavigate();
+  const { openContact } = useContactModal();
+  const solRef = useRef(null);
+  const closeTimer = useRef(null);
 
-  const navItems = [
-    { id: "hero", label: "Home", href: "/" },
-    {
-      id: "moduli",
-      label: "Soluzioni",
-      dropdown: [
-        { label: "Document Intelligence", href: "/soluzioni/document-intelligence" },
-        { label: "Finance Intelligence", href: "/soluzioni/finance-intelligence" },
-        { label: "Warehouse Intelligence", href: "/soluzioni/warehouse-intelligence" },
-        { label: "Production Intelligence", disabled: true },
-      ]
-    },
-    { id: "blog", label: "Blog", href: "/blog" },
-    { id: "contatti", label: "Demo", href: "/#contatti" },
-    { id: "area-clienti", label: "Area Clienti", href: "/area-clienti" },
-  ];
-
-  // Scroll spy for home page
   useEffect(() => {
-    if (!isHomePage) return;
-
-    const observer = new IntersectionObserver(
-      (entries) => {
-        entries.forEach((entry) => {
-          if (entry.isIntersecting) {
-            setActiveSection(entry.target.id || "hero");
-          }
-        });
-      },
-      { threshold: 0.3, rootMargin: "-100px 0px -50% 0px" }
-    );
-
-    const sections = document.querySelectorAll("section[id]");
-    sections.forEach((section) => observer.observe(section));
-    return () => sections.forEach((section) => observer.unobserve(section));
-  }, [isHomePage]);
-
-  // Close dropdown on click outside
-  useEffect(() => {
-    const handleClickOutside = (e) => {
-      const inNav = navRef.current && navRef.current.contains(e.target);
-      const inMobileMenu = mobileMenuRef.current && mobileMenuRef.current.contains(e.target);
-      if (!inNav && !inMobileMenu) {
-        setActiveDropdown(null);
-      }
-    };
-    document.addEventListener("mousedown", handleClickOutside);
-    return () => document.removeEventListener("mousedown", handleClickOutside);
+    const onScroll = () => setScrolled(window.scrollY > 20);
+    onScroll();
+    window.addEventListener("scroll", onScroll, { passive: true });
+    return () => window.removeEventListener("scroll", onScroll);
   }, []);
 
-  // Automatically close mobile menu and dropdowns on route change
   useEffect(() => {
-    setMobileMenuOpen(false);
-    setActiveDropdown(null);
+    setMobileOpen(false);
+    setSolOpen(false);
   }, [location.pathname]);
 
-  const toggleDropdown = (id) => {
-    setActiveDropdown((prev) => (prev === id ? null : id));
-  };
-
-  const handleMouseEnter = (id) => {
-    if (timeoutRef.current) clearTimeout(timeoutRef.current);
-    setActiveDropdown(id);
-  };
-
-  const handleMouseLeave = () => {
-    timeoutRef.current = setTimeout(() => {
-      setActiveDropdown(null);
-    }, 200); // 200ms delay to move mouse
-  };
-
-  const handleLinkClick = (id) => {
-    setMobileMenuOpen(false);
-    setActiveDropdown(null);
-    if (id) {
-      setActiveSection(id);
-      setTimeout(() => {
-        const el = document.getElementById(id);
-        if (el) el.scrollIntoView({ behavior: "smooth" });
-      }, 50);
+  // Smooth-scroll to a homepage section, navigating home first if needed.
+  const goToSection = (id) => {
+    setMobileOpen(false);
+    if (location.pathname === "/") {
+      document.getElementById(id)?.scrollIntoView({ behavior: "smooth" });
     } else {
-      window.scrollTo(0, 0);
+      navigate("/");
+      setTimeout(() => document.getElementById(id)?.scrollIntoView({ behavior: "smooth" }), 120);
     }
+  };
+
+  const openSol = () => {
+    if (closeTimer.current) clearTimeout(closeTimer.current);
+    setSolOpen(true);
+  };
+  const closeSol = () => {
+    closeTimer.current = setTimeout(() => setSolOpen(false), 180);
   };
 
   return (
     <>
-      <nav ref={navRef} className="fixed top-0 left-0 right-0 z-50 border-b border-border/50 bg-background/80 backdrop-blur-xl">
-        <div className="mx-auto max-w-7xl px-4 sm:px-6 lg:px-8">
-          <div className="flex h-20 items-center justify-between">
+      <header className={`nav${scrolled ? " scrolled" : ""}`}>
+        <div className="nav-inner">
+          <Link to="/" className="nav-logo" aria-label="Finch-AI home" onClick={() => window.scrollTo(0, 0)}>
+            <img
+              src="/assets/images/LOGO.png"
+              alt="Finch-AI"
+              onError={(e) => {
+                e.currentTarget.style.display = "none";
+                e.currentTarget.parentNode.classList.add("text-mode");
+              }}
+            />
+            <span className="logo-fallback">Finch<span className="dot">-</span>AI</span>
+          </Link>
 
-            {/* Logo */}
-            <Link to="/" onClick={() => handleLinkClick("hero")} className="flex-shrink-0">
-              <div className="inline-flex items-center rounded-2xl bg-white px-4 py-2.5 shadow-sm transition hover:shadow-md">
-                <img src="/assets/images/LOGO.png" alt="Finch-AI" className="h-16 w-auto object-contain" />
-              </div>
-            </Link>
+          <nav className="nav-links">
+            <a href="/#piattaforma" onClick={(e) => { e.preventDefault(); goToSection("piattaforma"); }}>Approccio</a>
 
-            {/* Desktop Nav */}
-            <div className="hidden md:flex items-center gap-1">
-              {navItems.map((item) => (
-                <div key={item.id} className="relative">
-                  {item.dropdown ? (
-                    <button
-                      onMouseEnter={() => handleMouseEnter(item.id)}
-                      onMouseLeave={handleMouseLeave}
-                      onClick={() => {
-                        if (isHomePage && item.id === "moduli") {
-                          handleLinkClick(item.id);
-                        } else {
-                          toggleDropdown(item.id);
-                        }
-                      }}
-                      className={`relative px-4 py-2 text-sm font-medium transition-colors flex items-center gap-1 ${activeDropdown === item.id ? "text-primary" : "text-muted-foreground hover:text-foreground"
-                        }`}
-                    >
-                      {item.label}
-                      <svg
-                        className={`h-4 w-4 transition-transform duration-200 ${activeDropdown === item.id ? "rotate-180" : ""}`}
-                        viewBox="0 0 20 20" fill="currentColor"
-                      >
-                        <path fillRule="evenodd" d="M5.293 7.293a1 1 0 011.414 0L10 10.586l3.293-3.293a1 1 0 111.414 1.414l-4 4a1 1 0 01-1.414 0l-4-4a1 1 0 010-1.414z" clipRule="evenodd" />
-                      </svg>
-                    </button>
-                  ) : (
-                    <Link
-                      to={item.href}
-                      onClick={() => handleLinkClick(item.id)}
-                      className={`relative px-4 py-2 text-sm font-medium transition-colors flex items-center ${isHomePage && activeSection === item.id ? "text-primary" : "text-muted-foreground hover:text-foreground"
-                        }`}
-                    >
-                      {item.label}
-                      {isHomePage && activeSection === item.id && (
-                        <span className="absolute bottom-0 left-0 right-0 h-0.5 bg-primary rounded-full" />
-                      )}
-                    </Link>
-                  )}
-
-                  {item.dropdown && activeDropdown === item.id && (
-                    <div
-                      onMouseEnter={() => handleMouseEnter(item.id)}
-                      onMouseLeave={handleMouseLeave}
-                      className="absolute top-full left-0 mt-1 w-64 overflow-hidden rounded-xl border border-border bg-background/95 shadow-xl backdrop-blur-xl animate-in fade-in slide-in-from-top-2 duration-200"
-                    >
-                      <div className="p-2">
-                        {item.dropdown.map((sub) =>
-                          sub.disabled ? (
-                            <div
-                              key={sub.label}
-                              className="px-4 py-3 rounded-lg text-sm text-muted-foreground/40 cursor-not-allowed select-none"
-                            >
-                              {sub.label}
-                            </div>
-                          ) : sub.external ? (
-                            <a
-                              key={sub.label}
-                              href={sub.href}
-                              target="_blank"
-                              rel="noopener noreferrer"
-                              onClick={() => setActiveDropdown(null)}
-                              className="flex items-center justify-between px-4 py-3 rounded-lg text-sm transition-colors hover:bg-primary/10 hover:text-primary group/sub"
-                            >
-                              <span>{sub.label}</span>
-                              <svg className="h-4 w-4 opacity-0 -translate-x-2 transition-all group-hover/sub:opacity-100 group-hover/sub:translate-x-0" viewBox="0 0 24 24" fill="none" stroke="currentColor">
-                                <path d="M5 12h14M13 5l7 7-7 7" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round" />
-                              </svg>
-                            </a>
-                          ) : (
-                            <Link
-                              key={sub.label}
-                              to={sub.href}
-                              onClick={() => handleLinkClick(null)}
-                              className="flex items-center justify-between px-4 py-3 rounded-lg text-sm transition-colors hover:bg-primary/10 hover:text-primary group/sub"
-                            >
-                              <span>{sub.label}</span>
-                              <svg className="h-4 w-4 opacity-0 -translate-x-2 transition-all group-hover/sub:opacity-100 group-hover/sub:translate-x-0" viewBox="0 0 24 24" fill="none" stroke="currentColor">
-                                <path d="M5 12h14M13 5l7 7-7 7" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round" />
-                              </svg>
-                            </Link>
-                          )
-                        )}
-                      </div>
-                    </div>
-                  )}
-                </div>
-              ))}
-              <div className="ml-4 flex items-center border-l border-border/50 pl-4">
-                <ThemeToggle />
-              </div>
-            </div>
-
-            {/* Desktop CTA */}
-            <Link
-              to="/#contatti"
-              onClick={() => handleLinkClick("contatti")}
-              className="hidden sm:inline-flex items-center gap-2 rounded-lg bg-teal-600 dark:bg-teal-400 px-4 py-2 text-sm font-semibold text-white dark:text-[#0B1220] shadow-lg shadow-teal-500/20 transition hover:brightness-110"
+            {/* Soluzioni dropdown */}
+            <div
+              ref={solRef}
+              onMouseEnter={openSol}
+              onMouseLeave={closeSol}
+              style={{ position: "relative" }}
             >
-              Contattaci
-            </Link>
-
-            {/* Mobile Toggle */}
-            <div className="md:hidden flex items-center gap-4">
-              <ThemeToggle />
-              <button
-                onClick={() => setMobileMenuOpen(!mobileMenuOpen)}
-                className="inline-flex items-center justify-center p-2 rounded-lg text-muted-foreground hover:text-primary hover:bg-muted/50 transition-colors"
+              <a
+                href="/#moduli"
+                onClick={(e) => { e.preventDefault(); setSolOpen(false); goToSection("moduli"); }}
+                style={{ display: "inline-flex", alignItems: "center", gap: 5 }}
               >
-                <svg className="h-6 w-6" fill="none" viewBox="0 0 24 24" stroke="currentColor">
-                  {mobileMenuOpen ? (
-                    <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M6 18L18 6M6 6l12 12" />
-                  ) : (
-                    <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M4 6h16M4 12h16M4 18h16" />
-                  )}
-                </svg>
-              </button>
+                Soluzioni
+                <ChevronDown size={15} style={{ transition: "transform .2s", transform: solOpen ? "rotate(180deg)" : "none" }} />
+              </a>
+              {solOpen && (
+                <div
+                  onMouseEnter={openSol}
+                  onMouseLeave={closeSol}
+                  className="absolute left-0 top-full mt-3 w-64 overflow-hidden rounded-2xl border border-border bg-popover shadow-2xl ring-1 ring-black/5 dark:ring-white/10"
+                  style={{ zIndex: 120 }}
+                >
+                  <div className="p-2">
+                    {SOLUTIONS.map((s) => (
+                      <Link
+                        key={s.label}
+                        to={s.href}
+                        onClick={() => { setSolOpen(false); window.scrollTo(0, 0); }}
+                        className="group flex items-center justify-between rounded-xl px-4 py-3 text-sm font-semibold text-foreground transition-colors hover:bg-primary hover:text-primary-foreground"
+                      >
+                        <span>{s.label}</span>
+                        <ArrowUpRight size={15} className="opacity-0 -translate-x-1 transition-all group-hover:opacity-100 group-hover:translate-x-0" />
+                      </Link>
+                    ))}
+                  </div>
+                </div>
+              )}
             </div>
-          </div>
-        </div>
-      </nav>
 
-      {/* Mobile Menu */}
-      {mobileMenuOpen && (
-        <div ref={mobileMenuRef} className="md:hidden fixed inset-x-0 top-[80px] z-40 border-b border-border/50 bg-background/95 backdrop-blur-xl">
-          <div className="mx-auto max-w-7xl px-4 py-4 space-y-2">
-            {navItems.map((item) => (
-              <div key={item.id} className="space-y-1">
-                {item.dropdown ? (
-                  <div
-                    onClick={() => toggleDropdown(item.id)}
-                    className={`w-full flex items-center justify-between px-4 py-3 rounded-lg text-base font-medium transition-all cursor-pointer ${activeDropdown === item.id
-                      ? "bg-primary/10 text-primary border border-primary/30"
-                      : "text-muted-foreground hover:text-foreground hover:bg-muted/50"
-                      }`}
-                  >
-                    <span>{item.label}</span>
-                    <svg className={`h-5 w-5 transition-transform ${activeDropdown === item.id ? "rotate-180" : ""}`} viewBox="0 0 20 20" fill="currentColor">
-                      <path fillRule="evenodd" d="M5.293 7.293a1 1 0 011.414 0L10 10.586l3.293-3.293a1 1 0 111.414 1.414l-4 4a1 1 0 01-1.414 0l-4-4a1 1 0 010-1.414z" clipRule="evenodd" />
-                    </svg>
-                  </div>
-                ) : (
-                  <Link
-                    to={item.href}
-                    onClick={() => handleLinkClick(item.id)}
-                    className={`flex items-center px-4 py-3 rounded-lg text-base font-medium transition-all ${isHomePage && activeSection === item.id
-                      ? "bg-primary/10 text-primary border border-primary/30"
-                      : "text-muted-foreground hover:text-foreground hover:bg-muted/50"
-                      }`}
-                  >
-                    {item.label}
-                  </Link>
-                )}
-
-                {item.dropdown && activeDropdown === item.id && (
-                  <div className="pl-6 space-y-1 pb-2">
-                    {item.dropdown.map((sub) =>
-                      sub.disabled ? (
-                        <div key={sub.label} className="px-4 py-2 rounded-lg text-sm text-muted-foreground/40 cursor-not-allowed select-none">
-                          {sub.label}
-                        </div>
-                      ) : sub.external ? (
-                        <a
-                          key={sub.label}
-                          href={sub.href}
-                          target="_blank"
-                          rel="noopener noreferrer"
-                          onClick={() => setMobileMenuOpen(false)}
-                          className="block px-4 py-2 rounded-lg text-sm text-muted-foreground hover:text-primary hover:bg-primary/5 transition-colors"
-                        >
-                          {sub.label}
-                        </a>
-                      ) : (
-                        <Link
-                          key={sub.label}
-                          to={sub.href}
-                          onClick={() => handleLinkClick(null)}
-                          className="block px-4 py-2 rounded-lg text-sm text-muted-foreground hover:text-primary hover:bg-primary/5 transition-colors"
-                        >
-                          {sub.label}
-                        </Link>
-                      )
-                    )}
-                  </div>
-                )}
-              </div>
+            {SECTIONS.filter((s) => s.id !== "piattaforma").map((s) => (
+              <a key={s.id} href={`/#${s.id}`} onClick={(e) => { e.preventDefault(); goToSection(s.id); }}>{s.label}</a>
             ))}
-            <Link
-              to="/#contatti"
-              onClick={() => handleLinkClick("contatti")}
-              className="block mt-4 px-4 py-3 rounded-lg bg-teal-600 dark:bg-teal-400 text-center text-base font-semibold text-white dark:text-[#0B1220] shadow-lg shadow-teal-500/20"
-            >
-              Contattaci
+            <Link to="/blog">Blog</Link>
+          </nav>
+
+          <div className="nav-cta">
+            <Link to="/area-clienti" className="hidden lg:inline-flex text-[15px] font-medium opacity-70 transition-opacity hover:opacity-100">
+              Area Clienti
             </Link>
+            <ThemeToggle />
+            <button type="button" onClick={() => openContact({ prefill: { need: "Richiesta demo" } })} className="btn btn-primary">
+              Prenota una demo
+              <ArrowUpRight size={16} />
+            </button>
+            <button
+              className={`nav-burger${mobileOpen ? " x" : ""}`}
+              aria-label="Menu"
+              onClick={() => setMobileOpen((v) => !v)}
+            >
+              <span></span><span></span><span></span>
+            </button>
           </div>
         </div>
-      )}
+      </header>
+
+      {/* Mobile menu */}
+      <nav className={`mobile-menu${mobileOpen ? " open" : ""}`}>
+        <a href="/#piattaforma" onClick={(e) => { e.preventDefault(); goToSection("piattaforma"); }}>Approccio</a>
+        {SOLUTIONS.map((s) => (
+          <Link key={s.label} to={s.href} onClick={() => { setMobileOpen(false); window.scrollTo(0, 0); }}>{s.label}</Link>
+        ))}
+        <a href="/#news" onClick={(e) => { e.preventDefault(); goToSection("news"); }}>News</a>
+        <a href="/#stampa" onClick={(e) => { e.preventDefault(); goToSection("stampa"); }}>Dicono di noi</a>
+        <Link to="/blog" onClick={() => setMobileOpen(false)}>Blog</Link>
+        <Link to="/area-clienti" onClick={() => setMobileOpen(false)}>Area Clienti</Link>
+        <button type="button" onClick={() => { setMobileOpen(false); openContact({ prefill: { need: "Richiesta demo" } }); }} className="btn btn-lime">Prenota una demo</button>
+      </nav>
     </>
   );
 }

@@ -20,6 +20,9 @@ export const ThemeProvider = ({ children }) => {
     const root = window.document.documentElement;
     root.classList.remove('light', 'dark');
     root.classList.add(theme);
+    // Map the light/dark toggle to the finch-design "online"/"night" themes
+    // (drives the body[data-theme=...] rules in finch-design.css).
+    document.body.setAttribute('data-theme', theme === 'dark' ? 'night' : 'online');
     localStorage.setItem('theme', theme);
   }, [theme]);
 

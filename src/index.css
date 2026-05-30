@@ -3,49 +3,51 @@
 @tailwind utilities;
 
 @layer base {
+  /* Light = tema "online": bianco + teal/lime (allineato a finch-design.css) */
   :root {
     --background: 0 0% 100%;
-    --foreground: 230 25% 12%;
+    --foreground: 207 34% 13%;
     --card: 0 0% 100%;
-    --card-foreground: 230 25% 12%;
+    --card-foreground: 207 34% 13%;
     --popover: 0 0% 100%;
-    --popover-foreground: 230 25% 12%;
-    --primary: 167 72% 35%;
-    --primary-foreground: 0 0% 98%;
-    --secondary: 220 14% 96%;
-    --secondary-foreground: 230 25% 12%;
-    --muted: 220 14% 96%;
-    --muted-foreground: 220 9% 46%;
-    --accent: 167 72% 35%;
-    --accent-foreground: 0 0% 98%;
+    --popover-foreground: 207 34% 13%;
+    --primary: 174 84% 34%;
+    --primary-foreground: 0 0% 100%;
+    --secondary: 192 38% 96%;
+    --secondary-foreground: 207 34% 13%;
+    --muted: 192 38% 96%;
+    --muted-foreground: 203 13% 39%;
+    --accent: 174 84% 34%;
+    --accent-foreground: 0 0% 100%;
     --destructive: 0 84.2% 60.2%;
     --destructive-foreground: 0 0% 98%;
-    --border: 220 13% 91%;
-    --input: 220 13% 91%;
-    --ring: 167 72% 35%;
+    --border: 202 22% 90%;
+    --input: 202 22% 90%;
+    --ring: 174 84% 34%;
     --radius: 1rem;
   }
 
+  /* Dark = tema "notte": verde scuro premium (allineato a finch-design.css) */
   .dark {
-    --background: 224 71% 4%;
-    --foreground: 213 31% 91%;
-    --card: 224 71% 4%;
-    --card-foreground: 213 31% 91%;
-    --popover: 224 71% 4%;
-    --popover-foreground: 213 31% 91%;
-    --primary: 168 76% 52%;
-    --primary-foreground: 222.2 47.4% 11.2%;
-    --secondary: 222.2 47.4% 11.2%;
-    --secondary-foreground: 210 40% 98%;
-    --muted: 223 47% 11%;
-    --muted-foreground: 215.4 16.3% 56.9%;
-    --accent: 168 76% 52%;
-    --accent-foreground: 210 40% 98%;
+    --background: 159 41% 7%;
+    --foreground: 130 17% 93%;
+    --card: 152 40% 12%;
+    --card-foreground: 130 17% 93%;
+    --popover: 159 41% 7%;
+    --popover-foreground: 130 17% 93%;
+    --primary: 156 55% 60%;
+    --primary-foreground: 159 41% 7%;
+    --secondary: 154 35% 12%;
+    --secondary-foreground: 130 17% 93%;
+    --muted: 154 35% 12%;
+    --muted-foreground: 140 10% 66%;
+    --accent: 156 55% 60%;
+    --accent-foreground: 159 41% 7%;
     --destructive: 0 62.8% 30.6%;
     --destructive-foreground: 210 40% 98%;
-    --border: 216 34% 17%;
-    --input: 216 34% 17%;
-    --ring: 168 76% 52%;
+    --border: 160 22% 18%;
+    --input: 160 22% 18%;
+    --ring: 156 55% 60%;
   }
 }
 
