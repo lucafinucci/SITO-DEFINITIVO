@@ -88,9 +88,9 @@
 .syn-src .ds{font-size:11.5px;color:var(--muted-2);margin-top:3px}
 
 /* enterprise dark panel */
-.syn-ent{background:var(--ink);color:#fff;border-radius:var(--radius-lg);padding:clamp(36px,5vw,56px);position:relative;overflow:hidden}
+.syn-ent{background:var(--panel);color:#fff;border-radius:var(--radius-lg);padding:clamp(36px,5vw,56px);position:relative;overflow:hidden}
 .syn-ent::before{content:"";position:absolute;top:-100px;right:-100px;width:360px;height:360px;background:radial-gradient(circle,rgba(82,197,58,.25),transparent 70%);filter:blur(40px)}
-body[data-theme="night"] .syn-ent{background:#06120D;border:1px solid var(--line)}
+body[data-theme="night"] .syn-ent{border:1px solid var(--line)}
 .syn-ent-in{position:relative;z-index:1;display:grid;grid-template-columns:1fr 1fr;gap:44px;align-items:center}
 .syn-ent h2{font-size:clamp(28px,3.4vw,34px);color:#fff;margin-bottom:16px;font-weight:300}
 .syn-ent h2 em{color:var(--lime)}

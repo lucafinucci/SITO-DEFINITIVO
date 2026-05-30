@@ -42,7 +42,7 @@ export default function Layout({ children }) {
                 ctx.beginPath();
                 ctx.arc(this.x, this.y, this.size, 0, Math.PI * 2);
                 ctx.fillStyle = theme === "dark"
-                    ? `rgba(45, 212, 191, ${this.opacity})`
+                    ? `rgba(98, 216, 158, ${this.opacity})`
                     : `rgba(20, 184, 166, ${this.opacity * 0.5})`;
                 ctx.fill();
             }
@@ -59,7 +59,7 @@ export default function Layout({ children }) {
             // Draw grid
             ctx.beginPath();
             ctx.strokeStyle = theme === "dark"
-                ? "rgba(45, 212, 191, 0.03)"
+                ? "rgba(98, 216, 158, 0.03)"
                 : "rgba(20, 184, 166, 0.02)";
             ctx.lineWidth = 1;
             const step = 60;

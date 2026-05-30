@@ -29,25 +29,25 @@
 
   /* Dark = tema "notte": verde scuro premium (allineato a finch-design.css) */
   .dark {
-    --background: 159 41% 7%;
-    --foreground: 130 17% 93%;
-    --card: 152 40% 12%;
-    --card-foreground: 130 17% 93%;
-    --popover: 159 41% 7%;
-    --popover-foreground: 130 17% 93%;
-    --primary: 156 55% 60%;
-    --primary-foreground: 159 41% 7%;
-    --secondary: 154 35% 12%;
-    --secondary-foreground: 130 17% 93%;
-    --muted: 154 35% 12%;
-    --muted-foreground: 140 10% 66%;
-    --accent: 156 55% 60%;
-    --accent-foreground: 159 41% 7%;
+    --background: 165 18% 5%;
+    --foreground: 150 18% 93%;
+    --card: 153 17% 10%;
+    --card-foreground: 150 18% 93%;
+    --popover: 165 18% 5%;
+    --popover-foreground: 150 18% 93%;
+    --primary: 154 60% 62%;
+    --primary-foreground: 165 30% 6%;
+    --secondary: 154 16% 12%;
+    --secondary-foreground: 150 18% 93%;
+    --muted: 154 16% 12%;
+    --muted-foreground: 146 12% 68%;
+    --accent: 154 60% 62%;
+    --accent-foreground: 165 30% 6%;
     --destructive: 0 62.8% 30.6%;
     --destructive-foreground: 210 40% 98%;
-    --border: 160 22% 18%;
-    --input: 160 22% 18%;
-    --ring: 156 55% 60%;
+    --border: 155 14% 16%;
+    --input: 155 14% 16%;
+    --ring: 154 60% 62%;
   }
 }
 
