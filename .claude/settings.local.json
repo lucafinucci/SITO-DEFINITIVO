@@ -78,7 +78,14 @@
       "Bash(python c:/tmp/make_en_video.py)",
       "PowerShell(npm run build)",
       "PowerShell(try { $x = [xml]\\(Get-Content \"public/sitemap.xml\" -Raw\\); \"XML VALIDO - URL totali: \" + $x.urlset.url.Count } catch { \"ERRORE XML: \" + $_.Exception.Message })",
-      "PowerShell(try { $r = Invoke-WebRequest -Uri \"https://www.finch-ai.it/sitemap.xml\" -UseBasicParsing -TimeoutSec 20; \"WWW STATUS: \" + $r.StatusCode + \" | Content-Type: \" + $r.Headers['Content-Type']; \"PRIMI 200 CHAR:\"; $r.Content.Substring\\(0,[Math]::Min\\(200,$r.Content.Length\\)\\) } catch { \"ERRORE WWW: \" + $_.Exception.Message })"
+      "PowerShell(try { $r = Invoke-WebRequest -Uri \"https://www.finch-ai.it/sitemap.xml\" -UseBasicParsing -TimeoutSec 20; \"WWW STATUS: \" + $r.StatusCode + \" | Content-Type: \" + $r.Headers['Content-Type']; \"PRIMI 200 CHAR:\"; $r.Content.Substring\\(0,[Math]::Min\\(200,$r.Content.Length\\)\\) } catch { \"ERRORE WWW: \" + $_.Exception.Message })",
+      "PowerShell(try { $r = Invoke-WebRequest -Uri \"https://finch-ai.it/sitemap.xml\" -UseBasicParsing -TimeoutSec 20; \"NO-WWW STATUS: \" + $r.StatusCode + \" | Content-Type: \" + $r.Headers['Content-Type']; \"PRIMI 200 CHAR:\"; $r.Content.Substring\\(0,[Math]::Min\\(200,$r.Content.Length\\)\\) } catch { \"ERRORE NO-WWW: \" + $_.Exception.Message })",
+      "PowerShell(try { $r = Invoke-WebRequest -Uri \"https://www.finch-ai.it/sitemap.xml\" -UseBasicParsing -TimeoutSec 20; $c = $r.Content; \"Contiene privacy-policy? \" + $c.Contains\\('privacy-policy'\\); \"Contiene cookie-policy? \" + $c.Contains\\('cookie-policy'\\); $m = [regex]::Matches\\($c,'<loc>'\\); \"Totale <loc> live: \" + $m.Count } catch { \"err: \" + $_.Exception.Message })",
+      "Bash(netstat -ano)",
+      "Bash(taskkill /PID 38192 /F)",
+      "PowerShell(Stop-Process -Id 38192 -Force)",
+      "PowerShell(\"killed\")",
+      "Bash(node -e \"try{require.resolve\\('playwright'\\);console.log\\('playwright OK'\\)}catch\\(e\\){try{require.resolve\\('puppeteer'\\);console.log\\('puppeteer OK'\\)}catch\\(e2\\){console.log\\('none'\\)}}\")"
     ],
     "deny": [],
     "ask": [],

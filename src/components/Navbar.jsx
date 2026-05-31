@@ -123,7 +123,7 @@ export default function Navbar() {
           </nav>
 
           <div className="nav-cta">
-            <Link to={lp("/area-clienti")} className="hidden lg:inline-flex text-[15px] font-medium opacity-70 transition-opacity hover:opacity-100">
+            <Link to={lp("/area-clienti")} className="hidden lg:inline-flex whitespace-nowrap text-[15px] font-medium opacity-70 transition-opacity hover:opacity-100">
               {t("nav.areaClienti")}
             </Link>
             <LanguageSwitcher />
