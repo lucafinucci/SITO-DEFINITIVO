@@ -19,6 +19,8 @@ import ArticleAIHumanCentered from "@/pages/ArticleAIHumanCentered";
 import ArticlePMIDatiSilos from "@/pages/ArticlePMIDatiSilos";
 import ArticleSupportoDecisionaleSynapse from "@/pages/ArticleSupportoDecisionaleSynapse";
 import Blog from "@/pages/Blog";
+import PrivacyPolicy from "@/pages/PrivacyPolicy";
+import CookiePolicy from "@/pages/CookiePolicy";
 
 // The full route tree, defined once with paths relative to the language root
 // so it can be mounted under both `/` (Italian) and `/en` (English).
@@ -33,6 +35,8 @@ function LocalizedRoutes() {
       <Route path="soluzioni/synapse" element={<Synapse />} />
       <Route path="soluzioni/aps" element={<APS />} />
       <Route path="blog" element={<Blog />} />
+      <Route path="privacy-policy" element={<PrivacyPolicy />} />
+      <Route path="cookie-policy" element={<CookiePolicy />} />
       <Route path="blog/intelligenza-artificiale-imprenditori-commercialisti" element={<ArticleAIImprenditori />} />
       <Route path="blog/document-intelligence-automazione-ddt-bolle-consegna" element={<ArticleDocumentIntelligenceDDT />} />
       <Route path="blog/intelligenza-artificiale-studi-professionali" element={<ArticleStudiProfessionali />} />

@@ -242,4 +242,24 @@
     <xhtml:link rel="alternate" hreflang="x-default" href="https://finch-ai.it/blog/sistema-supporto-decisionale-ai-pmi-synapse"/>
   </url>
 
+  <!-- ============ LEGALI ============ -->
+  <url>
+    <loc>https://finch-ai.it/privacy-policy</loc>
+    <lastmod>2026-05-31</lastmod>
+    <changefreq>yearly</changefreq>
+    <priority>0.3</priority>
+    <xhtml:link rel="alternate" hreflang="it" href="https://finch-ai.it/privacy-policy"/>
+    <xhtml:link rel="alternate" hreflang="en" href="https://finch-ai.it/en/privacy-policy"/>
+    <xhtml:link rel="alternate" hreflang="x-default" href="https://finch-ai.it/privacy-policy"/>
+  </url>
+  <url>
+    <loc>https://finch-ai.it/cookie-policy</loc>
+    <lastmod>2026-05-31</lastmod>
+    <changefreq>yearly</changefreq>
+    <priority>0.3</priority>
+    <xhtml:link rel="alternate" hreflang="it" href="https://finch-ai.it/cookie-policy"/>
+    <xhtml:link rel="alternate" hreflang="en" href="https://finch-ai.it/en/cookie-policy"/>
+    <xhtml:link rel="alternate" hreflang="x-default" href="https://finch-ai.it/cookie-policy"/>
+  </url>
+
 </urlset>

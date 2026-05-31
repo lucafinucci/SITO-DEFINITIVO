@@ -96,8 +96,8 @@ export default function Footer() {
         <div className="footer-bot">
           <small>{t("footer.copyright")}</small>
           <div className="fp">
-            <a href="#" onClick={(e) => e.preventDefault()}>{t("footer.privacy")}</a>
-            <a href="#" onClick={(e) => e.preventDefault()}>{t("footer.cookie")}</a>
+            <RouteLink to="/privacy-policy">{t("footer.privacy")}</RouteLink>
+            <RouteLink to="/cookie-policy">{t("footer.cookie")}</RouteLink>
             <a href="mailto:info@finch-ai.it">info@finch-ai.it</a>
           </div>
         </div>
