@@ -1,0 +1,49 @@
+{
+  "seo": {
+    "title": "Pianificatore APS — Finch-AI | Advanced Planning System per la produzione",
+    "description": "APS (Advanced Planning System) di Finch-AI: pianificazione avanzata della produzione manifatturiera con ottimizzazione multi-algoritmo e interfaccia conversazionale in linguaggio naturale.",
+    "keywords": "APS, advanced planning system, pianificazione produzione, schedulazione produzione, MES, ottimizzazione produzione, AI manifatturiero, Finch-AI",
+    "ldDescription": "APS di Finch-AI è il pianificatore della produzione manifatturiera: ottimizzazione multi-algoritmo della schedulazione e interfaccia conversazionale in linguaggio naturale."
+  },
+  "hero": {
+    "tag": "Pianificazione · Produzione",
+    "titlePre": "Pianificatore",
+    "lead": "Sistema di pianificazione avanzata per la produzione manifatturiera: ottimizzazione multi-algoritmo e interfaccia conversazionale in linguaggio naturale per gestire la <strong>schedulazione senza complessità</strong>.",
+    "ctaDemo": "Richiedi una demo",
+    "ctaAll": "Tutte le soluzioni",
+    "demoPrefill": "Demo APS — pianificatore produzione",
+    "ambitiLabel": "Ambiti di applicazione"
+  },
+  "ambiti": [
+    "Schedulazione ordini di produzione",
+    "Gestione risorse, macchinari e turni",
+    "Ottimizzazione lotti e sequenze",
+    "Simulazione scenari produttivi"
+  ],
+  "featuresHead": {
+    "title": "Pianificazione che parla<br />la <em>tua lingua</em>.",
+    "eyebrow": "Advanced Planning System"
+  },
+  "features": [
+    { "title": "Ottimizzazione avanzata della schedulazione", "desc": "Algoritmi euristici, metaeuristici ed esatti per generare piani produttivi ottimali, bilanciando vincoli, risorse e priorità." },
+    { "title": "Interfaccia conversazionale in linguaggio naturale", "desc": "Interagisci con il pianificatore come con un esperto di produzione: chiedi, simula e ripianifica in linguaggio naturale." },
+    { "title": "Schedulazione multi-vincolo end-to-end", "desc": "Ordini, macchinari, turni e materiali in un unico motore di pianificazione coerente, sempre aggiornato." }
+  ],
+  "featRows": [
+    "Vincoli di capacità, materiali e competenze",
+    "Ripianificazione rapida al cambiare degli ordini",
+    "Integrabile con ERP e MES esistenti"
+  ],
+  "valueHead": {
+    "eyebrow": "Dove genera valore",
+    "title": "Dalla teoria al reparto,<br />in <em>tempi rapidi</em>.",
+    "lead": "APS porta l'ottimizzazione matematica nella pianificazione quotidiana, con un'interfaccia che chiunque in produzione sa usare."
+  },
+  "cta": {
+    "title": "Pronto a pianificare<br />con <em>l'AI</em>?",
+    "text": "Ti mostriamo APS sui tuoi ordini e vincoli reali in una demo di 30 minuti, senza impegno.",
+    "ctaDemo": "Richiedi una demo",
+    "ctaWrite": "Scrivici",
+    "demoPrefill": "Demo APS — pianificatore produzione"
+  }
+}

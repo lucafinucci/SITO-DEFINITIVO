@@ -1,0 +1,436 @@
+<!DOCTYPE html>
+<html lang="it">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Il Sistema di Supporto Decisionale che costruisce la tua memoria aziendale | FinCh-Ai Blog</title>
+  <meta name="description" content="Come un DSS evoluto basato su AI trasforma documenti sparsi, email e contratti in un database vivo della tua PMI, con risposte verificabili e human-in-the-loop.">
+  <meta name="keywords" content="Sistema di Supporto Decisionale, DSS PMI, AI per imprese, knowledge graph aziendale, document AI, Synapse FinCh-Ai, automazione documentale, decisioni data-driven PMI">
+  <meta name="author" content="FinCh-AI">
+  <meta name="robots" content="index, follow">
+
+  <!-- Open Graph -->
+  <meta property="og:type" content="article">
+  <meta property="og:title" content="Il Sistema di Supporto Decisionale che costruisce la tua memoria aziendale">
+  <meta property="og:description" content="Come un DSS evoluto basato su AI trasforma documenti sparsi, email e contratti in un database vivo della tua PMI, con risposte verificabili e human-in-the-loop.">
+  <meta property="article:published_time" content="2026-05-18">
+
+  <!-- Fonts -->
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&family=Playfair+Display:wght@600;700&display=swap" rel="stylesheet">
+
+  <style>
+    :root {
+      --finch-blue: #048EE3;
+      --finch-blue-dark: #0374BA;
+      --finch-green: #1CE25A;
+      --finch-green-dark: #15B848;
+      --finch-dark: #274049;
+      --finch-bg-blue: #E6F3FC;
+      --finch-bg-green: #E5FBEE;
+      --finch-gradient: linear-gradient(135deg, #048EE3 0%, #1CE25A 100%);
+      --color-text: #274049;
+      --color-text-light: #506872;
+      --color-white: #FFFFFF;
+      --font-heading: 'Playfair Display', Georgia, serif;
+      --font-body: 'Inter', 'Segoe UI', sans-serif;
+      --max-width: 780px;
+    }
+
+    *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+    html { font-size: 18px; scroll-behavior: smooth; }
+    body { font-family: var(--font-body); color: var(--color-text); line-height: 1.75; background-color: #F4F8FA; }
+
+    /* --- NAVBAR --- */
+    .navbar { background: var(--color-white); padding: 0.7rem 1.5rem; display: flex; align-items: center; justify-content: center; box-shadow: 0 1px 4px rgba(0,0,0,0.06); position: sticky; top: 0; z-index: 100; }
+    .navbar__logo img { height: 40px; width: auto; }
+
+    /* --- HERO --- */
+    .hero { background: var(--finch-gradient); color: var(--color-white); padding: 4.5rem 1.5rem 4rem; text-align: center; position: relative; overflow: hidden; }
+    .hero::before { content: ''; position: absolute; top: -40%; right: -20%; width: 500px; height: 500px; background: radial-gradient(circle, rgba(255,255,255,0.08) 0%, transparent 70%); border-radius: 50%; }
+    .hero::after { content: ''; position: absolute; bottom: -30%; left: -15%; width: 400px; height: 400px; background: radial-gradient(circle, rgba(255,255,255,0.06) 0%, transparent 70%); border-radius: 50%; }
+    .hero__label { display: inline-block; font-size: 0.72rem; font-weight: 600; letter-spacing: 0.14em; text-transform: uppercase; background: rgba(255,255,255,0.15); backdrop-filter: blur(4px); padding: 0.35em 1.2em; border-radius: 20px; margin-bottom: 1.5rem; border: 1px solid rgba(255,255,255,0.2); position: relative; z-index: 1; }
+    .hero h1 { font-family: var(--font-heading); font-size: 2.5rem; font-weight: 700; line-height: 1.2; max-width: 720px; margin: 0 auto 1.2rem; position: relative; z-index: 1; }
+    .hero__subtitle { font-size: 1.05rem; opacity: 0.92; max-width: 580px; margin: 0 auto; line-height: 1.65; font-weight: 400; position: relative; z-index: 1; }
+    .hero__meta { margin-top: 2rem; font-size: 0.78rem; opacity: 0.65; position: relative; z-index: 1; }
+
+    /* --- ARTICLE --- */
+    .article-container { max-width: var(--max-width); margin: 0 auto; padding: 0 1.5rem; }
+    article { background: var(--color-white); margin: -2.5rem auto 3rem; border-radius: 12px; box-shadow: 0 4px 30px rgba(4, 142, 227, 0.08); padding: 2.8rem 2.8rem 3.2rem; position: relative; z-index: 1; }
+
+    /* --- TOC --- */
+    .toc { background: linear-gradient(135deg, var(--finch-bg-blue) 0%, var(--finch-bg-green) 100%); border-left: 4px solid var(--finch-blue); border-radius: 0 8px 8px 0; padding: 1.5rem 2rem; margin-bottom: 2.5rem; }
+    .toc__title { font-family: var(--font-heading); font-size: 1rem; font-weight: 700; color: var(--finch-blue); margin-bottom: 0.8rem; text-transform: uppercase; letter-spacing: 0.08em; }
+    .toc ol { list-style: none; counter-reset: toc-counter; padding: 0; }
+    .toc ol li { counter-increment: toc-counter; margin-bottom: 0.45rem; }
+    .toc ol li::before { content: counter(toc-counter) "."; font-weight: 600; color: var(--finch-green-dark); margin-right: 0.5em; font-size: 0.9rem; }
+    .toc a { color: var(--color-text); text-decoration: none; font-size: 0.9rem; transition: color 0.2s; }
+    .toc a:hover { color: var(--finch-blue); text-decoration: underline; }
+
+    /* --- HEADINGS --- */
+    h2 { font-family: var(--font-heading); font-size: 1.6rem; font-weight: 700; color: var(--finch-dark); margin-top: 2.8rem; margin-bottom: 1rem; line-height: 1.3; padding-bottom: 0.5rem; border-bottom: 3px solid transparent; border-image: var(--finch-gradient) 1; }
+    h3 { font-family: var(--font-heading); font-size: 1.18rem; font-weight: 600; color: var(--finch-blue); margin-top: 1.8rem; margin-bottom: 0.7rem; line-height: 1.35; }
+
+    /* --- TEXT --- */
+    p { margin-bottom: 1.15rem; color: var(--color-text); }
+    strong { color: var(--finch-blue-dark); }
+    a { color: var(--finch-blue); text-decoration: underline; text-underline-offset: 2px; }
+    a:hover { color: var(--finch-blue-dark); }
+    ul, ol { margin: 0.8rem 0 1.5rem 0; padding: 0; list-style: none; }
+    ul li, ol li { margin-bottom: 0.7rem; padding-left: 1.6rem; position: relative; }
+    ul li::before { content: ''; position: absolute; left: 0; top: 0.55em; width: 8px; height: 8px; border-radius: 50%; background: var(--finch-gradient); }
+
+    /* --- BLOCKQUOTE --- */
+    blockquote { border-left: 4px solid var(--finch-green); background: linear-gradient(135deg, var(--finch-bg-blue) 0%, var(--finch-bg-green) 100%); padding: 1.25rem 1.5rem; margin: 2rem 0; border-radius: 0 8px 8px 0; font-style: italic; color: var(--color-text-light); }
+    blockquote p { margin-bottom: 0; }
+
+    /* --- INFO & WARNING BOXES --- */
+    .info-box { background: linear-gradient(135deg, var(--finch-bg-blue) 0%, var(--finch-bg-green) 100%); border-left: 4px solid var(--finch-blue); border-radius: 0 10px 10px 0; padding: 1.5rem 2rem; margin: 2rem 0; }
+    .info-box-title { font-family: var(--font-heading); font-weight: 700; color: var(--finch-blue); margin-bottom: 0.5rem; }
+    .warning-box { background: linear-gradient(135deg, rgba(245,158,11,0.08), rgba(245,158,11,0.03)); border-left: 4px solid #F59E0B; border-radius: 0 10px 10px 0; padding: 1.5rem 2rem; margin: 2rem 0; }
+    .warning-box .info-box-title { color: #D97706; }
+
+    /* --- TABLE --- */
+    table { width: 100%; border-collapse: collapse; margin: 2rem 0; font-size: 0.88rem; }
+    thead { background: var(--finch-gradient); color: white; }
+    th { padding: 0.875rem 1rem; text-align: left; font-weight: 600; }
+    td { padding: 0.75rem 1rem; border-bottom: 1px solid #E2E8F0; }
+    tbody tr:hover { background: var(--finch-bg-blue); }
+
+    /* --- INLINE CITATIONS --- */
+    .cite-ref { display: inline; font-size: 0.75em; vertical-align: super; line-height: 0; margin-left: 1px; }
+    .cite-ref a { color: var(--finch-blue) !important; text-decoration: none !important; font-weight: 600; }
+    .cite-ref a:hover { background: var(--finch-blue); color: #FFFFFF !important; }
+
+    /* --- REFERENCES --- */
+    .references-section { margin-top: 2.8rem; padding-top: 1.5rem; border-top: 2px solid var(--finch-bg-blue); }
+    .references-section h2 { border-image: none; border-bottom: none; color: var(--finch-blue); font-size: 1.2rem; margin-top: 0; }
+    .references-list { list-style: none; counter-reset: ref-counter; padding: 0; margin: 0; }
+    .references-list li { counter-increment: ref-counter; padding: 0.5rem 0 0.5rem 2.2rem; position: relative; font-size: 0.88rem; color: var(--color-text-light); border-bottom: 1px solid #F0F4F7; }
+    .references-list li:last-child { border-bottom: none; }
+    .references-list li::before { content: "[" counter(ref-counter) "]"; position: absolute; left: 0; font-weight: 600; color: var(--finch-blue); font-size: 0.82rem; }
+    .references-list .ref-title { font-weight: 500; color: var(--color-text); }
+    .references-list .ref-source { font-style: italic; }
+    .references-list a { color: var(--finch-blue); text-decoration: none; word-break: break-all; font-size: 0.8rem; }
+    .ref-backlink { color: var(--finch-blue) !important; text-decoration: none !important; font-size: 0.8rem; margin-left: 0.375rem; }
+
+    /* --- CTA --- */
+    .cta { margin-top: 2.5rem; padding: 2rem 2.2rem; background: linear-gradient(135deg, var(--finch-bg-blue) 0%, var(--finch-bg-green) 100%); border-left: 4px solid var(--finch-green); border-radius: 0 10px 10px 0; color: var(--finch-dark); line-height: 1.7; font-size: 1rem; }
+    .cta p { margin-bottom: 0; font-style: italic; }
+
+    /* --- FOOTER --- */
+    .site-footer { text-align: center; padding: 2rem 1.5rem 1.5rem; font-size: 0.78rem; color: var(--color-text-light); }
+    .site-footer img { height: 28px; width: auto; margin-bottom: 0.4rem; }
+
+    /* --- RESPONSIVE --- */
+    @media (max-width: 640px) {
+      html { font-size: 16px; }
+      .hero { padding: 3rem 1.2rem 2.5rem; }
+      .hero h1 { font-size: 1.8rem; }
+      article { padding: 1.5rem 1.2rem 2rem; margin: -1.5rem 0.8rem 2rem; }
+      h2 { font-size: 1.35rem; }
+      h3 { font-size: 1.08rem; }
+      .navbar__logo img { height: 32px; }
+    }
+  </style>
+</head>
+<body>
+
+  <!-- NAVBAR -->
+  <nav class="navbar">
+    <a href="https://www.finch-ai.it" class="navbar__logo">
+      <img src="/assets/images/LOGO.png" alt="FinCh-AI Logo">
+    </a>
+  </nav>
+
+  <!-- HERO -->
+  <header class="hero">
+    <span class="hero__label">Business Insight</span>
+    <h1>The Decision Support System that builds your company's memory</h1>
+    <p class="hero__subtitle">How Synapse turns scattered documents, emails and contracts into a living database of your SME &mdash; with verifiable answers and human control always at the center.</p>
+    <p class="hero__meta">May 18, 2026 &middot; Finch-AI &middot; 15 min read</p>
+  </header>
+
+  <!-- ARTICLE -->
+  <div class="article-container">
+    <article>
+
+      <!-- TOC -->
+      <nav class="toc" aria-label="Table of contents">
+        <p class="toc__title">Contents</p>
+        <ol>
+          <li><a href="#section-1">The structural amnesia of SMEs</a></li>
+          <li><a href="#section-2">Why ERP, management systems and BI are no longer enough</a></li>
+          <li><a href="#section-3">What we mean by an advanced Decision Support System</a></li>
+          <li><a href="#section-4">The real bottleneck: understanding documents</a></li>
+          <li><a href="#section-5">Synapse: from automatic extraction to a company database</a></li>
+          <li><a href="#section-6">Human-in-the-loop: control stays in your hands</a></li>
+          <li><a href="#section-7">Ask anything, get answers with sources</a></li>
+          <li><a href="#section-8">Three concrete scenarios for an SME</a></li>
+          <li><a href="#section-9">Why it's finally within reach of SMEs</a></li>
+          <li><a href="#section-10">Company memory as a strategic asset</a></li>
+          <li><a href="#references">Sources and References</a></li>
+        </ol>
+      </nav>
+
+      <!-- SECTION 1 -->
+      <h2 id="section-1">The structural amnesia of SMEs</h2>
+
+      <p>In an average SME, an employee spends about <strong>1.8 hours a day</strong> &mdash; nearly a fifth of the workday &mdash; looking for information that already exists somewhere in the company<sup class="cite-ref"><a href="#ref-1" id="cite-1">[1]</a></sup>. It's in the sales team's emails, in quotes sent last year, in a non-conformity PDF archived in a network folder, in the supplier's technical sheets, in an email from three people ago that said exactly what now needs to be known.</p>
+
+      <p>The problem isn't a lack of data. It's the opposite: the data is there, but it's <strong>fragmented</strong>, written in different formats, kept in people's heads, scattered across a thousand documents that no one reads systematically. When an entrepreneur has to decide something important &mdash; how much to quote a customer, whether to accept a new supplier, why a certain product is losing margin &mdash; that information should land in their hands. Instead they have to phone, ask, wait, check.</p>
+
+      <p>For the productive system this problem has enormous economic dimensions. In Italy there are about <strong>5 million companies</strong>, 96% of which are SMEs: together they generate 40% of national turnover and employ about 80% of workers<sup class="cite-ref"><a href="#ref-2" id="cite-2">[2]</a></sup>. Yet precisely these companies, fundamental to the economy, are the ones with the fewest tools to turn the enormous knowledge they produce every day into something usable.</p>
+
+      <p>You can call it many things: knowledge management, decision support, business intelligence. But the point remains one: <em>the information you'd need to decide better, the company has already produced</em>. You just need something that can read it.</p>
+
+      <!-- SECTION 2 -->
+      <h2 id="section-2">Why ERP, management systems and BI are no longer enough</h2>
+
+      <p>The classic answer to the problem "I want to decide better based on my data" has for years been traditional management tools: ERP, CRM, business-intelligence software, dashboards. All useful, but all with the same underlying limit: <strong>they only work on structured data</strong>. That is, data already entered into tables, with rows and columns, labeled correctly.</p>
+
+      <p>The problem is that <strong>80% of company data is unstructured</strong>. It lives in PDFs, emails, scans, voice notes, messy Excel sheets, presentations, photos, videos. According to Gartner estimates, this percentage reaches up to 90% if you consider all the new data companies generate each year, and it grows at a rate three times higher than structured data<sup class="cite-ref"><a href="#ref-3" id="cite-3">[3]</a></sup>. IDC projections confirm the scenario: the volume of unstructured data stored worldwide will go from 5.5 to 10.5 zettabytes between 2024 and 2028<sup class="cite-ref"><a href="#ref-4" id="cite-4">[4]</a></sup>.</p>
+
+      <p>For SMEs the imbalance is even more marked. Most don't have a data warehouse, don't have a dedicated IT team, don't have the structure to "clean and classify" tens of thousands of documents before being able to analyze them. The result is that the only way to use unstructured knowledge is to <strong>ask someone who remembers it</strong> &mdash; which is why every employee burns nearly a fifth of the day chasing information.</p>
+
+      <p>Traditional tools aren't wrong. They were simply designed for a world where data already arrives in table form. The real world of SMEs doesn't work like that.</p>
+
+      <!-- SECTION 3 -->
+      <h2 id="section-3">What we mean by an advanced Decision Support System</h2>
+
+      <p>The concept of a Decision Support System (DSS) isn't new. It's existed for decades in the enterprise world, but in the past it essentially meant <em>"a dashboard with some charts"</em>: take structured data from management systems, aggregate, show KPIs.</p>
+
+      <p>What we're talking about today is something different, enabled by generative AI. An advanced DSS does three things together:</p>
+
+      <ol>
+        <li>It <strong>understands</strong> any company document &mdash; contract PDFs, delivery-note scans, customer emails, supplier technical sheets, meeting minutes &mdash; and automatically extracts entities, relationships and structured data.</li>
+        <li>It <strong>connects</strong> that information with the data already present in management systems, creating a unified map of company knowledge.</li>
+        <li>It <strong>answers</strong> questions in natural language, showing <em>where</em> it found each piece of information, so the decision-maker can verify.</li>
+      </ol>
+
+      <p>The difference from a generic AI chatbot is substantial: an advanced DSS doesn't just "answer well" by drawing from a hazy internal memory. <strong>It actively builds, over time, your company's database</strong>, enriches it piece by piece, and tracks every source. It's an asset that grows with the SME, not a service to consume.</p>
+
+      <p>This is exactly the vision we built in <strong>Synapse</strong>, Finch-AI's knowledge-management platform.</p>
+
+      <!-- SECTION 4 -->
+      <h2 id="section-4">The real bottleneck: understanding documents</h2>
+
+      <p>There's a common misconception when talking about AI in business: people think the problem to solve is "asking the AI questions". In reality, the real problem is <strong>getting to a point where you can actually ask the AI something useful</strong>. Without a system that has read and understood company documents, any AI assistant is blind to the 80% of reality that lives in the company<sup class="cite-ref"><a href="#ref-3" id="cite-3b">[3]</a></sup>.</p>
+
+      <p>It's called <em>Intelligent Document Processing</em> (IDP), and it's the invisible but decisive piece of any modern decision support system. The global IDP market is already growing explosively: more than 60% of Fortune 250 companies use it, with average savings of 35% on document-management costs and a 17% reduction in manual document work<sup class="cite-ref"><a href="#ref-5" id="cite-5">[5]</a></sup>.</p>
+
+      <p>The key point, though, isn't just "doing OCR and extracting text". That's existed for twenty years. The novelty of the last two years is that next-generation language models can read a document <strong>in its entirety</strong>, understand context, identify actors, events, dates, amounts, deadlines, relationships between entities, and return everything in structured form. All in a single pass, without having to program custom rules for each document type.</p>
+
+      <p>This is what makes it possible to build something truly new: a company database that populates itself, reading the documents the company already produces in the normal course of its activities.</p>
+
+      <!-- SECTION 5 -->
+      <h2 id="section-5">Synapse: from automatic extraction to a company database</h2>
+
+      <p>Synapse starts from a simple idea: <em>your documents are already a database, they just need to be read</em>. Let's see what concretely happens when you upload a document &mdash; for example a supply contract, a technical specification or a delivery note.</p>
+
+      <h3>1. Full extraction, a single pass</h3>
+
+      <p>The document is processed in its entirety by a latest-generation AI model, in a single call. Not fragmented, not split into pages: <strong>all the content is analyzed in its complete context</strong>. The AI identifies the entities involved (customers, suppliers, products, people, locations), the relationships between them (who supplies what to whom, with what deadline, at what price) and the structural metadata (dates, amounts, regulatory references).</p>
+
+      <h3>2. Building a knowledge graph</h3>
+
+      <p>The extracted data doesn't end up in a flat table. It's organized into a <strong>knowledge graph</strong>: a map that explicitly represents the links between entities. The Amazon Web Services study on graph-based RAG systems shows that this approach increases answer accuracy by up to 35% compared to purely vector engines, and up to 3.4 times compared to classic semantic-search techniques<sup class="cite-ref"><a href="#ref-6" id="cite-6">[6]</a></sup>. For the SME, in practice, this means the system "truly understands" that <em>order 2024-117</em> is linked to <em>customer Rossi SRL</em>, which had two complaints in the last quarter, and that those same complaints concern a component that always comes from the same supplier.</p>
+
+      <h3>3. Ontology critique: the system improves itself</h3>
+
+      <p>Every time Synapse processes a new document, it takes one further step: it compares the extracted data with the current data schema (the company's "ontology") and suggests improvements &mdash; missing categories, redundant types, useful new relationships. It's a system that learns from the material you feed it, evolving with the complexity of your company. No one has to "reprogram" it from scratch every time a process changes or you enter a new market.</p>
+
+      <!-- SECTION 6 -->
+      <h2 id="section-6">Human-in-the-loop: control stays in your hands</h2>
+
+      <p>There's a question every entrepreneur rightly asks before entrusting their data to an AI system: <strong>"What if it's wrong?"</strong>. It's a fair question. AI models, even the most advanced, can produce errors &mdash; so-called "hallucinations" &mdash; with an average frequency of about 9% in generic knowledge-retrieval tasks<sup class="cite-ref"><a href="#ref-7" id="cite-7">[7]</a></sup>. For critical operational data (contracts, invoices, amounts, deadlines) a 9% margin of error is unacceptable.</p>
+
+      <p>That's why Synapse is built around the <strong>human-in-the-loop</strong> (HITL) principle: the AI proposes, the human validates. When the system extracts a piece of information with high confidence, it records it. When it has a doubt &mdash; an unclear field, an ambiguity, an out-of-range value &mdash; <em>it puts it in a review queue</em>, where an operator confirms or corrects with a click. The corrections are memorized and the system learns for next time.</p>
+
+      <p>The numbers behind this approach are remarkable. Studies on HITL systems in document extraction show accuracy up to <strong>99.9%</strong>, against about 92% for fully automatic systems<sup class="cite-ref"><a href="#ref-8" id="cite-8">[8]</a></sup>. It means practically total correctness, achieved by combining the speed of AI with human judgment where it's needed.</p>
+
+      <div class="info-box">
+        <div class="info-box-title">&#x1F4A1; The paradigm that works for SMEs</div>
+        <p>In an SME no one has time to do full-time data entry. But <em>almost everyone</em> has a few minutes a day to say "yes, this value is correct" or "no, the amount is off by a decimal". HITL turns an impossible job (populating a database manually) into a distributed, lightweight one. The database grows, gets richer, becomes more and more reliable &mdash; without hiring data-entry staff, without stopping operations.</p>
+      </div>
+
+      <p>This is the most important point we want to convey to our clients: <strong>AI doesn't replace anyone and doesn't act in the dark. It works alongside people, proposes, and waits for confirmation when needed.</strong></p>
+
+      <!-- SECTION 7 -->
+      <h2 id="section-7">Ask anything, get answers with sources</h2>
+
+      <p>Once the system has read and organized the documents, something happens that profoundly changes the daily experience of those who work in the company: you can <strong>ask questions, in plain language, exactly as you would an expert colleague</strong>.</p>
+
+      <p>"How many complaints have we had from Rossi SRL in the last 12 months?". "What's the average margin on the line-X products?". "Who are the three suppliers with the longest delivery times in 2025?". "What's the standard termination clause in our agent contracts?". All these questions have an answer inside the company. Synapse finds it, summarizes it, and presents it.</p>
+
+      <h3>The decisive difference: citations</h3>
+
+      <p>A generic AI chat answers, but doesn't say <em>where</em> it took the information from. For an entrepreneur this is a huge limitation: how can you trust an answer you can't verify? AI hallucinations have already caused concrete economic harm, with documented cases worth over $250 million a year in the legal and enterprise field alone<sup class="cite-ref"><a href="#ref-9" id="cite-9">[9]</a></sup>.</p>
+
+      <p>Synapse solves the problem at the root: every answer includes <strong>clickable citations</strong> to the original documents. Want to know on what basis the system says the margin on line X dropped 4%? You click the citation and reach the invoice, the line, the exact amount. If the AI misinterpreted, you notice immediately. If it's right, you have the proof in hand.</p>
+
+      <p>This isn't just an operational advantage &mdash; it's becoming a regulatory requirement. EU Regulation 2024/1689 (the <strong>AI Act</strong>) imposes precise obligations of transparency, traceability and decision logging on high-risk artificial-intelligence systems<sup class="cite-ref"><a href="#ref-10" id="cite-10">[10]</a></sup>. SMEs that adopt a DSS with explicit citations today will already be compliant tomorrow.</p>
+
+      <!-- SECTION 8 -->
+      <h2 id="section-8">Three concrete scenarios for an SME</h2>
+
+      <p>To make it concrete what it means to have a Decision Support System like Synapse, here are three real situations that recur in SMEs across different sectors.</p>
+
+      <h3>A consulting firm with 10 years of archives</h3>
+
+      <p>An accounting or law firm that has accumulated ten years of opinions, contracts, letters, advice. When a new client arrives with a matter similar to one already handled, today no one remembers it &mdash; or only the senior partner does. With Synapse, the entire archive becomes queryable in natural language: <em>"have we already handled GDPR compliance cases for fashion-sector companies based abroad?"</em>. The system finds the three relevant cases in seconds and shows the matters, the clauses adopted, the outcomes.</p>
+
+      <h3>Manufacturing with a complex supplier chain</h3>
+
+      <p>An Italian manufacturer working with 80 suppliers, 200 product codes, receiving delivery notes, technical sheets, conformity certifications every week. All in PDF, all scattered. When a production non-conformity arises, understanding <em>who supplied that specific batch, with which technical sheet, and whether there were similar problems in the past</em> requires hours of manual investigation. Synapse cross-references delivery notes, certificates, department reports and contracts, and produces the answer in real time. The quality manager sees at a glance the recurring patterns, the critical suppliers, the corrective actions that worked.</p>
+
+      <h3>E-commerce with distributed customer data</h3>
+
+      <p>An e-commerce business with a CRM, support ticketing system, complaint emails, Trustpilot reviews, WhatsApp customer-care conversations. Each channel is an island. Knowing "what the real problem of disappointed customers is over the last three months" today means reading hundreds of messages by hand. Synapse unifies them, identifies the recurring themes (e.g. <em>"shipping delays on large-size products"</em>) and links each report to the specific customer, product, supplier. Marketing finally knows <strong>what to fix first</strong>.</p>
+
+      <p>In all three cases, the value doesn't come from a single brilliant algorithm. It comes from the <strong>ability to unite knowledge that until yesterday was impossible to unite</strong>: documents of different formats, at different times, from different people, gathered into a single queryable memory.</p>
+
+      <!-- SECTION 9 -->
+      <h2 id="section-9">Why it's finally within reach of SMEs</h2>
+
+      <p>For years these systems were the preserve of large groups with million-euro IT budgets. Today three converging changes have made them accessible to SMEs too.</p>
+
+      <p><strong>First: the collapse of AI costs.</strong> The Stanford AI Index 2025 documents that the cost of querying a language model equivalent to GPT-3.5 dropped from $20 per million tokens in November 2022 to $0.07 in October 2024 &mdash; a reduction of <strong>over 280 times in 18 months</strong><sup class="cite-ref"><a href="#ref-11" id="cite-11">[11]</a></sup>. What until three years ago was economically sustainable only for banks and multinationals now fits within a small company's budget.</p>
+
+      <p><strong>Second: the maturity of the models.</strong> The latest generations of LLMs can read complex documents (contracts, delivery notes, technical sheets) with a reliability that didn't exist two years ago. Combined with the knowledge graph and HITL, they reach accuracy levels previously unthinkable for SMEs.</p>
+
+      <p><strong>Third: competitive and regulatory pressure.</strong> According to ISTAT 2025 data, AI adoption in Italian SMEs <strong>doubled in a single year</strong>, going from 7.7% to 15.7%, but the gap with large companies (at 53.1%) widened from the 20 percentage points of 2023 to the 37 points of 2025<sup class="cite-ref"><a href="#ref-12" id="cite-12">[12]</a></sup>. At the European level, Italy is 19th out of 27 in the DESI Index for digitization level, with an EU target of 90% of SMEs digitized by 2030<sup class="cite-ref"><a href="#ref-13" id="cite-13">[13]</a></sup>. The Politecnico di Milano Digital Innovation Observatory confirms the picture in 2025: 54% of SMEs invest in digital technologies, but <strong>only 19% adopt advanced solutions in a structured way</strong><sup class="cite-ref"><a href="#ref-14" id="cite-14">[14]</a></sup>.</p>
+
+      <p>Those who start now, in other words, still have a significant window of competitive advantage. Those who wait two years risk finding themselves playing catch-up.</p>
+
+      <!-- SECTION 10 -->
+      <h2 id="section-10">Company memory as a strategic asset</h2>
+
+      <p>To conclude, a change of perspective is worth it. For years we thought of "company knowledge" as something intangible, kept by people, hard to quantify. Today it's possible to turn it into a <strong>measurable, queryable and transferable asset</strong> &mdash; a heritage that stays in the company even when a key person retires, even when a second location opens, even when a new collaborator needs to be trained quickly.</p>
+
+      <p>A Decision Support System like Synapse isn't software you buy and install once. It's a <strong>company memory that grows with you</strong>: every document you produce enriches it, every correction makes it more precise, every question you ask it makes it more useful.</p>
+
+      <p>It's not about replacing people. It's about freeing them from the toil of chasing information, so they can devote their time to what really makes the difference for an SME: <strong>deciding better, and deciding sooner</strong>.</p>
+
+      <!-- REFERENCES SECTION -->
+      <section class="references-section" id="references">
+        <h2>&#x1F4DA; Sources and References</h2>
+        <ol class="references-list">
+          <li id="ref-1">
+            <span class="ref-title">"The social economy: Unlocking value and productivity through social technologies"</span>,
+            <span class="ref-source">McKinsey Global Institute</span>,
+            <span class="ref-date">2012 (cited in later 2024 studies on knowledge workers)</span>.
+            <a href="https://www.mckinsey.com/industries/technology-media-and-telecommunications/our-insights/the-social-economy" target="_blank" rel="noopener">Link &#x2197;</a>
+            <a href="#cite-1" class="ref-backlink" title="Back to text">&#8617;</a>
+          </li>
+          <li id="ref-2">
+            <span class="ref-title">"Italian Statistical Yearbook 2024 &mdash; Chapter 14: Businesses"</span>,
+            <span class="ref-source">ISTAT</span>,
+            <span class="ref-date">2024</span>.
+            <a href="https://www.istat.it/storage/ASI/2024/capitoli/C14.pdf" target="_blank" rel="noopener">Link &#x2197;</a>
+            <a href="#cite-2" class="ref-backlink" title="Back to text">&#8617;</a>
+          </li>
+          <li id="ref-3">
+            <span class="ref-title">"Securing Unstructured Data is Key to Enabling GenAI: New Gartner&reg; Report"</span>,
+            <span class="ref-source">Forcepoint / Gartner Research</span>,
+            <span class="ref-date">2024</span>.
+            <a href="https://www.forcepoint.com/blog/insights/gartner-2024-world-class-security-unstructured-data-report" target="_blank" rel="noopener">Link &#x2197;</a>
+            <a href="#cite-3" class="ref-backlink" title="Back to text">&#8617;</a>
+            <a href="#cite-3b" class="ref-backlink" title="Back to text">&#8617;</a>
+          </li>
+          <li id="ref-4">
+            <span class="ref-title">"Worldwide Global StorageSphere Structured and Unstructured Data Forecast, 2024-2028"</span>,
+            <span class="ref-source">IDC Research</span>,
+            <span class="ref-date">September 2024</span>.
+            <a href="https://my.idc.com/getdoc.jsp?containerId=US52554924" target="_blank" rel="noopener">Link &#x2197;</a>
+            <a href="#cite-4" class="ref-backlink" title="Back to text">&#8617;</a>
+          </li>
+          <li id="ref-5">
+            <span class="ref-title">"Gartner&reg; 2024 Market Guide for Intelligent Document Processing Solutions"</span>,
+            <span class="ref-source">Gartner / Hyperscience</span>,
+            <span class="ref-date">2024</span>.
+            <a href="https://www.hyperscience.ai/resource/gartner-2024-market-guide-for-intelligent-document-processing-solutions/" target="_blank" rel="noopener">Link &#x2197;</a>
+            <a href="#cite-5" class="ref-backlink" title="Back to text">&#8617;</a>
+          </li>
+          <li id="ref-6">
+            <span class="ref-title">"Improving Retrieval Augmented Generation accuracy with GraphRAG"</span>,
+            <span class="ref-source">Amazon Web Services Machine Learning Blog</span>,
+            <span class="ref-date">2024</span>.
+            <a href="https://aws.amazon.com/blogs/machine-learning/improving-retrieval-augmented-generation-accuracy-with-graphrag/" target="_blank" rel="noopener">Link &#x2197;</a>
+            <a href="#cite-6" class="ref-backlink" title="Back to text">&#8617;</a>
+          </li>
+          <li id="ref-7">
+            <span class="ref-title">"LLM Hallucinations in Enterprise AI: Risks, Costs, Control Frameworks"</span>,
+            <span class="ref-source">Dextra Labs Research</span>,
+            <span class="ref-date">2024</span>.
+            <a href="https://dextralabs.com/blog/llm-hallucinations-enterprise-ai-risks-control/" target="_blank" rel="noopener">Link &#x2197;</a>
+            <a href="#cite-7" class="ref-backlink" title="Back to text">&#8617;</a>
+          </li>
+          <li id="ref-8">
+            <span class="ref-title">"Human-in-the-Loop AI (HITL) &mdash; Complete Guide to Benefits, Best Practices &amp; Trends"</span>,
+            <span class="ref-source">Parseur / industry HITL research</span>,
+            <span class="ref-date">2026</span>.
+            <a href="https://parseur.com/blog/human-in-the-loop-ai" target="_blank" rel="noopener">Link &#x2197;</a>
+            <a href="#cite-8" class="ref-backlink" title="Back to text">&#8617;</a>
+          </li>
+          <li id="ref-9">
+            <span class="ref-title">"Understanding LLM hallucinations in enterprise applications"</span>,
+            <span class="ref-source">Glean Perspectives / Cresta Research / industry analyses</span>,
+            <span class="ref-date">2024-2025</span>.
+            <a href="https://www.glean.com/perspectives/when-llms-hallucinate-in-enterprise-contexts-and-how-contextual-grounding" target="_blank" rel="noopener">Link &#x2197;</a>
+            <a href="#cite-9" class="ref-backlink" title="Back to text">&#8617;</a>
+          </li>
+          <li id="ref-10">
+            <span class="ref-title">"Regulation (EU) 2024/1689 of the European Parliament and of the Council &mdash; AI Act"</span>,
+            <span class="ref-source">EUR-Lex, European Union</span>,
+            <span class="ref-date">June 13, 2024</span>.
+            <a href="https://eur-lex.europa.eu/eli/reg/2024/1689/oj?locale=it" target="_blank" rel="noopener">Link &#x2197;</a>
+            <a href="#cite-10" class="ref-backlink" title="Back to text">&#8617;</a>
+          </li>
+          <li id="ref-11">
+            <span class="ref-title">"Artificial Intelligence Index Report 2025 &mdash; Chapter 1: Research and Development"</span>,
+            <span class="ref-source">Stanford HAI (Human-Centered Artificial Intelligence)</span>,
+            <span class="ref-date">2025</span>.
+            <a href="https://hai.stanford.edu/ai-index/2025-ai-index-report" target="_blank" rel="noopener">Link &#x2197;</a>
+            <a href="#cite-11" class="ref-backlink" title="Back to text">&#8617;</a>
+          </li>
+          <li id="ref-12">
+            <span class="ref-title">"Businesses and ICT &mdash; Year 2025"</span>,
+            <span class="ref-source">ISTAT &mdash; Italian National Institute of Statistics</span>,
+            <span class="ref-date">December 2025</span>.
+            <a href="https://www.istat.it/comunicato-stampa/imprese-e-ict-anno-2025/" target="_blank" rel="noopener">Link &#x2197;</a>
+            <a href="#cite-12" class="ref-backlink" title="Back to text">&#8617;</a>
+          </li>
+          <li id="ref-13">
+            <span class="ref-title">"Italy in the Digital Economy and Society Index (DESI) &mdash; Digital Decade Country Report 2024"</span>,
+            <span class="ref-source">European Commission, Shaping Europe's digital future</span>,
+            <span class="ref-date">2024</span>.
+            <a href="https://digital-strategy.ec.europa.eu/en/policies/desi-italy" target="_blank" rel="noopener">Link &#x2197;</a>
+            <a href="#cite-13" class="ref-backlink" title="Back to text">&#8617;</a>
+          </li>
+          <li id="ref-14">
+            <span class="ref-title">"Italian SMEs: innovation that starts from weaknesses &mdash; 2025 Research"</span>,
+            <span class="ref-source">Digital Innovation in SMEs Observatory, Politecnico di Milano</span>,
+            <span class="ref-date">2025</span>.
+            <a href="https://www.osservatori.net/comunicato/innovazione-digitale-nelle-pmi/pmi-italiane-innovazione/" target="_blank" rel="noopener">Link &#x2197;</a>
+            <a href="#cite-14" class="ref-backlink" title="Back to text">&#8617;</a>
+          </li>
+        </ol>
+      </section>
+
+      <!-- CTA SECTION -->
+      <div class="cta">
+        <p>Want to see how Synapse reads your company documents and turns 10 years of archives into an assistant that answers you with citations? Contact us for a personalized demo on your SME. <a href="https://www.finch-ai.it/#contatti"><strong>Contact us &rarr;</strong></a></p>
+      </div>
+
+    </article>
+  </div>
+
+  <footer class="site-footer">
+    <img src="/assets/images/LOGO.png" alt="Finch-AI"><br>
+    &copy; 2026 Finch-AI &middot; All rights reserved
+  </footer>
+
+</body>
+</html>

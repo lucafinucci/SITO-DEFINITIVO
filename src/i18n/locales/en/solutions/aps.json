@@ -1,0 +1,49 @@
+{
+  "seo": {
+    "title": "APS Planner — Finch-AI | Advanced Planning System for Manufacturing",
+    "description": "Finch-AI's APS (Advanced Planning System): advanced manufacturing production planning with multi-algorithm optimization and a natural-language conversational interface.",
+    "keywords": "APS, advanced planning system, production planning software, production scheduling, MES, manufacturing optimization, AI for manufacturing, Finch-AI",
+    "ldDescription": "Finch-AI's APS is the manufacturing production planner: multi-algorithm scheduling optimization and a natural-language conversational interface."
+  },
+  "hero": {
+    "tag": "Planning · Production",
+    "titlePre": "APS",
+    "lead": "An advanced planning system for manufacturing production: multi-algorithm optimization and a natural-language conversational interface to manage <strong>scheduling without the complexity</strong>.",
+    "ctaDemo": "Request a demo",
+    "ctaAll": "All solutions",
+    "demoPrefill": "APS demo — production planner",
+    "ambitiLabel": "Areas of application"
+  },
+  "ambiti": [
+    "Production order scheduling",
+    "Resource, machine and shift management",
+    "Batch and sequence optimization",
+    "Production scenario simulation"
+  ],
+  "featuresHead": {
+    "title": "Planning that speaks<br />your <em>language</em>.",
+    "eyebrow": "Advanced Planning System"
+  },
+  "features": [
+    { "title": "Advanced scheduling optimization", "desc": "Heuristic, metaheuristic and exact algorithms generate optimal production plans, balancing constraints, resources and priorities." },
+    { "title": "Natural-language conversational interface", "desc": "Interact with the planner like a production expert: ask, simulate and re-plan in natural language." },
+    { "title": "End-to-end multi-constraint scheduling", "desc": "Orders, machines, shifts and materials in a single, consistent planning engine, always up to date." }
+  ],
+  "featRows": [
+    "Capacity, material and skill constraints",
+    "Fast re-planning as orders change",
+    "Integrates with existing ERP and MES"
+  ],
+  "valueHead": {
+    "eyebrow": "Where it creates value",
+    "title": "From theory to the shop floor,<br /><em>fast</em>.",
+    "lead": "APS brings mathematical optimization into daily planning, with an interface anyone in production can use."
+  },
+  "cta": {
+    "title": "Ready to plan<br />with <em>AI</em>?",
+    "text": "We'll show you APS on your real orders and constraints in a 30-minute demo, no commitment.",
+    "ctaDemo": "Request a demo",
+    "ctaWrite": "Write to us",
+    "demoPrefill": "APS demo — production planner"
+  }
+}

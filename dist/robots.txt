@@ -4,6 +4,7 @@
 User-agent: *
 Allow: /
 Disallow: /area-clienti/
+Disallow: /en/area-clienti/
 Disallow: /api/
 Disallow: /*.json$
 
@@ -20,9 +21,11 @@ Allow: /*.svg$
 # Bad bots / scrapers (best effort)
 User-agent: GPTBot
 Disallow: /area-clienti/
+Disallow: /en/area-clienti/
 
 User-agent: CCBot
 Disallow: /area-clienti/
+Disallow: /en/area-clienti/
 
 User-agent: AhrefsBot
 Crawl-delay: 10

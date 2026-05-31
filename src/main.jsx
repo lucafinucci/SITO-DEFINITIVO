@@ -5,6 +5,7 @@ import { HelmetProvider } from 'react-helmet-async';
 import App from '@/App';
 import { ThemeProvider } from '@/context/ThemeContext';
 import { ContactModalProvider } from '@/context/ContactModalContext';
+import '@/i18n';
 import './index.css';
 import './styles/finch-design.css';
 

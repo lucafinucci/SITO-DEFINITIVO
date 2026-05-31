@@ -1,0 +1,183 @@
+{
+  "seo": {
+    "title": "Finch-AI — Custom AI Solutions for SMEs",
+    "description": "Finch-AI builds tailored artificial intelligence that adapts to your processes and grows with your business: OmniFlow, Document Intelligence, Finance Intelligence and Synapse. Live in days, not months.",
+    "keywords": "AI for SMEs, custom AI solutions, business process automation AI, document intelligence software, financial analysis AI, knowledge management AI, OmniFlow, Synapse",
+    "orgDescription": "Tailored artificial intelligence that adapts and grows with small and mid-sized businesses: OmniFlow, Document Intelligence, Finance Intelligence and Synapse."
+  },
+  "hero": {
+    "tag": "Enterprise AI for small & mid-sized businesses",
+    "title": "Artificial<br />intelligence that <em>works</em><br />like <span class=\"stroke\">your business</span>.",
+    "sub": "Finch-AI builds tailored artificial intelligence that adapts to your processes and <strong>grows together with your business</strong>. From ready-made modules to an agent built around you — live in days, not months.",
+    "demoBtn": "Book a demo",
+    "exploreBtn": "Explore the modules",
+    "stat1n": "Adaptive",
+    "stat1l": "Evolves with you",
+    "stat2n": "Tailored",
+    "stat2l": "To every business",
+    "stat3l": "Data kept in Italy",
+    "flowTitle": "How Finch works",
+    "flowBadge": "Adaptive AI",
+    "flowStage1": "01 · Your sources",
+    "flowChipDocs": "Documents",
+    "flowChipProc": "Processes",
+    "flowChipErp": "ERP systems",
+    "flowChipEmail": "Email & chat",
+    "flowCoreName": "Finch AI",
+    "flowCoreAdapt": "adapts",
+    "flowCoreEvolve": "evolves",
+    "flowFloat": "Grows with your business",
+    "flowStage3": "03 · The solutions",
+    "flowTailor": "+ Tailored"
+  },
+  "partners": {
+    "label": "Recognized by",
+    "partner24Name": "Partner 24 Ore",
+    "partner24Role": "Official partner",
+    "confindustriaName": "Confindustria",
+    "confindustriaRole": "L'Aquila"
+  },
+  "value": {
+    "eyebrow": "Our approach",
+    "title": "The bridge between your business<br />and <em>artificial intelligence</em>.",
+    "lead": "The most advanced AI engines change every month. Your business doesn't. Finch-AI sits in between: it connects your processes, documents and numbers to the right artificial intelligence — wherever it lives, even inside your own walls — and puts it to work for you.",
+    "cell1Title": "Truly modular",
+    "cell1Text": "Turn on only what you need, when you need it. Each module works on its own or integrates with the others, without rewriting your processes.",
+    "cell2Title": "The best of AI, at your service",
+    "cell2Text": "We pick and connect the AI engines that fit you best — in the cloud or on-premise. Nothing changes for you: only the result does. And your data stays in Italy.",
+    "cell3Title": "It adapts and evolves",
+    "cell3Text": "Not static software: the AI learns from your work, improves over time and grows with your company. Live in days, never an endless project."
+  },
+  "modules": {
+    "title": "Five ready modules.<br />And the rest, <em>tailored</em>.",
+    "eyebrow": "The Finch suite",
+    "discover": "Discover {{name}}",
+    "items": {
+      "omniflow": {
+        "tag": "AI business management",
+        "name": "OmniFlow",
+        "desc": "The operational core. It orchestrates orders, invoices, inventory and workflows with a copilot that understands natural-language requests and acts on your behalf.",
+        "feats": [
+          "End-to-end automation of repetitive workflows",
+          "Conversational copilot on your management system",
+          "Integration with the systems you already use"
+        ]
+      },
+      "document": {
+        "tag": "Document understanding",
+        "name": "Document Intelligence",
+        "desc": "It reads, classifies and extracts data from invoices, contracts, delivery notes and emails. It turns paper and PDFs into structured, ready-to-use information.",
+        "feats": [
+          "Context-aware data extraction",
+          "Automatic reconciliation and checks",
+          "Natural-language searchable archive"
+        ]
+      },
+      "finance": {
+        "tag": "Financial analysis",
+        "name": "Finance Intelligence",
+        "desc": "It gives you visibility into the future: forecast cash flow, margins by customer and product, real-time KPIs. Management decides on numbers, not gut feeling.",
+        "feats": [
+          "Cash flow and forecast scenarios",
+          "Real-time KPI dashboard",
+          "Automatic alerts on margins and overdue payments"
+        ]
+      },
+      "synapse": {
+        "tag": "Knowledge Intelligence",
+        "name": "Synapse",
+        "desc": "Your company's documental brain. It turns scattered documents, emails, contracts and conversations into a living, self-maintaining wiki — with every answer cited back to its source.",
+        "feats": [
+          "Living wiki & company knowledge graph",
+          "Answers with verifiable citations",
+          "On-premise data, within your perimeter"
+        ]
+      },
+      "aps": {
+        "tag": "Production planning",
+        "name": "APS",
+        "desc": "Advanced Planning System: plan and optimize manufacturing production with advanced algorithms and a natural-language conversational interface, without the complexity.",
+        "feats": [
+          "Multi-algorithm scheduling optimization",
+          "Conversational interface for production",
+          "Integration with existing ERP and MES"
+        ]
+      }
+    }
+  },
+  "tailored": {
+    "eyebrow": "Custom solutions",
+    "title": "The modules are<br />the <em>starting point</em>.",
+    "lead": "No two companies are alike. That's why Finch-AI doesn't just sell licenses: we design and build artificial intelligence around <strong>your</strong> processes, your documents and your goals. From ready-made modules to an AI agent built from scratch.",
+    "cta": "Let's talk about your case",
+    "ctaPrefill": "Custom solution",
+    "cardATitle": "Consulting & assessment",
+    "cardAText": "We analyze processes and data to find where AI creates real value, not just experiments.",
+    "cardBTitle": "Custom development",
+    "cardBText": "Agents and workflows built around the way you work, integrated with the systems you already use.",
+    "cardCTitle": "Ongoing support",
+    "cardCText": "An Italian team that stays by your side: the AI evolves together with your company."
+  },
+  "process": {
+    "eyebrow": "The Finch method",
+    "title": "From the first call to AI<br />that works, <em>fast</em>.",
+    "step1Title": "Listen",
+    "step1Text": "A call to understand your company's processes, documents and numbers. No endless questionnaires.",
+    "step2Title": "Configure",
+    "step2Text": "We turn on the right modules and train them on your real data, in your secure environment.",
+    "step3Title": "Launch",
+    "step3Text": "In a short time the AI is live. The first automated workflows run right away, no waiting.",
+    "step4Title": "Grow",
+    "step4Text": "Finch learns from your work and improves. Add modules when your company is ready.",
+    "foot": "Ongoing support from an <b>Italian</b> team — not a ticket, a person."
+  },
+  "news": {
+    "eyebrow": "News",
+    "title": "What's happening<br />at <em>Finch</em>.",
+    "lead": "Announcements, milestones and product news. A startup that's growing — and sharing the story.",
+    "card1Cat": "Recognition",
+    "card1Date": "May 2026",
+    "card1Title": "Finch-AI joins the Partner 24 Ore network",
+    "card1Text": "Our vision on AI for Italian SMEs featured in the Partner 24 Ore special, with a video interview.",
+    "card1Go": "Read",
+    "card2Cat": "Product",
+    "card2Date": "2026",
+    "card2Title": "Introducing Synapse, your company's documental brain",
+    "card2Text": "From scattered data to a living, self-maintaining wiki: the new Knowledge Intelligence module, with answers always cited to their source.",
+    "card2Go": "Discover Synapse",
+    "card3Cat": "Ecosystem",
+    "card3Date": "2026",
+    "card3Title": "Together with Confindustria L'Aquila for AI in business",
+    "card3Text": "We bring tailored artificial intelligence into the local SME fabric, alongside Confindustria L'Aquila.",
+    "card3Go": "Discover"
+  },
+  "press": {
+    "eyebrow": "Testimonials",
+    "title": "The press that matters<br />talks about <em>Finch</em>.",
+    "videoTitle": "Partner 24 Ore video interview — Finch-AI",
+    "card1Kick": "Video interview",
+    "card1Text": "Finch-AI in the Partner 24 Ore network: our vision on AI for Italian SMEs.",
+    "card1Go": "Read on Partner 24 Ore",
+    "card2Kick": "Coming soon",
+    "card2Text": "The article dedicated to Finch-AI will be online soon. You'll find it here as soon as it's published.",
+    "card2Badge": "Article being published",
+    "videoCap": "▶ Video interview — Partner 24 Ore · Partner Special"
+  },
+  "clients": {
+    "eyebrow": "Our clients",
+    "title": "Businesses already<br />working with <em>Finch</em>.",
+    "lead": "Italian companies that chose to put artificial intelligence at the center of their processes — and to do it with us.",
+    "quote": "The first case studies from our clients will be online soon. We're gathering the results of the businesses already working with Finch.",
+    "metaName": "Finch-AI",
+    "metaRole": "case studies coming soon",
+    "cta": "Become a case study",
+    "ctaPrefill": "Case study"
+  },
+  "cta": {
+    "title": "Let's see what AI can do<br />for <em>your business</em>.",
+    "text": "Book a 30-minute demo. We'll show you Finch on your own documents and numbers, no commitment.",
+    "demoBtn": "Book a demo",
+    "writeBtn": "Write to us",
+    "demoPrefill": "Demo request"
+  }
+}

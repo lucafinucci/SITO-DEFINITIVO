@@ -1,0 +1,120 @@
+{
+  "seo": {
+    "title": "Finance Intelligence | Analisi Bilancio AI per PMI — Finch-AI",
+    "description": "Dal bilancio Excel al report OIC professionale. Indici finanziari (ROE, ROI, EBITDA, Z-Score Altman), riclassificazione automatica, chat AI sui dati. Da €49/mese.",
+    "keywords": "analisi finanziaria AI, report bilancio automatico, software analisi bilancio PMI, indici finanziari ROE ROI EBITDA, riclassificazione OIC automatica, Z-Score Altman, cash flow AI, software CFO PMI, Finance Intelligence, commercialisti AI, bilancio OIC art 2425"
+  },
+  "hero": {
+    "pill": "Finance Intelligence · AI finanziario per PMI",
+    "title": "Il tuo bilancio parla. <em>Ora puoi ascoltarlo.</em>",
+    "lead": "Carica il Conto Economico in Excel e ottieni un report OIC professionale, indici finanziari e trend — con un assistente AI che risponde alle tue domande sui numeri.",
+    "ctaTry": "Prova gratis",
+    "ctaHow": "Scopri come funziona",
+    "trust1": "Conforme OIC · Art. 2425 C.C.",
+    "trust2": "GDPR · Dati in EU",
+    "trust3": "Dati cancellati dopo il test",
+    "vizHead": "Dal file al dialogo",
+    "vizBadge": "Workflow",
+    "vizLoop": "Parla con il tuo bilancio"
+  },
+  "workflow": [
+    { "h": "Carichi l'Excel", "s": "Conto economico" },
+    { "h": "L'AI analizza", "s": "Riclassificazione OIC + indici" },
+    { "h": "Report OIC", "s": "PDF professionale" },
+    { "h": "Chat sui numeri", "s": "In linguaggio naturale" }
+  ],
+  "video": {
+    "unsupported": "Il tuo browser non supporta il tag video.",
+    "cap": "Demo · Analista Finanziario AI",
+    "link": "Guarda come l'AI analizza un bilancio e risponde in linguaggio naturale."
+  },
+  "how": {
+    "eyebrow": "Come funziona",
+    "title": "Dal tuo Excel al report, in tre passi",
+    "lead": "Nessuna configurazione, nessuna formazione. Funziona dal primo minuto."
+  },
+  "steps": [
+    { "k": "01", "h": "Carica il tuo Excel", "p": "Trascina il Conto Economico. Accettiamo qualsiasi formato: il sistema riconosce la struttura." },
+    { "k": "02", "h": "L'AI analizza tutto", "p": "Riclassificazione OIC, indici finanziari, analisi dei margini e trend anno su anno. Tutto automatico." },
+    { "k": "03", "h": "Parla con i tuoi numeri", "p": "Scarichi il report PDF, poi chiedi all'AI: \"Qual è il mio margine operativo?\" \"Dove sto perdendo margine?\"" }
+  ],
+  "featuresHead": {
+    "eyebrow": "Funzionalità",
+    "title": "Tutto quello che un CFO vorrebbe",
+    "lead": "Pensato per chi gestisce un'impresa, non per chi fa il commercialista."
+  },
+  "features": [
+    { "title": "Report OIC professionale", "desc": "Riclassificazione conforme agli standard OIC e all'Art. 2425 C.C. Pronto per la banca, l'investitore o il CdA." },
+    { "title": "Indici finanziari completi", "desc": "ROE, ROI, ROS, EBITDA margin, liquidità, solidità patrimoniale e Z-Score di Altman — calcolati e spiegati in italiano." },
+    { "title": "Chat AI in italiano", "desc": "Domande sui tuoi dati in linguaggio naturale: l'AI capisce il contesto e risponde con i numeri della tua azienda." },
+    { "title": "Confronto pluriennale", "desc": "Carica più anni e visualizza i trend. L'AI identifica le variazioni significative e segnala le criticità." },
+    { "title": "Export PDF professionale", "desc": "Report con grafici, tabelle e commenti dell'AI. Pronto da condividere senza ulteriori modifiche." },
+    { "title": "100% italiano", "desc": "Terminologia contabile italiana, normativa OIC, standard del Codice Civile. Costruito per il mercato italiano." }
+  ],
+  "privacyHead": {
+    "eyebrow": "I tuoi dati, le tue regole",
+    "title": "Prova senza pensieri. Cancellazione totale.",
+    "lead": "Sappiamo che i dati finanziari sono sensibili. Per questo il sistema è progettato con la privacy al centro.",
+    "promiseTitle": "La nostra promessa sui dati",
+    "promiseSub": "Trasparenza totale su cosa succede con le tue informazioni",
+    "note": "In sintesi: carica, analizza, scarica il report. Poi tutto sparisce. Rimane solo la tua email."
+  },
+  "privacy": [
+    { "title": "L'Excel non viene archiviato", "desc": "Il file è elaborato in memoria per generare il report. Non viene salvato sui nostri server." },
+    { "title": "Cancellazione automatica", "desc": "Dopo il download del report e la fine della sessione, i dati dell'analisi vengono eliminati." },
+    { "title": "Conserviamo solo la tua email", "desc": "L'unico dato che teniamo è l'indirizzo email, per ricontattarti. Nessun dato finanziario." },
+    { "title": "GDPR · server in EU", "desc": "Infrastruttura europea conforme al GDPR. I dati non lasciano mai l'Unione Europea." }
+  ],
+  "pricingHead": {
+    "eyebrow": "Prezzi",
+    "title": "Meno di un caffè al giorno",
+    "lead": "Scegli il piano giusto per la tua impresa. Puoi cambiare o disdire in qualsiasi momento.",
+    "featureCol": "Funzionalità",
+    "recommended": "Consigliato"
+  },
+  "plans": [
+    { "name": "Demo", "price": "Gratis", "per": "prova", "feat": false, "btn": "Inizia gratis" },
+    { "name": "Starter", "price": "€49", "per": "/mese", "feat": false, "btn": "Starter" },
+    { "name": "Professional", "price": "€99", "per": "/mese", "feat": true, "btn": "Professional" },
+    { "name": "Business", "price": "€299", "per": "/mese", "feat": false, "btn": "Business" },
+    { "name": "Enterprise", "price": "Su misura", "per": "", "feat": false, "btn": "Contattaci" }
+  ],
+  "customPrice": "Su misura",
+  "rows": [
+    { "label": "Report / mese", "vals": ["2", "5", "10", "20", "Illimitati"] },
+    { "label": "Indici finanziari", "vals": ["6", "6–8", "15+", "20+", "Custom"] },
+    { "label": "Riclassificazione", "vals": [null, null, "OIC completa", "OIC + custom", "Tutto custom"] },
+    { "label": "Analisi trend", "vals": [null, null, "Multi-anno", "+ proiezioni", "+ scenari"] },
+    { "label": "Chat AI", "vals": ["5 domande", "30/mese", "60/mese", "Illimitate", "Illimitate"] },
+    { "label": "Export PDF", "vals": [null, "Base", "Professionale", "White-label", "Full custom"] },
+    { "label": "Utenti", "vals": ["1", "1", "3", "5", "30+"] },
+    { "label": "Scenari What-If", "vals": [false, false, false, true, true] },
+    { "label": "Integrazione ERP / API", "vals": [false, false, false, false, true] },
+    { "label": "SSO / SAML", "vals": [false, false, false, false, true] },
+    { "label": "SLA garantito", "vals": [null, null, null, null, "99,5%"] },
+    { "label": "Supporto", "vals": ["Self-service", "Email 48h", "Email 24h", "Prioritario", "Dedicato + AM"] }
+  ],
+  "related": {
+    "eyebrow": "Le altre soluzioni Finch-AI",
+    "title": "Completa il tuo stack AI",
+    "card1Tag": "Document Intelligence",
+    "card1Title": "Estrai i dati da fatture, DDT e ricevute",
+    "card1Text": "AI pronta all'uso per i documenti aziendali, con app Android per gli operatori in campo e integrazione ERP.",
+    "card1Go": "Scopri Document Intelligence",
+    "card2Tag": "OmniFlow · Warehouse",
+    "card2Title": "Il gestionale AI per tutto il ciclo commerciale",
+    "card2Text": "Acquisti, magazzino, vendite, ordini e finanza in un unico sistema con AI integrata.",
+    "card2Go": "Scopri OmniFlow"
+  },
+  "cta": {
+    "title": "Prova adesso. Gratis. Senza impegno.",
+    "text": "Carica il tuo Conto Economico e scopri cosa l'AI vede nei tuoi numeri. Basta un file Excel.",
+    "ctaTry": "Prova gratis",
+    "ctaHow": "Scopri come funziona"
+  },
+  "faqs": [
+    { "q": "Il mio bilancio è al sicuro?", "a": "Sì. Il file Excel è elaborato in memoria, non viene archiviato sui nostri server e i dati dell'analisi vengono cancellati al termine della sessione. Conserviamo solo il tuo indirizzo email. Infrastruttura europea conforme al GDPR." },
+    { "q": "Il report è conforme alla normativa italiana?", "a": "Sì: la riclassificazione segue gli standard OIC e l'Art. 2425 del Codice Civile, con terminologia contabile italiana." },
+    { "q": "Quanto costa?", "a": "Si parte dal piano Starter a €49/mese. È disponibile una Demo gratuita. I piani Professional (€99/mese) e Business (€299/mese) ampliano report, indici e funzioni; per esigenze enterprise c'è un'offerta su misura." }
+  ]
+}

@@ -1,0 +1,238 @@
+<!doctype html>
+<html lang="en">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Termini di Servizio - Finch-AI</title>
+  <style>
+    :root {
+      color-scheme: dark;
+      --bg: #0b1220;
+      --panel: rgba(15, 23, 42, 0.92);
+      --border: #1f2937;
+      --text: #dbe4f4;
+      --muted: #b7c2d6;
+      --accent: #67e8f9;
+      --accent-2: #7dd3fc;
+    }
+    * { box-sizing: border-box; }
+    body {
+      font-family: "Manrope", "Segoe UI", "Helvetica Neue", Arial, sans-serif;
+      color: var(--text);
+      margin: 0;
+      padding: clamp(16px, 5vw, 42px);
+      line-height: 1.7;
+      background: var(--bg);
+      background-image:
+        linear-gradient(120deg, rgba(0, 224, 255, 0.08) 0%, rgba(3, 16, 31, 0.2) 45%, rgba(0, 224, 255, 0.05) 100%),
+        linear-gradient(rgba(255,255,255,0.04) 1px, transparent 1px);
+      background-size: cover, 100% 28px;
+    }
+    main {
+      max-width: 960px;
+      margin: 0 auto;
+      background: var(--panel);
+      border: 1px solid var(--border);
+      border-radius: 14px;
+      padding: clamp(18px, 4vw, 38px);
+      box-shadow: 0 20px 60px rgba(0, 0, 0, 0.4);
+      backdrop-filter: blur(6px);
+    }
+    h1, h2, h3 { color: #fff; margin-top: 24px; letter-spacing: -0.01em; }
+    h1 { font-size: clamp(26px, 4vw, 34px); margin: 0; }
+    h2 { font-size: clamp(20px, 3.4vw, 26px); }
+    h3 { font-size: clamp(18px, 3vw, 22px); color: #e0e7ff; }
+    p, li { color: var(--muted); font-size: 15.5px; }
+    p { margin: 10px 0 14px; }
+    strong { color: #f8fafc; }
+    a { color: var(--accent); text-decoration: none; }
+    a:hover { color: var(--accent-2); text-decoration: underline; }
+    ul { padding-left: 20px; margin: 10px 0 16px; }
+    .page-header { display: flex; align-items: center; gap: 14px; margin-bottom: 16px; }
+    .page-header img { height: 58px; width: auto; }
+    .meta { color: #94a3b8; font-size: 14px; display: block; margin-top: 6px; }
+    .card { background: rgba(30, 41, 59, 0.65); border: 1px solid var(--border); border-radius: 10px; padding: 16px; }
+    @media (max-width: 720px) {
+      body { padding: 16px; }
+      main { padding: 18px; }
+      .page-header { flex-direction: column; align-items: flex-start; gap: 8px; }
+      .page-header img { height: 48px; }
+    }
+  </style>
+</head>
+<body>
+  <canvas id="neural-bg" aria-hidden="true" style="position:fixed; inset:0; width:100%; height:100%; z-index:-2; pointer-events:none;"></canvas>
+  <script>
+    (() => {
+      const canvas = document.getElementById('neural-bg');
+      if (!canvas) return;
+      const ctx = canvas.getContext('2d', { alpha: true });
+      let w, h;
+      const setSize = () => {
+        w = canvas.width = window.innerWidth;
+        h = canvas.height = window.innerHeight;
+      };
+      setSize();
+      window.addEventListener('resize', setSize);
+      const rnd = (min, max) => Math.random() * (max - min) + min;
+      const MAX = 90;
+      let count = Math.min(MAX, Math.floor((w * h) / 18000));
+      let nodes = Array.from({ length: count }, () => ({
+        x: rnd(0, w),
+        y: rnd(0, h),
+        vx: rnd(-0.4, 0.4),
+        vy: rnd(-0.4, 0.4),
+        r: rnd(0.6, 1.8),
+      }));
+      const gradientStroke = () => {
+        const g = ctx.createLinearGradient(0, 0, w, h);
+        g.addColorStop(0, "rgba(0,224,255,0.85)");
+        g.addColorStop(1, "rgba(59,130,246,0.85)");
+        return g;
+      };
+      const LINK_DIST = () => Math.min(180, Math.max(110, Math.min(w, h) * 0.22));
+      let rafId;
+      const draw = () => {
+        ctx.clearRect(0, 0, w, h);
+        ctx.fillStyle = "rgba(7,12,22,0.75)";
+        ctx.fillRect(0, 0, w, h);
+        const rg = ctx.createRadialGradient(w * 0.5, h * 0.3, 0, w * 0.5, h * 0.3, Math.max(w, h) * 0.7);
+        rg.addColorStop(0, "rgba(23,162,255,0.10)");
+        rg.addColorStop(1, "rgba(0,0,0,0)");
+        ctx.fillStyle = rg;
+        ctx.fillRect(0, 0, w, h);
+        ctx.globalCompositeOperation = "lighter";
+        for (const n of nodes) {
+          n.x += n.vx;
+          n.y += n.vy;
+          if (n.x < 0 || n.x > w) n.vx *= -1;
+          if (n.y < 0 || n.y > h) n.vy *= -1;
+          ctx.beginPath();
+          ctx.arc(n.x, n.y, n.r, 0, Math.PI * 2);
+          ctx.fillStyle = "rgba(56,189,248,0.65)";
+          ctx.fill();
+        }
+        ctx.lineWidth = 0.7;
+        ctx.strokeStyle = gradientStroke();
+        const linkDist = LINK_DIST();
+        for (let i = 0; i < nodes.length; i++) {
+          for (let j = i + 1; j < nodes.length; j++) {
+            const dx = nodes[i].x - nodes[j].x;
+            const dy = nodes[i].y - nodes[j].y;
+            const dist = Math.hypot(dx, dy);
+            if (dist < linkDist) {
+              const alpha = 1 - dist / linkDist;
+              ctx.globalAlpha = alpha * 0.6;
+              ctx.beginPath();
+              ctx.moveTo(nodes[i].x, nodes[i].y);
+              ctx.lineTo(nodes[j].x, nodes[j].y);
+              ctx.stroke();
+            }
+          }
+        }
+        ctx.globalAlpha = 1;
+        rafId = requestAnimationFrame(draw);
+      };
+      draw();
+      window.addEventListener('beforeunload', () => cancelAnimationFrame(rafId));
+    })();
+  </script>
+  <main>
+    <div class="page-header">
+      <a href="/" style="display:inline-flex; align-items:center;">
+        <img src="/assets/images/LOGO.png" alt="Finch-AI">
+      </a>
+      <div>
+        <h1>Terms of Service &ndash; Finch-AI (SaaS with client area)</h1>
+        <span class="meta"><strong>Last updated:</strong> 2025</span>
+      </div>
+    </div>
+
+    <h2>1. Subject of the service</h2>
+    <p>These Terms govern access to and use of the Finch-AI platform, accessible through the client area, which provides:</p>
+    <ul>
+      <li>document AI services</li>
+      <li>production optimization</li>
+      <li>warehouse management</li>
+      <li>financial analysis</li>
+      <li>integrated AI chatbot</li>
+      <li>predictive tools</li>
+      <li>dashboards and reporting</li>
+    </ul>
+    <p>Access to the platform is allowed through personal credentials provided to the client.</p>
+
+    <h2>2. Registration and access to the client area</h2>
+    <p>To access the platform you must:</p>
+    <ul>
+      <li>create an account</li>
+      <li>accept these Terms</li>
+      <li>accept the Privacy Policy</li>
+      <li>provide correct company data</li>
+    </ul>
+    <p>The user is responsible for the confidentiality of their credentials. It is forbidden to share the account with third parties, attempt to access other clients' data, or tamper with or copy the system.</p>
+
+    <h2>3. Permitted use of the platform</h2>
+    <p>The client may:</p>
+    <ul>
+      <li>use the platform for internal business purposes</li>
+      <li>upload documents and data</li>
+      <li>consult analyses, reports and dashboards</li>
+      <li>integrate systems via API (if included)</li>
+    </ul>
+    <p>It is forbidden to use the platform for unlawful activities, violate third-party rights, circumvent security logic or resell access without authorization.</p>
+
+    <h2>4. Data ownership and responsibility</h2>
+    <div class="card">
+      <p><strong>Data uploaded by the client remains the property of the client.</strong></p>
+      <ul>
+        <li>It is not sold</li>
+        <li>It is not shared</li>
+        <li>It is not used for external training</li>
+      </ul>
+      <p>Finch-AI guarantees that data is processed in compliance with the GDPR and protected by adequate technical and organizational measures.</p>
+    </div>
+
+    <h2>5. Service levels (SLA)</h2>
+    <ul>
+      <li>Service availability &gt; 99%</li>
+      <li>Planned maintenance communicated in advance</li>
+      <li>Response and support times appropriate to the purchased plan</li>
+    </ul>
+
+    <h2>6. Limitation of liability</h2>
+    <p>Finch-AI is not responsible for:</p>
+    <ul>
+      <li>network interruptions beyond the owner's control</li>
+      <li>improper use of the platform by the client</li>
+      <li>errors arising from third-party systems integrated by the client</li>
+      <li>data loss caused by user errors</li>
+      <li>indirect damages (loss of profit, opportunity, etc.)</li>
+    </ul>
+
+    <h2>7. Account and deactivation</h2>
+    <p>The client may request account suspension, data erasure or export of the uploaded documents. Finch-AI may suspend the account in case of Terms violations or fraudulent activities.</p>
+
+    <h2>8. Payments and billing (if SaaS active)</h2>
+    <ul>
+      <li>Subscription service (monthly or annual)</li>
+      <li>Payments via invoice or supported systems</li>
+      <li>Non-payment results in suspension of the service</li>
+      <li>Possibility to upgrade/downgrade the plan</li>
+    </ul>
+
+    <h2>9. Duration and withdrawal</h2>
+    <p>The contract is valid for 12 months (annual plan) or 1 month (monthly plan) with automatic renewal unless cancelled.</p>
+
+    <h2>10. Security and backup</h2>
+    <ul>
+      <li>encryption of data in transit and at rest</li>
+      <li>periodic backups</li>
+      <li>access controls and monitoring</li>
+      <li>protection from intrusions and malware</li>
+    </ul>
+
+    <h2>11. Applicable law</h2>
+    <p>These Terms are governed by Italian law. Court of jurisdiction: L'Aquila, unless otherwise required by mandatory law.</p>
+  </main>
+</body>
+</html>

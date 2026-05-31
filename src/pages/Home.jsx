@@ -1,10 +1,12 @@
 import { useEffect } from "react";
 import { Link } from "react-router-dom";
 import { ArrowUpRight, ArrowDown, Check } from "lucide-react";
+import { useTranslation } from "react-i18next";
 import Navbar from "@/components/Navbar";
 import Footer from "@/components/Footer";
 import SEO from "@/components/SEO";
 import { useContactModal } from "@/context/ContactModalContext";
+import { useLocale, useLocalizedPath } from "@/i18n/routing";
 
 /* Reveal-on-scroll: aggiunge .in agli elementi .reveal quando entrano in viewport */
 function useReveal() {
@@ -28,36 +30,24 @@ const Tick = () => (
   <span className="tick"><Check size={12} strokeWidth={3} /></span>
 );
 
-const MODULES = [
-  {
-    n: "01", tag: "Gestionale AI", name: "OmniFlow", href: "/soluzioni/warehouse-intelligence",
-    desc: "Il cuore operativo. Orchestra ordini, fatture, magazzino e flussi di lavoro con un copilota che capisce le richieste in linguaggio naturale e agisce al posto tuo.",
-    feats: ["Automazione dei flussi ripetitivi end-to-end", "Copilota conversazionale sul tuo gestionale", "Integrazione con i sistemi che già usi"],
-  },
-  {
-    n: "02", tag: "Comprensione documentale", name: "Document Intelligence", href: "/soluzioni/document-intelligence",
-    desc: "Legge, classifica ed estrae dati da fatture, contratti, DDT ed e-mail. Trasforma la carta e i PDF in informazioni strutturate, pronte per essere usate.",
-    feats: ["Estrazione dati con riconoscimento del contesto", "Riconciliazione e controllo automatici", "Archivio ricercabile in linguaggio naturale"],
-  },
-  {
-    n: "03", tag: "Analisi finanziaria", name: "Finance Intelligence", href: "/soluzioni/finance-intelligence",
-    desc: "Dà visibilità sul futuro: cash flow previsionale, marginalità per cliente e prodotto, KPI in tempo reale. La direzione decide sui numeri, non sulle sensazioni.",
-    feats: ["Cash flow e scenari previsionali", "Cruscotto KPI aggiornato in tempo reale", "Alert automatici su marginalità e scaduti"],
-  },
-  {
-    n: "04", tag: "Knowledge Intelligence", name: "Synapse", href: "/soluzioni/synapse",
-    desc: "Il cervello documentale dell'azienda. Trasforma documenti, email, contratti e conversazioni sparse in un wiki vivo che si auto-mantiene — con ogni risposta citata fino alla fonte.",
-    feats: ["Wiki vivo & knowledge graph aziendale", "Risposte con citazioni verificabili", "Dati on-premise, nel tuo perimetro"],
-  },
-  {
-    n: "05", tag: "Pianificazione produzione", name: "APS", href: "/soluzioni/aps",
-    desc: "Advanced Planning System: pianifica e ottimizza la produzione manifatturiera con algoritmi avanzati e un'interfaccia conversazionale in linguaggio naturale, senza complessità.",
-    feats: ["Ottimizzazione multi-algoritmo della schedulazione", "Interfaccia conversazionale per la produzione", "Integrazione con ERP e MES esistenti"],
-  },
+// Render a translated string that contains inline markup (<br>, <em>, <strong>…).
+const Html = ({ as: Tag = "span", html, ...rest }) => (
+  <Tag {...rest} dangerouslySetInnerHTML={{ __html: html }} />
+);
+
+const MODULE_LINKS = [
+  { key: "omniflow", href: "/soluzioni/warehouse-intelligence", n: "01" },
+  { key: "document", href: "/soluzioni/document-intelligence", n: "02" },
+  { key: "finance", href: "/soluzioni/finance-intelligence", n: "03" },
+  { key: "synapse", href: "/soluzioni/synapse", n: "04" },
+  { key: "aps", href: "/soluzioni/aps", n: "05" },
 ];
 
 export default function Home() {
   useReveal();
+  const { t } = useTranslation("home");
+  const locale = useLocale();
+  const lp = useLocalizedPath();
   const { openContact } = useContactModal();
 
   const jsonLd = [
@@ -67,7 +57,7 @@ export default function Home() {
       name: "Finch-AI",
       url: "https://finch-ai.it",
       logo: "https://finch-ai.it/favicon-512.png",
-      description: "Intelligenza artificiale su misura che si adatta ed evolve con le PMI italiane: OmniFlow, Document Intelligence, Finance Intelligence e Synapse.",
+      description: t("seo.orgDescription"),
       sameAs: ["https://www.linkedin.com/company/finch-ai"],
     },
     {
@@ -75,16 +65,16 @@ export default function Home() {
       "@type": "WebSite",
       name: "Finch-AI",
       url: "https://finch-ai.it",
-      inLanguage: "it-IT",
+      inLanguage: locale === "en" ? "en-US" : "it-IT",
     },
   ];
 
   return (
     <>
       <SEO
-        title="Finch-AI — Intelligenza artificiale, precisione italiana"
-        description="Finch-AI progetta intelligenza artificiale su misura che si adatta ai processi ed evolve con le PMI italiane: OmniFlow, Document Intelligence, Finance Intelligence e Synapse. Operativa in tempi rapidi."
-        keywords="AI per PMI, intelligenza artificiale PMI italiane, OmniFlow, Document Intelligence, Finance Intelligence, Synapse, automazione documentale, analisi finanziaria AI"
+        title={t("seo.title")}
+        description={t("seo.description")}
+        keywords={t("seo.keywords")}
         canonical="https://finch-ai.it/"
         jsonLd={jsonLd}
       />
@@ -96,26 +86,21 @@ export default function Home() {
           <div className="hero-grid-bg" />
           <div className="wrap hero-inner">
             <div className="hero-copy">
-              <div className="hero-tag eyebrow reveal">AI Enterprise per le PMI italiane</div>
-              <h1 className="display reveal d1">
-                L'intelligenza<br />artificiale che <em>lavora</em><br />come la <span className="stroke">tua impresa</span>.
-              </h1>
-              <p className="lead hero-sub reveal d2">
-                Finch-AI progetta intelligenza artificiale su misura che si adatta ai tuoi processi e{" "}
-                <strong>evolve insieme alla tua impresa</strong>. Dai moduli pronti all'agente costruito su di te — operativa in tempi rapidi, non in mesi.
-              </p>
+              <div className="hero-tag eyebrow reveal">{t("hero.tag")}</div>
+              <Html as="h1" className="display reveal d1" html={t("hero.title")} />
+              <Html as="p" className="lead hero-sub reveal d2" html={t("hero.sub")} />
               <div className="hero-actions reveal d3">
-                <button type="button" onClick={() => openContact({ prefill: { need: "Richiesta demo" } })} className="btn btn-primary">
-                  Prenota una demo <ArrowUpRight size={16} />
+                <button type="button" onClick={() => openContact({ prefill: { need: t("cta.demoPrefill") } })} className="btn btn-primary">
+                  {t("hero.demoBtn")} <ArrowUpRight size={16} />
                 </button>
-                <a href="/#moduli" onClick={(e) => { e.preventDefault(); document.getElementById("moduli")?.scrollIntoView({ behavior: "smooth" }); }} className="btn btn-ghost">
-                  Esplora i moduli
+                <a href={`${lp("/")}#moduli`} onClick={(e) => { e.preventDefault(); document.getElementById("moduli")?.scrollIntoView({ behavior: "smooth" }); }} className="btn btn-ghost">
+                  {t("hero.exploreBtn")}
                 </a>
               </div>
               <div className="hero-stats reveal d4">
-                <div className="hero-stat"><div className="n">Adattiva</div><div className="l">Evolve con te</div></div>
-                <div className="hero-stat"><div className="n">Su misura</div><div className="l">Su ogni impresa</div></div>
-                <div className="hero-stat"><div className="n">100<span>%</span></div><div className="l">Dati in Italia</div></div>
+                <div className="hero-stat"><div className="n">{t("hero.stat1n")}</div><div className="l">{t("hero.stat1l")}</div></div>
+                <div className="hero-stat"><div className="n">{t("hero.stat2n")}</div><div className="l">{t("hero.stat2l")}</div></div>
+                <div className="hero-stat"><div className="n">100<span>%</span></div><div className="l">{t("hero.stat3l")}</div></div>
               </div>
             </div>
 
@@ -123,34 +108,34 @@ export default function Home() {
             <div className="hero-visual reveal d2">
               <div className="flow">
                 <div className="flow-head">
-                  <span className="ft">Come lavora Finch</span>
-                  <span className="fb">AI adattiva</span>
+                  <span className="ft">{t("hero.flowTitle")}</span>
+                  <span className="fb">{t("hero.flowBadge")}</span>
                 </div>
                 <div className="flow-stage">
-                  <div className="flow-lab">01 · Le tue fonti</div>
+                  <div className="flow-lab">{t("hero.flowStage1")}</div>
                   <div className="chips">
-                    <span className="chip"><span className="ci" />Documenti</span>
-                    <span className="chip"><span className="ci" />Processi</span>
-                    <span className="chip"><span className="ci" />Gestionali</span>
-                    <span className="chip"><span className="ci" />Email &amp; chat</span>
+                    <span className="chip"><span className="ci" />{t("hero.flowChipDocs")}</span>
+                    <span className="chip"><span className="ci" />{t("hero.flowChipProc")}</span>
+                    <span className="chip"><span className="ci" />{t("hero.flowChipErp")}</span>
+                    <span className="chip"><span className="ci" />{t("hero.flowChipEmail")}</span>
                   </div>
                 </div>
                 <div className="flow-arrow"><ArrowDown size={18} /></div>
                 <div className="flow-core">
-                  <div className="cn">Finch AI</div>
-                  <div className="cd"><span>si adatta</span><span>evolve</span></div>
-                  <div className="flow-float">Cresce con la tua impresa</div>
+                  <div className="cn">{t("hero.flowCoreName")}</div>
+                  <div className="cd"><span>{t("hero.flowCoreAdapt")}</span><span>{t("hero.flowCoreEvolve")}</span></div>
+                  <div className="flow-float">{t("hero.flowFloat")}</div>
                 </div>
                 <div className="flow-arrow"><ArrowDown size={18} /></div>
                 <div className="flow-stage">
-                  <div className="flow-lab">03 · Le soluzioni</div>
+                  <div className="flow-lab">{t("hero.flowStage3")}</div>
                   <div className="chips sols">
                     <span className="chip sol"><span className="ci" />OmniFlow</span>
                     <span className="chip sol"><span className="ci" />Document Intelligence</span>
                     <span className="chip sol"><span className="ci" />Finance Intelligence</span>
                     <span className="chip sol"><span className="ci" />Synapse</span>
                     <span className="chip sol"><span className="ci" />APS</span>
-                    <span className="chip tailor">+ Su misura</span>
+                    <span className="chip tailor">{t("hero.flowTailor")}</span>
                   </div>
                 </div>
               </div>
@@ -161,15 +146,15 @@ export default function Home() {
         {/* ============ PARTNER STRIP ============ */}
         <section className="partners" id="partner">
           <div className="partners-inner">
-            <div className="partners-label">Con il riconoscimento di</div>
+            <div className="partners-label">{t("partners.label")}</div>
             <div className="partners-list">
               <a href="https://partner24ore.ilsole24ore.com/partner/finch-ai/" target="_blank" rel="noopener noreferrer" className="partner link">
-                <span className="pn">Partner 24 Ore</span>
-                <span className="pr">Partner ufficiale</span>
+                <span className="pn">{t("partners.partner24Name")}</span>
+                <span className="pr">{t("partners.partner24Role")}</span>
               </a>
               <div className="partner">
-                <span className="pn">Confindustria</span>
-                <span className="pr">L'Aquila</span>
+                <span className="pn">{t("partners.confindustriaName")}</span>
+                <span className="pr">{t("partners.confindustriaRole")}</span>
               </div>
             </div>
           </div>
@@ -180,28 +165,26 @@ export default function Home() {
           <div className="wrap">
             <div className="value-head">
               <div>
-                <div className="eyebrow reveal" style={{ marginBottom: 22 }}>Il nostro approccio</div>
-                <h2 className="h2 reveal d1">Il ponte tra la tua impresa<br />e l'<em>intelligenza artificiale</em>.</h2>
+                <div className="eyebrow reveal" style={{ marginBottom: 22 }}>{t("value.eyebrow")}</div>
+                <Html as="h2" className="h2 reveal d1" html={t("value.title")} />
               </div>
-              <p className="lead reveal d2">
-                I motori di AI più avanzati cambiano ogni mese. La tua impresa no. Finch-AI sta nel mezzo: collega processi, documenti e numeri all'intelligenza artificiale giusta — ovunque viva, anche dentro le tue mura — e la fa lavorare per te.
-              </p>
+              <p className="lead reveal d2">{t("value.lead")}</p>
             </div>
             <div className="value-grid reveal d1">
               <div className="value-cell">
                 <span className="num">01</span>
-                <h3 className="h3">Modulare per davvero</h3>
-                <p>Attivi solo ciò che ti serve, quando ti serve. Ogni modulo lavora da solo o si integra con gli altri, senza riscrivere i tuoi processi.</p>
+                <h3 className="h3">{t("value.cell1Title")}</h3>
+                <p>{t("value.cell1Text")}</p>
               </div>
               <div className="value-cell">
                 <span className="num">02</span>
-                <h3 className="h3">Il meglio dell'AI, al tuo servizio</h3>
-                <p>Scegliamo e colleghiamo i motori di intelligenza artificiale più adatti a te — nel cloud o on-premise. Per te non cambia nulla: cambia solo il risultato. E i dati restano in Italia.</p>
+                <h3 className="h3">{t("value.cell2Title")}</h3>
+                <p>{t("value.cell2Text")}</p>
               </div>
               <div className="value-cell">
                 <span className="num">03</span>
-                <h3 className="h3">Si adatta ed evolve</h3>
-                <p>Non un software statico: l'AI impara dal tuo lavoro, migliora nel tempo e cresce con l'azienda. Operativa in tempi rapidi, mai con progetti infiniti.</p>
+                <h3 className="h3">{t("value.cell3Title")}</h3>
+                <p>{t("value.cell3Text")}</p>
               </div>
             </div>
           </div>
@@ -211,28 +194,32 @@ export default function Home() {
         <section className="section modules" id="moduli">
           <div className="wrap">
             <div className="modules-head">
-              <h2 className="h2 reveal">Cinque moduli pronti.<br />E il resto, <em>su misura</em>.</h2>
-              <div className="eyebrow on-dark reveal d1" style={{ paddingBottom: 10 }}>La suite Finch</div>
+              <Html as="h2" className="h2 reveal" html={t("modules.title")} />
+              <div className="eyebrow on-dark reveal d1" style={{ paddingBottom: 10 }}>{t("modules.eyebrow")}</div>
             </div>
 
-            {MODULES.map((m) => (
-              <article className="mod reveal" key={m.name}>
-                <div className="mod-num">{m.n}</div>
-                <div className="mod-main">
-                  <span className="mtag">{m.tag}</span>
-                  <h3>{m.name}</h3>
-                  <p>{m.desc}</p>
-                  <Link to={m.href} onClick={() => window.scrollTo(0, 0)} className="btn-text" style={{ color: "var(--lime)", marginTop: 18 }}>
-                    Scopri {m.name} <ArrowUpRight size={15} />
-                  </Link>
-                </div>
-                <div className="mod-feats">
-                  {m.feats.map((f) => (
-                    <div className="mod-feat" key={f}><Tick />{f}</div>
-                  ))}
-                </div>
-              </article>
-            ))}
+            {MODULE_LINKS.map((m) => {
+              const name = t(`modules.items.${m.key}.name`);
+              const feats = t(`modules.items.${m.key}.feats`, { returnObjects: true });
+              return (
+                <article className="mod reveal" key={m.key}>
+                  <div className="mod-num">{m.n}</div>
+                  <div className="mod-main">
+                    <span className="mtag">{t(`modules.items.${m.key}.tag`)}</span>
+                    <h3>{name}</h3>
+                    <p>{t(`modules.items.${m.key}.desc`)}</p>
+                    <Link to={lp(m.href)} onClick={() => window.scrollTo(0, 0)} className="btn-text" style={{ color: "var(--lime)", marginTop: 18 }}>
+                      {t("modules.discover", { name })} <ArrowUpRight size={15} />
+                    </Link>
+                  </div>
+                  <div className="mod-feats">
+                    {(Array.isArray(feats) ? feats : []).map((f) => (
+                      <div className="mod-feat" key={f}><Tick />{f}</div>
+                    ))}
+                  </div>
+                </article>
+              );
+            })}
           </div>
         </section>
 
@@ -240,31 +227,28 @@ export default function Home() {
         <section className="section tailored" id="sumisura">
           <div className="wrap tailored-inner">
             <div className="tailored-copy">
-              <div className="eyebrow reveal" style={{ marginBottom: 22 }}>Soluzioni su misura</div>
-              <h2 className="h2 reveal d1">I moduli sono<br />il punto di <em>partenza</em>.</h2>
-              <p className="lead reveal d2" style={{ marginTop: 24 }}>
-                Nessuna azienda è uguale a un'altra. Per questo Finch-AI non vende licenze e basta: progettiamo e sviluppiamo l'intelligenza artificiale attorno ai{" "}
-                <strong>tuoi</strong> processi, ai tuoi documenti e ai tuoi obiettivi. Dai moduli pronti fino all'agente AI costruito da zero.
-              </p>
-              <button type="button" onClick={() => openContact({ prefill: { need: "Soluzione su misura" } })} className="btn btn-primary reveal d3" style={{ marginTop: 34 }}>
-                Parliamo del tuo caso <ArrowUpRight size={16} />
+              <div className="eyebrow reveal" style={{ marginBottom: 22 }}>{t("tailored.eyebrow")}</div>
+              <Html as="h2" className="h2 reveal d1" html={t("tailored.title")} />
+              <Html as="p" className="lead reveal d2" style={{ marginTop: 24 }} html={t("tailored.lead")} />
+              <button type="button" onClick={() => openContact({ prefill: { need: t("tailored.ctaPrefill") } })} className="btn btn-primary reveal d3" style={{ marginTop: 34 }}>
+                {t("tailored.cta")} <ArrowUpRight size={16} />
               </button>
             </div>
             <div className="tailored-cards">
               <div className="tcard reveal d1">
                 <span className="tnum">A</span>
-                <h4>Consulenza &amp; assessment</h4>
-                <p>Analizziamo processi e dati per capire dove l'AI genera valore reale, non sperimentazione.</p>
+                <h4>{t("tailored.cardATitle")}</h4>
+                <p>{t("tailored.cardAText")}</p>
               </div>
               <div className="tcard reveal d2">
                 <span className="tnum">B</span>
-                <h4>Sviluppo su misura</h4>
-                <p>Agenti e flussi costruiti sul tuo modo di lavorare, integrati con i sistemi che già usi.</p>
+                <h4>{t("tailored.cardBTitle")}</h4>
+                <p>{t("tailored.cardBText")}</p>
               </div>
               <div className="tcard reveal d3">
                 <span className="tnum">C</span>
-                <h4>Affiancamento continuo</h4>
-                <p>Un team italiano che resta al tuo fianco: l'AI evolve insieme all'azienda.</p>
+                <h4>{t("tailored.cardCTitle")}</h4>
+                <p>{t("tailored.cardCText")}</p>
               </div>
             </div>
           </div>
@@ -274,32 +258,32 @@ export default function Home() {
         <section className="section process">
           <div className="wrap">
             <div className="process-head">
-              <div className="eyebrow center reveal">Il metodo Finch</div>
-              <h2 className="h2 reveal d1">Dalla prima call all'AI<br />che lavora, in <em>tempi rapidi</em>.</h2>
+              <div className="eyebrow center reveal">{t("process.eyebrow")}</div>
+              <Html as="h2" className="h2 reveal d1" html={t("process.title")} />
             </div>
             <div className="steps reveal d1">
               <div className="step">
                 <div className="sn"><span>01</span><span className="ar">→</span></div>
-                <h4>Ascolto</h4>
-                <p>Una call per capire processi, documenti e numeri della tua impresa. Niente questionari infiniti.</p>
+                <h4>{t("process.step1Title")}</h4>
+                <p>{t("process.step1Text")}</p>
               </div>
               <div className="step">
                 <div className="sn"><span>02</span><span className="ar">→</span></div>
-                <h4>Configurazione</h4>
-                <p>Attiviamo i moduli giusti e li addestriamo sui tuoi dati reali, nel tuo ambiente sicuro.</p>
+                <h4>{t("process.step2Title")}</h4>
+                <p>{t("process.step2Text")}</p>
               </div>
               <div className="step">
                 <div className="sn"><span>03</span><span className="ar">→</span></div>
-                <h4>Avvio</h4>
-                <p>In poco tempo l'AI è operativa. I primi flussi automatici girano da subito, senza attese.</p>
+                <h4>{t("process.step3Title")}</h4>
+                <p>{t("process.step3Text")}</p>
               </div>
               <div className="step">
                 <div className="sn"><span>04</span><span className="ar">↗</span></div>
-                <h4>Crescita</h4>
-                <p>Finch impara dal tuo lavoro e migliora. Aggiungi moduli quando l'azienda è pronta.</p>
+                <h4>{t("process.step4Title")}</h4>
+                <p>{t("process.step4Text")}</p>
               </div>
             </div>
-            <p className="process-foot reveal">Affiancamento continuo da un team <b>italiano</b> — non un ticket, una persona.</p>
+            <Html as="p" className="process-foot reveal" html={t("process.foot")} />
           </div>
         </section>
 
@@ -308,29 +292,29 @@ export default function Home() {
           <div className="wrap">
             <div className="news-head">
               <div>
-                <div className="eyebrow reveal" style={{ marginBottom: 20 }}>News</div>
-                <h2 className="h2 reveal d1">Cosa succede<br />in <em>Finch</em>.</h2>
+                <div className="eyebrow reveal" style={{ marginBottom: 20 }}>{t("news.eyebrow")}</div>
+                <Html as="h2" className="h2 reveal d1" html={t("news.title")} />
               </div>
-              <p className="lead reveal d2">Annunci, traguardi e novità sul prodotto. Una startup che cresce — e lo racconta.</p>
+              <p className="lead reveal d2">{t("news.lead")}</p>
             </div>
             <div className="news-grid">
               <a href="https://partner24ore.ilsole24ore.com/partner/finch-ai/" target="_blank" rel="noopener noreferrer" className="news-card reveal">
-                <div className="news-meta"><span className="nc">Riconoscimenti</span><span className="nd">Mag 2026</span></div>
-                <h3>Finch-AI entra nel network Partner 24 Ore</h3>
-                <p>La nostra visione sull'AI per le PMI italiane raccontata sullo speciale Partner 24 Ore, con video intervista.</p>
-                <span className="news-go">Leggi <ArrowUpRight size={14} /></span>
+                <div className="news-meta"><span className="nc">{t("news.card1Cat")}</span><span className="nd">{t("news.card1Date")}</span></div>
+                <h3>{t("news.card1Title")}</h3>
+                <p>{t("news.card1Text")}</p>
+                <span className="news-go">{t("news.card1Go")} <ArrowUpRight size={14} /></span>
               </a>
-              <Link to="/soluzioni/synapse" onClick={() => window.scrollTo(0, 0)} className="news-card reveal d1">
-                <div className="news-meta"><span className="nc">Prodotto</span><span className="nd">2026</span></div>
-                <h3>Presentiamo Synapse, il cervello documentale dell'azienda</h3>
-                <p>Da dati sparsi a un wiki vivo che si auto-mantiene: il nuovo modulo di Knowledge Intelligence, con risposte sempre citate alla fonte.</p>
-                <span className="news-go">Scopri Synapse <ArrowUpRight size={14} /></span>
+              <Link to={lp("/soluzioni/synapse")} onClick={() => window.scrollTo(0, 0)} className="news-card reveal d1">
+                <div className="news-meta"><span className="nc">{t("news.card2Cat")}</span><span className="nd">{t("news.card2Date")}</span></div>
+                <h3>{t("news.card2Title")}</h3>
+                <p>{t("news.card2Text")}</p>
+                <span className="news-go">{t("news.card2Go")} <ArrowUpRight size={14} /></span>
               </Link>
               <a href="https://www.confindustria.aq.it/imprese-associate" target="_blank" rel="noopener noreferrer" className="news-card reveal d2">
-                <div className="news-meta"><span className="nc">Ecosistema</span><span className="nd">2026</span></div>
-                <h3>Insieme a Confindustria L'Aquila per l'AI nelle imprese</h3>
-                <p>Portiamo l'intelligenza artificiale su misura nel tessuto delle PMI del territorio, accanto a Confindustria L'Aquila.</p>
-                <span className="news-go">Scopri <ArrowUpRight size={14} /></span>
+                <div className="news-meta"><span className="nc">{t("news.card3Cat")}</span><span className="nd">{t("news.card3Date")}</span></div>
+                <h3>{t("news.card3Title")}</h3>
+                <p>{t("news.card3Text")}</p>
+                <span className="news-go">{t("news.card3Go")} <ArrowUpRight size={14} /></span>
               </a>
             </div>
           </div>
@@ -340,14 +324,14 @@ export default function Home() {
         <section className="section press" id="stampa">
           <div className="wrap">
             <div className="press-head">
-              <div className="eyebrow on-dark reveal" style={{ marginBottom: 20 }}>Dicono di noi</div>
-              <h2 className="h2 reveal d1">La stampa che conta<br />parla di <em>Finch</em>.</h2>
+              <div className="eyebrow on-dark reveal" style={{ marginBottom: 20 }}>{t("press.eyebrow")}</div>
+              <Html as="h2" className="h2 reveal d1" html={t("press.title")} />
             </div>
             <div className="press-grid">
               <div className="press-video reveal">
                 <iframe
                   src="https://www.youtube.com/embed/6IZxDRKazQc"
-                  title="Video intervista Partner 24 Ore — Finch-AI"
+                  title={t("press.videoTitle")}
                   allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share"
                   allowFullScreen
                   loading="lazy"
@@ -356,23 +340,23 @@ export default function Home() {
               <div className="press-side">
                 <a href="https://partner24ore.ilsole24ore.com/partner/finch-ai/" target="_blank" rel="noopener noreferrer" className="press-card reveal d1">
                   <div>
-                    <span className="kick">Video intervista</span>
+                    <span className="kick">{t("press.card1Kick")}</span>
                     <div className="src">Partner <span className="it">24 Ore</span></div>
-                    <p>Finch-AI nel network Partner 24 Ore: la nostra visione sull'AI per le PMI italiane.</p>
+                    <p>{t("press.card1Text")}</p>
                   </div>
-                  <span className="go">Leggi su Partner 24 Ore <ArrowUpRight size={14} /></span>
+                  <span className="go">{t("press.card1Go")} <ArrowUpRight size={14} /></span>
                 </a>
                 <div className="press-card soon reveal d2">
                   <div>
-                    <span className="kick">In arrivo</span>
+                    <span className="kick">{t("press.card2Kick")}</span>
                     <div className="src">la <span className="it">Repubblica</span></div>
-                    <p>L'articolo dedicato a Finch-AI sarà presto online. Lo trovi qui appena pubblicato.</p>
+                    <p>{t("press.card2Text")}</p>
                   </div>
-                  <span className="badge-soon">Articolo in pubblicazione</span>
+                  <span className="badge-soon">{t("press.card2Badge")}</span>
                 </div>
               </div>
             </div>
-            <p className="video-cap reveal">▶ Intervista video — Partner 24 Ore · Speciale Partner</p>
+            <p className="video-cap reveal">{t("press.videoCap")}</p>
           </div>
         </section>
 
@@ -380,26 +364,24 @@ export default function Home() {
         <section className="section clients" id="clienti">
           <div className="wrap clients-inner">
             <div className="clients-copy">
-              <div className="eyebrow reveal" style={{ marginBottom: 22 }}>I nostri clienti</div>
-              <h2 className="h2 reveal d1">Imprese che già<br />lavorano con <em>Finch</em>.</h2>
-              <p className="lead reveal d2" style={{ marginTop: 24 }}>
-                Aziende italiane che hanno scelto di mettere l'intelligenza artificiale al centro dei propri processi — e di farlo con noi.
-              </p>
+              <div className="eyebrow reveal" style={{ marginBottom: 22 }}>{t("clients.eyebrow")}</div>
+              <Html as="h2" className="h2 reveal d1" html={t("clients.title")} />
+              <p className="lead reveal d2" style={{ marginTop: 24 }}>{t("clients.lead")}</p>
             </div>
             <div className="client-card reveal d1">
               <p className="client-quote">
-                <span className="mark">“</span>I primi case study dei nostri clienti saranno presto online. Stiamo raccogliendo i risultati delle imprese che già lavorano con Finch.<span className="mark">”</span>
+                <span className="mark">“</span>{t("clients.quote")}<span className="mark">”</span>
               </p>
               <div className="client-meta">
                 <div className="client-id">
                   <div className="client-logo">✦</div>
                   <div className="ci">
-                    <b>Finch-AI</b>
-                    <span>case study in arrivo</span>
+                    <b>{t("clients.metaName")}</b>
+                    <span>{t("clients.metaRole")}</span>
                   </div>
                 </div>
-                <button type="button" onClick={() => openContact({ prefill: { need: "Caso studio" } })} className="btn-text">
-                  Diventa un caso studio <ArrowUpRight size={15} />
+                <button type="button" onClick={() => openContact({ prefill: { need: t("clients.ctaPrefill") } })} className="btn-text">
+                  {t("clients.cta")} <ArrowUpRight size={15} />
                 </button>
               </div>
             </div>
@@ -409,12 +391,12 @@ export default function Home() {
         {/* ============ CTA ============ */}
         <section className="section cta" id="contatti">
           <div className="wrap cta-inner">
-            <h2 className="h2 reveal">Vediamo cosa può fare<br />l'AI per la <em>tua impresa</em>.</h2>
+            <Html as="h2" className="h2 reveal" html={t("cta.title")} />
             <div className="cta-right reveal d1">
-              <p>Prenota una demo di 30 minuti. Ti mostriamo Finch sui tuoi documenti e i tuoi numeri, senza impegno.</p>
+              <p>{t("cta.text")}</p>
               <div className="cta-actions">
-                <button type="button" onClick={() => openContact({ prefill: { need: "Richiesta demo" } })} className="btn btn-primary">Prenota una demo <ArrowUpRight size={16} /></button>
-                <button type="button" onClick={() => openContact()} className="btn btn-ghost">Scrivici</button>
+                <button type="button" onClick={() => openContact({ prefill: { need: t("cta.demoPrefill") } })} className="btn btn-primary">{t("cta.demoBtn")} <ArrowUpRight size={16} /></button>
+                <button type="button" onClick={() => openContact()} className="btn btn-ghost">{t("cta.writeBtn")}</button>
               </div>
             </div>
           </div>

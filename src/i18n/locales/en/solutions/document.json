@@ -1,0 +1,171 @@
+{
+  "seo": {
+    "title": "Document Intelligence AI | Automated Document Processing for SMEs",
+    "description": "Automate invoices, delivery notes, receipts and many document types with AI. No-code guided setup, custom fields in natural language, ERP integration, Android app for field operators. From €49/mo.",
+    "keywords": "document intelligence, AI document automation, automated invoice data extraction, intelligent OCR software, document management AI, accounts payable automation, delivery note automation, ERP document integration, human-in-the-loop OCR, mobile document capture app, custom data extraction fields"
+  },
+  "hero": {
+    "pill": "Document Intelligence · AI for documents",
+    "title": "Documents to handle every day. <em>Finch-AI reads them for you.</em>",
+    "lead": "Guided setup, instant even for non-experts. Document Intelligence recognizes, extracts and verifies data from any type of document — and pushes it into your management system.",
+    "ctaTry": "Start free",
+    "ctaHow": "See how it works",
+    "trust1": "GDPR · Data in the EU",
+    "trust2": "Android app included",
+    "trust3": "API for any ERP",
+    "vizHead": "From intake to your ERP",
+    "vizBadge": "Pipeline",
+    "vizLoop": "No manual data entry"
+  },
+  "pipeline": [
+    { "k": "01", "h": "Intake", "p": "Scan, manual upload or automatic intake via email." },
+    { "k": "02", "h": "AI recognition", "p": "The AI automatically extracts fields and tables from the document." },
+    { "k": "03", "h": "Review", "p": "The operator reviews the data and confirms. No error reaches your system without approval." },
+    { "k": "04", "h": "Transfer", "p": "Verified data flows into your management system via API or webhook." }
+  ],
+  "brochure": {
+    "title": "Information brochure",
+    "text": "The technical details and full use cases of Document Intelligence.",
+    "it": "IT · Download PDF",
+    "en": "EN · Download PDF"
+  },
+  "how": {
+    "eyebrow": "How it works",
+    "title": "From document to ERP, automatically",
+    "lead": "No operator involved until the review. Every step is automated, every exception handled.",
+    "imgAlt": "Document Intelligence flow infographic — from document intake to ERP integration"
+  },
+  "docTypesHead": {
+    "eyebrow": "Ready to use",
+    "title": "Supported document types",
+    "lead": "For each type, activation is guided: choose the fields, define the rules, configure the output. No code."
+  },
+  "docTypes": [
+    { "tag": "Accounts payable", "title": "Invoices", "desc": "Supplier, VAT number, amount, tax, due date and line items. Electronic or scanned PDFs." },
+    { "tag": "Expense reports", "title": "Receipts", "desc": "Employee reimbursements and expense reconciliation: date, amount, category, merchant." },
+    { "tag": "KYC · Onboarding", "title": "ID documents", "desc": "ID card, passport, driver's license. Fast verification for banks and rentals." },
+    { "tag": "Logistics", "title": "Delivery notes", "desc": "Goods receiving, item codes, quantities and stock updates to the WMS." },
+    { "tag": "Reconciliation", "title": "Bank statements", "desc": "Bank movements with automatic classification and open-item matching." },
+    { "tag": "Procurement", "title": "Purchase orders", "desc": "Recording supplier orders and matching them against delivery notes." },
+    { "tag": "Item management", "title": "Credit notes", "desc": "Invoice reversals and automatic linking to the original invoice." },
+    { "tag": "Healthcare", "title": "Health cards", "desc": "Tax code, name and date of birth for fast check-in." },
+    { "tag": "CRM", "title": "Business cards", "desc": "Name, company, role and contacts: every card becomes a contact in your CRM." }
+  ],
+  "customModel": {
+    "eyebrow": "Custom models",
+    "title": "Proprietary documents? <em>No problem.</em>",
+    "text": "For specific needs we build custom models for any company layout. No technical skills required on your side.",
+    "cta": "Request a custom model"
+  },
+  "rulesHead": {
+    "eyebrow": "No code · just natural language",
+    "title": "Custom fields, written the way you talk",
+    "lead": "Define extraction rules exactly as you'd explain them to a colleague. The AI understands context and feeds your ERP with the exact fields you need."
+  },
+  "ruleCards": [
+    { "title": "Custom fields", "desc": "Create fields that don't exist in the document but that your ERP requires.", "example": "\"Extract the cost-center code from the order reference. The format is CC-XXXX.\"" },
+    { "title": "Derived fields", "desc": "Compute values from other already-extracted fields.", "example": "\"Calculate the net taxable amount by subtracting the discount from the total.\"" },
+    { "title": "Enrichment fields", "desc": "Add classifications and metadata based on your business rules.", "example": "\"Classify the supplier as 'strategic' if the amount exceeds €5,000.\"" }
+  ],
+  "ruleDemo": {
+    "label": "Extraction rules — Supplier invoices",
+    "active": "Active rule",
+    "field": "Field",
+    "ruleExample": "\"Extract the cost-center code from the order reference. The format is CC-XXXX.\"",
+    "applied": "CC-0042 · applied automatically",
+    "newRule": "New rule",
+    "draftInput": "Classify the supplier as 'strategic' if the amount exceeds €5,000",
+    "aiUnderstands": "The AI understands the logic",
+    "saveRule": "Save rule",
+    "outputPreview": "Output preview → ERP",
+    "strategicValue": "✓ strategic"
+  },
+  "androidHead": {
+    "eyebrow": "Android app · always with you",
+    "title": "In the warehouse, in the field, wherever you receive documents"
+  },
+  "android": {
+    "eyebrow": "Scenario · goods receiving",
+    "title": "The operator points at the delivery note. <em>The system updates itself.</em>",
+    "text": "No need to go back to the office or use a PC. Open the app, point the camera at the document and in moments the data is extracted, verified and ready for the WMS.",
+    "feat1Title": "Camera",
+    "feat1Desc": "No scanner needed.",
+    "feat2Title": "On the move",
+    "feat2Desc": "Automatic sync to the server.",
+    "feat3Title": "On-screen review",
+    "feat3Desc": "Human-in-the-loop right on the phone.",
+    "feat4Title": "Straight into the ERP",
+    "feat4Desc": "Data ready for the WMS in moments.",
+    "cta": "Discover the Android app",
+    "phoneExtracted": "Data extracted",
+    "phoneSupplier": "Supplier",
+    "phoneDdt": "Note no.",
+    "phoneItems": "Items",
+    "phoneItemsVal": "8 lines",
+    "phoneCta": "Confirm and transfer"
+  },
+  "videoHead": {
+    "eyebrow": "In motion",
+    "title": "Watch Document Intelligence in action",
+    "videoTitle": "Document Intelligence — explainer video",
+    "open": "Open",
+    "openAria": "Open the video in full screen",
+    "modalTitle": "Document Intelligence Demo"
+  },
+  "featuresHead": {
+    "eyebrow": "Features",
+    "title": "Everything you need to eliminate data entry"
+  },
+  "features": [
+    { "title": "Ready to use", "desc": "Many document types ready with no setup. For complex layouts we build dedicated models." },
+    { "title": "Custom AI models", "desc": "Proprietary documents or company layouts? We build dedicated models with higher accuracy than generic ones." },
+    { "title": "Human-in-the-loop", "desc": "The operator confirms every extraction before transfer. No error reaches your system." },
+    { "title": "ERP integration", "desc": "Connection via API or webhook. Every value ends up exactly where it should." },
+    { "title": "Multi-channel", "desc": "Email, upload, FTP, API or camera from the Android app: the flow adapts to the way you work." },
+    { "title": "Enterprise security", "desc": "Encrypted data hosted in Europe, in full GDPR compliance." }
+  ],
+  "pricingHead": {
+    "eyebrow": "Pricing",
+    "title": "Subscription plans",
+    "lead": "Billing based on processed pages. Scales with your business.",
+    "popular": "Most popular",
+    "note1": "Extra pages cost more than upgrading: for high volumes, an upgrade is the better deal.",
+    "note2": "Limits are monthly and reset automatically."
+  },
+  "plans": [
+    { "name": "Demo", "price": "Free", "per": "Always free", "desc": "To test the system's potential with no commitment.", "rows": [["Pages/month", "20"], ["Document types", "1"], ["Users", "2"], ["Email polling", false], ["API", false]], "btn": "Start free", "feat": false },
+    { "name": "Basic", "price": "€49", "per": "/ month + VAT", "desc": "For small companies starting to automate.", "rows": [["Pages/month", "200"], ["Document types", "2"], ["Users", "5"], ["Email polling", false], ["API", false]], "btn": "Get started", "feat": false },
+    { "name": "Business", "price": "€129", "per": "/ month + VAT", "desc": "For growing companies automating via email.", "rows": [["Pages/month", "800"], ["Document types", "5"], ["Users", "10"], ["Email polling", true], ["API", false]], "btn": "Get started", "feat": false },
+    { "name": "Professional", "price": "€249", "per": "/ month + VAT", "desc": "Full FTP integration for professional flows.", "rows": [["Pages/month", "2,000"], ["Document types", "10"], ["Users", "20"], ["Email polling", true], ["FTP", true]], "btn": "Get started", "feat": true },
+    { "name": "Enterprise", "price": "Custom", "per": "Custom offer", "desc": "Custom models and dedicated support for high volumes.", "rows": [["Pages", "fair use"], ["Document types", "∞"], ["Users", "∞"], ["Custom models", true], ["API + FTP", true]], "btn": "Contact us", "feat": false }
+  ],
+  "faqHead": {
+    "eyebrow": "Frequently asked questions",
+    "title": "Questions about Document Intelligence?"
+  },
+  "faqs": [
+    { "q": "Which document types does it support?", "a": "Domestic and international invoices, receipts, ID documents, delivery notes, bank statements, purchase orders, credit notes, health cards, payslips, business cards and contracts. For proprietary layouts we develop custom models." },
+    { "q": "Does it integrate with my ERP?", "a": "Yes, via REST API or webhook. You can configure the exact structure of the data to send — including custom and derived fields — for full compatibility with SAP, Zucchetti, TeamSystem, Sage and others." },
+    { "q": "Can I define fields that aren't in the document?", "a": "Yes: custom, derived and enrichment fields, written in natural language. For example \"Classify the supplier as strategic if the amount exceeds €5,000\"." },
+    { "q": "Is there a mobile app for field work?", "a": "Yes, an Android app that captures documents from the phone's camera. Ideal for warehouse and logistics operators who record delivery notes in the field, without going back to the office." },
+    { "q": "How much does it cost?", "a": "Plans start with Basic at €49/mo + VAT (200 pages/month). A free Demo plan is available. The Business (€129/mo) and Professional (€249/mo) plans include higher volumes; for large volumes there's a custom Enterprise plan." }
+  ],
+  "related": {
+    "eyebrow": "The other Finch-AI solutions",
+    "title": "Complete your AI stack",
+    "card1Tag": "OmniFlow · Warehouse",
+    "card1Title": "The AI management system for the whole commercial cycle",
+    "card1Text": "Purchasing, inventory, sales, orders and finance in a single system, with extracted documents flowing straight into the system.",
+    "card1Go": "Discover OmniFlow",
+    "card2Tag": "Finance Intelligence",
+    "card2Title": "Financial statement and ratio analysis with AI",
+    "card2Text": "Upload your Excel financials and get a professional report, financial ratios and an AI chat on your numbers.",
+    "card2Go": "Discover Finance Intelligence"
+  },
+  "cta": {
+    "title": "Stop retyping. Start automating.",
+    "text": "Try Document Intelligence for free — the first month is on us.",
+    "ctaTry": "Request free access",
+    "ctaHow": "See how it works"
+  }
+}

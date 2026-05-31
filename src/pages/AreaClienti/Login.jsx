@@ -1,7 +1,9 @@
 import { useState, useEffect, useRef } from 'react';
 import { useNavigate } from 'react-router-dom';
+import { useTranslation } from 'react-i18next';
 
 export default function Login({ onLoginSuccess }) {
+  const { t } = useTranslation('common');
   const [formData, setFormData] = useState({
     email: '',
     password: '',
@@ -135,15 +137,15 @@ export default function Login({ onLoginSuccess }) {
       const user = users[formData.email];
 
       if (!user || user.password !== formData.password) {
-        throw new Error('Credenziali non valide');
+        throw new Error(t('area.login.invalidCredentials'));
       }
 
       if (formData.otp && formData.otp !== user.otp) {
-        throw new Error('Codice MFA non valido');
+        throw new Error(t('area.login.invalidMfa'));
       }
 
       // Login riuscito
-      setStatus({ type: 'success', message: 'Accesso eseguito! Reindirizzamento...' });
+      setStatus({ type: 'success', message: t('area.login.successMsg') });
 
       const userData = {
         name: user.name,
@@ -203,7 +205,7 @@ export default function Login({ onLoginSuccess }) {
     } catch (error) {
       setStatus({
         type: 'error',
-        message: error.message || 'Errore durante l\'accesso. Riprova.'
+        message: error.message || t('area.login.genericError')
       });
     } finally {
       setLoading(false);
@@ -249,11 +251,11 @@ export default function Login({ onLoginSuccess }) {
               <svg className="w-4 h-4 text-cyan-400" fill="none" viewBox="0 0 24 24" stroke="currentColor">
                 <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M12 15v2m-6 4h12a2 2 0 002-2v-6a2 2 0 00-2-2H6a2 2 0 00-2 2v6a2 2 0 002 2zm10-10V7a4 4 0 00-8 0v4h8z" />
               </svg>
-              <span className="text-sm font-semibold text-cyan-300">Accesso riservato</span>
+              <span className="text-sm font-semibold text-cyan-300">{t('area.login.badge')}</span>
             </div>
 
-            <h1 className="text-2xl font-bold text-white mb-2">Area Clienti Finch-AI</h1>
-            <p className="text-slate-400 text-sm">Inserisci le credenziali per accedere all'area riservata.</p>
+            <h1 className="text-2xl font-bold text-white mb-2">{t('area.login.title')}</h1>
+            <p className="text-slate-400 text-sm">{t('area.login.subtitle')}</p>
           </div>
 
           {/* Form */}
@@ -261,7 +263,7 @@ export default function Login({ onLoginSuccess }) {
             {/* Email */}
             <div>
               <label htmlFor="email" className="block text-sm font-medium text-slate-300 mb-2">
-                Email aziendale o Username
+                {t('area.login.emailLabel')}
               </label>
               <input
                 id="email"
@@ -279,7 +281,7 @@ export default function Login({ onLoginSuccess }) {
             {/* Password */}
             <div>
               <label htmlFor="password" className="block text-sm font-medium text-slate-300 mb-2">
-                Password
+                {t('area.login.passwordLabel')}
               </label>
               <input
                 id="password"
@@ -297,8 +299,8 @@ export default function Login({ onLoginSuccess }) {
             {/* OTP (opzionale) */}
             <div>
               <label htmlFor="otp" className="block text-sm font-medium text-slate-300 mb-2">
-                Codice MFA (OTP)
-                <span className="text-slate-500 font-normal ml-1">(opzionale)</span>
+                {t('area.login.otpLabel')}
+                <span className="text-slate-500 font-normal ml-1">{t('area.login.otpOptional')}</span>
               </label>
               <input
                 id="otp"
@@ -324,7 +326,7 @@ export default function Login({ onLoginSuccess }) {
                 className="w-4 h-4 text-cyan-500 bg-slate-800 border-slate-700 rounded focus:ring-2 focus:ring-cyan-500"
               />
               <label htmlFor="remember" className="ml-2 text-sm text-slate-300">
-                Ricordami su questo dispositivo
+                {t('area.login.remember')}
               </label>
             </div>
 
@@ -346,29 +348,29 @@ export default function Login({ onLoginSuccess }) {
                 disabled={loading}
                 className="w-full py-3 px-4 bg-gradient-to-r from-cyan-500 to-blue-600 text-white font-semibold rounded-xl shadow-lg shadow-cyan-500/30 hover:shadow-cyan-500/50 transition-all duration-300 hover:scale-[1.02] disabled:opacity-50 disabled:cursor-not-allowed disabled:hover:scale-100"
               >
-                {loading ? 'Accesso in corso...' : 'Accedi'}
+                {loading ? t('area.login.signingIn') : t('area.login.signIn')}
               </button>
 
               <div className="p-3 rounded-xl bg-slate-800/50 border border-slate-700/60 text-sm text-slate-200">
-                <p className="font-semibold mb-2 text-white">Recupero credenziali</p>
+                <p className="font-semibold mb-2 text-white">{t('area.login.recoveryTitle')}</p>
                 <div className="space-y-2">
                   <a
                     href="mailto:info@finch-ai.it?subject=Recupero%20credenziali"
                     className="block px-3 py-2 rounded-lg bg-slate-900/60 border border-slate-700 hover:border-cyan-500/60 text-cyan-300 transition"
                   >
-                    Recupera via email
+                    {t('area.login.recoverEmail')}
                   </a>
                   <a
                     href="#"
                     className="block px-3 py-2 rounded-lg bg-slate-900/60 border border-slate-700 hover:border-cyan-500/60 text-cyan-300 transition"
                   >
-                    Reset password
+                    {t('area.login.resetPassword')}
                   </a>
                   <a
                     href="#"
                     className="block px-3 py-2 rounded-lg bg-slate-900/60 border border-slate-700 hover:border-cyan-500/60 text-cyan-300 transition"
                   >
-                    Recupera OTP / MFA
+                    {t('area.login.recoverOtp')}
                   </a>
                 </div>
               </div>
@@ -377,7 +379,7 @@ export default function Login({ onLoginSuccess }) {
                 href="mailto:info@finch-ai.it?subject=Supporto%20Area%20Clienti"
                 className="block w-full py-3 px-4 text-center border border-slate-700 text-slate-300 font-medium rounded-xl hover:bg-slate-800/50 transition-all"
               >
-                Hai bisogno di aiuto?
+                {t('area.login.needHelp')}
               </a>
             </div>
           </form>
@@ -385,8 +387,7 @@ export default function Login({ onLoginSuccess }) {
           {/* Footer note */}
           <div className="mt-6 p-3 bg-slate-800/30 border border-slate-700/50 rounded-lg">
             <p className="text-xs text-slate-400 leading-relaxed">
-              <strong className="text-slate-300">Suggerimento:</strong> Abilita MFA per maggiore sicurezza.
-              Per problemi di accesso contattaci a{' '}
+              <strong className="text-slate-300">{t('area.login.tipLabel')}</strong> {t('area.login.tip')}{' '}
               <a href="mailto:info@finch-ai.it" className="text-cyan-400 hover:text-cyan-300">
                 info@finch-ai.it
               </a>
@@ -403,7 +404,7 @@ export default function Login({ onLoginSuccess }) {
             <svg className="w-4 h-4" fill="none" viewBox="0 0 24 24" stroke="currentColor">
               <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M10 19l-7-7m0 0l7-7m-7 7h18" />
             </svg>
-            Torna alla home
+            {t('area.login.backHome')}
           </a>
         </div>
       </div>

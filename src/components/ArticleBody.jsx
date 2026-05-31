@@ -1,19 +1,36 @@
 import { useEffect, useState } from 'react';
+import { useLocale } from '@/i18n/routing';
 import '../styles/article.css';
 
-/* Carica il corpo statico di un articolo da public/blog/<slug>.html,
+/* Carica il corpo statico di un articolo da public/blog/<slug>.html
+   (o public/blog/en/<slug>.html in inglese, con fallback all'italiano),
    rimuove nav/hero/footer originali, filtra le regole html/body e inietta
    gli stili dell'articolo. Il tema editoriale (font + palette) è applicato
    da article.css che ri-mappa i token dell'articolo. */
 export default function ArticleBody({ slug }) {
+  const locale = useLocale();
   const [bodyHtml, setBodyHtml] = useState('');
   const [articleStyles, setArticleStyles] = useState('');
   const [loading, setLoading] = useState(true);
 
   useEffect(() => {
     let cancelled = false;
-    fetch(`/blog/${slug}.html`)
-      .then(r => r.text())
+    // In English, try /blog/en/<slug>.html first; fall back to the Italian
+    // body if the translated file isn't available yet.
+    const fetchBody = async () => {
+      if (locale === 'en') {
+        const res = await fetch(`/blog/en/${slug}.html`);
+        if (res.ok) {
+          const text = await res.text();
+          // A SPA 404 returns index.html; detect it and fall back.
+          if (!/<!doctype html>\s*<html[^>]*>\s*<head>[\s\S]*id="root"/i.test(text)) {
+            return text;
+          }
+        }
+      }
+      return (await fetch(`/blog/${slug}.html`)).text();
+    };
+    fetchBody()
       .then(html => {
         if (cancelled) return;
         const parser = new DOMParser();
@@ -41,7 +58,7 @@ export default function ArticleBody({ slug }) {
       });
 
     return () => { cancelled = true; };
-  }, [slug]);
+  }, [slug, locale]);
 
   if (loading) {
     return (

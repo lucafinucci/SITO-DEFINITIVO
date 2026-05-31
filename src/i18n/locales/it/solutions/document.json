@@ -1,0 +1,171 @@
+{
+  "seo": {
+    "title": "Document Intelligence AI | Automazione Documenti per PMI Italiane — Finch-AI",
+    "description": "Automatizza fatture, DDT, ricevute e tante tipologie di documento con AI. Configurazione guidata senza codice, campi personalizzati in linguaggio naturale, integrazione ERP, app Android per operatori in campo. Da €49/mese.",
+    "keywords": "document intelligence, automazione documenti AI, estrazione dati fatture automatica, OCR intelligente PMI, software gestione documenti AI, digitalizzazione fatture passive, automazione DDT bolle consegna, integrazione ERP documenti, human-in-the-loop OCR, app acquisizione documenti android, campi personalizzati estrazione dati, gestione documentale cloud PMI italiana"
+  },
+  "hero": {
+    "pill": "Document Intelligence · AI per documenti",
+    "title": "Documenti da gestire ogni giorno. <em>Finch-AI li legge per te.</em>",
+    "lead": "Configurazione guidata, immediata anche per i non esperti. Document Intelligence riconosce, estrae e verifica i dati da ogni tipo di documento — e li porta nel tuo gestionale.",
+    "ctaTry": "Inizia gratis",
+    "ctaHow": "Scopri come funziona",
+    "trust1": "GDPR · Dati in EU",
+    "trust2": "App Android inclusa",
+    "trust3": "API per ogni gestionale",
+    "vizHead": "Dalla ricezione al gestionale",
+    "vizBadge": "Pipeline",
+    "vizLoop": "Nessun data entry manuale"
+  },
+  "pipeline": [
+    { "k": "01", "h": "Ricezione", "p": "Scansione, upload manuale o ricezione automatica via email." },
+    { "k": "02", "h": "Riconoscimento AI", "p": "L'AI estrae automaticamente campi e tabelle dal documento." },
+    { "k": "03", "h": "Verifica", "p": "L'operatore rivede i dati e conferma. Nessun errore raggiunge il gestionale senza approvazione." },
+    { "k": "04", "h": "Trasferimento", "p": "I dati verificati arrivano nel gestionale via API o webhook." }
+  ],
+  "brochure": {
+    "title": "Brochure informativa",
+    "text": "I dettagli tecnici e i casi d'uso completi di Document Intelligence.",
+    "it": "IT · Scarica PDF",
+    "en": "EN · Download PDF"
+  },
+  "how": {
+    "eyebrow": "Come funziona",
+    "title": "Dal documento al gestionale, in automatico",
+    "lead": "Nessun operatore coinvolto fino alla verifica. Ogni passaggio è automatizzato, ogni eccezione gestita.",
+    "imgAlt": "Infografica del flusso Document Intelligence — dalla ricezione del documento all'integrazione nel gestionale ERP"
+  },
+  "docTypesHead": {
+    "eyebrow": "Pronto all'uso",
+    "title": "Tipologie di documento supportate",
+    "lead": "Per ogni tipologia l'attivazione è guidata: scegli i campi, definisci le regole, configura l'output. Nessun codice."
+  },
+  "docTypes": [
+    { "tag": "Contabilità fornitori", "title": "Fatture", "desc": "Fornitore, P.IVA, importo, IVA, scadenza e righe. Elettroniche o PDF scansionati." },
+    { "tag": "Note spese", "title": "Ricevute e scontrini", "desc": "Rimborsi dipendenti e riconciliazione spese: data, importo, categoria, punto vendita." },
+    { "tag": "KYC · Onboarding", "title": "Documenti d'identità", "desc": "Carta d'identità, passaporto, patente. Verifica rapida per banche e noleggi." },
+    { "tag": "Logistica", "title": "DDT e bolle", "desc": "Ricezione merci, codici articolo, quantità e aggiornamento scorte verso il WMS." },
+    { "tag": "Riconciliazione", "title": "Estratti conto", "desc": "Movimenti bancari con classificazione automatica e abbinamento partite aperte." },
+    { "tag": "Approvvigionamenti", "title": "Ordini d'acquisto", "desc": "Registrazione ordini fornitori e confronto con i DDT di consegna." },
+    { "tag": "Gestione partite", "title": "Note di credito", "desc": "Storno fatture e collegamento automatico alla fattura originale." },
+    { "tag": "Sanità", "title": "Tessera sanitaria", "desc": "Codice fiscale, nome e data di nascita per un'accettazione rapida." },
+    { "tag": "CRM", "title": "Biglietti da visita", "desc": "Nome, azienda, ruolo e contatti: ogni biglietto diventa un contatto nel CRM." }
+  ],
+  "customModel": {
+    "eyebrow": "Modelli custom",
+    "title": "Documenti proprietari? <em>Nessun problema.</em>",
+    "text": "Per esigenze specifiche sviluppiamo modelli personalizzati per qualsiasi layout aziendale. Nessuna competenza tecnica richiesta da parte tua.",
+    "cta": "Richiedi modello custom"
+  },
+  "rulesHead": {
+    "eyebrow": "Nessun codice · solo linguaggio naturale",
+    "title": "Campi personalizzati, scritti come parli",
+    "lead": "Definisci le regole di estrazione esattamente come le spiegheresti a un collega. L'AI capisce il contesto e alimenta l'ERP con i campi esatti che ti servono."
+  },
+  "ruleCards": [
+    { "title": "Campi personalizzati", "desc": "Crea campi che non esistono nel documento ma che il gestionale richiede.", "example": "\"Estrai il codice centro di costo dal riferimento ordine. Il formato è CC-XXXX.\"" },
+    { "title": "Campi derivati", "desc": "Calcola valori a partire da altri campi già estratti.", "example": "\"Calcola l'imponibile netto sottraendo lo sconto dall'importo totale.\"" },
+    { "title": "Campi di arricchimento", "desc": "Aggiungi classificazioni e metadati basati sulle tue regole di business.", "example": "\"Classifica il fornitore come 'strategico' se l'importo supera €5.000.\"" }
+  ],
+  "ruleDemo": {
+    "label": "Regole di estrazione — Fatture fornitore",
+    "active": "Regola attiva",
+    "field": "Campo",
+    "ruleExample": "\"Estrai il codice centro di costo dal riferimento ordine. Il formato è CC-XXXX.\"",
+    "applied": "CC-0042 · applicata automaticamente",
+    "newRule": "Nuova regola",
+    "draftInput": "Classifica il fornitore come 'strategico' se l'importo supera €5.000",
+    "aiUnderstands": "L'AI comprende la logica",
+    "saveRule": "Salva regola",
+    "outputPreview": "Anteprima output → ERP",
+    "strategicValue": "✓ strategico"
+  },
+  "androidHead": {
+    "eyebrow": "App Android · sempre con te",
+    "title": "In magazzino, sul campo, ovunque tu riceva documenti"
+  },
+  "android": {
+    "eyebrow": "Scenario · ricezione merci",
+    "title": "L'operatore inquadra il DDT. <em>Il gestionale si aggiorna da solo.</em>",
+    "text": "Non serve tornare in ufficio né un PC. Si apre l'app, si punta la fotocamera sul documento e in pochi istanti i dati sono estratti, verificati e pronti per il WMS.",
+    "feat1Title": "Fotocamera",
+    "feat1Desc": "Nessuno scanner necessario.",
+    "feat2Title": "In mobilità",
+    "feat2Desc": "Sincronizzazione automatica al server.",
+    "feat3Title": "Verifica a schermo",
+    "feat3Desc": "Human-in-the-loop direttamente sul telefono.",
+    "feat4Title": "Subito nel gestionale",
+    "feat4Desc": "Dati pronti per il WMS in pochi istanti.",
+    "cta": "Scopri l'app Android",
+    "phoneExtracted": "Dati estratti",
+    "phoneSupplier": "Fornitore",
+    "phoneDdt": "N. DDT",
+    "phoneItems": "Articoli",
+    "phoneItemsVal": "8 righe",
+    "phoneCta": "Conferma e trasferisci"
+  },
+  "videoHead": {
+    "eyebrow": "In movimento",
+    "title": "Guarda Document Intelligence in azione",
+    "videoTitle": "Document Intelligence — Video divulgativo",
+    "open": "Apri",
+    "openAria": "Apri il video a schermo intero",
+    "modalTitle": "Document Intelligence Demo"
+  },
+  "featuresHead": {
+    "eyebrow": "Funzionalità",
+    "title": "Tutto quello che serve per eliminare il data entry"
+  },
+  "features": [
+    { "title": "Pronto all'uso", "desc": "Tante tipologie di documento pronte senza configurazione. Per i layout complessi creiamo modelli dedicati." },
+    { "title": "Modelli AI personalizzati", "desc": "Documenti proprietari o layout aziendali? Creiamo modelli dedicati con precisione superiore ai generici." },
+    { "title": "Human-in-the-loop", "desc": "L'operatore conferma ogni estrazione prima del trasferimento. Nessun errore arriva al gestionale." },
+    { "title": "Integrazione ERP", "desc": "Collegamento via API o webhook. Ogni dato finisce esattamente dove deve essere." },
+    { "title": "Multi-canale", "desc": "Email, upload, FTP, API o fotocamera da app Android: il flusso si adatta al tuo modo di lavorare." },
+    { "title": "Sicurezza enterprise", "desc": "Dati crittografati e ospitati in Europa, in piena conformità GDPR." }
+  ],
+  "pricingHead": {
+    "eyebrow": "Prezzi",
+    "title": "Piani di abbonamento",
+    "lead": "Fatturazione basata sulle pagine elaborate. Scala con il tuo business.",
+    "popular": "Più popolare",
+    "note1": "Le pagine extra hanno un costo maggiore rispetto ai piani superiori: per volumi elevati conviene l'upgrade.",
+    "note2": "I limiti sono mensili e si resettano automaticamente."
+  },
+  "plans": [
+    { "name": "Demo", "price": "Gratis", "per": "Sempre gratuito", "desc": "Per testare le potenzialità del sistema senza impegno.", "rows": [["Pagine/mese", "20"], ["Tipi documento", "1"], ["Utenti", "2"], ["Email polling", false], ["API", false]], "btn": "Inizia gratis", "feat": false },
+    { "name": "Basic", "price": "€49", "per": "/ mese + IVA", "desc": "Per piccole aziende che iniziano ad automatizzare.", "rows": [["Pagine/mese", "200"], ["Tipi documento", "2"], ["Utenti", "5"], ["Email polling", false], ["API", false]], "btn": "Inizia ora", "feat": false },
+    { "name": "Business", "price": "€129", "per": "/ mese + IVA", "desc": "Per aziende in crescita che automatizzano via email.", "rows": [["Pagine/mese", "800"], ["Tipi documento", "5"], ["Utenti", "10"], ["Email polling", true], ["API", false]], "btn": "Inizia ora", "feat": false },
+    { "name": "Professional", "price": "€249", "per": "/ mese + IVA", "desc": "Integrazione completa con FTP per flussi professionali.", "rows": [["Pagine/mese", "2.000"], ["Tipi documento", "10"], ["Utenti", "20"], ["Email polling", true], ["FTP", true]], "btn": "Inizia ora", "feat": true },
+    { "name": "Enterprise", "price": "Custom", "per": "Offerta su misura", "desc": "Modelli custom e supporto dedicato per grandi volumi.", "rows": [["Pagine", "fair use"], ["Tipi documento", "∞"], ["Utenti", "∞"], ["Modelli custom", true], ["API + FTP", true]], "btn": "Contattaci", "feat": false }
+  ],
+  "faqHead": {
+    "eyebrow": "Domande frequenti",
+    "title": "Hai domande su Document Intelligence?"
+  },
+  "faqs": [
+    { "q": "Quali tipi di documenti supporta?", "a": "Fatture italiane e internazionali, ricevute e scontrini, documenti d'identità, DDT e bolle, estratti conto, ordini d'acquisto, note di credito, tessera sanitaria, cedolini, biglietti da visita e contratti. Per layout proprietari sviluppiamo modelli personalizzati." },
+    { "q": "Si integra con il mio gestionale ERP?", "a": "Sì, tramite API REST o webhook. Puoi configurare la struttura esatta dei dati da inviare — inclusi campi personalizzati e derivati — per piena compatibilità con SAP, Zucchetti, TeamSystem, Sage e altri." },
+    { "q": "Posso definire campi non presenti nel documento?", "a": "Sì: campi personalizzati, derivati e di arricchimento, scritti in linguaggio naturale. Ad esempio \"Classifica il fornitore come strategico se l'importo supera €5.000\"." },
+    { "q": "C'è un'app mobile per chi lavora in campo?", "a": "Sì, un'app Android che acquisisce documenti dalla fotocamera del telefono. Ideale per operatori di magazzino e logistica che registrano DDT e bolle sul campo, senza tornare in ufficio." },
+    { "q": "Quanto costa?", "a": "Si parte dal piano Basic a €49/mese + IVA (200 pagine/mese). È disponibile un piano Demo gratuito. I piani Business (€129/mese) e Professional (€249/mese) includono volumi maggiori; per grandi volumi c'è un piano Enterprise su misura." }
+  ],
+  "related": {
+    "eyebrow": "Le altre soluzioni Finch-AI",
+    "title": "Completa il tuo stack AI",
+    "card1Tag": "OmniFlow · Warehouse",
+    "card1Title": "Il gestionale AI per tutto il ciclo commerciale",
+    "card1Text": "Acquisti, magazzino, vendite, ordini e finanza in un unico sistema, con i documenti estratti che entrano direttamente nel gestionale.",
+    "card1Go": "Scopri OmniFlow",
+    "card2Tag": "Finance Intelligence",
+    "card2Title": "Analisi di bilancio e indici con l'AI",
+    "card2Text": "Carica il bilancio Excel e ottieni report OIC, indici finanziari e una chat AI sui tuoi numeri.",
+    "card2Go": "Scopri Finance Intelligence"
+  },
+  "cta": {
+    "title": "Smetti di ricopiare. Inizia ad automatizzare.",
+    "text": "Prova Document Intelligence gratis — il primo mese è offerto da noi.",
+    "ctaTry": "Richiedi accesso gratuito",
+    "ctaHow": "Scopri come funziona"
+  }
+}

@@ -1,0 +1,394 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Document Intelligence: Goodbye to Manual Entry of Delivery Notes</title>
+  <meta name="description" content="How Document Intelligence transforms the handling of delivery and transport documents: fewer errors, zero manual typing, automatically verified flows.">
+  <meta name="keywords" content="document intelligence, delivery notes, automation, automatic document recognition, AI OCR, delivery note management, logistics digitization, SME">
+  <meta name="author" content="Finch-AI">
+  <meta property="og:title" content="Document Intelligence: Goodbye to Manual Entry of Delivery Notes">
+  <meta property="og:description" content="How Document Intelligence transforms the handling of delivery and transport documents: fewer errors, zero manual typing, automatically verified flows.">
+  <meta property="og:type" content="article">
+  <meta property="article:published_time" content="2026-03-04">
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&family=Playfair+Display:wght@600;700&display=swap" rel="stylesheet">
+  <style>
+    :root {
+      --finch-blue: #048EE3;
+      --finch-blue-dark: #0374BA;
+      --finch-green: #1CE25A;
+      --finch-green-dark: #15B848;
+      --finch-dark: #274049;
+      --finch-bg-blue: #E6F3FC;
+      --finch-bg-green: #E5FBEE;
+      --finch-gradient: linear-gradient(135deg, #048EE3 0%, #1CE25A 100%);
+      --color-text: #274049;
+      --color-text-light: #506872;
+      --color-white: #FFFFFF;
+      --font-heading: 'Playfair Display', Georgia, serif;
+      --font-body: 'Inter', 'Segoe UI', sans-serif;
+      --max-width: 780px;
+    }
+
+    *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+    html { font-size: 18px; scroll-behavior: smooth; }
+    body { font-family: var(--font-body); color: var(--color-text); line-height: 1.75; background-color: #F4F8FA; }
+
+    /* --- NAVBAR --- */
+    .navbar { background: var(--color-white); padding: 0.7rem 1.5rem; display: flex; align-items: center; justify-content: center; box-shadow: 0 1px 4px rgba(0,0,0,0.06); position: sticky; top: 0; z-index: 100; }
+    .navbar__logo img { height: 40px; width: auto; }
+
+    /* --- HERO --- */
+    .hero { background: var(--finch-gradient); color: var(--color-white); padding: 4.5rem 1.5rem 4rem; text-align: center; position: relative; overflow: hidden; }
+    .hero::before { content: ''; position: absolute; top: -40%; right: -20%; width: 500px; height: 500px; background: radial-gradient(circle, rgba(255,255,255,0.08) 0%, transparent 70%); border-radius: 50%; }
+    .hero::after { content: ''; position: absolute; bottom: -30%; left: -15%; width: 400px; height: 400px; background: radial-gradient(circle, rgba(255,255,255,0.06) 0%, transparent 70%); border-radius: 50%; }
+    .hero__label { display: inline-block; font-size: 0.72rem; font-weight: 600; letter-spacing: 0.14em; text-transform: uppercase; background: rgba(255,255,255,0.15); backdrop-filter: blur(4px); padding: 0.35em 1.2em; border-radius: 20px; margin-bottom: 1.5rem; border: 1px solid rgba(255,255,255,0.2); position: relative; z-index: 1; }
+    .hero h1 { font-family: var(--font-heading); font-size: 2.5rem; font-weight: 700; line-height: 1.2; max-width: 720px; margin: 0 auto 1.2rem; position: relative; z-index: 1; }
+    .hero__subtitle { font-size: 1.05rem; opacity: 0.92; max-width: 580px; margin: 0 auto; line-height: 1.65; font-weight: 400; position: relative; z-index: 1; }
+    .hero__meta { margin-top: 2rem; font-size: 0.78rem; opacity: 0.65; position: relative; z-index: 1; }
+
+    /* --- ARTICLE --- */
+    .article-container { max-width: var(--max-width); margin: 0 auto; padding: 0 1.5rem; }
+    article { background: var(--color-white); margin: -2.5rem auto 3rem; border-radius: 12px; box-shadow: 0 4px 30px rgba(4, 142, 227, 0.08); padding: 2.8rem 2.8rem 3.2rem; position: relative; z-index: 1; }
+
+    /* --- TOC --- */
+    .toc { background: linear-gradient(135deg, var(--finch-bg-blue) 0%, var(--finch-bg-green) 100%); border-left: 4px solid var(--finch-blue); border-radius: 0 8px 8px 0; padding: 1.5rem 2rem; margin-bottom: 2.5rem; }
+    .toc__title { font-family: var(--font-heading); font-size: 1rem; font-weight: 700; color: var(--finch-blue); margin-bottom: 0.8rem; text-transform: uppercase; letter-spacing: 0.08em; }
+    .toc ol { list-style: none; counter-reset: toc-counter; padding: 0; }
+    .toc ol li { counter-increment: toc-counter; margin-bottom: 0.45rem; }
+    .toc ol li::before { content: counter(toc-counter) "."; font-weight: 600; color: var(--finch-green-dark); margin-right: 0.5em; font-size: 0.9rem; }
+    .toc a { color: var(--color-text); text-decoration: none; font-size: 0.9rem; transition: color 0.2s; }
+    .toc a:hover { color: var(--finch-blue); text-decoration: underline; }
+
+    /* --- HEADINGS --- */
+    h2 { font-family: var(--font-heading); font-size: 1.6rem; font-weight: 700; color: var(--finch-dark); margin-top: 2.8rem; margin-bottom: 1rem; line-height: 1.3; padding-bottom: 0.5rem; border-bottom: 3px solid transparent; border-image: var(--finch-gradient) 1; }
+    h3 { font-family: var(--font-heading); font-size: 1.18rem; font-weight: 600; color: var(--finch-blue); margin-top: 1.8rem; margin-bottom: 0.7rem; line-height: 1.35; }
+
+    /* --- TEXT --- */
+    p { margin-bottom: 1.15rem; color: var(--color-text); }
+    ul, ol.steps { margin: 0.8rem 0 1.5rem 0; padding: 0; list-style: none; }
+    ul li, ol.steps li { margin-bottom: 0.7rem; padding-left: 1.6rem; position: relative; }
+    ul li::before { content: ''; position: absolute; left: 0; top: 0.55em; width: 8px; height: 8px; border-radius: 50%; background: var(--finch-gradient); }
+    ol.steps { counter-reset: step-counter; }
+    ol.steps li { counter-increment: step-counter; }
+    ol.steps li::before { content: counter(step-counter); position: absolute; left: 0; top: 0.12em; width: 22px; height: 22px; border-radius: 50%; background: var(--finch-gradient); color: white; font-size: 0.72rem; font-weight: 700; display: flex; align-items: center; justify-content: center; }
+    ul li strong, ol.steps li strong { color: var(--finch-blue-dark); }
+
+    /* --- INLINE CITATIONS --- */
+    .cite { font-size: 0.75rem; vertical-align: super; color: var(--finch-blue); font-weight: 600; text-decoration: none; cursor: pointer; }
+    .cite:hover { text-decoration: underline; }
+
+    /* --- HIGHLIGHT BOX --- */
+    .highlight-box { background: linear-gradient(135deg, var(--finch-bg-blue) 0%, var(--finch-bg-green) 100%); border-left: 4px solid var(--finch-green); border-radius: 0 8px 8px 0; padding: 1.4rem 1.8rem; margin: 1.8rem 0 1.5rem; }
+    .highlight-box p { margin-bottom: 0; font-style: italic; color: var(--finch-dark); }
+
+    /* --- STAT GRID --- */
+    .stat-grid { display: grid; grid-template-columns: repeat(3, 1fr); gap: 1rem; margin: 1.5rem 0 2rem; }
+    .stat-card { background: var(--finch-bg-blue); border-radius: 10px; padding: 1.2rem 1rem; text-align: center; }
+    .stat-card__value { font-family: var(--font-heading); font-size: 2rem; font-weight: 700; background: var(--finch-gradient); -webkit-background-clip: text; -webkit-text-fill-color: transparent; background-clip: text; line-height: 1.1; }
+    .stat-card__label { font-size: 0.8rem; color: var(--color-text-light); margin-top: 0.4rem; line-height: 1.3; }
+
+    /* --- REFERENCES --- */
+    .references { margin-top: 2.8rem; padding-top: 1.5rem; border-top: 2px solid var(--finch-bg-blue); }
+    .references h2 { border-image: none; border-bottom: none; color: var(--finch-blue); font-size: 1.2rem; margin-top: 0; }
+    .references ol { list-style: none; counter-reset: ref-counter; padding: 0; margin: 0; }
+    .references ol li { counter-increment: ref-counter; padding: 0.5rem 0 0.5rem 2.2rem; position: relative; font-size: 0.88rem; color: var(--color-text-light); border-bottom: 1px solid #F0F4F7; }
+    .references ol li:last-child { border-bottom: none; }
+    .references ol li::before { content: "[" counter(ref-counter) "]"; position: absolute; left: 0; font-weight: 600; color: var(--finch-blue); font-size: 0.82rem; }
+    .references .ref-source { font-style: italic; }
+    .references .ref-title { font-weight: 500; color: var(--color-text); }
+
+    /* --- CTA --- */
+    .cta { margin-top: 2.5rem; padding: 2rem 2.2rem; background: linear-gradient(135deg, var(--finch-bg-blue) 0%, var(--finch-bg-green) 100%); border-left: 4px solid var(--finch-green); border-radius: 0 10px 10px 0; color: var(--finch-dark); line-height: 1.7; font-size: 1rem; }
+    .cta p { margin-bottom: 0; font-style: italic; }
+
+    /* --- FOOTER --- */
+    .site-footer { text-align: center; padding: 2rem 1.5rem 1.5rem; font-size: 0.78rem; color: var(--color-text-light); }
+    .site-footer img { height: 28px; width: auto; margin-bottom: 0.4rem; }
+
+    /* --- DARK MODE --- */
+    html.dark body { background-color: #0b1220; color: #e2e8f0; }
+    html.dark .navbar { background: #0f1d2e; box-shadow: 0 1px 4px rgba(0,0,0,0.4); }
+    html.dark article { background: #111f30; box-shadow: 0 4px 30px rgba(0,0,0,0.3); color: #e2e8f0; }
+    html.dark p { color: #cbd5e1; }
+    html.dark h2 { color: #e2e8f0; }
+    html.dark h3 { color: #67e8f9; }
+    html.dark .toc { background: linear-gradient(135deg, #0f1d2e 0%, #0a1a1a 100%); }
+    html.dark .toc a { color: #cbd5e1; }
+    html.dark .toc a:hover { color: #67e8f9; }
+    html.dark .highlight-box { background: linear-gradient(135deg, #0f1d2e 0%, #0a1a1a 100%); color: #e2e8f0; }
+    html.dark .highlight-box p { color: #cbd5e1; }
+    html.dark .stat-card { background: #0f1d2e; }
+    html.dark .stat-card__label { color: #94a3b8; }
+    html.dark .cta { background: linear-gradient(135deg, #0f1d2e 0%, #0a1a1a 100%); color: #e2e8f0; }
+    html.dark .cta p { color: #cbd5e1; }
+    html.dark .references { border-top-color: #1e3a5f; }
+    html.dark .references ol li { border-bottom-color: #1e3a5f; color: #94a3b8; }
+    html.dark .references .ref-title { color: #cbd5e1; }
+    html.dark .site-footer { color: #64748b; }
+    html.dark ul li::before { background: linear-gradient(135deg, #0284c7 0%, #22d3ee 100%); }
+    html.dark ul li strong, html.dark ol.steps li strong { color: #67e8f9; }
+
+    /* --- RESPONSIVE --- */
+    @media (max-width: 640px) {
+      html { font-size: 16px; }
+      .hero { padding: 3rem 1.2rem 2.5rem; }
+      .hero h1 { font-size: 1.8rem; }
+      article { padding: 1.5rem 1.2rem 2rem; margin: -1.5rem 0.8rem 2rem; }
+      h2 { font-size: 1.35rem; }
+      h3 { font-size: 1.08rem; }
+      .navbar__logo img { height: 32px; }
+      .stat-grid { grid-template-columns: 1fr; }
+    }
+  </style>
+</head>
+<body>
+
+  <!-- NAVBAR -->
+  <nav class="navbar">
+    <a href="#" class="navbar__logo">
+      <!-- Insert logo here: <img src="logo.svg" alt="Finch-AI"> -->
+    </a>
+  </nav>
+
+  <!-- HERO -->
+  <header class="hero">
+    <span class="hero__label">Document Automation · AI</span>
+    <h1>Document Intelligence:<br>goodbye to manual entry of delivery notes</h1>
+    <p class="hero__subtitle">Every year companies lose thousands of hours typing, correcting and reconciling transport documents. There's a better way — and it's already available.</p>
+    <p class="hero__meta">March 4, 2026 &nbsp;·&nbsp; Reading time: ~8 minutes</p>
+  </header>
+
+  <!-- ARTICLE -->
+  <div class="article-container">
+    <article>
+
+      <!-- TOC -->
+      <nav class="toc" aria-label="Table of contents">
+        <p class="toc__title">Contents</p>
+        <ol>
+          <li><a href="#il-problema">The hidden problem of operational documents</a></li>
+          <li><a href="#cosa-e">What Document Intelligence is</a></li>
+          <li><a href="#come-funziona">How it works: from PDF to structured data</a></li>
+          <li><a href="#flusso-verifica">The verification flow: the machine helps, the professional decides</a></li>
+          <li><a href="#vantaggi-aziende">What changes for companies that adopt it</a></li>
+          <li><a href="#integrazione">Integration with existing systems</a></li>
+          <li><a href="#quando-adatta">When it's a fit and when it isn't</a></li>
+          <li><a href="#come-iniziare">Where to start: a realistic path</a></li>
+          <li><a href="#riferimenti">References</a></li>
+        </ol>
+      </nav>
+
+      <!-- SECTION 1 -->
+      <h2 id="il-problema">The hidden problem of operational documents</h2>
+
+      <p>Ask any operations manager, warehouse worker or accounts-payable clerk at an SME how much time they spend each week handling delivery notes. The answer, almost invariably, is surprising: hours. Sometimes dozens of hours a month, between receiving, digitizing, checking, matching to orders, correcting errors and archiving.</p>
+
+      <p>The transport document — the delivery note — is one of the most common documents in the life of a company that buys, sells or moves goods. It's also one of the most neglected when it comes to automation. While electronic invoicing went through a regulatory revolution that forced digitization, delivery notes have often remained in the analog era: paper sheets, unstructured PDFs, emails with poorly named attachments, data entered by hand into the management system.</p>
+
+      <p>The result is predictable: transcription errors, missed matches with purchase orders, longer accounting close times, and a significant share of human work absorbed by activities that add no value <a href="#riferimenti" class="cite">[1]</a>. Document Intelligence is the technological answer to this problem — mature, accessible and already adopted by companies of every size.</p>
+
+      <!-- SECTION 2 -->
+      <h2 id="cosa-e">What Document Intelligence is</h2>
+
+      <p>Document Intelligence is the ability of a software system to read, interpret and structure the content of unstructured documents — PDFs, images, scans — automatically extracting the relevant fields and making them available to company systems.</p>
+
+      <p>This is not the old OCR that "read" text without understanding it. Modern Document Intelligence systems combine optical character recognition with artificial-intelligence models trained to <em>understand</em> the semantic structure of a document: it knows that the number next to the words "Note number" is the document reference, not a quantity; it knows that "sender" and "recipient" are different entities even if they appear in variable positions depending on the supplier.</p>
+
+      <h3>The role of composed models</h3>
+
+      <p>A key element in the most effective implementations is the use of <strong>composed models</strong>: instead of training a single generic model, you create specialized models for each document type (or even for each supplier) and combine them into a single access point. The system receives the document, identifies which type it is, and routes the analysis to the most appropriate model <a href="#riferimenti" class="cite">[2]</a>.</p>
+
+      <p>This approach guarantees far higher accuracy than generalist models, especially when working with documents that have proprietary layouts or industry-specific terminology.</p>
+
+      <div class="stat-grid">
+        <div class="stat-card">
+          <div class="stat-card__value">80%</div>
+          <div class="stat-card__label">average reduction in document-processing time</div>
+        </div>
+        <div class="stat-card">
+          <div class="stat-card__value">&lt;2%</div>
+          <div class="stat-card__label">error rate on key fields with trained models</div>
+        </div>
+        <div class="stat-card">
+          <div class="stat-card__value">24/7</div>
+          <div class="stat-card__label">continuous processing, no Monday-morning backlog</div>
+        </div>
+      </div>
+
+      <!-- SECTION 3 -->
+      <h2 id="come-funziona">How it works: from PDF to structured data</h2>
+
+      <p>The end-to-end process of a Document Intelligence solution for delivery notes typically unfolds in four phases, each of which contributes to the quality of the final result.</p>
+
+      <ol class="steps">
+        <li>
+          <strong>Document intake:</strong> the delivery note enters the system through one of the supported channels — manual upload from a web interface, monitoring of a dedicated email inbox, direct integration with the management system or supplier portal. The system accepts PDFs, images and scans, even of imperfect quality.
+        </li>
+        <li>
+          <strong>Analysis with the AI model:</strong> the document is sent to the recognition engine (such as Microsoft's Document Intelligence), which applies the most suitable composed model. The model extracts the configured fields: note number, date, sender, recipient, line items (item code, description, quantity, unit of measure), carrier, packages, weight. The results also include a confidence score for each extracted field.
+        </li>
+        <li>
+          <strong>Validation and completion:</strong> the system automatically checks that mandatory fields are present and that the values make sense (dates in the correct format, positive numeric quantities, item codes existing in the master data). Documents with all fields complete are marked "ready for verification"; those with missing fields or anomalies are flagged for human review.
+        </li>
+        <li>
+          <strong>Verification and transfer:</strong> an operator reviews the flagged documents, completes or corrects the necessary data, and validates the document. Once verified, the delivery note is transferred to the management system or ERP with all structured fields, ready for matching with the purchase order and accounting entry.
+        </li>
+      </ol>
+
+      <div class="highlight-box">
+        <p>The key isn't to eliminate human intervention, but to focus it where it really matters: 70-80% of documents typically require no manual touch, while the remaining 20-30% are flagged precisely for operator review.</p>
+      </div>
+
+      <!-- SECTION 4 -->
+      <h2 id="flusso-verifica">The verification flow: the machine helps, the professional decides</h2>
+
+      <p>One of the elements that distinguishes serious implementations from superficial ones is the presence of a structured verification flow. It's not enough for the system to "read" the document: you need a clear process that guarantees data quality before it's fed into company systems.</p>
+
+      <p>A robust approach uses a well-defined state machine, in which each document goes through sequential phases with controlled transitions:</p>
+
+      <ul>
+        <li><strong>Processing:</strong> the document is awaiting analysis or being processed by the AI engine.</li>
+        <li><strong>Incomplete:</strong> the analysis produced results, but mandatory fields are missing or the extracted values show anomalies requiring human intervention.</li>
+        <li><strong>To verify:</strong> all mandatory fields are present; the document awaits review and confirmation by an operator.</li>
+        <li><strong>Verified:</strong> an operator has confirmed the data is correct. The document is ready for transfer to the downstream system.</li>
+        <li><strong>Transferred:</strong> the data has been sent to the management system or ERP. Final state, tracked with a timestamp and a reference to the user who carried out the transfer.</li>
+        <li><strong>Error:</strong> the document can't be processed (corrupted file, unsupported format, insufficient quality). It's flagged for manual handling with the option to retry.</li>
+      </ul>
+
+      <p>Every transition is recorded in the document's history, creating a complete audit trail: who did what, when, with what outcome. This traceability is fundamental for internal compliance and exception management <a href="#riferimenti" class="cite">[3]</a>.</p>
+
+      <!-- SECTION 5 -->
+      <h2 id="vantaggi-aziende">What changes for companies that adopt it</h2>
+
+      <p>The benefits of Document Intelligence are not only quantitative — fewer hours spent, fewer errors — but they structurally change the way a company manages its document flows.</p>
+
+      <h3>Speed and predictability</h3>
+
+      <p>Documents that arrive in the evening are processed overnight. On Monday morning the warehouse and accounting find everything already processed, verified or flagged, without the traditional return-to-work backlog. Cycle times shorten structurally; they no longer depend on people's availability.</p>
+
+      <h3>Data quality in the management system</h3>
+
+      <p>Manual entry inevitably introduces transcription errors: transposed figures, truncated descriptions, wrong item codes. A Document Intelligence system, once configured correctly, is deterministic: it always extracts the same fields with the same logic, and its errors — when they occur — are visible and traceable through confidence indicators.</p>
+
+      <h3>Scalability without marginal costs</h3>
+
+      <p>In a growing company, the volume of documents to handle increases in proportion to revenue. With manual processes, this means hiring additional staff. With a Document Intelligence system, processing capacity scales automatically with no significant marginal cost <a href="#riferimenti" class="cite">[4]</a>.</p>
+
+      <h3>Freeing up time for value-added activities</h3>
+
+      <p>Operators taken away from mechanical typing can be redirected toward activities that require judgment: exception handling, supplier relationships, analysis of discrepancies between what was ordered and delivered. The added value of human work increases, it doesn't decrease.</p>
+
+      <!-- SECTION 6 -->
+      <h2 id="integrazione">Integration with existing systems</h2>
+
+      <p>A frequent concern when evaluating a Document Intelligence solution is integration with the systems already in use — ERP, management systems, supplier portals. It's a legitimate concern, but often overestimated.</p>
+
+      <p>Modern solutions offer several integration mechanisms, suited to very different technical contexts:</p>
+
+      <ul>
+        <li><strong>REST APIs:</strong> the system exposes standard endpoints for uploading documents, checking status, retrieving extracted data and transferring to external systems. Any modern or custom management system can integrate via API.</li>
+        <li><strong>CSV/Excel export:</strong> for companies with legacy systems or spreadsheet-based workflows, periodic export of processed data is an immediate option that requires no development.</li>
+        <li><strong>Webhooks:</strong> the system can actively notify downstream systems whenever a document changes state, enabling event-driven integrations without continuous polling.</li>
+        <li><strong>Email integration:</strong> sending delivery notes via email to a dedicated address can be the documents' entry point, without requiring any change to suppliers' processes.</li>
+      </ul>
+
+      <p>The guiding principle is adaptability: the solution must adapt to existing processes, not the other way around. A well-designed implementation has minimal impact on operational routines during the adoption phase.</p>
+
+      <!-- SECTION 7 -->
+      <h2 id="quando-adatta">When it's a fit and when it isn't</h2>
+
+      <p>Document Intelligence isn't the right solution for every situation. It's useful to understand in advance when the ROI is solid and when, instead, the investment risks not being justified.</p>
+
+      <h3>When it makes sense to adopt it</h3>
+
+      <ul>
+        <li><strong>High document volume:</strong> automation becomes worthwhile from a few dozen documents a month; above a few hundred, the advantage is clear.</li>
+        <li><strong>Documents with a recurring structure:</strong> if your suppliers' delivery notes always have the same fields in roughly the same positions, the model trains quickly and reaches high accuracy.</li>
+        <li><strong>Costly or frequent errors:</strong> if transcription errors cause discrepancies that are hard to reconcile, returns, disputes with suppliers or payment delays.</li>
+        <li><strong>Growing volume without wanting to scale staff proportionally.</strong></li>
+      </ul>
+
+      <h3>When it needs more care</h3>
+
+      <ul>
+        <li><strong>Highly variable documents:</strong> if every supplier uses a completely different format and the documents are few, the cost of configuring the models might not be amortized.</li>
+        <li><strong>Very low scan quality:</strong> heavily degraded documents, irregular handwriting or non-standard fonts can significantly reduce recognition accuracy.</li>
+        <li><strong>No verification process:</strong> without a flow that includes human review of doubtful cases, the risk of feeding wrong data into the management system isn't eliminated — only shifted.</li>
+      </ul>
+
+      <div class="highlight-box">
+        <p>The rule of thumb: if an experienced operator takes more than 2 minutes on average to process a document, and the volume exceeds 200 documents a month, the ROI calculation is almost always in favor of automation.</p>
+      </div>
+
+      <!-- SECTION 8 -->
+      <h2 id="come-iniziare">Where to start: a realistic path</h2>
+
+      <p>Adopting a Document Intelligence system doesn't require a major digital-transformation project. A pragmatic path unfolds over a few weeks, not months, if you start from clear and well-defined goals.</p>
+
+      <ol class="steps">
+        <li>
+          <strong>Volume and format analysis:</strong> gather a representative sample of the documents you want to automate — at least 50-100 delivery notes from different suppliers. Analyze how many different suppliers there are, which fields always appear, which are variable, and what the average quality of the scans or PDFs is. This phase takes 1-2 days but defines feasibility and the expected ROI.
+        </li>
+        <li>
+          <strong>Model configuration:</strong> modern Document Intelligence services let you train custom models with just a few dozen labeled examples. Configuration for a subset of high-volume suppliers typically takes 1-2 weeks, with improvement iterations based on real output.
+        </li>
+        <li>
+          <strong>Pilot on a specific flow:</strong> before automating everything, start the system in "supervision" mode: documents are processed by the AI but every result is verified by an operator. This lets you measure real accuracy, identify problematic cases and build trust in the system before reducing the level of supervision.
+        </li>
+        <li>
+          <strong>Extension and optimization:</strong> once the pilot is consolidated, extend to other document types and suppliers. Over time, the models improve thanks to operator feedback, and the share of documents reaching the "verified" state without human intervention progressively increases.
+        </li>
+      </ol>
+
+      <p>The key to success isn't technological: it's organizational. You need an internal owner who takes ownership of the process, defines the quality rules, manages exceptions and drives continuous improvement. Technology is an enabling tool; the process is what determines the result <a href="#riferimenti" class="cite">[5]</a>.</p>
+
+      <!-- CTA -->
+      <div class="cta">
+        <p>If you're evaluating how to automate delivery-note management in your company — or if you want to understand whether your current volume justifies the investment — we can run a quick feasibility analysis together. Write to us: building the real case takes less time than you think.</p>
+      </div>
+
+      <!-- REFERENCES -->
+      <div class="references" id="riferimenti">
+        <h2>References</h2>
+        <ol>
+          <li>
+            <span class="ref-title">McKinsey Global Institute — "The Future of Work After COVID-19"</span>,
+            <span class="ref-source">McKinsey &amp; Company, 2021.</span>
+            Analysis of the share of automatable work in administrative and operational functions.
+          </li>
+          <li>
+            <span class="ref-title">Microsoft — "Document Intelligence: Composed Models"</span>,
+            <span class="ref-source">Microsoft Learn Documentation, 2025.</span>
+            Technical documentation on the architecture of composed models for document recognition.
+          </li>
+          <li>
+            <span class="ref-title">AIIM — "State of Intelligent Information Management"</span>,
+            <span class="ref-source">AIIM Industry Report, 2024.</span>
+            Survey on adoption, benefits and challenges of intelligent document processing in organizations.
+          </li>
+          <li>
+            <span class="ref-title">Gartner — "Market Guide for Intelligent Document Processing Solutions"</span>,
+            <span class="ref-source">Gartner Research, 2024.</span>
+            Overview of the IDP market, adoption trends and evaluation of the main vendors.
+          </li>
+          <li>
+            <span class="ref-title">Forrester Research — "The Total Economic Impact of Intelligent Document Processing"</span>,
+            <span class="ref-source">Forrester Consulting, 2023.</span>
+            Study on the ROI of document automation in mid-sized companies.
+          </li>
+        </ol>
+      </div>
+
+    </article>
+  </div>
+
+  <!-- FOOTER -->
+  <footer class="site-footer">
+    <p>© 2026 Finch-AI · Article by the editorial team</p>
+  </footer>
+
+</body>
+</html>

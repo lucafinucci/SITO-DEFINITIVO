@@ -1,0 +1,281 @@
+<!doctype html>
+<html lang="en">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Privacy Policy - Finch-AI</title>
+  <style>
+    :root {
+      color-scheme: dark;
+      --bg: #0b1220;
+      --panel: rgba(15, 23, 42, 0.92);
+      --border: #1f2937;
+      --text: #dbe4f4;
+      --muted: #b7c2d6;
+      --accent: #67e8f9;
+      --accent-2: #7dd3fc;
+    }
+    * { box-sizing: border-box; }
+    body {
+      font-family: "Manrope", "Segoe UI", "Helvetica Neue", Arial, sans-serif;
+      color: var(--text);
+      margin: 0;
+      padding: clamp(16px, 5vw, 42px);
+      line-height: 1.7;
+      background: var(--bg);
+      background-image:
+        radial-gradient(circle at 20% 20%, rgba(0, 224, 255, 0.08), transparent 32%),
+        radial-gradient(circle at 80% 0%, rgba(59, 130, 246, 0.08), transparent 28%),
+        linear-gradient(120deg, rgba(0, 224, 255, 0.08) 0%, rgba(3, 16, 31, 0.2) 45%, rgba(0, 224, 255, 0.05) 100%),
+        linear-gradient(rgba(255,255,255,0.04) 1px, transparent 1px);
+      background-size: cover, cover, cover, 100% 28px;
+      position: relative;
+      min-height: 100vh;
+    }
+    canvas#bg {
+      position: fixed;
+      inset: 0;
+      width: 100%;
+      height: 100%;
+      z-index: 0;
+      pointer-events: none;
+    }
+    main {
+      max-width: 960px;
+      margin: 0 auto;
+      background: var(--panel);
+      border: 1px solid var(--border);
+      border-radius: 14px;
+      padding: clamp(18px, 4vw, 38px);
+      box-shadow: 0 20px 60px rgba(0, 0, 0, 0.4);
+      backdrop-filter: blur(6px);
+      position: relative;
+      z-index: 1;
+    }
+    h1, h2, h3 { color: #fff; margin-top: 24px; letter-spacing: -0.01em; }
+    h1 { font-size: clamp(26px, 4vw, 34px); margin: 0; }
+    h2 { font-size: clamp(20px, 3.4vw, 26px); }
+    h3 { font-size: clamp(18px, 3vw, 22px); color: #e0e7ff; }
+    p, li { color: var(--muted); font-size: 15.5px; }
+    p { margin: 10px 0 14px; }
+    strong { color: #f8fafc; }
+    a { color: var(--accent); text-decoration: none; }
+    a:hover { color: var(--accent-2); text-decoration: underline; }
+    ul { padding-left: 20px; margin: 10px 0 16px; }
+    .page-header { display: flex; align-items: center; gap: 14px; margin-bottom: 16px; }
+    .page-header img { height: 58px; width: auto; }
+    .meta { color: #94a3b8; font-size: 14px; display: block; margin-top: 6px; }
+    @media (max-width: 720px) {
+      body { padding: 16px; }
+      main { padding: 18px; }
+      .page-header { flex-direction: column; align-items: flex-start; gap: 8px; }
+      .page-header img { height: 48px; }
+    }
+  </style>
+</head>
+<body>
+  <canvas id="neural-bg" aria-hidden="true" style="position:fixed; inset:0; width:100%; height:100%; z-index:-2; pointer-events:none;"></canvas>
+  <script>
+    (() => {
+      const canvas = document.getElementById('neural-bg');
+      if (!canvas) return;
+      const ctx = canvas.getContext('2d', { alpha: true });
+      let w, h;
+      const setSize = () => {
+        w = canvas.width = window.innerWidth;
+        h = canvas.height = window.innerHeight;
+      };
+      setSize();
+      window.addEventListener('resize', setSize);
+      const rnd = (min, max) => Math.random() * (max - min) + min;
+      const MAX = 90;
+      let count = Math.min(MAX, Math.floor((w * h) / 18000));
+      let nodes = Array.from({ length: count }, () => ({
+        x: rnd(0, w),
+        y: rnd(0, h),
+        vx: rnd(-0.4, 0.4),
+        vy: rnd(-0.4, 0.4),
+        r: rnd(0.6, 1.8),
+      }));
+      const gradientStroke = () => {
+        const g = ctx.createLinearGradient(0, 0, w, h);
+        g.addColorStop(0, "rgba(0,224,255,0.85)");
+        g.addColorStop(1, "rgba(59,130,246,0.85)");
+        return g;
+      };
+      const LINK_DIST = () => Math.min(180, Math.max(110, Math.min(w, h) * 0.22));
+      let rafId;
+      const draw = () => {
+        ctx.clearRect(0, 0, w, h);
+        ctx.fillStyle = "rgba(7,12,22,0.75)";
+        ctx.fillRect(0, 0, w, h);
+        const rg = ctx.createRadialGradient(w * 0.5, h * 0.3, 0, w * 0.5, h * 0.3, Math.max(w, h) * 0.7);
+        rg.addColorStop(0, "rgba(23,162,255,0.10)");
+        rg.addColorStop(1, "rgba(0,0,0,0)");
+        ctx.fillStyle = rg;
+        ctx.fillRect(0, 0, w, h);
+        ctx.globalCompositeOperation = "lighter";
+        for (const n of nodes) {
+          n.x += n.vx;
+          n.y += n.vy;
+          if (n.x < 0 || n.x > w) n.vx *= -1;
+          if (n.y < 0 || n.y > h) n.vy *= -1;
+          ctx.beginPath();
+          ctx.arc(n.x, n.y, n.r, 0, Math.PI * 2);
+          ctx.fillStyle = "rgba(56,189,248,0.65)";
+          ctx.fill();
+        }
+        ctx.lineWidth = 0.7;
+        ctx.strokeStyle = gradientStroke();
+        const linkDist = LINK_DIST();
+        for (let i = 0; i < nodes.length; i++) {
+          for (let j = i + 1; j < nodes.length; j++) {
+            const dx = nodes[i].x - nodes[j].x;
+            const dy = nodes[i].y - nodes[j].y;
+            const dist = Math.hypot(dx, dy);
+            if (dist < linkDist) {
+              const alpha = 1 - dist / linkDist;
+              ctx.globalAlpha = alpha * 0.6;
+              ctx.beginPath();
+              ctx.moveTo(nodes[i].x, nodes[i].y);
+              ctx.lineTo(nodes[j].x, nodes[j].y);
+              ctx.stroke();
+            }
+          }
+        }
+        ctx.globalAlpha = 1;
+        rafId = requestAnimationFrame(draw);
+      };
+      draw();
+      window.addEventListener('beforeunload', () => cancelAnimationFrame(rafId));
+    })();
+  </script>
+  <main>
+    <div class="page-header">
+      <a href="/" style="display:inline-flex; align-items:center;">
+        <img src="/assets/images/LOGO.png" alt="Finch-AI">
+      </a>
+      <div>
+        <h1>&#128196; Privacy Policy &ndash; Finch-AI</h1>
+        <span class="meta"><strong>Last updated:</strong> 2025</span>
+      </div>
+    </div>
+
+    <h2>1. Data Controller</h2>
+    <p>The Data Controller is:</p>
+    <p>
+      <strong>Finch-AI S.r.l.</strong><br>
+      Registered office: Via Enrico Mattei 18, 67043 &ndash; Celano (AQ), Italy<br>
+      Email: <a href="mailto:info@finch-ai.it">info@finch-ai.it</a><br>
+      Certified email (PEC): <a href="mailto:finch-ai@pec.finch-ai.it">finch-ai@pec.finch-ai.it</a>
+    </p>
+
+    <h2>2. Types of data collected</h2>
+    <h3>2.1 Data provided voluntarily</h3>
+    <ul>
+      <li>First and last name</li>
+      <li>Email</li>
+      <li>Phone number (if present in the form)</li>
+      <li>Company</li>
+      <li>Message or information entered in the forms</li>
+      <li>Data provided to download whitepapers or informational material</li>
+    </ul>
+    <h3>2.2 Browsing data</h3>
+    <p>Collected automatically through technical tools:</p>
+    <ul>
+      <li>IP address (anonymized)</li>
+      <li>Browser and device type</li>
+      <li>Pages visited</li>
+      <li>Time spent</li>
+    </ul>
+    <h3>2.3 Technical cookies</h3>
+    <p>Used exclusively for the correct functioning of the site. No profiling cookies until a marketing-analytics tool is activated.</p>
+
+    <h2>3. Purposes of processing</h2>
+    <h3>3.1 Responding to user requests</h3>
+    <ul>
+      <li>Replies via email or phone</li>
+      <li>Informational communications about Finch-AI products or services</li>
+    </ul>
+    <h3>3.2 Lead generation</h3>
+    <ul>
+      <li>Commercial contact upon express request</li>
+      <li>Sending requested materials (e.g. whitepapers)</li>
+    </ul>
+    <h3>3.3 Site improvement</h3>
+    <ul>
+      <li>Technical analysis of anonymous traffic</li>
+      <li>Aggregated statistics</li>
+    </ul>
+    <h3>3.4 Legal obligations</h3>
+    <ul>
+      <li>Compliance with applicable regulations</li>
+      <li>Possible legal defense</li>
+    </ul>
+
+    <h2>4. Legal basis for processing</h2>
+    <p>According to Art. 6 GDPR:</p>
+    <ul>
+      <li>User consent (contact form and whitepaper download)</li>
+      <li>Performance of pre-contractual measures at the request of the data subject</li>
+      <li>Legitimate interest of the Controller (site security, abuse prevention)</li>
+    </ul>
+
+    <h2>5. Processing methods</h2>
+    <p>The data:</p>
+    <ul>
+      <li>is processed with IT tools</li>
+      <li>is protected by adequate security measures</li>
+      <li>is not disclosed to unauthorized third parties</li>
+      <li>is processed only by authorized personnel</li>
+    </ul>
+
+    <h2>6. Data retention</h2>
+    <ul>
+      <li>max 12 months for commercial requests or contacts</li>
+      <li>until consent is withdrawn for voluntary newsletter subscriptions</li>
+      <li>the time strictly necessary to send the requested material</li>
+    </ul>
+
+    <h2>7. Data communication</h2>
+    <p>The data may be shared with:</p>
+    <ul>
+      <li>Technical providers (hosting, email, CRM)</li>
+      <li>Professionals who collaborate with Finch-AI</li>
+      <li>Public authorities if required by law</li>
+    </ul>
+    <p>All providers act as external Data Processors (Art. 28 GDPR).</p>
+
+    <h2>8. Data transfer outside the EU</h2>
+    <p>The Controller prefers services with servers in the EU. Any transfers (e.g. US cloud tools) take place through:</p>
+    <ul>
+      <li>Standard Contractual Clauses (SCC)</li>
+      <li>Supplementary security measures</li>
+    </ul>
+
+    <h2>9. User rights (Art. 15-22 GDPR)</h2>
+    <p>The user may request at any time:</p>
+    <ul>
+      <li>access to their data</li>
+      <li>rectification</li>
+      <li>erasure</li>
+      <li>restriction of processing</li>
+      <li>portability</li>
+      <li>objection</li>
+      <li>withdrawal of consent</li>
+    </ul>
+    <p>Requests to be sent to: <a href="mailto:privacy@finch-ai.it">privacy@finch-ai.it</a></p>
+
+    <h2>10. Cookies</h2>
+    <p>The site uses only:</p>
+    <ul>
+      <li>Technical cookies (necessary for the site to function)</li>
+      <li>Anonymized analytics cookies (if activated in the future)</li>
+    </ul>
+    <p>No profiling cookie is active without explicit consent.</p>
+
+    <h2>11. Changes to the Privacy Policy</h2>
+    <p>The Controller reserves the right to amend this notice. Updated versions will be published on this page.</p>
+  </main>
+</body>
+</html>

@@ -1,0 +1,162 @@
+{
+  "seo": {
+    "title": "OmniFlow · Modular AI Business Management for SMEs | Warehouse Intelligence",
+    "description": "OmniFlow: AI management software for SMEs with WMS, sales, purchasing, orders and finance in one system. 8 modules, built-in AI, cloud or on-premise. GDPR. Book a demo.",
+    "keywords": "AI business management software, AI ERP for SMEs, AI warehouse management software, cloud WMS, modular ERP SME, OmniFlow Finch-AI, warehouse intelligence, closed-loop commerce software, Smart Quote Builder, AI guided picking, dynamic slotting, AI stockout prediction software, Smart Swap, Golden Thread ERP",
+    "ogImageAlt": "OmniFlow — Dashboard of Finch-AI's Warehouse Intelligence AI management system",
+    "ldDescription": "OmniFlow is the modular AI management system for SMEs: it closes the Buy → Stock → Sell → Deliver → Collect loop in a single system, with 8 integrated modules and AI active across the whole pipeline. Multi-warehouse, cloud or on-premise, GDPR compliant."
+  },
+  "hero": {
+    "pill": "Warehouse Intelligence · OmniFlow",
+    "title": "The management system with <em>built-in AI</em> that evolves with your business.",
+    "lead": "OmniFlow closes the <strong>Buy → Stock → Sell → Deliver → Collect</strong> loop in a single system. One data point, one truth — for every department, in real time.",
+    "ctaDemo": "Book a demo",
+    "ctaHow": "See how it works",
+    "demoPrefill": "OmniFlow demo",
+    "trust1": "Built-in AI Assistant",
+    "trust2": "Multi-warehouse",
+    "trust3": "Cloud or on-premise",
+    "trust4": "GDPR · Data in the EU",
+    "vizHead": "The OmniFlow loop",
+    "vizBadge": "Closed-loop",
+    "vizLoop": "One single flow, always tracked"
+  },
+  "cycleSteps": [
+    { "label": "Buy", "sub": "Purchasing & Suppliers" },
+    { "label": "Stock", "sub": "WMS Warehouse" },
+    { "label": "Sell", "sub": "Quotes & live margin" },
+    { "label": "Deliver", "sub": "OMS & delivery notes" },
+    { "label": "Collect", "sub": "Finance & cash flow" }
+  ],
+  "problemHead": {
+    "eyebrow": "The problem",
+    "title": "When data doesn't flow, margin gets lost",
+    "lead": "Purchasing, warehouse, sales and finance often use separate tools. The result is manual work, decisions in the dark and eroded margins."
+  },
+  "problems": [
+    { "title": "Departments that don't talk", "desc": "Excel, email and separate systems: each function works on different numbers, often out of sync with each other." },
+    { "title": "Decisions without the full picture", "desc": "Stockouts, overstock, imprecise quotes: without up-to-date data you decide by gut, and the margin suffers." },
+    { "title": "Too much manual work", "desc": "Retyping between systems and alignment emails: repetitive operations steal time and introduce errors." }
+  ],
+  "solutionHead": {
+    "eyebrow": "The solution",
+    "title": "One single flow, from supplier to customer",
+    "lead": "OmniFlow connects every stage with AI always on: it forecasts, suggests and automates across the whole pipeline."
+  },
+  "flowSteps": [
+    { "k": "01 · Buy", "h": "Purchasing", "p": "Smart Restock forecasts stockouts and proposes orders ready to approve." },
+    { "k": "02 · Stock", "h": "Warehouse", "p": "Bin map, guided picking and AI-optimized dynamic slotting." },
+    { "k": "03 · Sell", "h": "Quotes", "p": "Quote builder with live margin and Smart Swap proposing better alternatives." },
+    { "k": "04 · Deliver", "h": "Orders & notes", "p": "Order kanban, carrier planning and tracking of shipping documents." },
+    { "k": "05 · Collect", "h": "Finance", "p": "Automatic invoicing from orders and a cash-flow timeline." }
+  ],
+  "highlights": [
+    { "tag": "Golden Thread", "title": "Follow the thread, from supplier to customer", "desc": "One click reveals the whole chain: PO → bin → order → invoice. Zero manual searching." },
+    { "tag": "Command-K", "title": "One keyboard, the whole system", "desc": "Global shortcut: find and do anything in OmniFlow in an instant." },
+    { "tag": "Smart Swap", "title": "Sell better, not just more", "desc": "The AI proposes higher-margin alternatives as you build the quote." },
+    { "tag": "Price Watch", "title": "The supplier market, in the clear", "desc": "Price history for every item and an alert if you're paying more than usual." }
+  ],
+  "modulesHead": {
+    "eyebrow": "The modules",
+    "title": "The whole commerce cycle, in one system",
+    "lead": "Modular by design: turn on only what you need today and add more as you grow."
+  },
+  "modules": [
+    { "title": "Purchasing & Suppliers", "desc": "Scorecards, automatic RFQs, price history, goods receiving." },
+    { "title": "WMS Warehouse", "desc": "Bin map, guided picking, slotting, multi-warehouse." },
+    { "title": "Sales & Quotes", "desc": "Quote builder, live margin, Good/Better/Best, digital signature." },
+    { "title": "OMS Orders", "desc": "Kanban, back-orders, Golden Thread, approval workflows." },
+    { "title": "Shipping", "desc": "Carrier planning, tracking, delivery notes, direct dropshipping." },
+    { "title": "Finance", "desc": "Automatic invoices from orders, cash flow, Stripe integration." },
+    { "title": "Returns & Quality", "desc": "Customer and supplier returns, quality inspections, scorecards." },
+    { "title": "Reports & Analytics", "desc": "Role-based dashboards, live KPIs, data export, scheduler." }
+  ],
+  "assistant": {
+    "eyebrow": "AI Assistant",
+    "title": "An extra teammate, <em>always available</em>",
+    "text": "It knows your whole company, answers in natural language and acts under your supervision — on every screen, for every role.",
+    "feat1Title": "Query the data",
+    "feat1Desc": "Late orders, top customers, low stock: instant answers.",
+    "feat2Title": "Create with text",
+    "feat2Desc": "Quotes, orders, RFQs — always with confirmation before writing.",
+    "feat3Title": "Suggests",
+    "feat3Desc": "Higher-margin alternatives, better suppliers, optimal slotting.",
+    "feat4Title": "Under control",
+    "feat4Desc": "Every write requires your explicit confirmation.",
+    "you": "YOU",
+    "chatQ1": "Which orders are late this week?",
+    "chatA1Pre": "I found",
+    "chatA1Bold": "three late orders",
+    "chatA1Post": ": Fratelli Esposito, Centro Edile Brianza and Hotel Mediterraneo. Shall I prepare a message for the customers?",
+    "chatQ2": "Top products by margin this month",
+    "chatA2Pre": "Leading are Roman Travertine, Interlocking Paver and Oak Parquet. With",
+    "chatA2Bold": "Smart Swap",
+    "chatA2Post": "I can propose higher-margin alternatives on the open quotes."
+  },
+  "rolesHead": {
+    "eyebrow": "Who it's for",
+    "title": "The right advantage for every role"
+  },
+  "roles": [
+    { "title": "Management", "desc": "Real-time KPIs and end-to-end visibility. Margins and turnover always under control, with no manual reconciliations." },
+    { "title": "Sales", "desc": "A quote in moments, margin visible as you negotiate, a digital signature that becomes an order. Zero retyping." },
+    { "title": "Purchasing", "desc": "Forecast stockouts and orders ready to approve. Suppliers evaluated with objective data and price history always visible." },
+    { "title": "Warehouse", "desc": "Guided picking with optimized routes and a bin map. Every bin linked to the order, errors reduced." },
+    { "title": "Operations", "desc": "Visual workflows, fast approvals, clear escalations. The AI flags exceptions before they become problems." },
+    { "title": "Finance", "desc": "A cash-flow timeline between expected income and outgoing commitments. Automatic invoicing and reconciliation." }
+  ],
+  "shotsHead": {
+    "eyebrow": "Inside OmniFlow",
+    "title": "A system as beautiful as it is powerful",
+    "lead": "Web-based, real-time, modular. Browse the real views of the app.",
+    "carouselAria": "OmniFlow screens",
+    "prevAria": "Previous screen",
+    "nextAria": "Next screen",
+    "dotAria": "Go to screen {{n}}"
+  },
+  "shots": [
+    { "title": "Dashboard", "sub": "Operational overview and KPIs", "alt": "OmniFlow — Dashboard of Finch-AI's Warehouse Intelligence AI management system" },
+    { "title": "Warehouse", "sub": "Bins, picking and stock", "alt": "OmniFlow — Warehouse view with bin map and guided picking" },
+    { "title": "Sales & Quotes", "sub": "Quote builder and live margin", "alt": "OmniFlow — Sales and quotes with real-time margin" },
+    { "title": "Orders", "sub": "Kanban and Golden Thread", "alt": "OmniFlow — Order management in kanban view" },
+    { "title": "Procurement", "sub": "Supplier Smart Restock", "alt": "OmniFlow — Procurement and supplier orders" },
+    { "title": "Customers", "sub": "Profiles and history", "alt": "OmniFlow — Customer records and profiles" },
+    { "title": "Reports & Analytics", "sub": "Live KPIs and export", "alt": "OmniFlow — Reports and analytics with real-time KPIs" }
+  ],
+  "videoHead": {
+    "eyebrow": "In motion",
+    "title": "Watch OmniFlow in action",
+    "lead": "From supplier to customer, the whole flow in a short video — with AI built into every step.",
+    "videoTitle": "OmniFlow — explainer video",
+    "fullscreen": "Full screen"
+  },
+  "faqHead": {
+    "eyebrow": "Frequently asked questions",
+    "title": "Questions about OmniFlow?"
+  },
+  "faqs": [
+    { "q": "Does OmniFlow replace my current management system?", "a": "OmniFlow is a complete operating system for the Buy → Stock → Sell cycle. If you use SAP or Oracle for general accounting, OmniFlow runs alongside and integrates via API — it doesn't replace them." },
+    { "q": "Where is the data stored?", "a": "Available in the cloud (EU data centers) and on-premise. Data isolated per tenant, encrypted at rest and in transit. GDPR compliance included." },
+    { "q": "Do I have to enable all the modules?", "a": "No. OmniFlow is modular by design: enable only the modules you need today and add others at any time, with no data migrations." },
+    { "q": "Is my data used to train AI models?", "a": "No. The AI uses your data exclusively to answer your requests. Write operations always require your explicit confirmation." }
+  ],
+  "related": {
+    "eyebrow": "The other Finch-AI solutions",
+    "title": "Complete your AI stack",
+    "card1Tag": "Document Intelligence",
+    "card1Title": "Extract data from invoices, delivery notes and receipts",
+    "card1Text": "Ready-to-use AI for business documents, with an Android app for field operators and direct integration with OmniFlow.",
+    "card1Go": "Discover Document Intelligence",
+    "card2Tag": "Finance Intelligence",
+    "card2Title": "Financial statement and ratio analysis with AI",
+    "card2Text": "Upload your Excel financials and get a professional report, financial ratios and an AI chat on your numbers.",
+    "card2Go": "Discover Finance Intelligence"
+  },
+  "cta": {
+    "title": "See OmniFlow in a demo",
+    "text": "A personalized demo for your industry. No commitment, just concrete answers.",
+    "ctaDemo": "Book a demo",
+    "ctaHow": "See how it works",
+    "demoPrefill": "OmniFlow demo"
+  }
+}

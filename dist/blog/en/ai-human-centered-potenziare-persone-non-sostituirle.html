@@ -1,0 +1,360 @@
+<!DOCTYPE html>
+<html lang="it">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>AI Human-Centered: Potenziare le Persone, Non Sostituirle | FinCh-Ai Blog</title>
+  <meta name="description" content="La filosofia Human-Centered di FinCh-AI: l'intelligenza artificiale come alleata della produttività umana, non come sostituta. Rischi, mitigazioni e vantaggi concreti per le PMI italiane.">
+  <meta name="keywords" content="AI human-centered, intelligenza artificiale PMI, human-in-the-loop, AI augmentation, FinCh-AI, produttività AI, rischi automazione, AI etica">
+  <meta name="author" content="FinCh-AI">
+  <meta name="robots" content="index, follow">
+
+  <!-- Open Graph -->
+  <meta property="og:type" content="article">
+  <meta property="og:title" content="AI Human-Centered: Potenziare le Persone, Non Sostituirle">
+  <meta property="og:description" content="La filosofia Human-Centered di FinCh-AI: l'intelligenza artificiale come alleata della produttività umana, non come sostituta.">
+  <meta property="article:published_time" content="2026-03-17">
+
+  <!-- Fonts -->
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&family=Playfair+Display:wght@600;700&display=swap" rel="stylesheet">
+
+  <style>
+    :root {
+      --finch-blue: #048EE3;
+      --finch-blue-dark: #0374BA;
+      --finch-green: #1CE25A;
+      --finch-green-dark: #15B848;
+      --finch-dark: #274049;
+      --finch-bg-blue: #E6F3FC;
+      --finch-bg-green: #E5FBEE;
+      --finch-gradient: linear-gradient(135deg, #048EE3 0%, #1CE25A 100%);
+      --color-text: #274049;
+      --color-text-light: #506872;
+      --color-white: #FFFFFF;
+      --font-heading: 'Playfair Display', Georgia, serif;
+      --font-body: 'Inter', 'Segoe UI', sans-serif;
+      --max-width: 780px;
+    }
+
+    *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+    html { font-size: 18px; scroll-behavior: smooth; }
+    body { font-family: var(--font-body); color: var(--color-text); line-height: 1.75; background-color: #F4F8FA; }
+
+    .navbar { background: var(--color-white); padding: 0.7rem 1.5rem; display: flex; align-items: center; justify-content: center; box-shadow: 0 1px 4px rgba(0,0,0,0.06); position: sticky; top: 0; z-index: 100; }
+    .navbar__logo img { height: 40px; width: auto; }
+
+    .hero { background: var(--finch-gradient); color: var(--color-white); padding: 4.5rem 1.5rem 4rem; text-align: center; position: relative; overflow: hidden; }
+    .hero::before { content: ''; position: absolute; top: -40%; right: -20%; width: 500px; height: 500px; background: radial-gradient(circle, rgba(255,255,255,0.08) 0%, transparent 70%); border-radius: 50%; }
+    .hero::after { content: ''; position: absolute; bottom: -30%; left: -15%; width: 400px; height: 400px; background: radial-gradient(circle, rgba(255,255,255,0.06) 0%, transparent 70%); border-radius: 50%; }
+    .hero__label { display: inline-block; font-size: 0.72rem; font-weight: 600; letter-spacing: 0.14em; text-transform: uppercase; background: rgba(255,255,255,0.15); backdrop-filter: blur(4px); padding: 0.35em 1.2em; border-radius: 20px; margin-bottom: 1.5rem; border: 1px solid rgba(255,255,255,0.2); position: relative; z-index: 1; }
+    .hero h1 { font-family: var(--font-heading); font-size: 2.5rem; font-weight: 700; line-height: 1.2; max-width: 720px; margin: 0 auto 1.2rem; position: relative; z-index: 1; }
+    .hero__subtitle { font-size: 1.05rem; opacity: 0.92; max-width: 580px; margin: 0 auto; line-height: 1.65; font-weight: 400; position: relative; z-index: 1; }
+    .hero__meta { margin-top: 2rem; font-size: 0.78rem; opacity: 0.65; position: relative; z-index: 1; }
+
+    .article-container { max-width: var(--max-width); margin: 0 auto; padding: 0 1.5rem; }
+    article { background: var(--color-white); margin: -2.5rem auto 3rem; border-radius: 12px; box-shadow: 0 4px 30px rgba(4, 142, 227, 0.08); padding: 2.8rem 2.8rem 3.2rem; position: relative; z-index: 1; }
+
+    .toc { background: linear-gradient(135deg, var(--finch-bg-blue) 0%, var(--finch-bg-green) 100%); border-left: 4px solid var(--finch-blue); border-radius: 0 8px 8px 0; padding: 1.5rem 2rem; margin-bottom: 2.5rem; }
+    .toc__title { font-family: var(--font-heading); font-size: 1rem; font-weight: 700; color: var(--finch-blue); margin-bottom: 0.8rem; text-transform: uppercase; letter-spacing: 0.08em; }
+    .toc ol { list-style: none; counter-reset: toc-counter; padding: 0; }
+    .toc ol li { counter-increment: toc-counter; margin-bottom: 0.45rem; }
+    .toc ol li::before { content: counter(toc-counter) "."; font-weight: 600; color: var(--finch-green-dark); margin-right: 0.5em; font-size: 0.9rem; }
+    .toc a { color: var(--color-text); text-decoration: none; font-size: 0.9rem; transition: color 0.2s; }
+    .toc a:hover { color: var(--finch-blue); text-decoration: underline; }
+
+    h2 { font-family: var(--font-heading); font-size: 1.6rem; font-weight: 700; color: var(--finch-dark); margin-top: 2.8rem; margin-bottom: 1rem; line-height: 1.3; padding-bottom: 0.5rem; border-bottom: 3px solid transparent; border-image: var(--finch-gradient) 1; }
+    h3 { font-family: var(--font-heading); font-size: 1.18rem; font-weight: 600; color: var(--finch-blue); margin-top: 1.8rem; margin-bottom: 0.7rem; line-height: 1.35; }
+
+    p { margin-bottom: 1.15rem; color: var(--color-text); }
+    strong { color: var(--finch-blue-dark); }
+    a { color: var(--finch-blue); text-decoration: underline; text-underline-offset: 2px; }
+    a:hover { color: var(--finch-blue-dark); }
+    ul, ol { margin: 0.8rem 0 1.5rem 0; padding: 0; list-style: none; }
+    ul li, ol li { margin-bottom: 0.7rem; padding-left: 1.6rem; position: relative; }
+    ul li::before { content: ''; position: absolute; left: 0; top: 0.55em; width: 8px; height: 8px; border-radius: 50%; background: var(--finch-gradient); }
+
+    blockquote { border-left: 4px solid var(--finch-green); background: linear-gradient(135deg, var(--finch-bg-blue) 0%, var(--finch-bg-green) 100%); padding: 1.25rem 1.5rem; margin: 2rem 0; border-radius: 0 8px 8px 0; font-style: italic; color: var(--color-text-light); }
+    blockquote p { margin-bottom: 0; }
+
+    .info-box { background: linear-gradient(135deg, var(--finch-bg-blue) 0%, var(--finch-bg-green) 100%); border-left: 4px solid var(--finch-blue); border-radius: 0 10px 10px 0; padding: 1.5rem 2rem; margin: 2rem 0; }
+    .info-box-title { font-family: var(--font-heading); font-weight: 700; color: var(--finch-blue); margin-bottom: 0.5rem; }
+    .warning-box { background: linear-gradient(135deg, rgba(245,158,11,0.08), rgba(245,158,11,0.03)); border-left: 4px solid #F59E0B; border-radius: 0 10px 10px 0; padding: 1.5rem 2rem; margin: 2rem 0; }
+    .warning-box .info-box-title { color: #D97706; }
+
+    table { width: 100%; border-collapse: collapse; margin: 2rem 0; font-size: 0.88rem; }
+    thead { background: var(--finch-gradient); color: white; }
+    th { padding: 0.875rem 1rem; text-align: left; font-weight: 600; }
+    td { padding: 0.75rem 1rem; border-bottom: 1px solid #E2E8F0; }
+    tbody tr:hover { background: var(--finch-bg-blue); }
+
+    .cite-ref { display: inline; font-size: 0.75em; vertical-align: super; line-height: 0; margin-left: 1px; }
+    .cite-ref a { color: var(--finch-blue) !important; text-decoration: none !important; font-weight: 600; }
+    .cite-ref a:hover { background: var(--finch-blue); color: #FFFFFF !important; }
+
+    .references-section { margin-top: 2.8rem; padding-top: 1.5rem; border-top: 2px solid var(--finch-bg-blue); }
+    .references-section h2 { border-image: none; border-bottom: none; color: var(--finch-blue); font-size: 1.2rem; margin-top: 0; }
+    .references-list { list-style: none; counter-reset: ref-counter; padding: 0; margin: 0; }
+    .references-list li { counter-increment: ref-counter; padding: 0.5rem 0 0.5rem 2.2rem; position: relative; font-size: 0.88rem; color: var(--color-text-light); border-bottom: 1px solid #F0F4F7; }
+    .references-list li:last-child { border-bottom: none; }
+    .references-list li::before { content: "[" counter(ref-counter) "]"; position: absolute; left: 0; font-weight: 600; color: var(--finch-blue); font-size: 0.82rem; }
+    .references-list .ref-title { font-weight: 500; color: var(--color-text); }
+    .references-list .ref-source { font-style: italic; }
+    .references-list a { color: var(--finch-blue); text-decoration: none; word-break: break-all; font-size: 0.8rem; }
+    .ref-backlink { color: var(--finch-blue) !important; text-decoration: none !important; font-size: 0.8rem; margin-left: 0.375rem; }
+
+    .cta { margin-top: 2.5rem; padding: 2rem 2.2rem; background: linear-gradient(135deg, var(--finch-bg-blue) 0%, var(--finch-bg-green) 100%); border-left: 4px solid var(--finch-green); border-radius: 0 10px 10px 0; color: var(--finch-dark); line-height: 1.7; font-size: 1rem; }
+    .cta p { margin-bottom: 0; font-style: italic; }
+
+    .site-footer { text-align: center; padding: 2rem 1.5rem 1.5rem; font-size: 0.78rem; color: var(--color-text-light); }
+    .site-footer img { height: 28px; width: auto; margin-bottom: 0.4rem; }
+
+    @media (max-width: 640px) {
+      html { font-size: 16px; }
+      .hero { padding: 3rem 1.2rem 2.5rem; }
+      .hero h1 { font-size: 1.8rem; }
+      article { padding: 1.5rem 1.2rem 2rem; margin: -1.5rem 0.8rem 2rem; }
+      h2 { font-size: 1.35rem; }
+      h3 { font-size: 1.08rem; }
+      .navbar__logo img { height: 32px; }
+    }
+  </style>
+</head>
+<body>
+
+  <!-- NAVBAR -->
+  <nav class="navbar">
+    <a href="https://www.finch-ai.it" class="navbar__logo">
+      <img src="/assets/images/LOGO.png" alt="FinCh-AI Logo">
+    </a>
+  </nav>
+
+  <!-- HERO -->
+  <header class="hero">
+    <span class="hero__label">Thought Leadership</span>
+    <h1>Human-Centered AI: Empower People, Don't Replace Them</h1>
+    <p class="hero__subtitle">Why at Finch-AI we believe artificial intelligence should amplify human talent, free up time for what truly matters and make every person more capable &mdash; not superfluous.</p>
+    <p class="hero__meta">March 17, 2026 &middot; Finch-AI &middot; 8 min read</p>
+  </header>
+
+  <!-- ARTICLE -->
+  <div class="article-container">
+    <article>
+
+      <!-- TOC -->
+      <nav class="toc" aria-label="Table of contents">
+        <p class="toc__title">Contents</p>
+        <ol>
+          <li><a href="#section-1">The paradox of AI at work</a></li>
+          <li><a href="#section-2">Finch-AI's Human-Centered philosophy</a></li>
+          <li><a href="#section-3">More productive, more capable: the concrete benefits</a></li>
+          <li><a href="#section-4">The risks of non-human-centered AI</a></li>
+          <li><a href="#section-5">How to mitigate the risks: our approach</a></li>
+          <li><a href="#references">Sources and References</a></li>
+        </ol>
+      </nav>
+
+      <!-- SECTION 1 -->
+      <h2 id="section-1">The paradox of AI at work</h2>
+
+      <p>Every time artificial intelligence in business comes up, the first reaction is almost always the same: "so will it replace people?". It's an understandable question. Headlines fuel this fear, the numbers seem to confirm it. Yet reality, as often happens, tells a different story.</p>
+
+      <p>According to the World Economic Forum's <strong>Future of Jobs Report 2025</strong>, by 2030 AI and digital technologies will create 170 million new jobs against 92 million roles being reduced, with a net positive balance of 78 million opportunities<sup class="cite-ref"><a href="#ref-1" id="cite-1">[1]</a></sup>. The point isn't whether jobs will change &mdash; they will &mdash; but <strong>how</strong> they'll change.</p>
+
+      <p>In Italy, AI adoption in companies with at least 10 employees doubled in a single year, going from 8.2% in 2024 to 16.4% in 2025<sup class="cite-ref"><a href="#ref-2" id="cite-2">[2]</a></sup>. The race has begun. But the real question isn't <em>how much</em> AI to adopt: it's <em>what kind</em> of AI to build.</p>
+
+      <!-- SECTION 2 -->
+      <h2 id="section-2">Finch-AI's Human-Centered philosophy</h2>
+
+      <p>At Finch-AI we made a clear choice from day one: every application we develop is designed as an <strong>enhancement</strong> of the person, never as a replacement. It's not a slogan: it's a design principle that guides every technical and product decision.</p>
+
+      <p>This approach is called <strong>Human-Centered AI</strong> and puts the human being at the center of the system, not at its margins. As defined by Stanford University in its HAI program, it's about designing AI systems that enhance and improve human capabilities rather than replacing them<sup class="cite-ref"><a href="#ref-3" id="cite-3">[3]</a></sup>.</p>
+
+      <p>What does it mean in practice? Consider a concrete example. The added value of a business report isn't in formatting tables, aligning columns or copying data from one system to another. The real value is in the <strong>thinking</strong> behind it: in interpreting the numbers, identifying a trend, making a strategic recommendation. Our AI solutions handle the repetitive, mechanical part &mdash; extraction, compilation, verification &mdash; to leave the person what only a person can do: reason, decide, create.</p>
+
+      <blockquote>
+        <p>The job of AI isn't to think for us, but to free up our time to think better.</p>
+      </blockquote>
+
+      <p>This concept is also reflected in McKinsey's "Superagency in the Workplace" report, which highlights how the most advanced companies don't aim to replace workers with AI, but to create a collaboration model where 92% of companies plan to increase AI investments over the next three years, with the explicit goal of enhancing &mdash; not reducing &mdash; the workforce<sup class="cite-ref"><a href="#ref-4" id="cite-4">[4]</a></sup>.</p>
+
+      <!-- SECTION 3 -->
+      <h2 id="section-3">More productive, more capable: the concrete benefits</h2>
+
+      <p>The human-centered approach isn't just ethically right &mdash; it produces better results. When an employee becomes more productive thanks to AI, two scenarios open up, both positive for the company and the person.</p>
+
+      <h3>Free up time for high-value activities</h3>
+
+      <p>A professional who today spends three hours a day manually filling in transport documents, reconciling data or preparing standardized reports, with AI support can reduce these activities to a few minutes. That freed-up time isn't time "saved" &mdash; it's time <strong>returned</strong> to activities that generate real value: strategic analysis, customer relationships, process innovation.</p>
+
+      <p>Microsoft has called this phenomenon the "Agent Boss" model, where the person takes on the role of supervisor and orchestrator of AI agents, retaining decision-making control and critical judgment<sup class="cite-ref"><a href="#ref-5" id="cite-5">[5]</a></sup>.</p>
+
+      <h3>Access skills that were previously out of reach</h3>
+
+      <p>The second benefit is even more transformative. With AI support, an operator can perform tasks for which they previously lacked the necessary technical skills. A warehouse manager can analyze sales trends. An administrative clerk can generate cash-flow forecasts. A small business owner can get insights from their own data that previously required a dedicated analyst.</p>
+
+      <p>This is particularly relevant for SMEs, where 60% of companies that evaluated AI investments gave up precisely for lack of in-house skills<sup class="cite-ref"><a href="#ref-2" id="cite-2b">[2]</a></sup>. Human-centered solutions break down this barrier: they don't require the user to become an AI expert, but rather the AI to adapt to the user.</p>
+
+      <div class="info-box">
+        <div class="info-box-title">&128161; The key figure</div>
+        <p>The World Economic Forum estimates that 59% of the global workforce will need reskilling or upskilling by 2030<sup class="cite-ref"><a href="#ref-1" id="cite-1b">[1]</a></sup>. Human-centered AI solutions can accelerate this process, making new skills accessible <em>through</em> the very use of the tool.</p>
+      </div>
+
+      <!-- SECTION 4 -->
+      <h2 id="section-4">The risks of non-human-centered AI</h2>
+
+      <p>Adopting AI without a person-centered approach isn't just a missed opportunity &mdash; it can cause real harm. Here are the main risks companies need to know.</p>
+
+      <h3>Deskilling: the erosion of competence</h3>
+
+      <p>When AI makes decisions instead of people rather than supporting them, professional skills atrophy. Recent studies in the medical field have shown a worrying effect: doctors who routinely relied on AI for diagnostic detection, once deprived of the assistance, performed worse than before the tool was introduced. The competence delegated to the machine had progressively atrophied<sup class="cite-ref"><a href="#ref-6" id="cite-6">[6]</a></sup>. The same principle applies in business: if software makes all the pricing decisions, the sales manager progressively loses the ability to assess the market independently.</p>
+
+      <h3>Automation bias: trusting the machine too much</h3>
+
+      <p>Automation bias is the tendency to uncritically trust AI results, even when they're wrong. Research shows that less experienced operators are particularly vulnerable: when the AI is wrong, the error is accepted without checks<sup class="cite-ref"><a href="#ref-7" id="cite-7">[7]</a></sup>. In a business context, this can translate into wrong financial decisions, forecasting errors or document-management mistakes.</p>
+
+      <h3>Opacity and loss of control</h3>
+
+      <p>AI systems that operate as "black boxes" &mdash; where no one understands why the algorithm made a certain decision &mdash; create a governance problem. It's no coincidence that the <strong>EU AI Act</strong>, fully applicable from August 2026, explicitly requires high-risk AI systems to be designed with tools for effective human oversight<sup class="cite-ref"><a href="#ref-8" id="cite-8">[8]</a></sup>.</p>
+
+      <h3>Algorithmic bias and discrimination</h3>
+
+      <p>An AI trained on historical data can perpetuate and amplify existing prejudices. Without active human oversight, automated decisions can be discriminatory &mdash; in hiring, credit assessment, customer prioritization. The EU AI Act requires, for high-risk systems, a conformity assessment proving the absence of discrimination before going into production<sup class="cite-ref"><a href="#ref-8" id="cite-8b">[8]</a></sup>.</p>
+
+      <div class="warning-box">
+        <div class="info-box-title">&9888;&#65039; Warning</div>
+        <p>The "Shadow AI" phenomenon &mdash; employees using AI tools without company policies &mdash; already affects one European worker in three, while only 15% have received specific training<sup class="cite-ref"><a href="#ref-9" id="cite-9">[9]</a></sup>. Without clear governance, the risks multiply.</p>
+      </div>
+
+      <!-- SECTION 5 -->
+      <h2 id="section-5">How to mitigate the risks: our approach</h2>
+
+      <p>Recognizing the risks is the first step. The second is designing solutions that structurally prevent them. Here are the principles that guide every Finch-AI project.</p>
+
+      <h3>Human-in-the-loop: the person always decides</h3>
+
+      <p>In every one of our applications, the AI proposes and the person disposes. No critical decision is executed automatically without human validation. This doesn't slow the process down &mdash; it makes it reliable. The AI handles analysis and preparation; the professional verifies, corrects if necessary, and approves. It's the model the EU AI Act calls "effective human oversight"<sup class="cite-ref"><a href="#ref-10" id="cite-10">[10]</a></sup>.</p>
+
+      <h3>Transparency and explainability</h3>
+
+      <p>Our solutions aren't black boxes. When the AI extracts a value, classifies a document or suggests an action, it shows <em>why</em> it did so. This lets the person verify the reasoning, spot any errors and maintain &mdash; indeed, strengthen &mdash; their own skills over time.</p>
+
+      <h3>Integrated continuous training</h3>
+
+      <p>The best AI solutions don't just require an initial course: they teach as they're used. At Finch-AI we design interfaces that guide the user, explain the results and suggest best practices. The goal is for every interaction with the tool to also be a moment of learning. The World Economic Forum estimates that 85% of companies will adopt upskilling strategies as a top priority<sup class="cite-ref"><a href="#ref-1" id="cite-1c">[1]</a></sup>: our solutions are designed to make this upskilling natural and progressive.</p>
+
+      <h3>Clear governance and policies</h3>
+
+      <p>We support companies not only with technology, but with a responsible-adoption framework: clear usage policies, definition of person-AI roles, continuous monitoring of performance and potential bias. Because the best technology is useless without an organizational context that governs it.</p>
+
+      <table>
+        <thead>
+          <tr><th>Risk</th><th>Finch-AI mitigation</th></tr>
+        </thead>
+        <tbody>
+          <tr><td>Deskilling</td><td>AI supports, doesn't replace: the person always performs the final validation</td></tr>
+          <tr><td>Automation bias</td><td>Transparency of results with evidence of sources and reasoning</td></tr>
+          <tr><td>Opacity</td><td>Explanatory interfaces that show the "why" behind every output</td></tr>
+          <tr><td>Algorithmic bias</td><td>Periodic model audits, diversified datasets, human validation</td></tr>
+          <tr><td>Shadow AI</td><td>Governance and training framework for conscious adoption</td></tr>
+        </tbody>
+      </table>
+
+      <p>The most powerful artificial intelligence isn't the one that does everything on its own. It's the one that makes every person in the company more effective, more informed, more able to tackle new challenges. At Finch-AI we build exactly this: tools that amplify human talent, respect the centrality of the person and generate real value for businesses.</p>
+
+      <p>The future of work isn't humans <em>against</em> machines. It's humans <em>with</em> better machines.</p>
+
+      <!-- CTA -->
+      <div class="cta">
+        <p>Want to discover how a truly person-centered AI approach can transform your company's productivity? Let's talk. <a href="https://www.finch-ai.it/#contatti"><strong>Contact us &rarr;</strong></a></p>
+      </div>
+
+      <!-- REFERENCES -->
+      <section class="references-section" id="references">
+        <h2>&#x1F4DA; Sources and References</h2>
+        <ol class="references-list">
+          <li id="ref-1">
+            <span class="ref-title">"Future of Jobs Report 2025"</span>,
+            <span class="ref-source">World Economic Forum</span>,
+            <span class="ref-date">January 2025</span>.
+            <a href="https://www.weforum.org/publications/the-future-of-jobs-report-2025/" target="_blank" rel="noopener">Link &nearr;</a>
+            <a href="#cite-1" class="ref-backlink" title="Back to text">&crarr;</a>
+          </li>
+          <li id="ref-2">
+            <span class="ref-title">"Businesses and ICT &mdash; Year 2025"</span>,
+            <span class="ref-source">ISTAT</span>,
+            <span class="ref-date">December 2025</span>.
+            <a href="https://www.istat.it/comunicato-stampa/imprese-e-ict-anno-2025/" target="_blank" rel="noopener">Link &nearr;</a>
+            <a href="#cite-2" class="ref-backlink" title="Back to text">&crarr;</a>
+          </li>
+          <li id="ref-3">
+            <span class="ref-title">"The 2025 AI Index Report"</span>,
+            <span class="ref-source">Stanford Institute for Human-Centered Artificial Intelligence (HAI)</span>,
+            <span class="ref-date">April 2025</span>.
+            <a href="https://hai.stanford.edu/ai-index/2025-ai-index-report" target="_blank" rel="noopener">Link &nearr;</a>
+            <a href="#cite-3" class="ref-backlink" title="Back to text">&crarr;</a>
+          </li>
+          <li id="ref-4">
+            <span class="ref-title">"Superagency in the Workplace: Empowering People to Unlock AI&rsquo;s Full Potential at Work"</span>,
+            <span class="ref-source">McKinsey &amp; Company</span>,
+            <span class="ref-date">2025</span>.
+            <a href="https://www.mckinsey.com/capabilities/tech-and-ai/our-insights/superagency-in-the-workplace-empowering-people-to-unlock-ais-full-potential-at-work" target="_blank" rel="noopener">Link &nearr;</a>
+            <a href="#cite-4" class="ref-backlink" title="Back to text">&crarr;</a>
+          </li>
+          <li id="ref-5">
+            <span class="ref-title">"2025 Work Trend Index Annual Report"</span>,
+            <span class="ref-source">Microsoft</span>,
+            <span class="ref-date">2025</span>.
+            <a href="https://www.microsoft.com/en-us/worklab/work-trend-index/2025-annual-report" target="_blank" rel="noopener">Link &nearr;</a>
+            <a href="#cite-5" class="ref-backlink" title="Back to text">&crarr;</a>
+          </li>
+          <li id="ref-6">
+            <span class="ref-title">"AI-induced Deskilling in Medicine: A Mixed-Method Review and Research Agenda"</span>,
+            <span class="ref-source">Artificial Intelligence Review, Springer Nature</span>,
+            <span class="ref-date">2025</span>.
+            <a href="https://link.springer.com/article/10.1007/s10462-025-11352-1" target="_blank" rel="noopener">Link &nearr;</a>
+            <a href="#cite-6" class="ref-backlink" title="Back to text">&crarr;</a>
+          </li>
+          <li id="ref-7">
+            <span class="ref-title">"Exploring automation bias in human&ndash;AI collaboration: a review and implications for explainable AI"</span>,
+            <span class="ref-source">AI &amp; Society, Springer Nature</span>,
+            <span class="ref-date">2025</span>.
+            <a href="https://link.springer.com/article/10.1007/s00146-025-02422-7" target="_blank" rel="noopener">Link &nearr;</a>
+            <a href="#cite-7" class="ref-backlink" title="Back to text">&crarr;</a>
+          </li>
+          <li id="ref-8">
+            <span class="ref-title">"Article 14: Human Oversight &mdash; EU Artificial Intelligence Act"</span>,
+            <span class="ref-source">European Commission</span>,
+            <span class="ref-date">2024</span>.
+            <a href="https://artificialintelligenceact.eu/article/14/" target="_blank" rel="noopener">Link &nearr;</a>
+            <a href="#cite-8" class="ref-backlink" title="Back to text">&crarr;</a>
+          </li>
+          <li id="ref-9">
+            <span class="ref-title">"Shadow AI in SMEs: the ignored risk that can become a resource"</span>,
+            <span class="ref-source">Agenda Digitale</span>,
+            <span class="ref-date">2025</span>.
+            <a href="https://www.agendadigitale.eu/industry-4-0/shadow-ai-nelle-pmi-il-rischio-ignorato-che-puo-diventare-risorsa/" target="_blank" rel="noopener">Link &nearr;</a>
+            <a href="#cite-9" class="ref-backlink" title="Back to text">&crarr;</a>
+          </li>
+          <li id="ref-10">
+            <span class="ref-title">"Article 26: Obligations of Deployers of High-Risk AI Systems &mdash; EU AI Act"</span>,
+            <span class="ref-source">European Commission</span>,
+            <span class="ref-date">2024</span>.
+            <a href="https://artificialintelligenceact.eu/article/26/" target="_blank" rel="noopener">Link &nearr;</a>
+            <a href="#cite-10" class="ref-backlink" title="Back to text">&crarr;</a>
+          </li>
+        </ol>
+      </section>
+
+
+    </article>
+  </div>
+
+  <footer class="site-footer">
+    <img src="/assets/images/LOGO.png" alt="Finch-AI"><br>
+    &copy; 2026 Finch-AI &middot; All rights reserved
+  </footer>
+
+</body>
+</html>

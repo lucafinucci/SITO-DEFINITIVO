@@ -1,24 +1,23 @@
 import { useState, useEffect, useRef } from "react";
 import { Link, useLocation, useNavigate } from "react-router-dom";
 import { ArrowUpRight, ChevronDown } from "lucide-react";
+import { useTranslation } from "react-i18next";
 import ThemeToggle from "./ThemeToggle";
+import LanguageSwitcher from "./LanguageSwitcher";
+import { useLocalizedPath } from "@/i18n/routing";
 import { useContactModal } from "@/context/ContactModalContext";
 
-const SECTIONS = [
-  { id: "piattaforma", label: "Approccio" },
-  { id: "news", label: "News" },
-  { id: "stampa", label: "Dicono di noi" },
-];
-
 const SOLUTIONS = [
-  { label: "OmniFlow", href: "/soluzioni/warehouse-intelligence" },
-  { label: "Document Intelligence", href: "/soluzioni/document-intelligence" },
-  { label: "Finance Intelligence", href: "/soluzioni/finance-intelligence" },
-  { label: "Synapse", href: "/soluzioni/synapse" },
-  { label: "Pianificatore APS", href: "/soluzioni/aps" },
+  { key: "omniflow", href: "/soluzioni/warehouse-intelligence" },
+  { key: "document", href: "/soluzioni/document-intelligence" },
+  { key: "finance", href: "/soluzioni/finance-intelligence" },
+  { key: "synapse", href: "/soluzioni/synapse" },
+  { key: "aps", href: "/soluzioni/aps" },
 ];
 
 export default function Navbar() {
+  const { t } = useTranslation("common");
+  const lp = useLocalizedPath();
   const [scrolled, setScrolled] = useState(false);
   const [mobileOpen, setMobileOpen] = useState(false);
   const [solOpen, setSolOpen] = useState(false);
@@ -41,12 +40,13 @@ export default function Navbar() {
   }, [location.pathname]);
 
   // Smooth-scroll to a homepage section, navigating home first if needed.
+  const homePath = lp("/");
   const goToSection = (id) => {
     setMobileOpen(false);
-    if (location.pathname === "/") {
+    if (location.pathname === homePath) {
       document.getElementById(id)?.scrollIntoView({ behavior: "smooth" });
     } else {
-      navigate("/");
+      navigate(homePath);
       setTimeout(() => document.getElementById(id)?.scrollIntoView({ behavior: "smooth" }), 120);
     }
   };
@@ -63,7 +63,7 @@ export default function Navbar() {
     <>
       <header className={`nav${scrolled ? " scrolled" : ""}`}>
         <div className="nav-inner">
-          <Link to="/" className="nav-logo" aria-label="Finch-AI home" onClick={() => window.scrollTo(0, 0)}>
+          <Link to={lp("/")} className="nav-logo" aria-label="Finch-AI home" onClick={() => window.scrollTo(0, 0)}>
             <img
               src="/assets/images/LOGO.png"
               alt="Finch-AI"
@@ -76,7 +76,7 @@ export default function Navbar() {
           </Link>
 
           <nav className="nav-links">
-            <a href="/#piattaforma" onClick={(e) => { e.preventDefault(); goToSection("piattaforma"); }}>Approccio</a>
+            <a href={`${homePath}#piattaforma`} onClick={(e) => { e.preventDefault(); goToSection("piattaforma"); }}>{t("nav.approccio")}</a>
 
             {/* Soluzioni dropdown */}
             <div
@@ -86,11 +86,11 @@ export default function Navbar() {
               style={{ position: "relative" }}
             >
               <a
-                href="/#moduli"
+                href={`${homePath}#moduli`}
                 onClick={(e) => { e.preventDefault(); setSolOpen(false); goToSection("moduli"); }}
                 style={{ display: "inline-flex", alignItems: "center", gap: 5 }}
               >
-                Soluzioni
+                {t("nav.soluzioni")}
                 <ChevronDown size={15} style={{ transition: "transform .2s", transform: solOpen ? "rotate(180deg)" : "none" }} />
               </a>
               {solOpen && (
@@ -103,12 +103,12 @@ export default function Navbar() {
                   <div className="p-2">
                     {SOLUTIONS.map((s) => (
                       <Link
-                        key={s.label}
-                        to={s.href}
+                        key={s.key}
+                        to={lp(s.href)}
                         onClick={() => { setSolOpen(false); window.scrollTo(0, 0); }}
                         className="group flex items-center justify-between rounded-xl px-4 py-3 text-sm font-semibold text-foreground transition-colors hover:bg-primary hover:text-primary-foreground"
                       >
-                        <span>{s.label}</span>
+                        <span>{t(`solutionsMenu.${s.key}`)}</span>
                         <ArrowUpRight size={15} className="opacity-0 -translate-x-1 transition-all group-hover:opacity-100 group-hover:translate-x-0" />
                       </Link>
                     ))}
@@ -117,19 +117,19 @@ export default function Navbar() {
               )}
             </div>
 
-            {SECTIONS.filter((s) => s.id !== "piattaforma").map((s) => (
-              <a key={s.id} href={`/#${s.id}`} onClick={(e) => { e.preventDefault(); goToSection(s.id); }}>{s.label}</a>
-            ))}
-            <Link to="/blog">Blog</Link>
+            <a href={`${homePath}#news`} onClick={(e) => { e.preventDefault(); goToSection("news"); }}>{t("nav.news")}</a>
+            <a href={`${homePath}#stampa`} onClick={(e) => { e.preventDefault(); goToSection("stampa"); }}>{t("nav.dicono")}</a>
+            <Link to={lp("/blog")}>{t("nav.blog")}</Link>
           </nav>
 
           <div className="nav-cta">
-            <Link to="/area-clienti" className="hidden lg:inline-flex text-[15px] font-medium opacity-70 transition-opacity hover:opacity-100">
-              Area Clienti
+            <Link to={lp("/area-clienti")} className="hidden lg:inline-flex text-[15px] font-medium opacity-70 transition-opacity hover:opacity-100">
+              {t("nav.areaClienti")}
             </Link>
+            <LanguageSwitcher />
             <ThemeToggle />
-            <button type="button" onClick={() => openContact({ prefill: { need: "Richiesta demo" } })} className="btn btn-primary">
-              Prenota una demo
+            <button type="button" onClick={() => openContact({ prefill: { need: t("contact.demoPrefill") } })} className="btn btn-primary">
+              {t("nav.demo")}
               <ArrowUpRight size={16} />
             </button>
             <button
@@ -145,15 +145,16 @@ export default function Navbar() {
 
       {/* Mobile menu */}
       <nav className={`mobile-menu${mobileOpen ? " open" : ""}`}>
-        <a href="/#piattaforma" onClick={(e) => { e.preventDefault(); goToSection("piattaforma"); }}>Approccio</a>
+        <a href={`${homePath}#piattaforma`} onClick={(e) => { e.preventDefault(); goToSection("piattaforma"); }}>{t("nav.approccio")}</a>
         {SOLUTIONS.map((s) => (
-          <Link key={s.label} to={s.href} onClick={() => { setMobileOpen(false); window.scrollTo(0, 0); }}>{s.label}</Link>
+          <Link key={s.key} to={lp(s.href)} onClick={() => { setMobileOpen(false); window.scrollTo(0, 0); }}>{t(`solutionsMenu.${s.key}`)}</Link>
         ))}
-        <a href="/#news" onClick={(e) => { e.preventDefault(); goToSection("news"); }}>News</a>
-        <a href="/#stampa" onClick={(e) => { e.preventDefault(); goToSection("stampa"); }}>Dicono di noi</a>
-        <Link to="/blog" onClick={() => setMobileOpen(false)}>Blog</Link>
-        <Link to="/area-clienti" onClick={() => setMobileOpen(false)}>Area Clienti</Link>
-        <button type="button" onClick={() => { setMobileOpen(false); openContact({ prefill: { need: "Richiesta demo" } }); }} className="btn btn-lime">Prenota una demo</button>
+        <a href={`${homePath}#news`} onClick={(e) => { e.preventDefault(); goToSection("news"); }}>{t("nav.news")}</a>
+        <a href={`${homePath}#stampa`} onClick={(e) => { e.preventDefault(); goToSection("stampa"); }}>{t("nav.dicono")}</a>
+        <Link to={lp("/blog")} onClick={() => setMobileOpen(false)}>{t("nav.blog")}</Link>
+        <Link to={lp("/area-clienti")} onClick={() => setMobileOpen(false)}>{t("nav.areaClienti")}</Link>
+        <div className="mt-2"><LanguageSwitcher /></div>
+        <button type="button" onClick={() => { setMobileOpen(false); openContact({ prefill: { need: t("contact.demoPrefill") } }); }} className="btn btn-lime">{t("nav.demo")}</button>
       </nav>
     </>
   );

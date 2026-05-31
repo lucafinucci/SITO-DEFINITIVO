@@ -1,0 +1,192 @@
+<!doctype html>
+<html lang="en">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Note Legali - Finch-AI</title>
+  <style>
+    :root {
+      color-scheme: dark;
+      --bg: #0b1220;
+      --panel: rgba(15, 23, 42, 0.92);
+      --border: #1f2937;
+      --text: #dbe4f4;
+      --muted: #b7c2d6;
+      --accent: #67e8f9;
+      --accent-2: #7dd3fc;
+    }
+    * { box-sizing: border-box; }
+    body {
+      font-family: "Manrope", "Segoe UI", "Helvetica Neue", Arial, sans-serif;
+      color: var(--text);
+      margin: 0;
+      padding: clamp(16px, 5vw, 42px);
+      line-height: 1.7;
+      background: var(--bg);
+      background-image:
+        linear-gradient(120deg, rgba(0, 224, 255, 0.08) 0%, rgba(3, 16, 31, 0.2) 45%, rgba(0, 224, 255, 0.05) 100%),
+        linear-gradient(rgba(255,255,255,0.04) 1px, transparent 1px);
+      background-size: cover, 100% 28px;
+    }
+    main {
+      max-width: 960px;
+      margin: 0 auto;
+      background: var(--panel);
+      border: 1px solid var(--border);
+      border-radius: 14px;
+      padding: clamp(18px, 4vw, 38px);
+      box-shadow: 0 20px 60px rgba(0, 0, 0, 0.4);
+      backdrop-filter: blur(6px);
+    }
+    h1, h2, h3 { color: #fff; margin-top: 24px; letter-spacing: -0.01em; }
+    h1 { font-size: clamp(26px, 4vw, 34px); margin: 0; }
+    h2 { font-size: clamp(20px, 3.4vw, 26px); }
+    h3 { font-size: clamp(18px, 3vw, 22px); color: #e0e7ff; }
+    p, li { color: var(--muted); font-size: 15.5px; }
+    p { margin: 10px 0 14px; }
+    strong { color: #f8fafc; }
+    a { color: var(--accent); text-decoration: none; }
+    a:hover { color: var(--accent-2); text-decoration: underline; }
+    ul { padding-left: 20px; margin: 10px 0 16px; }
+    .page-header { display: flex; align-items: center; gap: 14px; margin-bottom: 16px; }
+    .page-header img { height: 58px; width: auto; }
+    .meta { color: #94a3b8; font-size: 14px; display: block; margin-top: 6px; }
+    @media (max-width: 720px) {
+      body { padding: 16px; }
+      main { padding: 18px; }
+      .page-header { flex-direction: column; align-items: flex-start; gap: 8px; }
+      .page-header img { height: 48px; }
+    }
+  </style>
+</head>
+<body>
+  <canvas id="neural-bg" aria-hidden="true" style="position:fixed; inset:0; width:100%; height:100%; z-index:-2; pointer-events:none;"></canvas>
+  <script>
+    (() => {
+      const canvas = document.getElementById('neural-bg');
+      if (!canvas) return;
+      const ctx = canvas.getContext('2d', { alpha: true });
+      let w, h;
+      const setSize = () => {
+        w = canvas.width = window.innerWidth;
+        h = canvas.height = window.innerHeight;
+      };
+      setSize();
+      window.addEventListener('resize', setSize);
+      const rnd = (min, max) => Math.random() * (max - min) + min;
+      const MAX = 90;
+      let count = Math.min(MAX, Math.floor((w * h) / 18000));
+      let nodes = Array.from({ length: count }, () => ({
+        x: rnd(0, w),
+        y: rnd(0, h),
+        vx: rnd(-0.4, 0.4),
+        vy: rnd(-0.4, 0.4),
+        r: rnd(0.6, 1.8),
+      }));
+      const gradientStroke = () => {
+        const g = ctx.createLinearGradient(0, 0, w, h);
+        g.addColorStop(0, "rgba(0,224,255,0.85)");
+        g.addColorStop(1, "rgba(59,130,246,0.85)");
+        return g;
+      };
+      const LINK_DIST = () => Math.min(180, Math.max(110, Math.min(w, h) * 0.22));
+      let rafId;
+      const draw = () => {
+        ctx.clearRect(0, 0, w, h);
+        ctx.fillStyle = "rgba(7,12,22,0.75)";
+        ctx.fillRect(0, 0, w, h);
+        const rg = ctx.createRadialGradient(w * 0.5, h * 0.3, 0, w * 0.5, h * 0.3, Math.max(w, h) * 0.7);
+        rg.addColorStop(0, "rgba(23,162,255,0.10)");
+        rg.addColorStop(1, "rgba(0,0,0,0)");
+        ctx.fillStyle = rg;
+        ctx.fillRect(0, 0, w, h);
+        ctx.globalCompositeOperation = "lighter";
+        for (const n of nodes) {
+          n.x += n.vx;
+          n.y += n.vy;
+          if (n.x < 0 || n.x > w) n.vx *= -1;
+          if (n.y < 0 || n.y > h) n.vy *= -1;
+          ctx.beginPath();
+          ctx.arc(n.x, n.y, n.r, 0, Math.PI * 2);
+          ctx.fillStyle = "rgba(56,189,248,0.65)";
+          ctx.fill();
+        }
+        ctx.lineWidth = 0.7;
+        ctx.strokeStyle = gradientStroke();
+        const linkDist = LINK_DIST();
+        for (let i = 0; i < nodes.length; i++) {
+          for (let j = i + 1; j < nodes.length; j++) {
+            const dx = nodes[i].x - nodes[j].x;
+            const dy = nodes[i].y - nodes[j].y;
+            const dist = Math.hypot(dx, dy);
+            if (dist < linkDist) {
+              const alpha = 1 - dist / linkDist;
+              ctx.globalAlpha = alpha * 0.6;
+              ctx.beginPath();
+              ctx.moveTo(nodes[i].x, nodes[i].y);
+              ctx.lineTo(nodes[j].x, nodes[j].y);
+              ctx.stroke();
+            }
+          }
+        }
+        ctx.globalAlpha = 1;
+        rafId = requestAnimationFrame(draw);
+      };
+      draw();
+      window.addEventListener('beforeunload', () => cancelAnimationFrame(rafId));
+    })();
+  </script>
+  <main>
+    <div class="page-header">
+      <a href="/" style="display:inline-flex; align-items:center;">
+        <img src="/assets/images/LOGO.png" alt="Finch-AI">
+      </a>
+      <div>
+        <h1>Legal Notice &ndash; Finch-AI</h1>
+        <span class="meta"><strong>Last updated:</strong> 2025</span>
+      </div>
+    </div>
+
+    <h2>1. Company information</h2>
+    <p>In compliance with the obligations set out by:</p>
+    <ul>
+      <li>Art. 2250 of the Italian Civil Code</li>
+      <li>Art. 2497-bis of the Italian Civil Code</li>
+      <li>Legislative Decree 70/2003, Art. 7</li>
+      <li>EU Reg. 2016/679 (GDPR)</li>
+    </ul>
+    <p>The details of the owner of the website <strong>www.finch-ai.it</strong> are as follows:</p>
+    <p>
+      Finch-AI S.r.l.<br>
+      Registered office: Via Enrico Mattei 18, 67043 Celano (AQ), Italy<br>
+      Tax Code / VAT number: <strong>[TO BE ADDED]</strong><br>
+      REA number: <strong>[TO BE ADDED]</strong><br>
+      Companies Register: CCIAA L'Aquila - <strong>[TO BE ADDED]</strong><br>
+      Certified email (PEC): <a href="mailto:finch-ai@pec.finch-ai.it">finch-ai@pec.finch-ai.it</a><br>
+      Email: <a href="mailto:info@finch-ai.it">info@finch-ai.it</a>
+    </p>
+    <p>(Update the fields in bold as soon as the company is incorporated.)</p>
+
+    <h2>2. Intellectual property</h2>
+    <p>All content on the site (text, graphics, logo, images, code and structure) is the property of Finch-AI S.r.l. and protected by Italian Law 633/1941 on copyright.</p>
+    <p>It may not be copied, modified or reused without written authorization. The name "Finch-AI" and its logo are company trademarks, registered or pending registration.</p>
+
+    <h2>3. Limitation of liability</h2>
+    <p>Finch-AI S.r.l. is committed to keeping the site's content up to date and accurate. However, it does not guarantee that the site is free from errors or interruptions, constantly updated or free from viruses.</p>
+    <p>The owner is not responsible for damages arising from improper use of the site, interruptions of third-party services (hosting, email, technical tools) or content of linked external sites.</p>
+
+    <h2>4. Links to external sites</h2>
+    <p>The site may contain links to third-party sites, managed by independent parties. Finch-AI S.r.l. is not responsible for the content of such sites or their data-processing practices.</p>
+
+    <h2>5. Processing of personal data</h2>
+    <p>Personal data is processed in compliance with EU Regulation 2016/679 (GDPR) and Italian Legislative Decree 196/2003 as amended. The complete documentation is available in the Privacy Policy and Cookie Policy sections.</p>
+    <p>The user can exercise their GDPR rights (access, rectification, erasure, objection, portability) by writing to: <a href="mailto:privacy@finch-ai.it">privacy@finch-ai.it</a></p>
+
+    <h2>6. Use of the site</h2>
+    <p>The user undertakes to use the site lawfully, respecting system security, without introducing viruses or attempting unauthorized access and without copying or distributing protected content. Any abuse will be prosecuted under the law.</p>
+
+    <h2>7. Changes to the Legal Notice</h2>
+    <p>Finch-AI S.r.l. may update this Legal Notice at any time. Changes will take effect from the moment they are published on the site.</p>
+  </main>
+</body>
+</html>

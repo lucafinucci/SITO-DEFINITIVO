@@ -1,0 +1,313 @@
+<!DOCTYPE html>
+<html lang="it">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Analisi finanziaria in 5 minuti: cosa può fare una PMI con FinCh-Ai oggi | FinCh-Ai Blog</title>
+  <meta name="description" content="Scopri come l'AI trasforma l'analisi finanziaria delle PMI italiane: dai numeri grezzi di ERP e bilanci a insight strategici in pochi minuti. Demo e casi concreti con FinCh-Ai.">
+  <meta name="keywords" content="analisi finanziaria PMI, AI bilanci, FinCh-Ai, intelligenza artificiale finanza, ERP analisi dati, PMI italiane digitalizzazione, CFO automazione, business intelligence PMI">
+  <meta name="author" content="FinCh-AI">
+  <meta name="robots" content="index, follow">
+
+  <!-- Open Graph -->
+  <meta property="og:type" content="article">
+  <meta property="og:title" content="Analisi finanziaria in 5 minuti: cosa può fare una PMI con FinCh-Ai oggi">
+  <meta property="og:description" content="Scopri come l'AI trasforma l'analisi finanziaria delle PMI italiane: dai numeri grezzi a insight strategici in pochi minuti.">
+  <meta property="article:published_time" content="2026-03-13">
+
+  <!-- Fonts -->
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&family=Playfair+Display:wght@600;700&display=swap" rel="stylesheet">
+
+  <style>
+    :root {
+      --finch-blue: #048EE3;
+      --finch-blue-dark: #0374BA;
+      --finch-green: #1CE25A;
+      --finch-green-dark: #15B848;
+      --finch-dark: #274049;
+      --finch-bg-blue: #E6F3FC;
+      --finch-bg-green: #E5FBEE;
+      --finch-gradient: linear-gradient(135deg, #048EE3 0%, #1CE25A 100%);
+      --color-text: #274049;
+      --color-text-light: #506872;
+      --color-white: #FFFFFF;
+      --font-heading: 'Playfair Display', Georgia, serif;
+      --font-body: 'Inter', 'Segoe UI', sans-serif;
+      --max-width: 780px;
+    }
+
+    *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+    html { font-size: 18px; scroll-behavior: smooth; }
+    body { font-family: var(--font-body); color: var(--color-text); line-height: 1.75; background-color: #F4F8FA; }
+
+    .navbar { background: var(--color-white); padding: 0.7rem 1.5rem; display: flex; align-items: center; justify-content: center; box-shadow: 0 1px 4px rgba(0,0,0,0.06); position: sticky; top: 0; z-index: 100; }
+    .navbar__logo img { height: 40px; width: auto; }
+
+    .hero { background: var(--finch-gradient); color: var(--color-white); padding: 4.5rem 1.5rem 4rem; text-align: center; position: relative; overflow: hidden; }
+    .hero::before { content: ''; position: absolute; top: -40%; right: -20%; width: 500px; height: 500px; background: radial-gradient(circle, rgba(255,255,255,0.08) 0%, transparent 70%); border-radius: 50%; }
+    .hero::after { content: ''; position: absolute; bottom: -30%; left: -15%; width: 400px; height: 400px; background: radial-gradient(circle, rgba(255,255,255,0.06) 0%, transparent 70%); border-radius: 50%; }
+    .hero__label { display: inline-block; font-size: 0.72rem; font-weight: 600; letter-spacing: 0.14em; text-transform: uppercase; background: rgba(255,255,255,0.15); backdrop-filter: blur(4px); padding: 0.35em 1.2em; border-radius: 20px; margin-bottom: 1.5rem; border: 1px solid rgba(255,255,255,0.2); position: relative; z-index: 1; }
+    .hero h1 { font-family: var(--font-heading); font-size: 2.5rem; font-weight: 700; line-height: 1.2; max-width: 720px; margin: 0 auto 1.2rem; position: relative; z-index: 1; }
+    .hero__subtitle { font-size: 1.05rem; opacity: 0.92; max-width: 580px; margin: 0 auto; line-height: 1.65; font-weight: 400; position: relative; z-index: 1; }
+    .hero__meta { margin-top: 2rem; font-size: 0.78rem; opacity: 0.65; position: relative; z-index: 1; }
+
+    .article-container { max-width: var(--max-width); margin: 0 auto; padding: 0 1.5rem; }
+    article { background: var(--color-white); margin: -2.5rem auto 3rem; border-radius: 12px; box-shadow: 0 4px 30px rgba(4, 142, 227, 0.08); padding: 2.8rem 2.8rem 3.2rem; position: relative; z-index: 1; }
+
+    .toc { background: linear-gradient(135deg, var(--finch-bg-blue) 0%, var(--finch-bg-green) 100%); border-left: 4px solid var(--finch-blue); border-radius: 0 8px 8px 0; padding: 1.5rem 2rem; margin-bottom: 2.5rem; }
+    .toc__title { font-family: var(--font-heading); font-size: 1rem; font-weight: 700; color: var(--finch-blue); margin-bottom: 0.8rem; text-transform: uppercase; letter-spacing: 0.08em; }
+    .toc ol { list-style: none; counter-reset: toc-counter; padding: 0; }
+    .toc ol li { counter-increment: toc-counter; margin-bottom: 0.45rem; }
+    .toc ol li::before { content: counter(toc-counter) "."; font-weight: 600; color: var(--finch-green-dark); margin-right: 0.5em; font-size: 0.9rem; }
+    .toc a { color: var(--color-text); text-decoration: none; font-size: 0.9rem; transition: color 0.2s; }
+    .toc a:hover { color: var(--finch-blue); text-decoration: underline; }
+
+    h2 { font-family: var(--font-heading); font-size: 1.6rem; font-weight: 700; color: var(--finch-dark); margin-top: 2.8rem; margin-bottom: 1rem; line-height: 1.3; padding-bottom: 0.5rem; border-bottom: 3px solid transparent; border-image: var(--finch-gradient) 1; }
+    h3 { font-family: var(--font-heading); font-size: 1.18rem; font-weight: 600; color: var(--finch-blue); margin-top: 1.8rem; margin-bottom: 0.7rem; line-height: 1.35; }
+
+    p { margin-bottom: 1.15rem; color: var(--color-text); }
+    strong { color: var(--finch-blue-dark); }
+    a { color: var(--finch-blue); text-decoration: underline; text-underline-offset: 2px; }
+    a:hover { color: var(--finch-blue-dark); }
+    ul, ol { margin: 0.8rem 0 1.5rem 0; padding: 0; list-style: none; }
+    ul li, ol li { margin-bottom: 0.7rem; padding-left: 1.6rem; position: relative; }
+    ul li::before { content: ''; position: absolute; left: 0; top: 0.55em; width: 8px; height: 8px; border-radius: 50%; background: var(--finch-gradient); }
+
+    blockquote { border-left: 4px solid var(--finch-green); background: linear-gradient(135deg, var(--finch-bg-blue) 0%, var(--finch-bg-green) 100%); padding: 1.25rem 1.5rem; margin: 2rem 0; border-radius: 0 8px 8px 0; font-style: italic; color: var(--color-text-light); }
+    blockquote p { margin-bottom: 0; }
+
+    .info-box { background: linear-gradient(135deg, var(--finch-bg-blue) 0%, var(--finch-bg-green) 100%); border-left: 4px solid var(--finch-blue); border-radius: 0 10px 10px 0; padding: 1.5rem 2rem; margin: 2rem 0; }
+    .info-box-title { font-family: var(--font-heading); font-weight: 700; color: var(--finch-blue); margin-bottom: 0.5rem; }
+
+    .warning-box { background: linear-gradient(135deg, rgba(245,158,11,0.08), rgba(245,158,11,0.03)); border-left: 4px solid #F59E0B; border-radius: 0 10px 10px 0; padding: 1.5rem 2rem; margin: 2rem 0; }
+    .warning-box .info-box-title { color: #D97706; }
+
+    table { width: 100%; border-collapse: collapse; margin: 2rem 0; font-size: 0.88rem; }
+    thead { background: var(--finch-gradient); color: white; }
+    th { padding: 0.875rem 1rem; text-align: left; font-weight: 600; }
+    td { padding: 0.75rem 1rem; border-bottom: 1px solid #E2E8F0; }
+    tbody tr:hover { background: var(--finch-bg-blue); }
+
+    .cite-ref { display: inline; font-size: 0.75em; vertical-align: super; line-height: 0; margin-left: 1px; }
+    .cite-ref a { color: var(--finch-blue) !important; text-decoration: none !important; font-weight: 600; }
+    .cite-ref a:hover { background: var(--finch-blue); color: #FFFFFF !important; }
+
+    .references-section { margin-top: 2.8rem; padding-top: 1.5rem; border-top: 2px solid var(--finch-bg-blue); }
+    .references-section h2 { border-image: none; border-bottom: none; color: var(--finch-blue); font-size: 1.2rem; margin-top: 0; }
+    .references-list { list-style: none; counter-reset: ref-counter; padding: 0; margin: 0; }
+    .references-list li { counter-increment: ref-counter; padding: 0.5rem 0 0.5rem 2.2rem; position: relative; font-size: 0.88rem; color: var(--color-text-light); border-bottom: 1px solid #F0F4F7; }
+    .references-list li:last-child { border-bottom: none; }
+    .references-list li::before { content: "[" counter(ref-counter) "]"; position: absolute; left: 0; font-weight: 600; color: var(--finch-blue); font-size: 0.82rem; }
+    .references-list .ref-title { font-weight: 500; color: var(--color-text); }
+    .references-list .ref-source { font-style: italic; }
+    .references-list a { color: var(--finch-blue); text-decoration: none; word-break: break-all; font-size: 0.8rem; }
+    .ref-backlink { color: var(--finch-blue) !important; text-decoration: none !important; font-size: 0.8rem; margin-left: 0.375rem; }
+
+    .cta { margin-top: 2.5rem; padding: 2rem 2.2rem; background: linear-gradient(135deg, var(--finch-bg-blue) 0%, var(--finch-bg-green) 100%); border-left: 4px solid var(--finch-green); border-radius: 0 10px 10px 0; color: var(--finch-dark); line-height: 1.7; font-size: 1rem; }
+    .cta p { margin-bottom: 0; font-style: italic; }
+
+    .site-footer { text-align: center; padding: 2rem 1.5rem 1.5rem; font-size: 0.78rem; color: var(--color-text-light); }
+    .site-footer img { height: 28px; width: auto; margin-bottom: 0.4rem; }
+
+    @media (max-width: 640px) {
+      html { font-size: 16px; }
+      .hero { padding: 3rem 1.2rem 2.5rem; }
+      .hero h1 { font-size: 1.8rem; }
+      article { padding: 1.5rem 1.2rem 2rem; margin: -1.5rem 0.8rem 2rem; }
+      h2 { font-size: 1.35rem; }
+      h3 { font-size: 1.08rem; }
+      .navbar__logo img { height: 32px; }
+    }
+  </style>
+</head>
+<body>
+
+  <nav class="navbar">
+    <a href="https://www.finch-ai.it" class="navbar__logo">
+      <img src="/assets/images/LOGO.png" alt="FinCh-AI Logo">
+    </a>
+  </nav>
+
+  <header class="hero">
+    <span class="hero__label">Business Insight</span>
+    <h1>Financial analysis in 5 minutes: what an SME can do with Finch-AI today</h1>
+    <p class="hero__subtitle">Your ERP data hides strategic answers. Finch-AI's AI turns them into actionable insights, before it's too late to decide.</p>
+    <p class="hero__meta">March 13, 2026 &middot; Finch-AI &middot; 7 min read</p>
+  </header>
+
+  <div class="article-container">
+    <article>
+
+      <nav class="toc" aria-label="Table of contents">
+        <p class="toc__title">Contents</p>
+        <ol>
+          <li><a href="#section-1">Numbers alone don't speak</a></li>
+          <li><a href="#section-2">What changes with AI applied to financial statements</a></li>
+          <li><a href="#section-3">Finch-AI in action: from invoice to insight</a></li>
+          <li><a href="#section-4">The numbers that matter: ROI and concrete benefits</a></li>
+          <li><a href="#section-5">"But is my company too small for AI?"</a></li>
+          <li><a href="#references">Sources and References</a></li>
+        </ol>
+      </nav>
+
+      <!-- SECTION 1 -->
+      <h2 id="section-1">Numbers alone don't speak</h2>
+
+      <p>You open the management system, export the data, paste it into Excel. The revenue is there, the costs too, the margin adds up. And yet, when asked <em>"how is the business really doing?"</em>, the answer stays vague. Not because the numbers are missing, but because <strong>numbers, on their own, say nothing</strong>.</p>
+
+      <p>It's the paradox that thousands of SMEs live every day: they have ERPs, management systems, accounting software &mdash; tools that produce mountains of structured data. But that data stays <strong>mute</strong>, trapped in tables that no one has the time (or the skills) to interpret in the right context. Is a 12% operating margin good or bad? It depends on the sector, on the trend of recent quarters, on the comparison with competitors. Without context, it's just a number.</p>
+
+      <p>The problem isn't the tool. Even those who have moved beyond Excel and work with a modern ERP run into the same barrier: <strong>turning raw data into decisions requires time, analytical skills and a holistic view</strong> that is often missing in the lean structures of an SME.</p>
+
+      <p>The data confirms it. According to the ISTAT "Businesses and ICT" 2025 report, nearly 80% of Italian companies with at least 10 employees reach a basic level of digitization<sup class="cite-ref"><a href="#ref-1" id="cite-1">[1]</a></sup>. But "basic level" means having the tools, not knowing how to exploit them. In fact, only 19% of SMEs adopt advanced digital solutions in a structured way, according to the Politecnico di Milano Observatory<sup class="cite-ref"><a href="#ref-2" id="cite-2">[2]</a></sup>. The most striking figure? 59% of SMEs report a lack of specialized people to interpret their own data<sup class="cite-ref"><a href="#ref-2" id="cite-2b">[2]</a></sup>.</p>
+
+      <p>And then there's the time issue. Who handles financial analysis in an SME with 20-50 employees? Often the owner themselves, or an administrative manager already swamped with deadlines. The result? Strategic analysis is postponed, decisions are made "by feel", and the warning signs in the financials only emerge when it's too late.</p>
+
+      <!-- SECTION 2 -->
+      <h2 id="section-2">What changes with AI applied to financial statements</h2>
+
+      <p>Artificial intelligence doesn't replace the accountant or the CFO. It does something different and, in some ways, more valuable: <strong>it puts the numbers in context, automatically and in real time</strong>.</p>
+
+      <p>A financial statement isn't a photograph &mdash; it's a story. But to read it you need to compare periods, calculate ratios, identify anomalies, cross-reference items. Operations an expert analyst performs in hours, and that AI can perform in minutes. Not because it's smarter, but because it's designed to do exactly this: <strong>find patterns, compare, contextualize</strong>.</p>
+
+      <p>This is not theory. Globally, 59% of corporate finance functions already use at least one AI technology<sup class="cite-ref"><a href="#ref-3" id="cite-3">[3]</a></sup>. Gartner predicts that by 2026 this percentage will rise to 90%<sup class="cite-ref"><a href="#ref-4" id="cite-4">[4]</a></sup>. And in Italy? AI adoption among companies doubled in a single year: from 8.2% in 2024 to 16.4% in 2025<sup class="cite-ref"><a href="#ref-1" id="cite-1b">[1]</a></sup>. The signal is clear: those who don't move now will fall behind.</p>
+
+      <p>The most relevant aspect for SMEs is that AI applied to finance requires neither data scientists nor complex infrastructure. Modern solutions &mdash; like Finch-AI &mdash; work directly on the data the company already has: financial statements, invoices, bank statements, exports from the management system. The AI reads them, cross-references them, and returns a clear, understandable picture.</p>
+
+      <!-- SECTION 3 -->
+      <h2 id="section-3">Finch-AI in action: from invoice to insight</h2>
+
+      <p>Let's see concretely what happens when an SME uses Finch-AI to analyze its financial data. The process is designed to be accessible even to those without advanced financial training.</p>
+
+      <h3>Phase 1: Upload your data</h3>
+      <p>Just upload a financial statement in PDF, a CSV export from the management system, or connect the ERP directly. Finch-AI accepts the most common formats and requires no manual data preparation. In a few seconds, the system recognizes the document structure and extracts the relevant items.</p>
+
+      <h3>Phase 2: Automatic analysis and contextualization</h3>
+      <p>Here's where the magic happens. The AI doesn't just recalculate the totals: it computes financial ratios (liquidity, profitability, capital solidity), compares them with previous periods, and relates them to industry benchmarks. The operating margin is no longer "12%" &mdash; it becomes <em>"12%, up 2 points from the previous quarter, above the industry average of 8.5%"</em>.</p>
+
+      <h3>Phase 3: Reports and alerts</h3>
+      <p>In less than 5 minutes, Finch-AI generates a complete report with key indicators, trends, highlighted anomalies and operational suggestions. Not more numbers, but <strong>numbers that speak</strong>. Each alert comes with a plain-language explanation, understandable without being a finance expert.</p>
+
+      <div class="info-box">
+        <div class="info-box-title">💡 Practical example</div>
+        <p>A manufacturing company with 35 employees uploads its half-year financials. In 4 minutes, Finch-AI flags: the liquidity ratio has dropped 18% from the previous half-year, the average customer collection days have risen from 45 to 62, and the cost of raw materials is 3 percentage points above the industry average. Three signals that, caught in time, can prevent a cash crisis.</p>
+      </div>
+
+      <table>
+        <thead>
+          <tr><th>Aspect</th><th>Traditional analysis</th><th>With Finch-AI</th></tr>
+        </thead>
+        <tbody>
+          <tr><td>Time for a complete analysis</td><td>4-8 hours</td><td>Less than 5 minutes</td></tr>
+          <tr><td>Comparison with industry benchmarks</td><td>Manual, if available</td><td>Automatic and up to date</td></tr>
+          <tr><td>Anomaly identification</td><td>Depends on experience</td><td>Systematic on every item</td></tr>
+          <tr><td>Analysis frequency</td><td>Quarterly / half-yearly</td><td>Whenever needed, even daily</td></tr>
+          <tr><td>Skills required</td><td>Financial analyst</td><td>No specific skills</td></tr>
+        </tbody>
+      </table>
+
+      <!-- SECTION 4 -->
+      <h2 id="section-4">The numbers that matter: ROI and concrete benefits</h2>
+
+      <p>Talking about AI is easy. The question every entrepreneur rightly asks is: <em>"how much does it cost me and how much does it return?"</em>. The international data is encouraging.</p>
+
+      <p>Companies that adopt intelligent automation in financial processes record a median ROI of 150% in the first year of use, with peaks up to 300% for accounts-payable processes<sup class="cite-ref"><a href="#ref-5" id="cite-5">[5]</a></sup>. In terms of time, finance professionals save on average 57 minutes a day thanks to AI, time that can be reinvested in strategic activities<sup class="cite-ref"><a href="#ref-6" id="cite-6">[6]</a></sup>.</p>
+
+      <p>But the biggest benefit for an SME isn't the saving itself: it's the <strong>ability to decide sooner and better</strong>. An analysis that arrives in 5 minutes instead of 5 days radically changes the quality of decisions. It means catching a cash problem before it becomes an emergency, seizing a positive trend while there's still time to invest in it, negotiating with suppliers with fresh data at hand.</p>
+
+      <p>In Italy, the most digitally mature companies record about a 6% higher operating margin than the average<sup class="cite-ref"><a href="#ref-1" id="cite-1c">[1]</a></sup>. And with data analysis on the rise &mdash; from 26.6% to 42.7% of companies in the last two years<sup class="cite-ref"><a href="#ref-7" id="cite-7">[7]</a></sup> &mdash; the message is clear: those who analyze their data perform better.</p>
+
+      <!-- SECTION 5 -->
+      <h2 id="section-5">"But is my company too small for AI?"</h2>
+
+      <p>It's the most frequent objection. And the answer is no &mdash; in fact, it's quite the opposite.</p>
+
+      <p>Large companies have dedicated teams of controllers, analysts, data scientists. <strong>SMEs don't.</strong> They have an administrative manager who does everything, an accountant who sees the numbers after the fact, and an owner who decides based on experience. AI isn't for those who already have an analysis department: it's for those who don't.</p>
+
+      <p>Finch-AI is designed exactly for this. It requires no complex integrations, presumes no technical skills, needs no Big Data. It works with the data you already have: the financial statement you send to your accountant, the export from the management system, the invoices in PDF. The goal isn't to turn an SME into a tech multinational, but to give the owner and the CFO the same level of financial awareness that today only large companies have.</p>
+
+      <p>The digital gap between large companies and SMEs in AI adoption is widening &mdash; from 20 percentage points in 2023 to 37 in 2025<sup class="cite-ref"><a href="#ref-1" id="cite-1d">[1]</a></sup>. But this isn't fate: it's an opportunity. SMEs that adopt tools like Finch-AI today don't just close a technological gap &mdash; they gain a <strong>real competitive advantage</strong> over competitors who keep flying blind.</p>
+
+      <div class="info-box">
+        <div class="info-box-title">💡 No Big Data needed</div>
+        <p>Finch-AI doesn't need millions of records to work. Even a single annual financial statement contains hundreds of relationships between items that, analyzed in the right context, reveal the company's real health. It's not the quantity of data that matters &mdash; it's the quality of the analysis.</p>
+      </div>
+
+      <blockquote>
+        <p>The real obstacle to the digital transformation of SMEs isn't a lack of financial resources, but the difficulty in reading change and turning it into strategic choices.</p>
+      </blockquote>
+      <p style="font-size: 0.85rem; color: var(--color-text-light); margin-top: -1rem;">&mdash; Digital Innovation in SMEs Observatory, Politecnico di Milano<sup class="cite-ref"><a href="#ref-2" id="cite-2c">[2]</a></sup></p>
+
+      <!-- REFERENCES -->
+      <section class="references-section" id="references">
+        <h2>&#x1F4DA; Sources and References</h2>
+        <ol class="references-list">
+          <li id="ref-1">
+            <span class="ref-title">"Businesses and ICT &mdash; Year 2025"</span>,
+            <span class="ref-source">ISTAT</span>,
+            <span class="ref-date">December 2025</span>.
+            <a href="https://www.istat.it/comunicato-stampa/imprese-e-ict-anno-2025/" target="_blank" rel="noopener">Link &#x2197;</a>
+            <a href="#cite-1" class="ref-backlink" title="Back to text">&#x21A9;</a>
+          </li>
+          <li id="ref-2">
+            <span class="ref-title">"SMEs and digital transformation: starting from weaknesses to relaunch"</span>,
+            <span class="ref-source">Digital Innovation in SMEs Observatory, Politecnico di Milano</span>,
+            <span class="ref-date">2025</span>.
+            <a href="https://www.osservatori.net/comunicato/innovazione-digitale-nelle-pmi/pmi-italiane-innovazione/" target="_blank" rel="noopener">Link &#x2197;</a>
+            <a href="#cite-2" class="ref-backlink" title="Back to text">&#x21A9;</a>
+          </li>
+          <li id="ref-3">
+            <span class="ref-title">"Gartner Survey Shows Finance AI Adoption Remains Steady in 2025"</span>,
+            <span class="ref-source">Gartner</span>,
+            <span class="ref-date">Novembre 2025</span>.
+            <a href="https://www.gartner.com/en/newsroom/press-releases/2025-11-18-gartner-survey-shows-finance-ai-adoption-remains-steady-in-2025" target="_blank" rel="noopener">Link &#x2197;</a>
+            <a href="#cite-3" class="ref-backlink" title="Back to text">&#x21A9;</a>
+          </li>
+          <li id="ref-4">
+            <span class="ref-title">"Gartner Predicts That 90% of Finance Functions will Deploy at Least One AI-enabled Technology Solution by 2026"</span>,
+            <span class="ref-source">Gartner</span>,
+            <span class="ref-date">Settembre 2024</span>.
+            <a href="https://www.gartner.com/en/newsroom/press-releases/2024-09-12-gartner-predicts-that-90-percent-of-finance-functions-will-deploy-at-least-one-ai-enabled-tech-solution-by-2026" target="_blank" rel="noopener">Link &#x2197;</a>
+            <a href="#cite-4" class="ref-backlink" title="Back to text">&#x21A9;</a>
+          </li>
+          <li id="ref-5">
+            <span class="ref-title">"The return on investment (ROI) of intelligent automation: Assessing value creation via AI-enhanced financial process transformation"</span>,
+            <span class="ref-source">ResearchGate</span>,
+            <span class="ref-date">2024</span>.
+            <a href="https://www.researchgate.net/publication/394436747_The_return_on_investment_ROI_of_intelligent_automation_Assessing_value_creation_via_AI-enhanced_financial_process_transformation" target="_blank" rel="noopener">Link &#x2197;</a>
+            <a href="#cite-5" class="ref-backlink" title="Back to text">&#x21A9;</a>
+          </li>
+          <li id="ref-6">
+            <span class="ref-title">"AI ROI Metrics for Small Businesses"</span>,
+            <span class="ref-source">Lucid</span>,
+            <span class="ref-date">2025</span>.
+            <a href="https://www.lucid.now/blog/ai-roi-metrics-for-small-businesses/" target="_blank" rel="noopener">Link &#x2197;</a>
+            <a href="#cite-6" class="ref-backlink" title="Back to text">&#x21A9;</a>
+          </li>
+          <li id="ref-7">
+            <span class="ref-title">"Businesses and ICT &mdash; Year 2024"</span>,
+            <span class="ref-source">ISTAT</span>,
+            <span class="ref-date">January 2025</span>.
+            <a href="https://www.istat.it/comunicato-stampa/imprese-e-ict-anno-2024/" target="_blank" rel="noopener">Link &#x2197;</a>
+            <a href="#cite-7" class="ref-backlink" title="Back to text">&#x21A9;</a>
+          </li>
+        </ol>
+      </section>
+
+      <!-- CTA -->
+      <div class="cta">
+        <p>Want to see what Finch-AI can extract from your financial data? All it takes is a financial statement and 5 minutes to find out. Request a free, personalized demo on your company's numbers. <a href="https://www.finch-ai.it/#contatti"><strong>Contact us &rarr;</strong></a></p>
+      </div>
+
+    </article>
+  </div>
+
+  <footer class="site-footer">
+    <img src="/assets/images/LOGO.png" alt="Finch-AI"><br>
+    &copy; 2026 Finch-AI &middot; All rights reserved
+  </footer>
+
+</body>
+</html>

@@ -1,0 +1,75 @@
+{
+  "seo": {
+    "title": "The AI for SMEs Blog | Finch-AI",
+    "description": "Stay up to date on how artificial intelligence is transforming small and mid-sized businesses. Guides, case studies and insights to optimize your company.",
+    "keywords": "artificial intelligence blog, AI for SMEs, business innovation, Finch-AI blog, AI articles, AI case studies"
+  },
+  "header": {
+    "eyebrow": "Insights & Updates",
+    "title": "The <em>Finch</em> blog.",
+    "lead": "How artificial intelligence is reshaping the workflows of SMEs and professional firms. Practical guides, analysis and real use cases."
+  },
+  "readMore": "Read",
+  "articles": {
+    "ai-studi-professionali": {
+      "title": "AI for Professional Firms",
+      "description": "Discover how artificial intelligence is reshaping workflows in professional firms, automating repetitive tasks.",
+      "date": "March 10, 2026",
+      "category": "Artificial Intelligence"
+    },
+    "ai-imprenditori": {
+      "title": "AI for Entrepreneurs and Accountants",
+      "description": "Artificial intelligence at the service of entrepreneurs and accountants: a strategic alliance to optimize management control and data-driven decisions.",
+      "date": "March 8, 2026",
+      "category": "Business Strategy"
+    },
+    "automazione-documentale": {
+      "title": "Document Automation with Document Intelligence",
+      "description": "Simplify the handling of delivery notes, quotes and invoices by integrating artificial intelligence and our Document Intelligence system.",
+      "date": "March 11, 2026",
+      "category": "Document Intelligence"
+    },
+    "ai-fatture-passive": {
+      "title": "AI for Accounts Payable Invoices",
+      "description": "Fast, accurate recognition and categorization of supplier invoices and payable documents thanks to advanced Document Intelligence technology.",
+      "date": "March 10, 2026",
+      "category": "Document Intelligence"
+    },
+    "ai-analisi-dati": {
+      "title": "AI and Data Analysis for SMEs: Beyond Excel",
+      "description": "How to overcome the limits of old Excel sheets and Access databases by relying on artificial intelligence for advanced data analysis.",
+      "date": "March 12, 2026",
+      "category": "Data Analysis"
+    },
+    "analisi-finanziaria": {
+      "title": "Financial Analysis in 5 Minutes with AI",
+      "description": "Get detailed financial reports, KPI indicators and corporate credit ratings in no time using Finch-AI's Virtual Financial Analyst.",
+      "date": "March 14, 2026",
+      "category": "Finance Intelligence"
+    },
+    "pmi-gap": {
+      "title": "Italian SMEs and the European AI Gap",
+      "description": "Italy and the gap with the rest of Europe in AI adoption: challenges and huge opportunities for SMEs that integrate innovative technologies into their workflows.",
+      "date": "March 15, 2026",
+      "category": "Innovation"
+    },
+    "ai-human": {
+      "title": "Human-Centered AI: Empowering People",
+      "description": "Finch-AI's Human-Centered philosophy: artificial intelligence as an ally and co-pilot for human productivity, not a replacement.",
+      "date": "March 17, 2026",
+      "category": "Technology & Ethics"
+    },
+    "pmi-dati-silos": {
+      "title": "Why many SMEs already have a data problem, even if they don't realize it",
+      "description": "Excel, email, PDFs, ERP: the data is there, but no one really sees it. How information silos slow down decisions and how much ignoring them costs.",
+      "date": "March 21, 2026",
+      "category": "Business Insight"
+    },
+    "sistema-supporto-decisionale-ai-pmi-synapse": {
+      "title": "The Decision Support System that builds your company's memory",
+      "description": "How an advanced AI-based DSS turns scattered documents, emails and contracts into a living database of your SME, with verifiable answers and human-in-the-loop.",
+      "date": "May 18, 2026",
+      "category": "Decision Intelligence"
+    }
+  }
+}

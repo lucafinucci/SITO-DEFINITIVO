@@ -1,25 +1,27 @@
 import { Link } from 'react-router-dom';
 import { ArrowUpRight } from 'lucide-react';
+import { useTranslation } from 'react-i18next';
 import Navbar from '../components/Navbar';
 import Footer from '../components/Footer';
 import SEO from '../components/SEO';
 import useReveal from '../hooks/useReveal';
 import { blogArticles } from '../data/blogArticles';
+import { useLocalizedPath } from '@/i18n/routing';
 
 export default function Blog() {
   useReveal();
-
-  const seoProps = {
-    title: "Il Blog sull'Intelligenza Artificiale per PMI | FinCh-Ai",
-    description: "Rimani aggiornato su come l'Intelligenza Artificiale sta trasformando le PMI italiane. Scopri guide, casi studio e insights per ottimizzare la tua azienda.",
-    keywords: "Blog intelligenza artificiale, AI per PMI, innovazione aziendale, FinCh-AI blog, articoli intelligenza artificiale, casi studio AI",
-    canonical: "https://finch-ai.it/blog",
-    ogType: "website"
-  };
+  const { t } = useTranslation('blog');
+  const lp = useLocalizedPath();
 
   return (
     <>
-      <SEO {...seoProps} />
+      <SEO
+        title={t('seo.title')}
+        description={t('seo.description')}
+        keywords={t('seo.keywords')}
+        canonical="https://finch-ai.it/blog"
+        ogType="website"
+      />
       <Navbar />
 
       <main id="top">
@@ -28,12 +30,10 @@ export default function Blog() {
           <div className="wrap">
             <div className="news-head">
               <div>
-                <div className="eyebrow reveal" style={{ marginBottom: 20 }}>Insights & Aggiornamenti</div>
-                <h2 className="h2 reveal d1">Il blog di <em>Finch</em>.</h2>
+                <div className="eyebrow reveal" style={{ marginBottom: 20 }}>{t('header.eyebrow')}</div>
+                <h2 className="h2 reveal d1" dangerouslySetInnerHTML={{ __html: t('header.title') }} />
               </div>
-              <p className="lead reveal d2">
-                Come l'intelligenza artificiale sta rivoluzionando i flussi di lavoro di PMI e studi professionali. Guide pratiche, analisi e use case reali.
-              </p>
+              <p className="lead reveal d2">{t('header.lead')}</p>
             </div>
           </div>
         </section>
@@ -45,17 +45,17 @@ export default function Blog() {
               {blogArticles.map((article, i) => (
                 <Link
                   key={article.id}
-                  to={article.path}
+                  to={lp(article.path)}
                   onClick={() => window.scrollTo(0, 0)}
                   className={`news-card reveal${i % 3 === 1 ? ' d1' : i % 3 === 2 ? ' d2' : ''}`}
                 >
                   <div className="news-meta">
-                    <span className="nc">{article.category}</span>
-                    <span className="nd">{article.date} · {article.readTime}</span>
+                    <span className="nc">{t(`articles.${article.id}.category`)}</span>
+                    <span className="nd">{t(`articles.${article.id}.date`)} · {article.readTime}</span>
                   </div>
-                  <h3>{article.title}</h3>
-                  <p>{article.description}</p>
-                  <span className="news-go">Leggi <ArrowUpRight size={14} /></span>
+                  <h3>{t(`articles.${article.id}.title`)}</h3>
+                  <p>{t(`articles.${article.id}.description`)}</p>
+                  <span className="news-go">{t('readMore')} <ArrowUpRight size={14} /></span>
                 </Link>
               ))}
             </div>

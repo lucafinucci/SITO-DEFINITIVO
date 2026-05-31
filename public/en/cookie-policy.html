@@ -1,0 +1,276 @@
+<!doctype html>
+<html lang="en">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Cookie Policy - Finch-AI</title>
+  <style>
+    :root {
+      color-scheme: dark;
+      --bg: #0b1220;
+      --panel: rgba(15, 23, 42, 0.92);
+      --border: #1f2937;
+      --text: #dbe4f4;
+      --muted: #b7c2d6;
+      --accent: #67e8f9;
+      --accent-2: #7dd3fc;
+    }
+    * { box-sizing: border-box; }
+    body {
+      font-family: "Manrope", "Segoe UI", "Helvetica Neue", Arial, sans-serif;
+      color: var(--text);
+      margin: 0;
+      padding: clamp(16px, 5vw, 42px);
+      line-height: 1.7;
+      background: var(--bg);
+      background-image:
+        linear-gradient(120deg, rgba(0, 224, 255, 0.08) 0%, rgba(3, 16, 31, 0.2) 45%, rgba(0, 224, 255, 0.05) 100%),
+        linear-gradient(rgba(255,255,255,0.04) 1px, transparent 1px);
+      background-size: cover, 100% 28px;
+    }
+    main {
+      max-width: 960px;
+      margin: 0 auto;
+      background: var(--panel);
+      border: 1px solid var(--border);
+      border-radius: 14px;
+      padding: clamp(18px, 4vw, 38px);
+      box-shadow: 0 20px 60px rgba(0, 0, 0, 0.4);
+      backdrop-filter: blur(6px);
+    }
+    h1, h2, h3 { color: #fff; margin-top: 24px; letter-spacing: -0.01em; }
+    h1 { font-size: clamp(26px, 4vw, 34px); margin: 0; }
+    h2 { font-size: clamp(20px, 3.4vw, 26px); }
+    h3 { font-size: clamp(18px, 3vw, 22px); color: #e0e7ff; }
+    p, li { color: var(--muted); font-size: 15.5px; }
+    p { margin: 10px 0 14px; }
+    strong { color: #f8fafc; }
+    a { color: var(--accent); text-decoration: none; }
+    a:hover { color: var(--accent-2); text-decoration: underline; }
+    ul { padding-left: 20px; margin: 10px 0 16px; }
+    .page-header { display: flex; align-items: center; gap: 14px; margin-bottom: 16px; }
+    .page-header img { height: 58px; width: auto; }
+    .meta { color: #94a3b8; font-size: 14px; display: block; margin-top: 6px; }
+    .table-wrapper { overflow-x: auto; margin: 12px 0 20px; border: 1px solid var(--border); border-radius: 10px; }
+    table { width: 100%; border-collapse: collapse; min-width: 520px; }
+    th, td { border-bottom: 1px solid var(--border); padding: 10px 12px; text-align: left; }
+    th { background: rgba(255,255,255,0.04); color: #e5e7eb; position: sticky; top: 0; }
+    code { background: #111827; padding: 2px 4px; border-radius: 4px; }
+    @media (max-width: 720px) {
+      body { padding: 16px; }
+      main { padding: 18px; }
+      .page-header { flex-direction: column; align-items: flex-start; gap: 8px; }
+      .page-header img { height: 48px; }
+      th, td { font-size: 14px; }
+    }
+  </style>
+</head>
+<body>
+  <canvas id="neural-bg" aria-hidden="true" style="position:fixed; inset:0; width:100%; height:100%; z-index:-2; pointer-events:none;"></canvas>
+  <script>
+    (() => {
+      const canvas = document.getElementById('neural-bg');
+      if (!canvas) return;
+      const ctx = canvas.getContext('2d', { alpha: true });
+      let w, h;
+      const setSize = () => {
+        w = canvas.width = window.innerWidth;
+        h = canvas.height = window.innerHeight;
+      };
+      setSize();
+      window.addEventListener('resize', setSize);
+      const rnd = (min, max) => Math.random() * (max - min) + min;
+      const MAX = 90;
+      let count = Math.min(MAX, Math.floor((w * h) / 18000));
+      let nodes = Array.from({ length: count }, () => ({
+        x: rnd(0, w),
+        y: rnd(0, h),
+        vx: rnd(-0.4, 0.4),
+        vy: rnd(-0.4, 0.4),
+        r: rnd(0.6, 1.8),
+      }));
+      const gradientStroke = () => {
+        const g = ctx.createLinearGradient(0, 0, w, h);
+        g.addColorStop(0, "rgba(0,224,255,0.85)");
+        g.addColorStop(1, "rgba(59,130,246,0.85)");
+        return g;
+      };
+      const LINK_DIST = () => Math.min(180, Math.max(110, Math.min(w, h) * 0.22));
+      let rafId;
+      const draw = () => {
+        ctx.clearRect(0, 0, w, h);
+        ctx.fillStyle = "rgba(7,12,22,0.75)";
+        ctx.fillRect(0, 0, w, h);
+        const rg = ctx.createRadialGradient(w * 0.5, h * 0.3, 0, w * 0.5, h * 0.3, Math.max(w, h) * 0.7);
+        rg.addColorStop(0, "rgba(23,162,255,0.10)");
+        rg.addColorStop(1, "rgba(0,0,0,0)");
+        ctx.fillStyle = rg;
+        ctx.fillRect(0, 0, w, h);
+        ctx.globalCompositeOperation = "lighter";
+        for (const n of nodes) {
+          n.x += n.vx;
+          n.y += n.vy;
+          if (n.x < 0 || n.x > w) n.vx *= -1;
+          if (n.y < 0 || n.y > h) n.vy *= -1;
+          ctx.beginPath();
+          ctx.arc(n.x, n.y, n.r, 0, Math.PI * 2);
+          ctx.fillStyle = "rgba(56,189,248,0.65)";
+          ctx.fill();
+        }
+        ctx.lineWidth = 0.7;
+        ctx.strokeStyle = gradientStroke();
+        const linkDist = LINK_DIST();
+        for (let i = 0; i < nodes.length; i++) {
+          for (let j = i + 1; j < nodes.length; j++) {
+            const dx = nodes[i].x - nodes[j].x;
+            const dy = nodes[i].y - nodes[j].y;
+            const dist = Math.hypot(dx, dy);
+            if (dist < linkDist) {
+              const alpha = 1 - dist / linkDist;
+              ctx.globalAlpha = alpha * 0.6;
+              ctx.beginPath();
+              ctx.moveTo(nodes[i].x, nodes[i].y);
+              ctx.lineTo(nodes[j].x, nodes[j].y);
+              ctx.stroke();
+            }
+          }
+        }
+        ctx.globalAlpha = 1;
+        rafId = requestAnimationFrame(draw);
+      };
+      draw();
+      window.addEventListener('beforeunload', () => cancelAnimationFrame(rafId));
+    })();
+  </script>
+  <main>
+    <div class="page-header">
+      <a href="/" style="display:inline-flex; align-items:center;">
+        <img src="/assets/images/LOGO.png" alt="Finch-AI">
+      </a>
+      <div>
+        <h1>Cookie Policy &ndash; Finch-AI</h1>
+        <span class="meta"><strong>Last updated:</strong> 2025</span>
+      </div>
+    </div>
+
+    <h2>1. What cookies are</h2>
+    <p>Cookies are small text files that the site saves on your device (computer, tablet, smartphone). They serve to ensure the correct functioning of the site and, where applicable, to collect information about how users use the page.</p>
+    <p>Cookies can be:</p>
+    <ul>
+      <li>Technical (necessary for the site to function)</li>
+      <li>Analytical (anonymous statistics)</li>
+      <li>Profiling (marketing - not used on this site)</li>
+    </ul>
+
+    <h2>2. Types of cookies used by this site</h2>
+    <h3>2.1 Technical cookies (necessary)</h3>
+    <p>These cookies:</p>
+    <ul>
+      <li>enable navigation</li>
+      <li>allow the correct functioning of the site</li>
+      <li>maintain the user session</li>
+      <li>manage basic preferences (language, cookie acceptance, etc.)</li>
+    </ul>
+    <p>They do not require user consent and are always active.</p>
+    <p>Examples:</p>
+    <ul>
+      <li>cookie to remember acceptance of the banner</li>
+      <li>technical session cookie</li>
+      <li>cookies necessary for the forms to function</li>
+    </ul>
+
+    <h3>2.2 Anonymized analytics cookies (optional)</h3>
+    <p>(Activatable only if tools such as Google Analytics 4 or Matomo are integrated in the future)</p>
+    <p>They serve to analyze, in aggregate form:</p>
+    <ul>
+      <li>site traffic</li>
+      <li>most-visited pages</li>
+      <li>time spent</li>
+      <li>geographic origin (anonymous)</li>
+    </ul>
+    <p>They are used only in anonymous form and do not allow the user to be identified.</p>
+
+    <h3>2.3 Profiling or marketing cookies</h3>
+    <p>The site does <strong>NOT</strong> use profiling cookies. No marketing or personalized tracking activity is active.</p>
+
+    <h2>3. Consent management</h2>
+    <p>On first access to the site:</p>
+    <ul>
+      <li>a cookie banner is shown</li>
+      <li>the user can accept technical cookies (already active)</li>
+      <li>can accept or refuse analytics cookies (if activated)</li>
+    </ul>
+    <p>The consent is:</p>
+    <ul>
+      <li>saved on a technical cookie</li>
+      <li>changeable at any time</li>
+    </ul>
+
+    <h2>4. How to disable cookies from the browser</h2>
+    <p>The user can disable cookies directly from their browser settings:</p>
+    <ul>
+      <li>Chrome</li>
+      <li>Firefox</li>
+      <li>Edge</li>
+      <li>Safari</li>
+      <li>Opera</li>
+    </ul>
+    <p>Up-to-date procedures are available here:</p>
+    <ul>
+      <li><a href="https://www.allaboutcookies.org/" target="_blank" rel="noopener noreferrer">https://www.allaboutcookies.org/</a></li>
+      <li><a href="https://www.youronlinechoices.com/" target="_blank" rel="noopener noreferrer">https://www.youronlinechoices.com/</a></li>
+    </ul>
+
+    <h2>5. Cookie duration</h2>
+    <div class="table-wrapper">
+      <table>
+        <thead>
+          <tr>
+            <th>Cookie type</th>
+            <th>Duration</th>
+            <th>Notes</th>
+          </tr>
+        </thead>
+        <tbody>
+          <tr>
+            <td>Technical</td>
+            <td>Session or 12 months</td>
+            <td>Necessary</td>
+          </tr>
+          <tr>
+            <td>Anonymized analytics</td>
+            <td>1-12 months</td>
+            <td>Only if activated</td>
+          </tr>
+          <tr>
+            <td>Profiling</td>
+            <td>Not used</td>
+            <td>-</td>
+          </tr>
+        </tbody>
+      </table>
+    </div>
+
+    <h2>6. Data Controller</h2>
+    <p>
+      Finch-AI S.r.l.<br>
+      Registered office: Via Enrico Mattei 18, Celano (AQ), Italy<br>
+      Email: <a href="mailto:privacy@finch-ai.it">privacy@finch-ai.it</a><br>
+      Certified email (PEC): <a href="mailto:finch-ai@pec.finch-ai.it">finch-ai@pec.finch-ai.it</a>
+    </p>
+
+    <h2>7. User rights (GDPR Art. 15-22)</h2>
+    <p>The user may at any time:</p>
+    <ul>
+      <li>request access to the data</li>
+      <li>request erasure</li>
+      <li>withdraw consent</li>
+      <li>restrict processing</li>
+    </ul>
+    <p>Requests to be sent to: <a href="mailto:privacy@finch-ai.it">privacy@finch-ai.it</a></p>
+
+    <h2>8. Changes to the Cookie Policy</h2>
+    <p>Finch-AI reserves the right to update this notice. Changes will be published on this page.</p>
+  </main>
+</body>
+</html>

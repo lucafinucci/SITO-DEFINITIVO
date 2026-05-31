@@ -1,48 +1,96 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <urlset xmlns="http://www.sitemaps.org/schemas/sitemap/0.9"
-        xmlns:image="http://www.google.com/schemas/sitemap-image/0.9">
+        xmlns:image="http://www.google.com/schemas/sitemap-image/0.9"
+        xmlns:xhtml="http://www.w3.org/1999/xhtml">
 
-  <!-- ============ CORE PAGES ============ -->
+  <!-- ============ HOME ============ -->
   <url>
     <loc>https://finch-ai.it/</loc>
-    <lastmod>2026-05-12</lastmod>
+    <lastmod>2026-05-30</lastmod>
     <changefreq>weekly</changefreq>
     <priority>1.0</priority>
+    <xhtml:link rel="alternate" hreflang="it" href="https://finch-ai.it/"/>
+    <xhtml:link rel="alternate" hreflang="en" href="https://finch-ai.it/en"/>
+    <xhtml:link rel="alternate" hreflang="x-default" href="https://finch-ai.it/"/>
     <image:image>
       <image:loc>https://finch-ai.it/assets/images/LOGO.png</image:loc>
       <image:title>Finch-AI — Piattaforma AI per PMI italiane</image:title>
     </image:image>
   </url>
+  <url>
+    <loc>https://finch-ai.it/en</loc>
+    <lastmod>2026-05-30</lastmod>
+    <changefreq>weekly</changefreq>
+    <priority>0.9</priority>
+    <xhtml:link rel="alternate" hreflang="it" href="https://finch-ai.it/"/>
+    <xhtml:link rel="alternate" hreflang="en" href="https://finch-ai.it/en"/>
+    <xhtml:link rel="alternate" hreflang="x-default" href="https://finch-ai.it/"/>
+  </url>
 
   <!-- ============ SOLUZIONI / PRODOTTI ============ -->
   <url>
     <loc>https://finch-ai.it/soluzioni/warehouse-intelligence</loc>
-    <lastmod>2026-05-12</lastmod>
+    <lastmod>2026-05-30</lastmod>
     <changefreq>monthly</changefreq>
     <priority>0.95</priority>
+    <xhtml:link rel="alternate" hreflang="it" href="https://finch-ai.it/soluzioni/warehouse-intelligence"/>
+    <xhtml:link rel="alternate" hreflang="en" href="https://finch-ai.it/en/soluzioni/warehouse-intelligence"/>
+    <xhtml:link rel="alternate" hreflang="x-default" href="https://finch-ai.it/soluzioni/warehouse-intelligence"/>
     <image:image>
       <image:loc>https://finch-ai.it/assets/images/warehouse/dashboard.png</image:loc>
       <image:title>OmniFlow — Dashboard del gestionale AI Warehouse Intelligence</image:title>
-      <image:caption>Dashboard principale di OmniFlow con AI Assistant integrata, 8 moduli e KPI in tempo reale</image:caption>
     </image:image>
+  </url>
+  <url>
+    <loc>https://finch-ai.it/en/soluzioni/warehouse-intelligence</loc>
+    <lastmod>2026-05-30</lastmod>
+    <changefreq>monthly</changefreq>
+    <priority>0.9</priority>
+    <xhtml:link rel="alternate" hreflang="it" href="https://finch-ai.it/soluzioni/warehouse-intelligence"/>
+    <xhtml:link rel="alternate" hreflang="en" href="https://finch-ai.it/en/soluzioni/warehouse-intelligence"/>
+    <xhtml:link rel="alternate" hreflang="x-default" href="https://finch-ai.it/soluzioni/warehouse-intelligence"/>
   </url>
 
   <url>
     <loc>https://finch-ai.it/soluzioni/finance-intelligence</loc>
-    <lastmod>2026-05-12</lastmod>
+    <lastmod>2026-05-30</lastmod>
     <changefreq>monthly</changefreq>
     <priority>0.9</priority>
+    <xhtml:link rel="alternate" hreflang="it" href="https://finch-ai.it/soluzioni/finance-intelligence"/>
+    <xhtml:link rel="alternate" hreflang="en" href="https://finch-ai.it/en/soluzioni/finance-intelligence"/>
+    <xhtml:link rel="alternate" hreflang="x-default" href="https://finch-ai.it/soluzioni/finance-intelligence"/>
+  </url>
+  <url>
+    <loc>https://finch-ai.it/en/soluzioni/finance-intelligence</loc>
+    <lastmod>2026-05-30</lastmod>
+    <changefreq>monthly</changefreq>
+    <priority>0.85</priority>
+    <xhtml:link rel="alternate" hreflang="it" href="https://finch-ai.it/soluzioni/finance-intelligence"/>
+    <xhtml:link rel="alternate" hreflang="en" href="https://finch-ai.it/en/soluzioni/finance-intelligence"/>
+    <xhtml:link rel="alternate" hreflang="x-default" href="https://finch-ai.it/soluzioni/finance-intelligence"/>
   </url>
 
   <url>
     <loc>https://finch-ai.it/soluzioni/document-intelligence</loc>
-    <lastmod>2026-05-12</lastmod>
+    <lastmod>2026-05-30</lastmod>
     <changefreq>monthly</changefreq>
     <priority>0.9</priority>
+    <xhtml:link rel="alternate" hreflang="it" href="https://finch-ai.it/soluzioni/document-intelligence"/>
+    <xhtml:link rel="alternate" hreflang="en" href="https://finch-ai.it/en/soluzioni/document-intelligence"/>
+    <xhtml:link rel="alternate" hreflang="x-default" href="https://finch-ai.it/soluzioni/document-intelligence"/>
     <image:image>
       <image:loc>https://finch-ai.it/assets/images/infografica_document_intelligence.png</image:loc>
       <image:title>Document Intelligence — Automazione DDT e fatture con AI</image:title>
     </image:image>
+  </url>
+  <url>
+    <loc>https://finch-ai.it/en/soluzioni/document-intelligence</loc>
+    <lastmod>2026-05-30</lastmod>
+    <changefreq>monthly</changefreq>
+    <priority>0.85</priority>
+    <xhtml:link rel="alternate" hreflang="it" href="https://finch-ai.it/soluzioni/document-intelligence"/>
+    <xhtml:link rel="alternate" hreflang="en" href="https://finch-ai.it/en/soluzioni/document-intelligence"/>
+    <xhtml:link rel="alternate" hreflang="x-default" href="https://finch-ai.it/soluzioni/document-intelligence"/>
   </url>
 
   <url>
@@ -50,6 +98,18 @@
     <lastmod>2026-05-30</lastmod>
     <changefreq>monthly</changefreq>
     <priority>0.9</priority>
+    <xhtml:link rel="alternate" hreflang="it" href="https://finch-ai.it/soluzioni/synapse"/>
+    <xhtml:link rel="alternate" hreflang="en" href="https://finch-ai.it/en/soluzioni/synapse"/>
+    <xhtml:link rel="alternate" hreflang="x-default" href="https://finch-ai.it/soluzioni/synapse"/>
+  </url>
+  <url>
+    <loc>https://finch-ai.it/en/soluzioni/synapse</loc>
+    <lastmod>2026-05-30</lastmod>
+    <changefreq>monthly</changefreq>
+    <priority>0.85</priority>
+    <xhtml:link rel="alternate" hreflang="it" href="https://finch-ai.it/soluzioni/synapse"/>
+    <xhtml:link rel="alternate" hreflang="en" href="https://finch-ai.it/en/soluzioni/synapse"/>
+    <xhtml:link rel="alternate" hreflang="x-default" href="https://finch-ai.it/soluzioni/synapse"/>
   </url>
 
   <url>
@@ -57,14 +117,38 @@
     <lastmod>2026-05-30</lastmod>
     <changefreq>monthly</changefreq>
     <priority>0.85</priority>
+    <xhtml:link rel="alternate" hreflang="it" href="https://finch-ai.it/soluzioni/aps"/>
+    <xhtml:link rel="alternate" hreflang="en" href="https://finch-ai.it/en/soluzioni/aps"/>
+    <xhtml:link rel="alternate" hreflang="x-default" href="https://finch-ai.it/soluzioni/aps"/>
+  </url>
+  <url>
+    <loc>https://finch-ai.it/en/soluzioni/aps</loc>
+    <lastmod>2026-05-30</lastmod>
+    <changefreq>monthly</changefreq>
+    <priority>0.8</priority>
+    <xhtml:link rel="alternate" hreflang="it" href="https://finch-ai.it/soluzioni/aps"/>
+    <xhtml:link rel="alternate" hreflang="en" href="https://finch-ai.it/en/soluzioni/aps"/>
+    <xhtml:link rel="alternate" hreflang="x-default" href="https://finch-ai.it/soluzioni/aps"/>
   </url>
 
   <!-- ============ BLOG ============ -->
   <url>
     <loc>https://finch-ai.it/blog</loc>
-    <lastmod>2026-05-12</lastmod>
+    <lastmod>2026-05-30</lastmod>
     <changefreq>weekly</changefreq>
     <priority>0.8</priority>
+    <xhtml:link rel="alternate" hreflang="it" href="https://finch-ai.it/blog"/>
+    <xhtml:link rel="alternate" hreflang="en" href="https://finch-ai.it/en/blog"/>
+    <xhtml:link rel="alternate" hreflang="x-default" href="https://finch-ai.it/blog"/>
+  </url>
+  <url>
+    <loc>https://finch-ai.it/en/blog</loc>
+    <lastmod>2026-05-30</lastmod>
+    <changefreq>weekly</changefreq>
+    <priority>0.75</priority>
+    <xhtml:link rel="alternate" hreflang="it" href="https://finch-ai.it/blog"/>
+    <xhtml:link rel="alternate" hreflang="en" href="https://finch-ai.it/en/blog"/>
+    <xhtml:link rel="alternate" hreflang="x-default" href="https://finch-ai.it/blog"/>
   </url>
 
   <url>
@@ -72,62 +156,90 @@
     <lastmod>2026-02-28</lastmod>
     <changefreq>monthly</changefreq>
     <priority>0.7</priority>
+    <xhtml:link rel="alternate" hreflang="it" href="https://finch-ai.it/blog/intelligenza-artificiale-imprenditori-commercialisti"/>
+    <xhtml:link rel="alternate" hreflang="en" href="https://finch-ai.it/en/blog/intelligenza-artificiale-imprenditori-commercialisti"/>
+    <xhtml:link rel="alternate" hreflang="x-default" href="https://finch-ai.it/blog/intelligenza-artificiale-imprenditori-commercialisti"/>
   </url>
-
   <url>
     <loc>https://finch-ai.it/blog/document-intelligence-automazione-ddt-bolle-consegna</loc>
-    <lastmod>2026-03-10</lastmod>
+    <lastmod>2026-03-04</lastmod>
     <changefreq>monthly</changefreq>
     <priority>0.7</priority>
+    <xhtml:link rel="alternate" hreflang="it" href="https://finch-ai.it/blog/document-intelligence-automazione-ddt-bolle-consegna"/>
+    <xhtml:link rel="alternate" hreflang="en" href="https://finch-ai.it/en/blog/document-intelligence-automazione-ddt-bolle-consegna"/>
+    <xhtml:link rel="alternate" hreflang="x-default" href="https://finch-ai.it/blog/document-intelligence-automazione-ddt-bolle-consegna"/>
   </url>
-
   <url>
     <loc>https://finch-ai.it/blog/intelligenza-artificiale-studi-professionali</loc>
     <lastmod>2026-03-10</lastmod>
     <changefreq>monthly</changefreq>
     <priority>0.7</priority>
+    <xhtml:link rel="alternate" hreflang="it" href="https://finch-ai.it/blog/intelligenza-artificiale-studi-professionali"/>
+    <xhtml:link rel="alternate" hreflang="en" href="https://finch-ai.it/en/blog/intelligenza-artificiale-studi-professionali"/>
+    <xhtml:link rel="alternate" hreflang="x-default" href="https://finch-ai.it/blog/intelligenza-artificiale-studi-professionali"/>
   </url>
-
   <url>
     <loc>https://finch-ai.it/blog/ai-fatture-passive-document-intelligence-pmi</loc>
     <lastmod>2026-03-10</lastmod>
     <changefreq>monthly</changefreq>
     <priority>0.7</priority>
+    <xhtml:link rel="alternate" hreflang="it" href="https://finch-ai.it/blog/ai-fatture-passive-document-intelligence-pmi"/>
+    <xhtml:link rel="alternate" hreflang="en" href="https://finch-ai.it/en/blog/ai-fatture-passive-document-intelligence-pmi"/>
+    <xhtml:link rel="alternate" hreflang="x-default" href="https://finch-ai.it/blog/ai-fatture-passive-document-intelligence-pmi"/>
   </url>
-
   <url>
     <loc>https://finch-ai.it/blog/ai-analisi-dati-pmi-excel-access</loc>
     <lastmod>2026-03-12</lastmod>
     <changefreq>monthly</changefreq>
     <priority>0.7</priority>
+    <xhtml:link rel="alternate" hreflang="it" href="https://finch-ai.it/blog/ai-analisi-dati-pmi-excel-access"/>
+    <xhtml:link rel="alternate" hreflang="en" href="https://finch-ai.it/en/blog/ai-analisi-dati-pmi-excel-access"/>
+    <xhtml:link rel="alternate" hreflang="x-default" href="https://finch-ai.it/blog/ai-analisi-dati-pmi-excel-access"/>
   </url>
-
   <url>
     <loc>https://finch-ai.it/blog/analisi-finanziaria-5-minuti-pmi-finch-ai</loc>
-    <lastmod>2026-03-15</lastmod>
+    <lastmod>2026-03-13</lastmod>
     <changefreq>monthly</changefreq>
     <priority>0.7</priority>
+    <xhtml:link rel="alternate" hreflang="it" href="https://finch-ai.it/blog/analisi-finanziaria-5-minuti-pmi-finch-ai"/>
+    <xhtml:link rel="alternate" hreflang="en" href="https://finch-ai.it/en/blog/analisi-finanziaria-5-minuti-pmi-finch-ai"/>
+    <xhtml:link rel="alternate" hreflang="x-default" href="https://finch-ai.it/blog/analisi-finanziaria-5-minuti-pmi-finch-ai"/>
   </url>
-
   <url>
     <loc>https://finch-ai.it/blog/pmi-italiane-intelligenza-artificiale-gap-europeo</loc>
-    <lastmod>2026-03-20</lastmod>
+    <lastmod>2026-03-13</lastmod>
     <changefreq>monthly</changefreq>
     <priority>0.7</priority>
+    <xhtml:link rel="alternate" hreflang="it" href="https://finch-ai.it/blog/pmi-italiane-intelligenza-artificiale-gap-europeo"/>
+    <xhtml:link rel="alternate" hreflang="en" href="https://finch-ai.it/en/blog/pmi-italiane-intelligenza-artificiale-gap-europeo"/>
+    <xhtml:link rel="alternate" hreflang="x-default" href="https://finch-ai.it/blog/pmi-italiane-intelligenza-artificiale-gap-europeo"/>
   </url>
-
   <url>
     <loc>https://finch-ai.it/blog/ai-human-centered-potenziare-persone-non-sostituirle</loc>
-    <lastmod>2026-04-02</lastmod>
+    <lastmod>2026-03-17</lastmod>
     <changefreq>monthly</changefreq>
     <priority>0.7</priority>
+    <xhtml:link rel="alternate" hreflang="it" href="https://finch-ai.it/blog/ai-human-centered-potenziare-persone-non-sostituirle"/>
+    <xhtml:link rel="alternate" hreflang="en" href="https://finch-ai.it/en/blog/ai-human-centered-potenziare-persone-non-sostituirle"/>
+    <xhtml:link rel="alternate" hreflang="x-default" href="https://finch-ai.it/blog/ai-human-centered-potenziare-persone-non-sostituirle"/>
   </url>
-
   <url>
     <loc>https://finch-ai.it/blog/pmi-problema-dati-silos-frammentati</loc>
-    <lastmod>2026-04-15</lastmod>
+    <lastmod>2026-03-21</lastmod>
     <changefreq>monthly</changefreq>
     <priority>0.7</priority>
+    <xhtml:link rel="alternate" hreflang="it" href="https://finch-ai.it/blog/pmi-problema-dati-silos-frammentati"/>
+    <xhtml:link rel="alternate" hreflang="en" href="https://finch-ai.it/en/blog/pmi-problema-dati-silos-frammentati"/>
+    <xhtml:link rel="alternate" hreflang="x-default" href="https://finch-ai.it/blog/pmi-problema-dati-silos-frammentati"/>
+  </url>
+  <url>
+    <loc>https://finch-ai.it/blog/sistema-supporto-decisionale-ai-pmi-synapse</loc>
+    <lastmod>2026-05-18</lastmod>
+    <changefreq>monthly</changefreq>
+    <priority>0.7</priority>
+    <xhtml:link rel="alternate" hreflang="it" href="https://finch-ai.it/blog/sistema-supporto-decisionale-ai-pmi-synapse"/>
+    <xhtml:link rel="alternate" hreflang="en" href="https://finch-ai.it/en/blog/sistema-supporto-decisionale-ai-pmi-synapse"/>
+    <xhtml:link rel="alternate" hreflang="x-default" href="https://finch-ai.it/blog/sistema-supporto-decisionale-ai-pmi-synapse"/>
   </url>
 
 </urlset>

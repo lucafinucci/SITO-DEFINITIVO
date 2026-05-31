@@ -1,5 +1,7 @@
 import { useEffect, useMemo, useState } from "react";
 import { X, ArrowUpRight, Check } from "lucide-react";
+import { useTranslation } from "react-i18next";
+import { useLocalizedPath } from "@/i18n/routing";
 
 function validateEmail(email) {
   return /\S+@\S+\.\S+/.test(email.trim());
@@ -11,6 +13,8 @@ const DEFAULT_EMAIL = "info@finch-ai.it";
 const EMPTY = { name: "", email: "", phone: "", company: "", need: "", message: "", privacy: true };
 
 export default function ContactModal({ open, onClose, prefill }) {
+  const { t } = useTranslation("common");
+  const lp = useLocalizedPath();
   const [values, setValues] = useState(EMPTY);
   const [errors, setErrors] = useState({});
   const [status, setStatus] = useState("idle"); // idle | loading | success | error
@@ -44,10 +48,10 @@ export default function ContactModal({ open, onClose, prefill }) {
 
   const validate = () => {
     const next = {};
-    if (!values.name.trim()) next.name = "Inserisci il nome";
-    if (!validateEmail(values.email)) next.email = "Email non valida";
-    if (!values.message.trim()) next.message = "Inserisci un messaggio";
-    if (!values.privacy) next.privacy = "Consenso obbligatorio";
+    if (!values.name.trim()) next.name = t("contact.errors.name");
+    if (!validateEmail(values.email)) next.email = t("contact.errors.email");
+    if (!values.message.trim()) next.message = t("contact.errors.message");
+    if (!values.privacy) next.privacy = t("contact.errors.privacy");
     return next;
   };
 
@@ -74,7 +78,7 @@ export default function ContactModal({ open, onClose, prefill }) {
       setStatus("success");
     } catch (err) {
       setStatus("error");
-      setErrorMessage(`Invio non riuscito. Riprova o scrivi a ${DEFAULT_EMAIL}.`);
+      setErrorMessage(t("contact.errorMessage", { email: DEFAULT_EMAIL }));
     }
   };
 
@@ -85,7 +89,7 @@ export default function ContactModal({ open, onClose, prefill }) {
       className="fixed inset-0 z-[200] flex items-center justify-center p-4"
       role="dialog"
       aria-modal="true"
-      aria-label="Contatta Finch-AI"
+      aria-label={t("contact.ariaLabel")}
     >
       {/* backdrop */}
       <div className="absolute inset-0 bg-[#0B1E16]/55 backdrop-blur-sm animate-in fade-in duration-200" onClick={onClose} />
@@ -94,7 +98,7 @@ export default function ContactModal({ open, onClose, prefill }) {
       <div className="relative w-full max-w-lg max-h-[92vh] overflow-y-auto rounded-3xl border border-border bg-card shadow-2xl ring-1 ring-black/5 dark:ring-white/10 animate-in fade-in zoom-in-95 duration-200">
         <button
           onClick={onClose}
-          aria-label="Chiudi"
+          aria-label={t("contact.close")}
           className="absolute right-4 top-4 z-10 inline-flex h-9 w-9 items-center justify-center rounded-full text-muted-foreground transition-colors hover:bg-secondary hover:text-foreground"
         >
           <X size={18} />
@@ -106,61 +110,61 @@ export default function ContactModal({ open, onClose, prefill }) {
               <div className="mx-auto mb-5 grid h-14 w-14 place-items-center rounded-2xl" style={{ background: "var(--brand-grad, var(--green))", color: "#fff" }}>
                 <Check size={28} strokeWidth={2.5} />
               </div>
-              <h3 style={{ fontFamily: "var(--serif)" }} className="text-2xl font-medium text-foreground">Messaggio inviato</h3>
-              <p className="mt-3 text-[15px] text-muted-foreground">Ti rispondiamo entro 24h lavorative. Grazie!</p>
-              <button onClick={onClose} className="btn btn-primary" style={{ marginTop: 24 }}>Chiudi</button>
+              <h3 style={{ fontFamily: "var(--serif)" }} className="text-2xl font-medium text-foreground">{t("contact.successTitle")}</h3>
+              <p className="mt-3 text-[15px] text-muted-foreground">{t("contact.successText")}</p>
+              <button onClick={onClose} className="btn btn-primary" style={{ marginTop: 24 }}>{t("contact.close")}</button>
             </div>
           ) : (
             <>
-              <span className="eyebrow">Parla con noi</span>
+              <span className="eyebrow">{t("contact.eyebrow")}</span>
               <h3 style={{ fontFamily: "var(--serif)", fontWeight: 400 }} className="mt-3 text-[28px] leading-tight text-foreground">
-                Scrivici, ti rispondiamo presto
+                {t("contact.title")}
               </h3>
               <p className="mt-2 text-[15px] text-muted-foreground">
-                Raccontaci la tua esigenza: ti ricontattiamo entro 24h lavorative. Niente impegno.
+                {t("contact.subtitle")}
               </p>
 
               <form onSubmit={handleSubmit} className="mt-6 space-y-4">
                 <div className="grid gap-4 sm:grid-cols-2">
                   <div className="space-y-1.5">
-                    <label className="text-sm text-muted-foreground" htmlFor="cm-name">Nome e cognome *</label>
-                    <input id="cm-name" type="text" value={values.name} onChange={onChange("name")} className={inputCls} placeholder="Mario Rossi" />
+                    <label className="text-sm text-muted-foreground" htmlFor="cm-name">{t("contact.nameLabel")}</label>
+                    <input id="cm-name" type="text" value={values.name} onChange={onChange("name")} className={inputCls} placeholder={t("contact.namePlaceholder")} />
                     {errors.name && <p className="text-xs text-rose-500">{errors.name}</p>}
                   </div>
                   <div className="space-y-1.5">
-                    <label className="text-sm text-muted-foreground" htmlFor="cm-email">Email *</label>
-                    <input id="cm-email" type="email" value={values.email} onChange={onChange("email")} className={inputCls} placeholder="nome@azienda.it" />
+                    <label className="text-sm text-muted-foreground" htmlFor="cm-email">{t("contact.emailLabel")}</label>
+                    <input id="cm-email" type="email" value={values.email} onChange={onChange("email")} className={inputCls} placeholder={t("contact.emailPlaceholder")} />
                     {errors.email && <p className="text-xs text-rose-500">{errors.email}</p>}
                   </div>
                   <div className="space-y-1.5">
-                    <label className="text-sm text-muted-foreground" htmlFor="cm-phone">Telefono</label>
-                    <input id="cm-phone" type="tel" value={values.phone} onChange={onChange("phone")} className={inputCls} placeholder="+39 333 1234567" />
+                    <label className="text-sm text-muted-foreground" htmlFor="cm-phone">{t("contact.phoneLabel")}</label>
+                    <input id="cm-phone" type="tel" value={values.phone} onChange={onChange("phone")} className={inputCls} placeholder={t("contact.phonePlaceholder")} />
                   </div>
                   <div className="space-y-1.5">
-                    <label className="text-sm text-muted-foreground" htmlFor="cm-company">Azienda</label>
-                    <input id="cm-company" type="text" value={values.company} onChange={onChange("company")} className={inputCls} placeholder="Ragione sociale" />
+                    <label className="text-sm text-muted-foreground" htmlFor="cm-company">{t("contact.companyLabel")}</label>
+                    <input id="cm-company" type="text" value={values.company} onChange={onChange("company")} className={inputCls} placeholder={t("contact.companyPlaceholder")} />
                   </div>
                 </div>
 
                 <div className="space-y-1.5">
-                  <label className="text-sm text-muted-foreground" htmlFor="cm-message">Messaggio *</label>
-                  <textarea id="cm-message" rows={4} value={values.message} onChange={onChange("message")} className={inputCls} placeholder="Descrivi il caso d'uso o cosa vuoi ottenere" />
+                  <label className="text-sm text-muted-foreground" htmlFor="cm-message">{t("contact.messageLabel")}</label>
+                  <textarea id="cm-message" rows={4} value={values.message} onChange={onChange("message")} className={inputCls} placeholder={t("contact.messagePlaceholder")} />
                   {errors.message && <p className="text-xs text-rose-500">{errors.message}</p>}
                 </div>
 
                 <div className="flex items-start gap-2.5">
                   <input id="cm-privacy" type="checkbox" checked={values.privacy} onChange={onChange("privacy")} className="mt-1 h-4 w-4 rounded border-border text-primary focus:ring-primary" />
                   <label htmlFor="cm-privacy" className="text-sm text-muted-foreground">
-                    Accetto il trattamento dei dati secondo la <a href="/privacy-policy.html" className="text-primary hover:underline">Privacy Policy</a>.
+                    {t("contact.privacyLabel")} <a href={lp("/privacy-policy.html")} className="text-primary hover:underline">{t("contact.privacyLink")}</a>.
                   </label>
                 </div>
                 {errors.privacy && <p className="text-xs text-rose-500">{errors.privacy}</p>}
 
                 <div className="flex items-center gap-3 pt-1">
                   <button type="submit" disabled={status === "loading"} className="btn btn-primary" style={{ opacity: status === "loading" ? 0.7 : 1 }}>
-                    {status === "loading" ? "Invio..." : <>Invia il messaggio <ArrowUpRight size={16} /></>}
+                    {status === "loading" ? t("contact.submitting") : <>{t("contact.submit")} <ArrowUpRight size={16} /></>}
                   </button>
-                  <a href={`mailto:${DEFAULT_EMAIL}`} className="text-sm text-muted-foreground hover:text-foreground transition-colors">oppure {DEFAULT_EMAIL}</a>
+                  <a href={`mailto:${DEFAULT_EMAIL}`} className="text-sm text-muted-foreground hover:text-foreground transition-colors">{t("contact.orWrite")} {DEFAULT_EMAIL}</a>
                 </div>
 
                 {status === "error" && (

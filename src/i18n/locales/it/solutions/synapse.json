@@ -1,0 +1,129 @@
+{
+  "seo": {
+    "title": "Synapse — Finch-AI | Il cervello documentale della tua azienda",
+    "description": "Synapse di Finch-AI trasforma documenti, email, contratti e conversazioni sparse in un wiki vivo che si auto-mantiene. Conoscenza, supporto alle decisioni, valutazione e scrittura documenti per banche e aziende strutturate.",
+    "keywords": "Synapse, knowledge intelligence, wiki aziendale AI, knowledge graph, gestione documentale AI, enterprise AI, on-premise, RAG, citazioni verificabili",
+    "ldDescription": "Synapse di Finch-AI trasforma documenti, email, contratti e conversazioni sparse in un wiki vivo che si auto-mantiene, con risposte citate fino alla fonte."
+  },
+  "hero": {
+    "pill": "Knowledge Intelligence · Enterprise",
+    "title": "Il <em>cervello documentale</em> della tua azienda",
+    "lead": "Synapse trasforma documenti, contratti, email e conversazioni sparse in un wiki vivo che si auto-mantiene. La conoscenza aziendale smette di disperdersi: si accumula, si collega, e risponde — con ogni affermazione citata fino alla fonte originale.",
+    "ctaDemo": "Richiedi una demo",
+    "ctaHow": "Scopri come funziona",
+    "demoPrefill": "Demo Synapse",
+    "trust1": "Dati on-premise",
+    "trust2": "Citazioni verificabili",
+    "trust3": "Sempre aggiornato",
+    "cardLabel": "Chiedi a Synapse",
+    "chatUser": "Qual è l'SLA che stiamo offrendo a Beta SpA per il prodotto Plus?",
+    "chatWarn": "Ho trovato una discrepanza tra i documenti.",
+    "chatAnswerPre": "La proposta commerciale indica",
+    "chatCite1": "prop-Beta.pdf p.7",
+    "chatAnswerMid": ", ma la MSA nel data room riporta",
+    "chatCite2": "MSA-rev3 art.9.2",
+    "chatAnswerPost": ". Suggerisco di allineare prima della firma."
+  },
+  "strip": {
+    "banks": "Banche & Assicurazioni",
+    "legal": "Studi legali",
+    "health": "Sanità",
+    "manufacturing": "Manifatturiero",
+    "pa": "PA & Enti"
+  },
+  "problemHead": {
+    "eyebrow": "Il problema",
+    "title": "La tua azienda sa più di quanto riesca a ricordare",
+    "lead": "Ogni giorno produci conoscenza preziosa. Ma si disperde in mille sistemi, e quando serve nessuno la ritrova."
+  },
+  "problems": [
+    { "title": "Documenti sparsi", "desc": "Contratti su SharePoint, decisioni in email, know-how in conversazioni. Niente è collegato e tutto invecchia in silenzio." },
+    { "title": "Ricerche che ripartono da zero", "desc": "Ogni domanda costa ore: leggere gli stessi documenti, ricostruire lo stesso contesto, sperando di non perdere un dettaglio." },
+    { "title": "Il know-how se ne va", "desc": "Quando una persona chiave lascia l'azienda, porta con sé anni di esperienza che non è mai stata scritta da nessuna parte." }
+  ],
+  "howHead": {
+    "eyebrow": "Come funziona",
+    "title": "Da dati sparsi a conoscenza che lavora per te",
+    "lead": "Synapse legge le tue fonti, le compila in un cervello documentale vivo, e produce valore concreto — non semplici risposte."
+  },
+  "flow": {
+    "inLabel": "01 · Da dove prende i dati",
+    "inTitle": "Le tue fonti",
+    "coreLabel": "02 · Cosa è",
+    "coreTitle": "Il cervello Synapse",
+    "coreCardTitle": "Wiki vivo & knowledge graph",
+    "coreCardDesc": "Agenti AI estraggono entità, collegano concetti, rilevano contraddizioni e mantengono tutto aggiornato — con citazioni verificabili su ogni affermazione.",
+    "coreAutoTitle": "Auto-manutenzione",
+    "coreAutoDesc": "Si aggiorna ad ogni nuova fonte",
+    "outLabel": "03 · Cosa produce",
+    "outTitle": "Valore concreto",
+    "inNodes": [
+      { "t": "Documenti & contratti", "d": "PDF, Word, scansioni, OCR" },
+      { "t": "Email & Office 365", "d": "Outlook, SharePoint, Drive" },
+      { "t": "Chat & call", "d": "Teams, Slack, trascrizioni" },
+      { "t": "Gestionali & CRM", "d": "ERP, Salesforce, database" }
+    ],
+    "outNodes": [
+      { "t": "Conoscenza", "d": "Risposte istantanee citate" },
+      { "t": "Supporto alle decisioni", "d": "Confronti, rischi, alert" },
+      { "t": "Valutazione documenti", "d": "Due diligence, conformità" },
+      { "t": "Scrittura documenti", "d": "Bozze, report, sintesi" }
+    ]
+  },
+  "capsHead": {
+    "eyebrow": "Cosa produce",
+    "title": "Quattro modi in cui Synapse lavora per te",
+    "lead": "Non un chatbot che risponde e dimentica. Un sistema che accumula valore ogni giorno."
+  },
+  "caps": [
+    { "num": "01", "title": "Conoscenza", "desc": "Chiedi in linguaggio naturale e ottieni risposte precise, con ogni affermazione citata fino alla riga esatta della fonte originale.", "items": ["Ricerca semantica su tutto l'archivio", "Citazioni verificabili, niente allucinazioni", "Onboarding più rapido dei nuovi assunti"] },
+    { "num": "02", "title": "Supporto alle decisioni", "desc": "Synapse confronta documenti, rileva contraddizioni e incoerenze, segnala rischi e ti dà il quadro completo prima che tu decida.", "items": ["Rilevamento automatico di contraddizioni", "Alert proattivi su scadenze e rischi", "Confronti cross-documento istantanei"] },
+    { "num": "03", "title": "Valutazione documenti", "desc": "Carica un contratto, una proposta, un dossier di due diligence: Synapse lo analizza contro le tue policy e i tuoi standard, ed evidenzia ciò che conta.", "items": ["Gap analysis su normative e policy", "Estrazione di clausole e obblighi", "Red flag tracker per due diligence"] },
+    { "num": "04", "title": "Scrittura documenti", "desc": "Genera bozze di report, sintesi, risposte e proposte già fondate sulla tua conoscenza aziendale — pronte da rivedere, non da scrivere da zero.", "items": ["Report e sintesi con fonti integrate", "Bozze coerenti con il tuo stile aziendale", "Playbook ricorrenti automatizzati"] }
+  ],
+  "sourcesHead": {
+    "eyebrow": "Fonti dati",
+    "title": "Si connette dove vive già la tua conoscenza",
+    "lead": "Nessuna migrazione. Synapse legge le tue fonti dove sono — anche dietro il firewall aziendale."
+  },
+  "sources": [
+    { "nm": "SharePoint & Drive", "ds": "File server, cloud storage" },
+    { "nm": "Email & Exchange", "ds": "Outlook on-prem e cloud" },
+    { "nm": "Teams & Slack", "ds": "Conversazioni, trascrizioni" },
+    { "nm": "ERP & CRM", "ds": "Salesforce, gestionali, DB" },
+    { "nm": "Ticketing", "ds": "Zendesk, Jira, ServiceNow" },
+    { "nm": "Data room", "ds": "Due diligence, contratti" },
+    { "nm": "Audio & video", "ds": "Call, registrazioni, ASR" },
+    { "nm": "Web & normativa", "ds": "Gazzetta, siti, fonti pubbliche" }
+  ],
+  "enterprise": {
+    "eyebrow": "Sicurezza enterprise",
+    "title": "I tuoi dati non escono mai dal tuo <em>perimetro</em>",
+    "text": "Synapse è progettato per banche, assicurazioni, sanità e PA. Funziona dietro il tuo firewall, con i tuoi modelli, sotto il tuo controllo. Conformità non come opzione, ma come fondamenta.",
+    "cta": "Scopri le opzioni di deploy",
+    "feats": [
+      { "ft": "On-premise", "fd": "Deploy nel tuo cloud o data center" },
+      { "ft": "RBAC granulare", "fd": "Permessi fino alla singola pagina" },
+      { "ft": "Audit log immutabile", "fd": "Tracciabilità per SOC2 / ISO 27001" },
+      { "ft": "GDPR by design", "fd": "Right-to-be-forgotten nativo" }
+    ]
+  },
+  "deployHead": {
+    "eyebrow": "Distribuzione",
+    "title": "Dal cloud all'air-gapped, una sola piattaforma",
+    "lead": "Scegli il modello che rispetta i tuoi vincoli di compliance, senza compromessi sulle funzionalità."
+  },
+  "deploys": [
+    { "tag": "Cloud", "title": "SaaS gestito", "pr": "Operativo in pochi giorni", "feat": false, "items": ["Zero installazione", "Connettori OAuth pronti", "Aggiornamenti automatici"] },
+    { "tag": "Più scelto · Enterprise", "title": "Ibrido federato", "pr": "Dati on-prem, gestione cloud", "feat": true, "items": ["I dati restano dentro l'azienda", "Connettore sicuro dietro firewall", "Modelli LLM a tua scelta"] },
+    { "tag": "On-premise", "title": "Totalmente in casa", "pr": "Per i vincoli più stringenti", "feat": false, "items": ["Deploy sul tuo Kubernetes", "Modelli AI on-premise", "Anche ambienti air-gapped"] }
+  ],
+  "cta": {
+    "title": "Trasforma la tua conoscenza in vantaggio competitivo",
+    "text": "Scopri in una demo personalizzata come Synapse può dare voce ai documenti della tua azienda. Parliamo del tuo caso d'uso specifico.",
+    "ctaDemo": "Richiedi una demo",
+    "ctaExpert": "Parla con un esperto",
+    "demoPrefill": "Demo Synapse",
+    "expertPrefill": "Synapse — parla con un esperto"
+  }
+}

@@ -1,0 +1,120 @@
+{
+  "seo": {
+    "title": "Finance Intelligence | AI Financial Statement Analysis for SMEs",
+    "description": "From your Excel financials to a professional report. Financial ratios (ROE, ROI, EBITDA, Altman Z-Score), automatic reclassification, AI chat on your data. From €49/mo.",
+    "keywords": "AI financial analysis, automated financial statement analysis, SME financial reporting software, financial ratios ROE ROI EBITDA, Altman Z-Score, cash flow AI, CFO software for SMEs, Finance Intelligence, AI for accountants"
+  },
+  "hero": {
+    "pill": "Finance Intelligence · Financial AI for SMEs",
+    "title": "Your financials speak. <em>Now you can listen.</em>",
+    "lead": "Upload your income statement in Excel and get a professional financial report, ratios and trends — with an AI assistant that answers your questions about the numbers.",
+    "ctaTry": "Try for free",
+    "ctaHow": "See how it works",
+    "trust1": "OIC / IFRS-aligned reclassification",
+    "trust2": "GDPR · Data in the EU",
+    "trust3": "Data deleted after the test",
+    "vizHead": "From file to dialogue",
+    "vizBadge": "Workflow",
+    "vizLoop": "Talk to your financials"
+  },
+  "workflow": [
+    { "h": "Upload the Excel", "s": "Income statement" },
+    { "h": "The AI analyzes", "s": "Reclassification + ratios" },
+    { "h": "Financial report", "s": "Professional PDF" },
+    { "h": "Chat on the numbers", "s": "In natural language" }
+  ],
+  "video": {
+    "unsupported": "Your browser does not support the video tag.",
+    "cap": "Demo · AI Financial Analyst",
+    "link": "Watch how the AI analyzes a financial statement and answers in natural language."
+  },
+  "how": {
+    "eyebrow": "How it works",
+    "title": "From your Excel to a report, in three steps",
+    "lead": "No setup, no training. It works from the first minute."
+  },
+  "steps": [
+    { "k": "01", "h": "Upload your Excel", "p": "Drag in your income statement. We accept any format: the system recognizes the structure." },
+    { "k": "02", "h": "The AI analyzes everything", "p": "Reclassification, financial ratios, margin analysis and year-over-year trends. All automatic." },
+    { "k": "03", "h": "Talk to your numbers", "p": "Download the PDF report, then ask the AI: \"What's my operating margin?\" \"Where am I losing margin?\"" }
+  ],
+  "featuresHead": {
+    "eyebrow": "Features",
+    "title": "Everything a CFO would want",
+    "lead": "Designed for people who run a business, not for accountants."
+  },
+  "features": [
+    { "title": "Professional financial report", "desc": "Reclassification aligned with recognized accounting standards. Ready for the bank, the investor or the board." },
+    { "title": "Complete financial ratios", "desc": "ROE, ROI, ROS, EBITDA margin, liquidity, capital solidity and Altman Z-Score — calculated and explained in plain language." },
+    { "title": "AI chat in plain language", "desc": "Ask questions about your data in natural language: the AI understands context and answers with your company's numbers." },
+    { "title": "Multi-year comparison", "desc": "Upload multiple years and visualize the trends. The AI spots significant changes and flags critical points." },
+    { "title": "Professional PDF export", "desc": "A report with charts, tables and AI commentary. Ready to share with no further edits." },
+    { "title": "Built for your market", "desc": "Local accounting terminology and standards. Designed to fit your regulatory context." }
+  ],
+  "privacyHead": {
+    "eyebrow": "Your data, your rules",
+    "title": "Try it worry-free. Total deletion.",
+    "lead": "We know financial data is sensitive. That's why the system is designed with privacy at its core.",
+    "promiseTitle": "Our promise on your data",
+    "promiseSub": "Full transparency on what happens with your information",
+    "note": "In short: upload, analyze, download the report. Then everything disappears. Only your email remains."
+  },
+  "privacy": [
+    { "title": "The Excel is not stored", "desc": "The file is processed in memory to generate the report. It is not saved on our servers." },
+    { "title": "Automatic deletion", "desc": "After you download the report and the session ends, the analysis data is deleted." },
+    { "title": "We only keep your email", "desc": "The only data we retain is your email address, to get back to you. No financial data." },
+    { "title": "GDPR · EU servers", "desc": "European, GDPR-compliant infrastructure. Your data never leaves the European Union." }
+  ],
+  "pricingHead": {
+    "eyebrow": "Pricing",
+    "title": "Less than a coffee a day",
+    "lead": "Choose the right plan for your business. You can change or cancel anytime.",
+    "featureCol": "Features",
+    "recommended": "Recommended"
+  },
+  "plans": [
+    { "name": "Demo", "price": "Free", "per": "trial", "feat": false, "btn": "Start free" },
+    { "name": "Starter", "price": "€49", "per": "/mo", "feat": false, "btn": "Starter" },
+    { "name": "Professional", "price": "€99", "per": "/mo", "feat": true, "btn": "Professional" },
+    { "name": "Business", "price": "€299", "per": "/mo", "feat": false, "btn": "Business" },
+    { "name": "Enterprise", "price": "Custom", "per": "", "feat": false, "btn": "Contact us" }
+  ],
+  "customPrice": "Custom",
+  "rows": [
+    { "label": "Reports / month", "vals": ["2", "5", "10", "20", "Unlimited"] },
+    { "label": "Financial ratios", "vals": ["6", "6–8", "15+", "20+", "Custom"] },
+    { "label": "Reclassification", "vals": [null, null, "Full", "Full + custom", "Fully custom"] },
+    { "label": "Trend analysis", "vals": [null, null, "Multi-year", "+ projections", "+ scenarios"] },
+    { "label": "AI chat", "vals": ["5 questions", "30/mo", "60/mo", "Unlimited", "Unlimited"] },
+    { "label": "PDF export", "vals": [null, "Basic", "Professional", "White-label", "Full custom"] },
+    { "label": "Users", "vals": ["1", "1", "3", "5", "30+"] },
+    { "label": "What-If scenarios", "vals": [false, false, false, true, true] },
+    { "label": "ERP / API integration", "vals": [false, false, false, false, true] },
+    { "label": "SSO / SAML", "vals": [false, false, false, false, true] },
+    { "label": "Guaranteed SLA", "vals": [null, null, null, null, "99.5%"] },
+    { "label": "Support", "vals": ["Self-service", "Email 48h", "Email 24h", "Priority", "Dedicated + AM"] }
+  ],
+  "related": {
+    "eyebrow": "The other Finch-AI solutions",
+    "title": "Complete your AI stack",
+    "card1Tag": "Document Intelligence",
+    "card1Title": "Extract data from invoices, delivery notes and receipts",
+    "card1Text": "Ready-to-use AI for business documents, with an Android app for field operators and ERP integration.",
+    "card1Go": "Discover Document Intelligence",
+    "card2Tag": "OmniFlow · Warehouse",
+    "card2Title": "The AI management system for the whole commercial cycle",
+    "card2Text": "Purchasing, inventory, sales, orders and finance in a single system with built-in AI.",
+    "card2Go": "Discover OmniFlow"
+  },
+  "cta": {
+    "title": "Try it now. Free. No commitment.",
+    "text": "Upload your income statement and discover what the AI sees in your numbers. All you need is an Excel file.",
+    "ctaTry": "Try for free",
+    "ctaHow": "See how it works"
+  },
+  "faqs": [
+    { "q": "Is my financial data safe?", "a": "Yes. The Excel file is processed in memory, never stored on our servers, and the analysis data is deleted at the end of the session. We only keep your email address. European, GDPR-compliant infrastructure." },
+    { "q": "Does the report follow recognized accounting standards?", "a": "Yes: the reclassification follows recognized accounting standards, with proper financial terminology." },
+    { "q": "How much does it cost?", "a": "Plans start with Starter at €49/mo. A free Demo is available. The Professional (€99/mo) and Business (€299/mo) plans expand reports, ratios and features; for enterprise needs there's a custom offer." }
+  ]
+}

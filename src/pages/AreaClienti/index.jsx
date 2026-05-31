@@ -1,10 +1,12 @@
 import { useState, useEffect } from 'react';
 import { Routes, Route, Navigate } from 'react-router-dom';
+import { useTranslation } from 'react-i18next';
 import Login from './Login';
 import Dashboard from './Dashboard';
 import SEO from '../../components/SEO';
 
 export default function AreaClienti() {
+  const { t } = useTranslation('common');
   const [isAuthenticated, setIsAuthenticated] = useState(false);
   const [loading, setLoading] = useState(true);
 
@@ -62,7 +64,7 @@ export default function AreaClienti() {
       <div className="min-h-screen bg-gradient-to-br from-slate-950 via-slate-900 to-slate-950 flex items-center justify-center">
         <div className="text-center">
           <div className="w-16 h-16 border-4 border-cyan-500 border-t-transparent rounded-full animate-spin mx-auto mb-4" />
-          <p className="text-slate-400">Caricamento...</p>
+          <p className="text-slate-400">{t('area.loading')}</p>
         </div>
       </div>
     );
@@ -71,8 +73,8 @@ export default function AreaClienti() {
   return (
     <>
       <SEO
-        title="Area Clienti | Finch-AI"
-        description="Accedi alla tua area riservata Finch-AI."
+        title={t('area.seoTitle')}
+        description={t('area.seoDescription')}
         canonical="https://finch-ai.it/area-clienti"
         noIndex={true}
       />
