@@ -100,7 +100,6 @@ export default function Home() {
               <div className="hero-stats reveal d4">
                 <div className="hero-stat"><div className="n">{t("hero.stat1n")}</div><div className="l">{t("hero.stat1l")}</div></div>
                 <div className="hero-stat"><div className="n">{t("hero.stat2n")}</div><div className="l">{t("hero.stat2l")}</div></div>
-                <div className="hero-stat"><div className="n">100<span>%</span></div><div className="l">{t("hero.stat3l")}</div></div>
               </div>
             </div>
 

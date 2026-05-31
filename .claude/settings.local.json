@@ -76,7 +76,9 @@
       "PowerShell($p = \"c:\\\\Users\\\\fdani\\\\Documents\\\\Progetti AI\\\\SITO-DEFINITIVO\\\\public\\\\assets\\\\videos\\\\warehouse-intelligence-demo.html\"; $c = [System.IO.File]::ReadAllText\\($p\\); $c = $c.Replace\\(\"L'azienda opera a silos.\", \"L'azienda opera a compartimenti stagni.\"\\); [System.IO.File]::WriteAllText\\($p, $c\\); \"done\")",
       "Bash(python c:/tmp/extract_video_text.py)",
       "Bash(python c:/tmp/make_en_video.py)",
-      "PowerShell(npm run build)"
+      "PowerShell(npm run build)",
+      "PowerShell(try { $x = [xml]\\(Get-Content \"public/sitemap.xml\" -Raw\\); \"XML VALIDO - URL totali: \" + $x.urlset.url.Count } catch { \"ERRORE XML: \" + $_.Exception.Message })",
+      "PowerShell(try { $r = Invoke-WebRequest -Uri \"https://www.finch-ai.it/sitemap.xml\" -UseBasicParsing -TimeoutSec 20; \"WWW STATUS: \" + $r.StatusCode + \" | Content-Type: \" + $r.Headers['Content-Type']; \"PRIMI 200 CHAR:\"; $r.Content.Substring\\(0,[Math]::Min\\(200,$r.Content.Length\\)\\) } catch { \"ERRORE WWW: \" + $_.Exception.Message })"
     ],
     "deny": [],
     "ask": [],
