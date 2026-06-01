@@ -1,6 +1,6 @@
 import { useEffect } from "react";
 import { Link } from "react-router-dom";
-import { ArrowUpRight, ArrowDown, Check } from "lucide-react";
+import { ArrowUpRight, ArrowDown, Check, Download } from "lucide-react";
 import { useTranslation } from "react-i18next";
 import Navbar from "@/components/Navbar";
 import Footer from "@/components/Footer";
@@ -297,6 +297,16 @@ export default function Home() {
               <p className="lead reveal d2">{t("news.lead")}</p>
             </div>
             <div className="news-grid">
+              <a
+                href={`${lp("/")}#stampa`}
+                onClick={(e) => { e.preventDefault(); document.getElementById("stampa")?.scrollIntoView({ behavior: "smooth" }); }}
+                className="news-card reveal"
+              >
+                <div className="news-meta"><span className="nc">{t("news.cardRepCat")}</span><span className="nd">{t("news.cardRepDate")}</span></div>
+                <h3>{t("news.cardRepTitle")}</h3>
+                <p>{t("news.cardRepText")}</p>
+                <span className="news-go">{t("news.cardRepGo")} <ArrowUpRight size={14} /></span>
+              </a>
               <a href="https://partner24ore.ilsole24ore.com/partner/finch-ai/" target="_blank" rel="noopener noreferrer" className="news-card reveal">
                 <div className="news-meta"><span className="nc">{t("news.card1Cat")}</span><span className="nd">{t("news.card1Date")}</span></div>
                 <h3>{t("news.card1Title")}</h3>
@@ -345,14 +355,14 @@ export default function Home() {
                   </div>
                   <span className="go">{t("press.card1Go")} <ArrowUpRight size={14} /></span>
                 </a>
-                <div className="press-card soon reveal d2">
+                <a href="/LaRepubblica-Finch-AI.pdf" download className="press-card reveal d2">
                   <div>
                     <span className="kick">{t("press.card2Kick")}</span>
                     <div className="src">la <span className="it">Repubblica</span></div>
                     <p>{t("press.card2Text")}</p>
                   </div>
-                  <span className="badge-soon">{t("press.card2Badge")}</span>
-                </div>
+                  <span className="go">{t("press.card2Go")} <Download size={14} /></span>
+                </a>
               </div>
             </div>
             <p className="video-cap reveal">{t("press.videoCap")}</p>

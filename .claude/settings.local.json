@@ -85,7 +85,10 @@
       "Bash(taskkill /PID 38192 /F)",
       "PowerShell(Stop-Process -Id 38192 -Force)",
       "PowerShell(\"killed\")",
-      "Bash(node -e \"try{require.resolve\\('playwright'\\);console.log\\('playwright OK'\\)}catch\\(e\\){try{require.resolve\\('puppeteer'\\);console.log\\('puppeteer OK'\\)}catch\\(e2\\){console.log\\('none'\\)}}\")"
+      "Bash(node -e \"try{require.resolve\\('playwright'\\);console.log\\('playwright OK'\\)}catch\\(e\\){try{require.resolve\\('puppeteer'\\);console.log\\('puppeteer OK'\\)}catch\\(e2\\){console.log\\('none'\\)}}\")",
+      "Bash(node -e \"const it=require\\('./src/i18n/locales/it/home.json'\\); console.log\\('PRESS:', JSON.stringify\\(it.press,null,2\\)\\); console.log\\('NEWS:', JSON.stringify\\(it.news,null,2\\)\\);\")",
+      "Bash(node -e \"const en=require\\('./src/i18n/locales/en/home.json'\\); console.log\\('PRESS:', JSON.stringify\\(en.press,null,2\\)\\); console.log\\('NEWS:', JSON.stringify\\(en.news,null,2\\)\\);\")",
+      "Bash(node -e \"JSON.parse\\(require\\('fs'\\).readFileSync\\('src/i18n/locales/it/home.json','utf8'\\)\\); JSON.parse\\(require\\('fs'\\).readFileSync\\('src/i18n/locales/en/home.json','utf8'\\)\\); console.log\\('Both JSON files valid'\\);\")"
     ],
     "deny": [],
     "ask": [],

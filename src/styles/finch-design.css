@@ -400,7 +400,7 @@ body[data-theme="online"] .footer-social a:hover{color:#fff;background:#52C53A;b
 .news{background:var(--paper-2)}
 .news-head{display:grid;grid-template-columns:1fr 1fr;gap:clamp(28px,5vw,80px);align-items:end;margin-bottom:clamp(40px,5vw,64px)}
 .news-head .h2 em{color:var(--green)}
-.news-grid{display:grid;grid-template-columns:repeat(3,1fr);gap:clamp(16px,2vw,24px)}
+.news-grid{display:grid;grid-template-columns:repeat(auto-fit,minmax(255px,1fr));gap:clamp(16px,2vw,24px)}
 .news-card{
   background:var(--fcard);border:1px solid var(--line);border-radius:var(--radius-lg);
   padding:clamp(24px,2.4vw,30px);display:flex;flex-direction:column;gap:14px;
