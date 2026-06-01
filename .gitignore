@@ -26,6 +26,9 @@ node_modules/
 #dist/
 build/
 
+# RAG index (generato a build-time)
+public/rag/chunks.json
+
 # Temporary files
 *.tmp
 *.temp
