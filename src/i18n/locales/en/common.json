@@ -71,6 +71,25 @@
     },
     "demoPrefill": "Demo request"
   },
+  "chat": {
+    "title": "Finch-AI Assistant",
+    "subtitle": "Answers based on the site's content",
+    "openAria": "Open AI assistant",
+    "close": "Close",
+    "reset": "New conversation",
+    "send": "Send",
+    "placeholder": "Type your question...",
+    "welcome": "Hi! I'm Finch-AI's assistant. I can answer questions about solutions, pricing, blog articles and features. Where would you like to start?",
+    "suggested": [
+      "What does Document Intelligence do?",
+      "How much is Finance Intelligence?",
+      "What is OmniFlow?",
+      "How does Synapse work?"
+    ],
+    "gdpr": "Your questions are sent to OpenAI to generate the answer. Please don't include personal or confidential data.",
+    "privacyLink": "Privacy Policy",
+    "errorGeneric": "Something went wrong. Please try again."
+  },
   "area": {
     "seoTitle": "Client Area | Finch-AI",
     "seoDescription": "Sign in to your Finch-AI private area.",

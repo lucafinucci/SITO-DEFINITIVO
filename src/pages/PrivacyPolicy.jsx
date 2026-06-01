@@ -9,7 +9,7 @@ const CONTENT = {
         "Informativa sul trattamento dei dati personali di Finch-AI ai sensi del Regolamento (UE) 2016/679 (GDPR).",
       keywords: "privacy policy, GDPR, trattamento dati, Finch-AI",
     },
-    lastUpdated: "Ultimo aggiornamento: 31 maggio 2026",
+    lastUpdated: "Ultimo aggiornamento: 1 giugno 2026",
     title: "Privacy Policy",
     intro:
       "La presente informativa descrive le modalità di trattamento dei dati personali degli utenti che consultano questo sito e che interagiscono con Finch-AI, in conformità al Regolamento (UE) 2016/679 (GDPR) e alla normativa italiana vigente.",
@@ -55,7 +55,16 @@ const CONTENT = {
         ],
       },
       {
-        heading: "6. Diritti dell'interessato",
+        heading: "6. Assistente AI (chatbot)",
+        blocks: [
+          "Il sito mette a disposizione un assistente conversazionale basato su intelligenza artificiale che risponde a domande sui contenuti pubblici del sito (soluzioni, articoli, prezzi).",
+          "Quando interagisci con l'assistente, il testo della tua domanda viene inviato a OpenAI, L.L.C. (sub-responsabile del trattamento) per generare la risposta. OpenAI tratta i dati secondo i propri termini per API enterprise (https://openai.com/policies/) e dichiara di non utilizzare i contenuti inviati via API per addestrare i propri modelli.",
+          "Base giuridica: legittimo interesse a fornire un servizio informativo automatizzato. La conversazione è conservata localmente nel tuo browser (sessionStorage) e viene cancellata alla chiusura della scheda o tramite il pulsante \"Nuova conversazione\". Lato server conserviamo soltanto log tecnici anonimi (hash della domanda, timestamp) per il monitoraggio della qualità.",
+          "Ti invitiamo a non inserire nella chat dati personali identificativi, riservati o particolari (es. dati sanitari, credenziali, dati di clienti terzi). Per richieste che riguardano dati personali utilizza il modulo di contatto.",
+        ],
+      },
+      {
+        heading: "7. Diritti dell'interessato",
         blocks: [
           "In qualità di interessato, hai il diritto di:",
           [
@@ -68,7 +77,7 @@ const CONTENT = {
         ],
       },
       {
-        heading: "7. Cookie",
+        heading: "8. Cookie",
         blocks: [
           "Questo sito utilizza cookie e tecnologie simili. Per maggiori dettagli consulta la Cookie Policy.",
         ],
@@ -82,7 +91,7 @@ const CONTENT = {
         "How Finch-AI processes personal data under Regulation (EU) 2016/679 (GDPR).",
       keywords: "privacy policy, GDPR, data processing, Finch-AI",
     },
-    lastUpdated: "Last updated: 31 May 2026",
+    lastUpdated: "Last updated: 1 June 2026",
     title: "Privacy Policy",
     intro:
       "This policy describes how the personal data of users who browse this website and interact with Finch-AI is processed, in accordance with Regulation (EU) 2016/679 (GDPR) and applicable Italian law.",
@@ -128,7 +137,16 @@ const CONTENT = {
         ],
       },
       {
-        heading: "6. Your rights",
+        heading: "6. AI assistant (chatbot)",
+        blocks: [
+          "The website provides an AI-powered conversational assistant that answers questions based on the public site content (solutions, articles, pricing).",
+          "When you interact with the assistant, the text of your message is sent to OpenAI, L.L.C. (sub-processor) to generate the answer. OpenAI processes the data under its API enterprise terms (https://openai.com/policies/) and states that content sent via API is not used to train its models.",
+          "Legal basis: legitimate interest in providing an automated informational service. The conversation is stored locally in your browser (sessionStorage) and cleared when you close the tab or use the \"New conversation\" button. On the server side we only keep anonymized technical logs (hashed question, timestamp) for quality monitoring.",
+          "Please do not include identifiable personal data, confidential information or special categories (e.g. health data, credentials, third-party customer data) in the chat. For requests involving personal data please use the contact form.",
+        ],
+      },
+      {
+        heading: "7. Your rights",
         blocks: [
           "As a data subject, you have the right to:",
           [
@@ -141,7 +159,7 @@ const CONTENT = {
         ],
       },
       {
-        heading: "7. Cookies",
+        heading: "8. Cookies",
         blocks: [
           "This website uses cookies and similar technologies. For more details, see the Cookie Policy.",
         ],

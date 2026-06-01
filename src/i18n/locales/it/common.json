@@ -71,6 +71,25 @@
     },
     "demoPrefill": "Richiesta demo"
   },
+  "chat": {
+    "title": "Assistente Finch-AI",
+    "subtitle": "Risposte basate sui contenuti del sito",
+    "openAria": "Apri assistente AI",
+    "close": "Chiudi",
+    "reset": "Nuova conversazione",
+    "send": "Invia",
+    "placeholder": "Scrivi la tua domanda...",
+    "welcome": "Ciao! Sono l'assistente AI di Finch-AI. Posso rispondere a domande su soluzioni, prezzi, articoli del blog e funzionalità. Da dove vuoi partire?",
+    "suggested": [
+      "Cosa fa Document Intelligence?",
+      "Quanto costa Finance Intelligence?",
+      "Cos'è OmniFlow?",
+      "Come funziona Synapse?"
+    ],
+    "gdpr": "Le tue domande vengono inviate a OpenAI per generare la risposta. Non inserire dati personali o riservati.",
+    "privacyLink": "Privacy Policy",
+    "errorGeneric": "Si è verificato un errore. Riprova tra qualche istante."
+  },
   "area": {
     "seoTitle": "Area Clienti | Finch-AI",
     "seoDescription": "Accedi alla tua area riservata Finch-AI.",
