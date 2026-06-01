@@ -1,5 +1,6 @@
 <?php
 require __DIR__ . '/includes/db.php';
+require_once __DIR__ . '/includes/security.php';
 
 if (session_status() === PHP_SESSION_NONE) {
     session_start();
@@ -25,7 +26,18 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
     $email = trim($_POST['email'] ?? '');
     $password = $_POST['password'] ?? '';
 
-    if ($email && $password) {
+    // Verifica CSRF
+    if (!Security::verifyCSRFToken($_POST['csrf_token'] ?? '')) {
+        $error = 'Sessione scaduta, riprova.';
+    } else {
+        // Rate limiting / brute-force lockout (per email + IP)
+        $rlId = strtolower($email) . '|' . Security::getClientIP();
+        $rl = Security::checkRateLimit($rlId);
+
+        if (!$rl['allowed']) {
+            $mins = (int) ceil(($rl['remaining_time'] ?? 0) / 60);
+            $error = "Troppi tentativi falliti. Riprova tra circa {$mins} minuti.";
+        } elseif ($email && $password) {
         // Query utente
         $stmt = $pdo->prepare('
             SELECT id, email, password_hash, nome, cognome, ruolo, mfa_enabled AS auth_2fa_enabled
@@ -38,6 +50,8 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
 
         if ($user && password_verify($password, $user['password_hash'])) {
             // Login riuscito
+            Security::resetRateLimit($rlId);
+            session_regenerate_id(true);
             $_SESSION['cliente_id'] = $user['id'];
             $_SESSION['cliente_email'] = $user['email'];
             $_SESSION['cliente_nome_completo'] = trim($user['nome'] . ' ' . $user['cognome']);
@@ -53,10 +67,12 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
             }
             exit;
         } else {
+            Security::recordFailedAttempt($rlId);
             $error = 'Credenziali non valide';
         }
-    } else {
-        $error = 'Inserisci email e password';
+        } else {
+            $error = 'Inserisci email e password';
+        }
     }
 }
 ?>
@@ -420,6 +436,7 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
 
     <!-- Form -->
     <form method="post">
+      <?php echo Security::csrfField(); ?>
       <div class="form-group">
         <label for="email">Email aziendale o Username</label>
         <input

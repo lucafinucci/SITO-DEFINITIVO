@@ -1,4 +1,10 @@
 Options -MultiViews
+
+# Blocca l'accesso HTTP ai file .env (contengono la chiave OpenAI runtime e le credenziali DB)
+<FilesMatch "^\.env">
+  Require all denied
+</FilesMatch>
+
 RewriteEngine On
 RewriteCond %{REQUEST_FILENAME} !-f
 RewriteCond %{REQUEST_FILENAME} !-d

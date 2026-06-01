@@ -113,7 +113,8 @@
       "consentLink": "Privacy Policy",
       "submit": "Invia richiesta",
       "submitting": "Invio in corso...",
-      "success": "Richiesta inviata! Il team Finch-AI ti ricontatterà per fissare l'appuntamento.",
+      "success": "Richiesta inviata! Ti abbiamo mandato una email di conferma e il team Finch-AI ti ricontatterà per fissare l'appuntamento.",
+      "bookCta": "Pianifica la riunione",
       "error": "Invio non riuscito. Riprova o scrivi a info@finch-ai.it.",
       "back": "Torna alla chat",
       "errors": {

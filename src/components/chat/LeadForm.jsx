@@ -1,5 +1,5 @@
 import { useMemo, useState } from "react";
-import { ArrowLeft, Check, Send } from "lucide-react";
+import { ArrowLeft, Calendar, Check, Send } from "lucide-react";
 import { useTranslation } from "react-i18next";
 import { useLocalizedPath } from "@/i18n/routing";
 import { track } from "@/lib/track";
@@ -19,7 +19,7 @@ function buildTranscript(messages) {
 }
 
 export default function LeadForm({ messages = [], onBack }) {
-  const { t } = useTranslation("common");
+  const { t, i18n } = useTranslation("common");
   const lp = useLocalizedPath();
 
   // Precompila la descrizione con l'ultimo messaggio dell'utente, se presente.
@@ -45,6 +45,9 @@ export default function LeadForm({ messages = [], onBack }) {
     () => import.meta.env.VITE_CONTACT_ENDPOINT || DEFAULT_ENDPOINT,
     []
   );
+
+  // Link prenotazione (Calendly): mostrato solo se configurato via env. Disattivato finché non c'è l'account.
+  const bookingUrl = import.meta.env.VITE_BOOKING_URL || "";
 
   const onChange = (field) => (e) => {
     const value = field === "privacy" ? e.target.checked : e.target.value;
@@ -90,6 +93,11 @@ export default function LeadForm({ messages = [], onBack }) {
       company: values.company,
       need: "Richiesta valutazione + appuntamento (chatbot)",
       message,
+      problem: values.problem,
+      day: values.day,
+      slot: slotLabel(values.slot),
+      transcript,
+      lang: i18n.language || "it",
       source: typeof window !== "undefined" ? window.location.href : "",
     };
 
@@ -108,7 +116,7 @@ export default function LeadForm({ messages = [], onBack }) {
   };
 
   const inputCls =
-    "w-full rounded-lg border border-border bg-muted/50 px-3 py-2 text-sm text-foreground placeholder:text-muted-foreground/70 focus:border-primary focus:outline-none focus:ring-2 focus:ring-primary/20 transition";
+    "w-full rounded-lg border border-border bg-muted/50 px-3 py-2 text-base sm:text-sm text-foreground placeholder:text-muted-foreground/70 focus:border-primary focus:outline-none focus:ring-2 focus:ring-primary/20 transition";
 
   if (status === "success") {
     return (
@@ -117,6 +125,17 @@ export default function LeadForm({ messages = [], onBack }) {
           <Check size={24} strokeWidth={2.5} />
         </div>
         <p className="text-sm text-foreground">{t("chat.lead.success")}</p>
+        {bookingUrl && (
+          <a
+            href={bookingUrl}
+            target="_blank"
+            rel="noopener noreferrer"
+            onClick={() => track("chat_lead_book_clicked", { slot: values.slot })}
+            className="inline-flex w-full items-center justify-center gap-2 rounded-xl bg-primary px-4 py-2.5 text-sm font-semibold text-primary-foreground hover:bg-primary/90 transition-colors"
+          >
+            <Calendar size={15} /> {t("chat.lead.bookCta")}
+          </a>
+        )}
         <button
           type="button"
           onClick={onBack}

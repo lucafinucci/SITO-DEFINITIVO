@@ -108,7 +108,13 @@
       "Bash(php -i)",
       "Bash(npx esbuild *)",
       "Bash(echo \"esbuild check done \\(exit $?\\)\")",
-      "Bash(echo \"---EXIT $?---\")"
+      "Bash(echo \"---EXIT $?---\")",
+      "Bash(git stash *)",
+      "PowerShell($php = \\(Get-Command php -ErrorAction SilentlyContinue\\); if \\($php\\) { php -l \"public\\\\contact.php\" } else { \"php not found on PATH\" })",
+      "PowerShell(& \"C:\\\\tools\\\\php85\\\\php.exe\" -l \"public\\\\contact.php\")",
+      "PowerShell(Get-Process php -ErrorAction SilentlyContinue)",
+      "PowerShell(Stop-Process -Force -ErrorAction SilentlyContinue)",
+      "PowerShell(\"server fermato\")"
     ],
     "deny": [],
     "ask": [],

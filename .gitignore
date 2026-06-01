@@ -44,3 +44,31 @@ public/rag/chunks.json
 credentials.json
 nul
 **/nul
+
+# Local-only dev/setup/reset scripts — MUST NOT be deployed (security)
+RESET_*.php
+RICREA_*.php
+SETUP_*.php
+FIX_*.php
+fix-*.php
+fix-*.sql
+genera-*.php
+generate-*.php
+init-db-*.php
+database/init.php
+database/quick_setup_*.sql
+database/setup_test_*.sql
+test-*.php
+**/test-db*.php
+**/test-login*.php
+**/dashboard-test.php
+**/login-simple*.php
+area-clienti/debug.php
+area-clienti/reset-admin-password.php
+# Local Windows helper scripts / setup notes (not for deploy)
+*.bat
+RESET_*.md
+FIX_*.md
+SETUP_*.md
+DEBUG_*.md
+FIX_*.txt

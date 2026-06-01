@@ -34,8 +34,8 @@ class AuditLogger {
             $this->currentUserEmail = $user['email'];
             $this->currentUserRole = $user['ruolo'];
 
-            // Imposta variabile MySQL per trigger
-            $this->pdo->exec("SET @current_admin_id = {$this->currentUserId}");
+            // Imposta variabile MySQL per trigger (cast a int: previene SQL injection)
+            $this->pdo->exec('SET @current_admin_id = ' . (int) $this->currentUserId);
         }
     }
 

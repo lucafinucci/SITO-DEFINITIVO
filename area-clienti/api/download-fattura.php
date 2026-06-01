@@ -324,7 +324,7 @@ if ($usePdfConversion && function_exists('shell_exec')) {
     $tmpHtml = tempnam(sys_get_temp_dir(), 'invoice_') . '.html';
     $tmpPdf = tempnam(sys_get_temp_dir(), 'invoice_') . '.pdf';
     file_put_contents($tmpHtml, $html);
-    shell_exec("wkhtmltopdf $tmpHtml $tmpPdf");
+    shell_exec('wkhtmltopdf ' . escapeshellarg($tmpHtml) . ' ' . escapeshellarg($tmpPdf));
 
     if (file_exists($tmpPdf)) {
         header('Content-Type: application/pdf');

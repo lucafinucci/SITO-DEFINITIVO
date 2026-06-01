@@ -61,7 +61,8 @@ export default function ChatWidget() {
         aria-label={open ? t("chat.close") : t("chat.openAria")}
         aria-expanded={open}
         className={[
-          "fixed z-[55] bottom-5 right-5 sm:bottom-6 sm:right-6",
+          "fixed z-[55] right-5 sm:right-6",
+          "bottom-[calc(1.25rem_+_env(safe-area-inset-bottom))] sm:bottom-[calc(1.5rem_+_env(safe-area-inset-bottom))]",
           "h-14 w-14 rounded-full grid place-items-center",
           "bg-primary text-primary-foreground shadow-lg shadow-primary/30",
           "hover:scale-105 active:scale-95 transition-transform",

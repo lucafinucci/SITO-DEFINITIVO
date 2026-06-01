@@ -113,7 +113,8 @@
       "consentLink": "Privacy Policy",
       "submit": "Send request",
       "submitting": "Sending...",
-      "success": "Request sent! The Finch-AI team will get back to you to schedule the meeting.",
+      "success": "Request sent! We've emailed you a confirmation and the Finch-AI team will get back to you to schedule the meeting.",
+      "bookCta": "Schedule the meeting",
       "error": "Sending failed. Please retry or write to info@finch-ai.it.",
       "back": "Back to chat",
       "errors": {

@@ -15,9 +15,14 @@ export default function ChatPanel({ open, onClose, chat }) {
 
   const [input, setInput] = useState("");
   const [view, setView] = useState("chat"); // "chat" | "lead"
+  // Spazio occupato dalla tastiera virtuale su mobile (0 su desktop / tastiera chiusa).
+  const [kbInset, setKbInset] = useState(0);
   const inputRef = useRef(null);
   const scrollRef = useRef(null);
   const lastFocusRef = useRef(null);
+
+  const isMobile = () =>
+    typeof window !== "undefined" && window.innerWidth < 640;
 
   const openLead = () => { setView("lead"); track("chat_lead_open"); };
   const backToChat = () => setView("chat");
@@ -30,7 +35,35 @@ export default function ChatPanel({ open, onClose, chat }) {
     if (!open || !scrollRef.current) return;
     const el = scrollRef.current;
     el.scrollTop = el.scrollHeight;
-  }, [open, messages]);
+  }, [open, messages, kbInset]);
+
+  // Mobile: solleva il pannello sopra la tastiera virtuale usando visualViewport.
+  // Su desktop o tastiera chiusa l'inset è 0 (nessun override del layout).
+  useEffect(() => {
+    const vv = typeof window !== "undefined" ? window.visualViewport : null;
+    if (!open || !vv) return;
+    const update = () => {
+      if (!isMobile()) { setKbInset(0); return; }
+      const inset = Math.max(0, window.innerHeight - vv.height - vv.offsetTop);
+      setKbInset(inset);
+    };
+    update();
+    vv.addEventListener("resize", update);
+    vv.addEventListener("scroll", update);
+    return () => {
+      vv.removeEventListener("resize", update);
+      vv.removeEventListener("scroll", update);
+      setKbInset(0);
+    };
+  }, [open]);
+
+  // Mobile: blocca lo scroll della pagina dietro al pannello fullscreen.
+  useEffect(() => {
+    if (!open || !isMobile()) return;
+    const prev = document.body.style.overflow;
+    document.body.style.overflow = "hidden";
+    return () => { document.body.style.overflow = prev; };
+  }, [open]);
 
   // ESC per chiudere, focus iniziale sull'input, restore focus alla chiusura
   useEffect(() => {
@@ -69,6 +102,9 @@ export default function ChatPanel({ open, onClose, chat }) {
           animate={{ opacity: 1, y: 0, scale: 1 }}
           exit={{ opacity: 0, y: 24, scale: 0.98 }}
           transition={{ duration: 0.18, ease: "easeOut" }}
+          // Su mobile, quando la tastiera è aperta alziamo il bordo inferiore (override
+          // di bottom-2); su desktop kbInset=0 → resta valido sm:bottom-24.
+          style={kbInset ? { bottom: `calc(0.5rem + ${kbInset}px)` } : undefined}
           className={[
             "fixed z-[60] flex flex-col",
             "bg-background/95 backdrop-blur-md border border-border/70 shadow-2xl",
@@ -94,7 +130,7 @@ export default function ChatPanel({ open, onClose, chat }) {
               disabled={streaming || messages.length === 0}
               title={t("chat.reset")}
               aria-label={t("chat.reset")}
-              className="p-1.5 rounded-md text-muted-foreground hover:bg-muted disabled:opacity-30"
+              className="p-2 rounded-md text-muted-foreground hover:bg-muted disabled:opacity-30"
             >
               <RefreshCw size={14} />
             </button>
@@ -103,7 +139,7 @@ export default function ChatPanel({ open, onClose, chat }) {
               onClick={onClose}
               title={t("chat.close")}
               aria-label={t("chat.close")}
-              className="p-1.5 rounded-md text-muted-foreground hover:bg-muted"
+              className="p-2 rounded-md text-muted-foreground hover:bg-muted"
             >
               <X size={16} />
             </button>
@@ -151,7 +187,7 @@ export default function ChatPanel({ open, onClose, chat }) {
 
           {/* Input (nascosto nella vista lead) */}
           {view === "chat" && (
-          <form onSubmit={handleSend} className="border-t border-border/60 bg-card/30">
+          <form onSubmit={handleSend} className="border-t border-border/60 bg-card/30 pb-[env(safe-area-inset-bottom)]">
             <div className="flex items-end gap-2 px-3 py-2.5">
               <textarea
                 ref={inputRef}
@@ -167,13 +203,13 @@ export default function ChatPanel({ open, onClose, chat }) {
                 rows={1}
                 maxLength={1500}
                 disabled={streaming}
-                className="flex-1 resize-none bg-transparent text-sm leading-snug px-2 py-1.5 max-h-32 outline-none placeholder:text-muted-foreground/70 disabled:opacity-60"
+                className="flex-1 resize-none bg-transparent text-base sm:text-sm leading-snug px-2 py-1.5 max-h-32 outline-none placeholder:text-muted-foreground/70 disabled:opacity-60"
               />
               <button
                 type="submit"
                 disabled={!input.trim() || streaming}
                 aria-label={t("chat.send")}
-                className="shrink-0 grid place-items-center w-9 h-9 rounded-xl bg-primary text-primary-foreground hover:bg-primary/90 disabled:opacity-40 disabled:cursor-not-allowed transition-colors"
+                className="shrink-0 grid place-items-center w-10 h-10 sm:w-9 sm:h-9 rounded-xl bg-primary text-primary-foreground hover:bg-primary/90 disabled:opacity-40 disabled:cursor-not-allowed transition-colors"
               >
                 <Send size={15} />
               </button>
