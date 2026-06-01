@@ -77,6 +77,17 @@ function MessageBubble({ role, content, sources, error, streaming }) {
   // Riparsa solo quando content cambia: durante streaming evita re-allocazione dei nodi.
   const blocks = useMemo(() => (isEmpty ? null : renderBlocks(content)), [content, isEmpty]);
 
+  // Mostra in fondo SOLO le fonti effettivamente citate inline nella risposta.
+  // Se il modello non ha usato il contesto del sito, non compare alcun riferimento.
+  const shownSources = useMemo(() => {
+    if (!sources?.length || !content) return [];
+    const cited = new Set();
+    CITATION_RE.lastIndex = 0;
+    let m;
+    while ((m = CITATION_RE.exec(content)) !== null) cited.add(m[1]);
+    return sources.filter((s) => cited.has(String(s.n)));
+  }, [sources, content]);
+
   return (
     <div className={`flex ${isUser ? "justify-end" : "justify-start"}`}>
       <div className={bubbleClass(isUser, error)}>
@@ -89,9 +100,9 @@ function MessageBubble({ role, content, sources, error, streaming }) {
         ) : (
           blocks
         )}
-        {!isUser && sources?.length > 0 && !streaming && !error && (
+        {!isUser && shownSources.length > 0 && !streaming && !error && (
           <ul className="mt-2 pt-2 border-t border-border/50 space-y-1 text-[0.7rem] text-muted-foreground">
-            {sources.map((s) => (
+            {shownSources.map((s) => (
               <li key={s.n} className="flex gap-1.5">
                 <span className="font-semibold text-primary">[{s.n}]</span>
                 <Link

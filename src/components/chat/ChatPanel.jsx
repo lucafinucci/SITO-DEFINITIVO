@@ -1,10 +1,12 @@
 import { useEffect, useLayoutEffect, useRef, useState } from "react";
 import { AnimatePresence, motion } from "framer-motion";
-import { X, Send, RefreshCw, ShieldAlert } from "lucide-react";
+import { X, Send, RefreshCw, ShieldAlert, CalendarCheck } from "lucide-react";
 import { useTranslation } from "react-i18next";
 import { useLocalizedPath } from "@/i18n/routing";
+import { track } from "@/lib/track";
 import MessageBubble from "./MessageBubble";
 import SuggestedQuestions from "./SuggestedQuestions";
+import LeadForm from "./LeadForm";
 
 export default function ChatPanel({ open, onClose, chat }) {
   const { t } = useTranslation("common");
@@ -12,9 +14,16 @@ export default function ChatPanel({ open, onClose, chat }) {
   const { messages, streaming, sendMessage, reset } = chat;
 
   const [input, setInput] = useState("");
+  const [view, setView] = useState("chat"); // "chat" | "lead"
   const inputRef = useRef(null);
   const scrollRef = useRef(null);
   const lastFocusRef = useRef(null);
+
+  const openLead = () => { setView("lead"); track("chat_lead_open"); };
+  const backToChat = () => setView("chat");
+
+  // Torna sempre alla vista chat quando il pannello viene chiuso.
+  useEffect(() => { if (!open) setView("chat"); }, [open]);
 
   // Auto-scroll quando arrivano nuovi messaggi o delta
   useLayoutEffect(() => {
@@ -74,7 +83,8 @@ export default function ChatPanel({ open, onClose, chat }) {
             </div>
             <div className="flex-1 min-w-0">
               <h2 className="text-sm font-semibold leading-tight truncate">{t("chat.title")}</h2>
-              <p className="text-[0.7rem] text-muted-foreground leading-tight truncate">
+              <p className="text-[0.7rem] text-muted-foreground leading-tight truncate flex items-center gap-1.5">
+                <span className="inline-block w-1.5 h-1.5 rounded-full bg-emerald-500" />
                 {t("chat.subtitle")}
               </p>
             </div>
@@ -105,7 +115,9 @@ export default function ChatPanel({ open, onClose, chat }) {
             className="flex-1 overflow-y-auto px-3 py-3 space-y-3"
             aria-live="polite"
           >
-            {messages.length === 0 ? (
+            {view === "lead" ? (
+              <LeadForm messages={messages} onBack={backToChat} />
+            ) : messages.length === 0 ? (
               <div className="space-y-3 pt-2">
                 <div className="text-sm text-muted-foreground px-1">{t("chat.welcome")}</div>
                 <SuggestedQuestions onPick={handlePick} />
@@ -124,7 +136,21 @@ export default function ChatPanel({ open, onClose, chat }) {
             )}
           </div>
 
-          {/* Input */}
+          {/* CTA: richiedi valutazione / appuntamento (nascosta nella vista lead) */}
+          {view === "chat" && (
+            <div className="border-t border-border/60 bg-card/20 px-3 py-2">
+              <button
+                type="button"
+                onClick={openLead}
+                className="w-full inline-flex items-center justify-center gap-2 rounded-xl border border-primary/40 bg-primary/10 px-3 py-2 text-sm font-medium text-primary hover:bg-primary/20 transition-colors"
+              >
+                <CalendarCheck size={16} /> {t("chat.lead.cta")}
+              </button>
+            </div>
+          )}
+
+          {/* Input (nascosto nella vista lead) */}
+          {view === "chat" && (
           <form onSubmit={handleSend} className="border-t border-border/60 bg-card/30">
             <div className="flex items-end gap-2 px-3 py-2.5">
               <textarea
@@ -162,6 +188,7 @@ export default function ChatPanel({ open, onClose, chat }) {
               </span>
             </p>
           </form>
+          )}
         </motion.div>
       )}
     </AnimatePresence>

@@ -1,7 +1,6 @@
 import { useRef, useEffect } from "react";
 import Navbar from "./Navbar";
 import Footer from "./Footer";
-import ChatWidget from "./chat/ChatWidget";
 import { useTheme } from "../context/ThemeContext";
 
 export default function Layout({ children }) {
@@ -110,8 +109,6 @@ export default function Layout({ children }) {
             </main>
 
             <Footer />
-
-            <ChatWidget />
         </div>
     );
 }

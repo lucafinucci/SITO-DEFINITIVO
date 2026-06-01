@@ -1,6 +1,7 @@
 import { useEffect } from 'react';
 import { Routes, Route } from 'react-router-dom';
 import { useTranslation } from 'react-i18next';
+import ChatWidget from "@/components/chat/ChatWidget";
 import Home from "@/pages/Home";
 import AreaClienti from "@/pages/AreaClienti";
 import DocumentIntelligence from "@/pages/DocumentIntelligence";
@@ -63,9 +64,13 @@ function LocalizedApp({ lang }) {
 
 export default function App() {
   return (
-    <Routes>
-      <Route path="/en/*" element={<LocalizedApp lang="en" />} />
-      <Route path="/*" element={<LocalizedApp lang="it" />} />
-    </Routes>
+    <>
+      <Routes>
+        <Route path="/en/*" element={<LocalizedApp lang="en" />} />
+        <Route path="/*" element={<LocalizedApp lang="it" />} />
+      </Routes>
+      {/* Montato a livello globale: compare su tutto il sito (si auto-nasconde su /area-clienti) */}
+      <ChatWidget />
+    </>
   );
 }
