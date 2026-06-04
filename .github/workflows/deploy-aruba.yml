@@ -50,6 +50,11 @@ jobs:
           local-dir: ./dist/
           server-dir: /www.finch-ai.it/
 
+          # Nome del file di stato: cambiato per forzare un re-upload completo
+          # (la cartella assets/ era stata rimossa a mano dal server e il vecchio
+          # stato la dava ancora presente). Da non rimuovere.
+          state-name: .ftp-deploy-state-v2.json
+
           # NON toccare area-clienti e cartelle operative
           exclude: |
             area-clienti/**
