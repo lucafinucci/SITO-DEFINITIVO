@@ -1,0 +1,1 @@
+import{j as i}from"./vendor-qrqH1cDy.js";import{A as a}from"./ArticlePage-Bj82WV1d.js";import"./Layout-BYX-vKYE.js";import"./index-CaLHfhb4.js";function l(){return i.jsx(a,{k:"analisi-dati",slug:"ai-analisi-dati-pmi-excel-access",canonical:"https://finch-ai.it/blog/ai-analisi-dati-pmi-excel-access"})}export{l as default};

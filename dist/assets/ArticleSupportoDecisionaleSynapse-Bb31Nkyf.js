@@ -1,0 +1,1 @@
+import{j as s}from"./vendor-qrqH1cDy.js";import{A as i}from"./ArticlePage-Bj82WV1d.js";import"./Layout-BYX-vKYE.js";import"./index-CaLHfhb4.js";function p(){return s.jsx(i,{k:"synapse-dss",slug:"sistema-supporto-decisionale-ai-pmi-synapse",canonical:"https://finch-ai.it/blog/sistema-supporto-decisionale-ai-pmi-synapse"})}export{p as default};

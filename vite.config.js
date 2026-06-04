@@ -24,19 +24,12 @@ export default defineConfig({
   build: {
     rollupOptions: {
       output: {
-        // Separa le dipendenze di terze parti in chunk dedicati e cacheabili,
-        // così il bundle dell'app resta sotto la soglia di warning.
+        // Tutte le dipendenze di terze parti in un unico chunk `vendor`.
+        // NB: NON dividere React/react-dom/scheduler/react-router in chunk
+        // separati: crea dipendenze circolari tra chunk e l'errore a runtime
+        // "Cannot access '...' before initialization". Un solo vendor è sicuro.
         manualChunks(id) {
           if (id.includes('node_modules')) {
-            if (id.includes('react-router') || id.includes('react-dom') || id.includes('/react/')) {
-              return 'react-vendor';
-            }
-            if (id.includes('i18next') || id.includes('react-i18next')) {
-              return 'i18n-vendor';
-            }
-            if (id.includes('framer-motion')) {
-              return 'motion-vendor';
-            }
             return 'vendor';
           }
         },

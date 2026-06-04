@@ -1,0 +1,1 @@
+import{j as i}from"./vendor-qrqH1cDy.js";import{A as t}from"./ArticlePage-Bj82WV1d.js";import"./Layout-BYX-vKYE.js";import"./index-CaLHfhb4.js";function e(){return i.jsx(t,{k:"studi",slug:"intelligenza-artificiale-studi-professionali",canonical:"https://finch-ai.it/blog/intelligenza-artificiale-studi-professionali"})}export{e as default};

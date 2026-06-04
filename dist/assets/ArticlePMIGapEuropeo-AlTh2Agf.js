@@ -1,0 +1,1 @@
+import{j as i}from"./vendor-qrqH1cDy.js";import{A as a}from"./ArticlePage-Bj82WV1d.js";import"./Layout-BYX-vKYE.js";import"./index-CaLHfhb4.js";function p(){return i.jsx(a,{k:"gap-europeo",slug:"pmi-italiane-intelligenza-artificiale-gap-europeo",canonical:"https://finch-ai.it/blog/pmi-italiane-intelligenza-artificiale-gap-europeo"})}export{p as default};
