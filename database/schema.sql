@@ -119,3 +119,21 @@ CREATE TABLE IF NOT EXISTS access_logs (
     INDEX idx_ip (ip_address),
     INDEX idx_data (created_at)
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci;
+
+-- Tabella Consensi Cookie (GDPR - prova del consenso)
+CREATE TABLE IF NOT EXISTS consensi_cookie (
+    id INT AUTO_INCREMENT PRIMARY KEY,
+    consent_id VARCHAR(36) NOT NULL,
+    ip_address VARCHAR(45),
+    user_agent TEXT,
+    consent_version VARCHAR(20) NOT NULL,
+    necessari TINYINT(1) NOT NULL DEFAULT 1,
+    statistici TINYINT(1) NOT NULL DEFAULT 0,
+    marketing TINYINT(1) NOT NULL DEFAULT 0,
+    azione VARCHAR(20) NOT NULL,
+    lingua VARCHAR(5) DEFAULT 'it',
+    page_url VARCHAR(500),
+    created_at TIMESTAMP DEFAULT CURRENT_TIMESTAMP,
+    INDEX idx_consent (consent_id),
+    INDEX idx_created (created_at)
+) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci;

@@ -2,6 +2,7 @@ import { useEffect, useMemo, useState } from "react";
 import { X, ArrowUpRight, Check } from "lucide-react";
 import { useTranslation } from "react-i18next";
 import { useLocalizedPath } from "@/i18n/routing";
+import { track } from "@/lib/track";
 
 function validateEmail(email) {
   return /\S+@\S+\.\S+/.test(email.trim());
@@ -76,6 +77,7 @@ export default function ContactModal({ open, onClose, prefill }) {
       });
       if (!res.ok) throw new Error("Request failed");
       setStatus("success");
+      track("generate_lead", { method: "contact_modal", source: payload.source });
     } catch (err) {
       setStatus("error");
       setErrorMessage(t("contact.errorMessage", { email: DEFAULT_EMAIL }));
