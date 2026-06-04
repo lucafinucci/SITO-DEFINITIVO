@@ -1,0 +1,1 @@
+import{j as i}from"./vendor-qrqH1cDy.js";import{A as t}from"./ArticlePage-Bj82WV1d.js";import"./Layout-BYX-vKYE.js";import"./index-CaLHfhb4.js";function s(){return i.jsx(t,{k:"dati-silos",slug:"pmi-problema-dati-silos-frammentati",canonical:"https://finch-ai.it/blog/pmi-problema-dati-silos-frammentati"})}export{s as default};

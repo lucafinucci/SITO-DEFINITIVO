@@ -1,0 +1,1 @@
+import{j as t}from"./vendor-qrqH1cDy.js";import{A as i}from"./ArticlePage-Bj82WV1d.js";import"./Layout-BYX-vKYE.js";import"./index-CaLHfhb4.js";function n(){return t.jsx(i,{k:"fatture-passive",slug:"ai-fatture-passive-document-intelligence-pmi",canonical:"https://finch-ai.it/blog/ai-fatture-passive-document-intelligence-pmi"})}export{n as default};

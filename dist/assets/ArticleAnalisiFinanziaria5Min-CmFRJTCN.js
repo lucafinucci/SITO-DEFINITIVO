@@ -1,0 +1,1 @@
+import{j as i}from"./vendor-qrqH1cDy.js";import{A as a}from"./ArticlePage-Bj82WV1d.js";import"./Layout-BYX-vKYE.js";import"./index-CaLHfhb4.js";function m(){return i.jsx(a,{k:"analisi-finanziaria",slug:"analisi-finanziaria-5-minuti-pmi-finch-ai",canonical:"https://finch-ai.it/blog/analisi-finanziaria-5-minuti-pmi-finch-ai"})}export{m as default};

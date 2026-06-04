@@ -1,0 +1,1 @@
+import{j as i}from"./vendor-qrqH1cDy.js";import{A as t}from"./ArticlePage-Bj82WV1d.js";import"./Layout-BYX-vKYE.js";import"./index-CaLHfhb4.js";function m(){return i.jsx(t,{k:"imprenditori",slug:"intelligenza-artificiale-imprenditori-commercialisti",canonical:"https://finch-ai.it/blog/intelligenza-artificiale-imprenditori-commercialisti"})}export{m as default};

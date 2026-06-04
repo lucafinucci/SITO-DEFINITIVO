@@ -1,0 +1,1 @@
+import{j as t}from"./vendor-qrqH1cDy.js";import{A as e}from"./ArticlePage-Bj82WV1d.js";import"./Layout-BYX-vKYE.js";import"./index-CaLHfhb4.js";function a(){return t.jsx(e,{k:"ddt",slug:"document-intelligence-automazione-ddt-bolle-consegna",canonical:"https://finch-ai.it/blog/document-intelligence-automazione-ddt-bolle-consegna"})}export{a as default};

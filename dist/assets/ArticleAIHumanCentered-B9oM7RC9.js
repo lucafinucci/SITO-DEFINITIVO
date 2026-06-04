@@ -1,0 +1,1 @@
+import{j as e}from"./vendor-qrqH1cDy.js";import{A as t}from"./ArticlePage-Bj82WV1d.js";import"./Layout-BYX-vKYE.js";import"./index-CaLHfhb4.js";function a(){return e.jsx(t,{k:"human-centered",slug:"ai-human-centered-potenziare-persone-non-sostituirle",canonical:"https://finch-ai.it/blog/ai-human-centered-potenziare-persone-non-sostituirle"})}export{a as default};
