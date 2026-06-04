@@ -1,32 +1,38 @@
-import { useEffect } from 'react';
+import { useEffect, lazy, Suspense } from 'react';
 import { Routes, Route } from 'react-router-dom';
 import { useTranslation } from 'react-i18next';
 import ChatWidget from "@/components/chat/ChatWidget";
+import CookieConsent from "@/components/CookieConsent";
+import RouteTracker from "@/components/RouteTracker";
 import Home from "@/pages/Home";
-import AreaClienti from "@/pages/AreaClienti";
-import DocumentIntelligence from "@/pages/DocumentIntelligence";
-import FinanceIntelligence from "@/pages/FinanceIntelligence";
-import WarehouseIntelligence from "@/pages/WarehouseIntelligence";
-import Synapse from "@/pages/Synapse";
-import APS from "@/pages/APS";
-import ArticleAIImprenditori from "@/pages/ArticleAIImprenditori";
-import ArticleDocumentIntelligenceDDT from "@/pages/ArticleDocumentIntelligenceDDT";
-import ArticleStudiProfessionali from "@/pages/ArticleStudiProfessionali";
-import ArticleAIFatturePassive from "@/pages/ArticleAIFatturePassive";
-import ArticleAIAnalisiDati from "@/pages/ArticleAIAnalisiDati";
-import ArticleAnalisiFinanziaria5Min from "@/pages/ArticleAnalisiFinanziaria5Min";
-import ArticlePMIGapEuropeo from "@/pages/ArticlePMIGapEuropeo";
-import ArticleAIHumanCentered from "@/pages/ArticleAIHumanCentered";
-import ArticlePMIDatiSilos from "@/pages/ArticlePMIDatiSilos";
-import ArticleSupportoDecisionaleSynapse from "@/pages/ArticleSupportoDecisionaleSynapse";
-import Blog from "@/pages/Blog";
-import PrivacyPolicy from "@/pages/PrivacyPolicy";
-import CookiePolicy from "@/pages/CookiePolicy";
+
+// Le pagine secondarie sono caricate on-demand (code-splitting) per ridurre
+// il bundle iniziale. Home resta eager perché è la landing page.
+const AreaClienti = lazy(() => import("@/pages/AreaClienti"));
+const DocumentIntelligence = lazy(() => import("@/pages/DocumentIntelligence"));
+const FinanceIntelligence = lazy(() => import("@/pages/FinanceIntelligence"));
+const WarehouseIntelligence = lazy(() => import("@/pages/WarehouseIntelligence"));
+const Synapse = lazy(() => import("@/pages/Synapse"));
+const APS = lazy(() => import("@/pages/APS"));
+const ArticleAIImprenditori = lazy(() => import("@/pages/ArticleAIImprenditori"));
+const ArticleDocumentIntelligenceDDT = lazy(() => import("@/pages/ArticleDocumentIntelligenceDDT"));
+const ArticleStudiProfessionali = lazy(() => import("@/pages/ArticleStudiProfessionali"));
+const ArticleAIFatturePassive = lazy(() => import("@/pages/ArticleAIFatturePassive"));
+const ArticleAIAnalisiDati = lazy(() => import("@/pages/ArticleAIAnalisiDati"));
+const ArticleAnalisiFinanziaria5Min = lazy(() => import("@/pages/ArticleAnalisiFinanziaria5Min"));
+const ArticlePMIGapEuropeo = lazy(() => import("@/pages/ArticlePMIGapEuropeo"));
+const ArticleAIHumanCentered = lazy(() => import("@/pages/ArticleAIHumanCentered"));
+const ArticlePMIDatiSilos = lazy(() => import("@/pages/ArticlePMIDatiSilos"));
+const ArticleSupportoDecisionaleSynapse = lazy(() => import("@/pages/ArticleSupportoDecisionaleSynapse"));
+const Blog = lazy(() => import("@/pages/Blog"));
+const PrivacyPolicy = lazy(() => import("@/pages/PrivacyPolicy"));
+const CookiePolicy = lazy(() => import("@/pages/CookiePolicy"));
 
 // The full route tree, defined once with paths relative to the language root
 // so it can be mounted under both `/` (Italian) and `/en` (English).
 function LocalizedRoutes() {
   return (
+    <Suspense fallback={null}>
     <Routes>
       <Route index element={<Home />} />
       <Route path="area-clienti/*" element={<AreaClienti />} />
@@ -49,6 +55,7 @@ function LocalizedRoutes() {
       <Route path="blog/pmi-problema-dati-silos-frammentati" element={<ArticlePMIDatiSilos />} />
       <Route path="blog/sistema-supporto-decisionale-ai-pmi-synapse" element={<ArticleSupportoDecisionaleSynapse />} />
     </Routes>
+    </Suspense>
   );
 }
 
@@ -69,8 +76,12 @@ export default function App() {
         <Route path="/en/*" element={<LocalizedApp lang="en" />} />
         <Route path="/*" element={<LocalizedApp lang="it" />} />
       </Routes>
+      {/* Tracking page_view sui cambi route (SPA) */}
+      <RouteTracker />
       {/* Montato a livello globale: compare su tutto il sito (si auto-nasconde su /area-clienti) */}
       <ChatWidget />
+      {/* Banner consenso cookie (Google Consent Mode v2) */}
+      <CookieConsent />
     </>
   );
 }

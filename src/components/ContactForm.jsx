@@ -1,4 +1,5 @@
 import { useMemo, useState } from "react";
+import { track } from "@/lib/track";
 
 function validateEmail(email) {
   return /\S+@\S+\.\S+/.test(email.trim());
@@ -84,6 +85,7 @@ export default function ContactForm({ defaultEmail = "info@finch-ai.it" }) {
       }
 
       setStatus("success");
+      track("generate_lead", { method: "contact_form", source: payload.source });
       setValues({
         name: "",
         email: "",

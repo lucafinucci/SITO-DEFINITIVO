@@ -110,6 +110,7 @@ export default function LeadForm({ messages = [], onBack }) {
       if (!res.ok) throw new Error("Request failed");
       setStatus("success");
       track("chat_lead_submitted", { slot: values.slot });
+      track("generate_lead", { method: "chat", slot: values.slot });
     } catch {
       setStatus("error");
     }

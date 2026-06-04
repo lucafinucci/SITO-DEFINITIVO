@@ -1,6 +1,6 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <urlset xmlns="http://www.sitemaps.org/schemas/sitemap/0.9"
-        xmlns:image="http://www.google.com/schemas/sitemap-image/0.9"
+        xmlns:image="http://www.google.com/schemas/sitemap-image/1.1"
         xmlns:xhtml="http://www.w3.org/1999/xhtml">
 
   <!-- ============ HOME ============ -->
@@ -14,7 +14,6 @@
     <xhtml:link rel="alternate" hreflang="x-default" href="https://finch-ai.it/"/>
     <image:image>
       <image:loc>https://finch-ai.it/assets/images/LOGO.png</image:loc>
-      <image:title>Finch-AI — Piattaforma AI per PMI italiane</image:title>
     </image:image>
   </url>
   <url>
@@ -38,7 +37,6 @@
     <xhtml:link rel="alternate" hreflang="x-default" href="https://finch-ai.it/soluzioni/warehouse-intelligence"/>
     <image:image>
       <image:loc>https://finch-ai.it/assets/images/warehouse/dashboard.png</image:loc>
-      <image:title>OmniFlow — Dashboard del gestionale AI Warehouse Intelligence</image:title>
     </image:image>
   </url>
   <url>
@@ -80,7 +78,6 @@
     <xhtml:link rel="alternate" hreflang="x-default" href="https://finch-ai.it/soluzioni/document-intelligence"/>
     <image:image>
       <image:loc>https://finch-ai.it/assets/images/infografica_document_intelligence.png</image:loc>
-      <image:title>Document Intelligence — Automazione DDT e fatture con AI</image:title>
     </image:image>
   </url>
   <url>
