@@ -1,9 +1,10 @@
 import { Link, useLocation, useNavigate } from "react-router-dom";
 import { useTranslation } from "react-i18next";
 import { useLocalizedPath } from "@/i18n/routing";
+import { OPEN_CONSENT_EVENT } from "@/components/CookieConsent";
 
 export default function Footer() {
-  const { t } = useTranslation("common");
+  const { t, i18n } = useTranslation("common");
   const lp = useLocalizedPath();
   const location = useLocation();
   const navigate = useNavigate();
@@ -98,6 +99,12 @@ export default function Footer() {
           <div className="fp">
             <RouteLink to="/privacy-policy">{t("footer.privacy")}</RouteLink>
             <RouteLink to="/cookie-policy">{t("footer.cookie")}</RouteLink>
+            <a
+              href="#"
+              onClick={(e) => { e.preventDefault(); window.dispatchEvent(new Event(OPEN_CONSENT_EVENT)); }}
+            >
+              {i18n.language?.startsWith("en") ? "Manage cookies" : "Gestisci cookie"}
+            </a>
             <a href="mailto:info@finch-ai.it">info@finch-ai.it</a>
           </div>
         </div>

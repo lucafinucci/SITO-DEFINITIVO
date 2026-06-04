@@ -114,7 +114,9 @@
       "PowerShell(& \"C:\\\\tools\\\\php85\\\\php.exe\" -l \"public\\\\contact.php\")",
       "PowerShell(Get-Process php -ErrorAction SilentlyContinue)",
       "PowerShell(Stop-Process -Force -ErrorAction SilentlyContinue)",
-      "PowerShell(\"server fermato\")"
+      "PowerShell(\"server fermato\")",
+      "Bash(ls -1 *deploy* *.config.js ftp*)",
+      "Bash(grep -ilE \"ftp|deploy\" package.json)"
     ],
     "deny": [],
     "ask": [],
