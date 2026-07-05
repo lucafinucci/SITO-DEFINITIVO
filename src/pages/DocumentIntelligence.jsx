@@ -390,7 +390,7 @@ export default function DocumentIntelligence() {
                             <h2 className="h2">{t('document.pricingHead.title')}</h2>
                             <p className="lead">{t('document.pricingHead.lead')}</p>
                         </div>
-                        <div className="sol-price-grid reveal">
+                        <div className={`sol-price-grid reveal${arr(plans).length === 1 ? ' solo' : ''}`}>
                             {arr(plans).map((p) => (
                                 <div className={`sol-plan${p.feat ? ' feat' : ''}`} key={p.name}>
                                     {p.feat && <span className="pop">{t('document.pricingHead.popular')}</span>}
@@ -403,7 +403,11 @@ export default function DocumentIntelligence() {
                                             <li key={k}><span>{k}</span>{typeof v === 'boolean' ? (v ? <Check /> : <Minus className="no" />) : <b>{v}</b>}</li>
                                         ))}
                                     </ul>
-                                    <a href={APP_URL} target="_blank" rel="noopener" className={`btn ${p.feat ? 'btn-primary' : 'btn-ghost'}`}>{p.btn}</a>
+                                    {p.name === 'Enterprise' ? (
+                                        <button type="button" onClick={openContact} className="btn btn-primary">{p.btn}</button>
+                                    ) : (
+                                        <a href={APP_URL} target="_blank" rel="noopener" className={`btn ${p.feat ? 'btn-primary' : 'btn-ghost'}`}>{p.btn}</a>
+                                    )}
                                 </div>
                             ))}
                         </div>

@@ -147,6 +147,7 @@
 
 /* ---------- pricing cards ---------- */
 .sol-price-grid{display:grid;grid-template-columns:repeat(5,1fr);gap:16px;align-items:stretch}
+.sol-price-grid.solo{grid-template-columns:1fr;max-width:520px;margin:0 auto}
 .sol-plan{background:var(--fcard);border:1px solid var(--line);border-radius:var(--radius-lg);padding:26px 22px;display:flex;flex-direction:column;position:relative;transition:transform .25s,box-shadow .25s}
 .sol-plan:hover{transform:translateY(-4px);box-shadow:0 24px 50px -30px rgba(11,30,22,.4)}
 .sol-plan.feat{border-color:transparent;box-shadow:0 24px 60px -30px rgba(11,30,22,.4)}

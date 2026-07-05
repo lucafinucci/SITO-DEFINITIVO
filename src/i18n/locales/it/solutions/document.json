@@ -126,18 +126,14 @@
   ],
   "pricingHead": {
     "eyebrow": "Prezzi",
-    "title": "Piani di abbonamento",
-    "lead": "Fatturazione basata sulle pagine elaborate. Scala con il tuo business.",
+    "title": "Prezzi su misura",
+    "lead": "Soluzioni enterprise personalizzate per grandi volumi e requisiti specifici. Scopri come Document Intelligence può trasformare i tuoi processi documentali.",
     "popular": "Più popolare",
-    "note1": "Le pagine extra hanno un costo maggiore rispetto ai piani superiori: per volumi elevati conviene l'upgrade.",
-    "note2": "I limiti sono mensili e si resettano automaticamente."
+    "note1": "Include integrazione API completa, modelli custom e supporto dedicato.",
+    "note2": "Contattaci per una demo personalizzata e un preventivo su misura."
   },
   "plans": [
-    { "name": "Demo", "price": "Gratis", "per": "Sempre gratuito", "desc": "Per testare le potenzialità del sistema senza impegno.", "rows": [["Pagine/mese", "20"], ["Tipi documento", "1"], ["Utenti", "2"], ["Email polling", false], ["API", false]], "btn": "Inizia gratis", "feat": false },
-    { "name": "Basic", "price": "€49", "per": "/ mese + IVA", "desc": "Per piccole aziende che iniziano ad automatizzare.", "rows": [["Pagine/mese", "200"], ["Tipi documento", "2"], ["Utenti", "5"], ["Email polling", false], ["API", false]], "btn": "Inizia ora", "feat": false },
-    { "name": "Business", "price": "€129", "per": "/ mese + IVA", "desc": "Per aziende in crescita che automatizzano via email.", "rows": [["Pagine/mese", "800"], ["Tipi documento", "5"], ["Utenti", "10"], ["Email polling", true], ["API", false]], "btn": "Inizia ora", "feat": false },
-    { "name": "Professional", "price": "€249", "per": "/ mese + IVA", "desc": "Integrazione completa con FTP per flussi professionali.", "rows": [["Pagine/mese", "2.000"], ["Tipi documento", "10"], ["Utenti", "20"], ["Email polling", true], ["FTP", true]], "btn": "Inizia ora", "feat": true },
-    { "name": "Enterprise", "price": "Custom", "per": "Offerta su misura", "desc": "Modelli custom e supporto dedicato per grandi volumi.", "rows": [["Pagine", "fair use"], ["Tipi documento", "∞"], ["Utenti", "∞"], ["Modelli custom", true], ["API + FTP", true]], "btn": "Contattaci", "feat": false }
+    { "name": "Enterprise", "price": "Custom", "per": "Offerta su misura", "desc": "Modelli custom e supporto dedicato per grandi volumi.", "rows": [["Volumi personalizzati", "Scalabilità senza limiti"], ["Modelli AI custom", "Per layout proprietari"], ["Supporto dedicato", "Team tecnico dedicato"], ["Integrazione enterprise", "API + FTP + webhook"], ["SLA garantito", "Uptime 99,9%"]], "btn": "Prenota una demo", "feat": false }
   ],
   "faqHead": {
     "eyebrow": "Domande frequenti",

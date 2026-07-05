@@ -126,18 +126,14 @@
   ],
   "pricingHead": {
     "eyebrow": "Pricing",
-    "title": "Subscription plans",
-    "lead": "Billing based on processed pages. Scales with your business.",
+    "title": "Custom pricing",
+    "lead": "Enterprise solutions tailored for high volumes and specific requirements. Discover how Document Intelligence can transform your document processes.",
     "popular": "Most popular",
-    "note1": "Extra pages cost more than upgrading: for high volumes, an upgrade is the better deal.",
-    "note2": "Limits are monthly and reset automatically."
+    "note1": "Includes full API integration, custom models, and dedicated support.",
+    "note2": "Contact us for a personalized demo and a custom quote."
   },
   "plans": [
-    { "name": "Demo", "price": "Free", "per": "Always free", "desc": "To test the system's potential with no commitment.", "rows": [["Pages/month", "20"], ["Document types", "1"], ["Users", "2"], ["Email polling", false], ["API", false]], "btn": "Start free", "feat": false },
-    { "name": "Basic", "price": "€49", "per": "/ month + VAT", "desc": "For small companies starting to automate.", "rows": [["Pages/month", "200"], ["Document types", "2"], ["Users", "5"], ["Email polling", false], ["API", false]], "btn": "Get started", "feat": false },
-    { "name": "Business", "price": "€129", "per": "/ month + VAT", "desc": "For growing companies automating via email.", "rows": [["Pages/month", "800"], ["Document types", "5"], ["Users", "10"], ["Email polling", true], ["API", false]], "btn": "Get started", "feat": false },
-    { "name": "Professional", "price": "€249", "per": "/ month + VAT", "desc": "Full FTP integration for professional flows.", "rows": [["Pages/month", "2,000"], ["Document types", "10"], ["Users", "20"], ["Email polling", true], ["FTP", true]], "btn": "Get started", "feat": true },
-    { "name": "Enterprise", "price": "Custom", "per": "Custom offer", "desc": "Custom models and dedicated support for high volumes.", "rows": [["Pages", "fair use"], ["Document types", "∞"], ["Users", "∞"], ["Custom models", true], ["API + FTP", true]], "btn": "Contact us", "feat": false }
+    { "name": "Enterprise", "price": "Custom", "per": "Custom offer", "desc": "Custom models and dedicated support for high volumes.", "rows": [["Custom volumes", "Unlimited scalability"], ["Custom AI models", "For proprietary layouts"], ["Dedicated support", "Dedicated technical team"], ["Enterprise integration", "API + FTP + webhooks"], ["Guaranteed SLA", "99.9% uptime"]], "btn": "Book a demo", "feat": false }
   ],
   "faqHead": {
     "eyebrow": "Frequently asked questions",
